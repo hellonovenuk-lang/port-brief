@@ -9,9 +9,11 @@ from __future__ import annotations
 
 import json
 from collections import defaultdict
-from datetime import date, datetime
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 from port_brief import paths
+from port_brief.judgement import port_status
 from port_brief.config.locations import AGULHAS, BY_ID, LOCATIONS, RELEVANCE, thresholds_for
 
 LEVELS = {"none": 0, "watch": 1, "likely": 2}
@@ -19,6 +21,8 @@ LEVEL_NAMES = {v: k for k, v in LEVELS.items()}
 DAYS = 7
 DRIFT_GUST_MS = 3.0
 DRIFT_HS_M = 1.0
+UK_TZ = ZoneInfo("Europe/London")
+WINDOW_MERGE_GAP_H = 2  # flagged hours this close together form one window
 
 
 def _max(values):
@@ -26,11 +30,14 @@ def _max(values):
     return max(vals) if vals else None
 
 
-def daily_peaks(hourly: dict) -> list[dict]:
-    """Collapse an hourly series to per-UTC-day peaks."""
+def daily_peaks(hourly: dict, now: datetime | None = None) -> list[dict]:
+    """Collapse an hourly series to per-UTC-day peaks. With `now`, today counts only the hours still ahead."""
     times = hourly.get("time") or []
+    cutoff = now.strftime("%Y-%m-%dT%H:00") if now else None
     buckets: dict[str, list[int]] = defaultdict(list)
     for i, t in enumerate(times):
+        if cutoff and t < cutoff:
+            continue
         buckets[t[:10]].append(i)
 
     def col(name, idx):
@@ -120,12 +127,74 @@ def day_flags(loc: dict, day: dict) -> list[dict]:
     return flags
 
 
+def _hour_as_day(hourly: dict, i: int) -> dict:
+    def at(name):
+        s = hourly.get(name) or []
+        return s[i] if i < len(s) else None
+
+    return {
+        "wind_max": at("wind_speed_10m"), "gust_max": at("wind_gusts_10m"), "hs_max": at("wave_height"),
+        "swell_max": at("swell_wave_height"), "swell_period_at_peak": at("swell_wave_period"),
+        "swell_dir_at_peak": at("swell_wave_direction"), "current_dir_at_peak": at("ocean_current_direction"),
+        "current_kmh_at_peak": at("ocean_current_velocity"),
+    }
+
+
+def window_label(start_utc: datetime, end_utc: datetime) -> str:
+    """'Mon 5 Oct 10:00–19:00' in UK local time; spans days as 'Sun 4 Oct 22:00 – Mon 5 Oct 06:00'."""
+    s, e = start_utc.astimezone(UK_TZ), end_utc.astimezone(UK_TZ)
+    day = lambda d: f"{d.strftime('%a')} {d.day} {d.strftime('%b')}"  # noqa: E731
+    if s.date() == e.date():
+        return f"{day(s)} {s:%H:%M}–{e:%H:%M}"
+    return f"{day(s)} {s:%H:%M} – {day(e)} {e:%H:%M}"
+
+
+def exceedance_windows(loc: dict, hourly: dict, now: datetime | None = None) -> list[dict]:
+    """Contiguous future hours where a port's operational thresholds are exceeded."""
+    times = hourly.get("time") or []
+    flagged = []
+    for i, t in enumerate(times):
+        ts = datetime.fromisoformat(t).replace(tzinfo=timezone.utc)
+        if now and ts < now.replace(minute=0, second=0, microsecond=0):
+            continue
+        flags = day_flags(loc, _hour_as_day(hourly, i))
+        if flags:
+            flagged.append((ts, i, flags))
+
+    windows, current = [], None
+    for ts, i, flags in flagged:
+        if current and (ts - current["end"]) <= timedelta(hours=WINDOW_MERGE_GAP_H):
+            current["end"] = ts
+            current["idx"].append(i)
+            current["flags"] += flags
+        else:
+            current = {"start": ts, "end": ts, "idx": [i], "flags": list(flags)}
+            windows.append(current)
+
+    out = []
+    for w in windows:
+        end = w["end"] + timedelta(hours=1)  # the flagged hour runs to the next hour
+        gusts = [hourly["wind_gusts_10m"][i] for i in w["idx"] if hourly.get("wind_gusts_10m") and hourly["wind_gusts_10m"][i] is not None]
+        seas = [hourly["wave_height"][i] for i in w["idx"] if hourly.get("wave_height") and hourly["wave_height"][i] is not None]
+        out.append({
+            "start": w["start"].strftime("%Y-%m-%dT%H:%MZ"),
+            "end": end.strftime("%Y-%m-%dT%H:%MZ"),
+            "label": window_label(w["start"], end),
+            "hours": len(w["idx"]),
+            "level": LEVEL_NAMES[worst(w["flags"])],
+            "causes": sorted({f["type"] for f in w["flags"]}),
+            "peak_gust": _round(max(gusts)) if gusts else None,
+            "peak_sea": _round(max(seas), 1) if seas else None,
+        })
+    return out
+
+
 def worst(flags: list[dict]) -> int:
     return max((LEVELS[f["level"]] for f in flags), default=0)
 
 
-def assess_location(loc: dict, hourly: dict, storms: list[dict]) -> dict:
-    days = daily_peaks(hourly)
+def assess_location(loc: dict, hourly: dict, storms: list[dict], now: datetime | None = None) -> dict:
+    days = daily_peaks(hourly, now)
     for d in days:
         d["flags"] = day_flags(loc, d)
         d["level"] = LEVEL_NAMES[worst(d["flags"])]
@@ -160,6 +229,7 @@ def assess_location(loc: dict, hourly: dict, storms: list[dict]) -> dict:
         "peak_day": peak["date"] if peak else None,
         "peak": {k: peak[k] for k in ("gust_max", "wind_max", "hs_max", "swell_max", "swell_period_at_peak")} if peak else None,
         "peak_flags": peak["flags"] if peak else [],
+        "windows": exceedance_windows(loc, hourly, now) if loc["kind"] == "port" else [],
     }
 
 
@@ -223,6 +293,7 @@ def congestion_context(snapshot: dict) -> dict:
     ports = (sc.get("data") or {}).get("ports") or {}
     history = sorted(paths.CONGESTION_HISTORY.glob("*.json"))[-16:]
     past: dict[str, list[float]] = defaultdict(list)
+    past_tip: dict[str, list[float]] = defaultdict(list)
     for f in history:
         rec = json.loads(f.read_text())
         if rec.get("run_id") == snapshot["run_id"]:
@@ -230,12 +301,15 @@ def congestion_context(snapshot: dict) -> dict:
         for pid, v in rec.get("ports", {}).items():
             if v.get("occupancy_pct") is not None:
                 past[pid].append(v["occupancy_pct"])
+            if v.get("time_in_port_median_h") is not None:
+                past_tip[pid].append(v["time_in_port_median_h"])
     out = {}
     for pid, v in ports.items():
         trailing = past.get(pid)
         avg = round(sum(trailing) / len(trailing), 1) if trailing else None
         out[pid] = {**v, "name": BY_ID[pid]["name"], "trailing_avg_pct": avg,
-                    "vs_trailing_pp": _delta(v.get("occupancy_pct"), avg), "history_runs": len(trailing or [])}
+                    "vs_trailing_pp": _delta(v.get("occupancy_pct"), avg), "history_runs": len(trailing or []),
+                    "time_in_port_trailing_avg_h": round(sum(past_tip[pid]) / len(past_tip[pid]), 1) if past_tip.get(pid) else None}
     return out
 
 
@@ -245,13 +319,15 @@ def judge(snapshot: dict) -> dict:
     hourly = json.loads((paths.ROOT / hist_file).read_text())["hourly"] if hist_file else {}
     storms = (snapshot["sources"].get("cyclones", {}).get("data") or {}).get("storms", [])
 
+    generated = datetime.strptime(snapshot["generated_at"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
     assessments = {}
     for loc in LOCATIONS:
         if loc["id"] in hourly and hourly[loc["id"]].get("time"):
-            assessments[loc["id"]] = assess_location(loc, hourly[loc["id"]], storms)
+            assessments[loc["id"]] = assess_location(loc, hourly[loc["id"]], storms, now=generated)
 
     prev_hourly, prev_run = previous_weather(snapshot["run_id"])
 
+    congestion = congestion_context(snapshot)
     judgement = {
         "question": "Which ports and lanes are likely to deteriorate in the next three to five days?",
         "levels": list(LEVELS),
@@ -259,7 +335,9 @@ def judge(snapshot: dict) -> dict:
         "watchlist": watchlist(list(assessments.values())),
         "deteriorating": [a["id"] for a in assessments.values() if a["trend"] == "deteriorating"],
         "forecast_drift": forecast_drift(assessments, prev_hourly, prev_run)[:10],
-        "congestion": congestion_context(snapshot),
+        "congestion": congestion,
+        "ports_status": port_status.ports_status(snapshot, assessments, congestion),
+        "inbound": port_status.inbound(assessments),
         "storms": storms,
         "forecast_issued": snapshot["generated_at"],
     }

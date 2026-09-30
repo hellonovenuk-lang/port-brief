@@ -1,0 +1,62 @@
+"""The action playbook: how signals become a port status and advice for importers.
+
+Every buffer and trigger lives here so it can be tuned without touching code. The editorial
+validator whitelists these numbers, so Claude can quote them without being flagged.
+"""
+
+# Status order: the worst signal wins.
+STATUS_ORDER = ["normal", "watch", "congested", "disruption"]
+STATUS_LABEL = {
+    "normal": "Running normally",
+    "watch": "Watch",
+    "congested": "Congested",
+    "disruption": "Disruption likely",
+}
+STATUS_ICON = {"normal": "●", "watch": "▲", "congested": "■", "disruption": "◆"}
+
+# Congestion triggers (Sinay commercial-vessel occupancy, percentage points above that port's usual level).
+CONGESTED_GAP_PP = 10.0
+BUSY_GAP_PP = 5.0
+# Our own history: median time in port this much above the trailing average also counts as congested.
+CONGESTED_TIME_IN_PORT_PCT = 25.0
+
+# Buffers quoted in the advice.
+BUFFER = {
+    "congested_days": "2–3 days",
+    "congested_horizon": "the next 2 weeks",
+    "disruption_hours": "24–48 hours",
+    "watch_hours": "12–24 hours",
+}
+
+# Inbound lane delay estimates by weather level.
+INBOUND_DELAY = {"watch": "up to 1 day", "likely": "1–2 days"}
+
+# Port headlines that change the status on their own (matched case-insensitively).
+DISRUPTION_KEYWORDS = ["strike", "industrial action", "walkout", "closure", "closed", "shut", "cyber", "outage", "suspend"]
+CONGESTION_KEYWORDS = ["congestion", "congested", "backlog", "delays", "yard full", "restrictions"]
+# Headlines about the port's energy grid, roads or finances are not operational signals.
+HEADLINE_EXCLUDE = ["grid", "electricity", "energy", "power", "road", "traffic jam", "profit", "revenue", "investment"]
+
+ACTIONS = {
+    "disruption_weather": (
+        "Operations likely suspended {window}. Tell your haulier to expect longer waits and re-booked slots, "
+        "and allow " + BUFFER["disruption_hours"] + " on collections and vessel arrivals around that window."
+    ),
+    "disruption_news": (
+        "Reported disruption: {headline}. Check your terminal's latest notice before booking collections, "
+        "and allow " + BUFFER["disruption_hours"] + "."
+    ),
+    "congested": (
+        "Busier than normal. Add " + BUFFER["congested_days"] + " to inland plans for containers arriving in "
+        + BUFFER["congested_horizon"] + ", pre-book haulage and check free time and demurrage."
+    ),
+    "watch_weather": (
+        "Intermittent stoppages possible {window}. Allow " + BUFFER["watch_hours"] + " and avoid tight cut-offs."
+    ),
+    "watch_news": "Reported: {headline}. Check your terminal's latest notice before booking collections.",
+    "watch_busy": "Busier than usual. Keep an eye on vessel berthing times and avoid tight cut-offs.",
+    "normal": "No predicted delays. Speak to your carrier about release and delivery now to keep it that way.",
+    "normal_no_congestion": "No weather disruption forecast. Speak to your carrier about release and delivery now.",
+}
+
+NO_CONGESTION_DATA = "Congestion data unavailable this issue; status based on weather and port news only."

@@ -10,6 +10,7 @@ from pathlib import Path
 
 from port_brief import paths
 from port_brief.collect import load_snapshot
+from port_brief.config import playbook as pb
 from port_brief.editorial import schema
 
 
@@ -36,7 +37,26 @@ def facts_markdown(snap: dict, issue_date: str) -> str:
     rel = snap["sources"]["schedule_reliability"]["data"]
     lines = [f"# Facts for Port Brief {issue_date}", "",
              f"Forecast issued {snap['generated_at']}. Levels: none < watch < likely.", "",
-             "## Watchlist (ranked)", ""]
+             "## Port status (one note required per port; keep the status, make the action specific)", ""]
+    for p in j.get("ports_status", []):
+        c = p.get("congestion") or {}
+        cong = (f"occupancy {c.get('occupancy_pct')}%, gap vs normal {c.get('occupancy_gap_vs_mean_pct')} pp, "
+                f"median time in port {c.get('time_in_port_median_h')} h (our trailing avg {c.get('time_in_port_trailing_avg_h')} h)"
+                if c else "congestion data unavailable")
+        lines.append(f"- `{p['id']}` {p['name']} [{p['region']}]: **{p['status_label']}**. Reasons: {'; '.join(p['reasons']) or 'none'}. "
+                     f"Weather windows (UK time): {', '.join(w['label'] + ' (' + w['level'] + ', ' + '/'.join(w['causes']) + ')' for w in p['windows']) or 'none'}. "
+                     f"Congestion: {cong}.")
+        lines.append(f"  - playbook action: {' '.join(p['actions'])}")
+    lines += ["", "## On the way in (lanes; for inbound_note)", ""]
+    for i in j.get("inbound", []):
+        lines.append(f"- {i['name']} ({i['level']}), {schema.day_label(i['from_day'])} to {schema.day_label(i['to_day'])}: "
+                     f"affects {i['trades']}; expected delay {i['delay']}; peak sea {i['peak_sea']} m, wind {i['peak_wind']} m/s."
+                     + (f" Storm: {i['storm']}." if i.get("storm") else ""))
+    if not j.get("inbound"):
+        lines.append("- none flagged")
+    lines += ["", "## Playbook buffers you may quote", "",
+              f"- {pb.BUFFER}", f"- inbound delays: {pb.INBOUND_DELAY}", "",
+              "## Watchlist (ranked)", ""]
     for w in j["watchlist"]:
         lines.append(f"- `{w['id']}` {w['name']} [{w['kind']}, {w['region']}]: {w['level']}, trend {w['trend']}, "
                      f"peak {schema.day_label(w['peak_day'])}; causes {', '.join(w['causes']) or '-'}; {' | '.join(w['reasons'])}")

@@ -3,10 +3,17 @@
 A twice-weekly freight intelligence brief for UK freight forwarders, importers and logistics managers.
 It goes out Monday and Thursday at 07:00 UK as a short email linking to a PDF.
 
-The brief answers one question: **which ports and lanes are likely to deteriorate in the next three to
-five days?** It adds port congestion, schedule reliability and port and carrier advisories for context.
+Small importer teams get everything in one place, with **a status and a concrete action for every port**:
+- the UK four: Felixstowe, Southampton, London Gateway and Liverpool
+- the North European hubs: Rotterdam, Antwerp, Bremerhaven and Hamburg
 
-A sample issue is in [`samples/`](samples/).
+For example: *"Felixstowe: congested, 13 pp above normal. Add 2–3 days to inland plans for containers
+arriving in the next 2 weeks."* The brief also covers weather on the routes in ("On the way in"),
+schedule reliability, and port and carrier advisories.
+
+Samples:
+- [`samples/2026-09-30/`](samples/2026-09-30/): a real issue from live data.
+- [`samples/illustration/`](samples/illustration/): synthetic inputs showing every port status.
 
 ## How it runs
 
@@ -31,12 +38,12 @@ You                  review the PR on GitHub (or the GitHub mobile app)
 
 | Source | What | Access | Cadence | Failure mode |
 |---|---|---|---|---|
-| Open-Meteo Marine + Forecast | Wave, swell, wind-wave height, swell period/direction, current, wind, gusts. 10 ports + 15 lanes, 7 days hourly | No key | Every run | `partial`/`failed`; issue shows no weather |
+| Open-Meteo Marine + Forecast | Wave, swell, wind-wave height, swell period/direction, current, wind, gusts. 8 ports + 14 lanes, 7 days hourly | No key | Every run | `partial`/`failed`; issue shows no weather |
 | GDACS | Active tropical cyclones, distance to each port/lane | No key | Every run | Cyclone panel empty |
-| Sinay Congestion API v1 | Berth occupancy %, gap vs the port's mean, time in port, vessels in port. One batch call for all 10 ports | `SINAY_API_KEY` | Every run | `skipped` (no key) or `failed`; column shows n/a |
+| Sinay Congestion API v1 | Berth occupancy %, gap vs the port's mean, time in port, vessels in port. One batch call for all 8 ports | `SINAY_API_KEY` | Every run | `skipped` (no key) or `failed`; column shows n/a |
 | Sea-Intelligence GLP | Global reliability series + top-13 carriers, parsed from the `.xlsx` attached to each press release | No key | Monthly, ~4 weeks lag | Last good month reused, marked stale |
 | Xeneta Scorecard | Global % from text; carrier table read from image by Claude, cross-checked against carriers quoted in the text | No key | Monthly, ~2 weeks lag | Previous month used until extracted |
-| Advisories | Felixstowe, Liverpool, Southampton, Rotterdam; Maersk, MSC, Hapag-Lloyd, CMA CGM. Official site where it allows scripted access (Rotterdam, Maersk), otherwise Google News RSS | No key | Every run (7-day window) | Per-publisher; others unaffected |
+| Advisories | All 8 ports; Maersk, MSC, Hapag-Lloyd, CMA CGM. Official site where it allows scripted access (Rotterdam, Maersk), otherwise Google News RSS | No key | Every run (7-day window) | Per-publisher; others unaffected |
 
 Felixstowe, ABP, MSC, Hapag-Lloyd and CMA CGM return 403 to scripted requests, which is why Google News
 is the fallback. Selectors and queries live in `port_brief/config/feeds.py`.
@@ -87,6 +94,21 @@ python -m pytest -q
 
 Dry-run replays the responses cached by the last live run in that checkout. `data/cache/` is
 gitignored, so do one live run before iterating offline.
+
+## Port status and actions (`port_brief/config/playbook.py`)
+
+Each port gets one status. The worst signal wins:
+
+| Status | Triggered by | Action given |
+|---|---|---|
+| ◆ Disruption likely | Crane or pilotage limits exceeded (window shown in UK time), or a strike, closure or cyber headline naming the port | Tell your haulier to expect longer waits; allow 24–48 hours around the window |
+| ■ Congested | Sinay berth occupancy ≥ 10 pp above the port's normal, or median time in port ≥ 25% above our trailing average | Add 2–3 days to inland plans for containers arriving in the next 2 weeks; pre-book haulage; check free time and demurrage |
+| ▲ Watch | Near crane or pilotage limits, occupancy 5–10 pp above normal, or a congestion headline | Allow 12–24 hours; avoid tight cut-offs |
+| ● Running normally | Nothing flagged | Speak to your carrier about release and delivery now |
+
+- If Sinay data is missing, the issue says so. The status then rests on weather and news only, and it never claims congestion is normal.
+- Lanes feed "On the way in": watch means up to 1 day late, likely means 1–2 days, for the named trades.
+- Every number in these actions lives in the playbook, and the validator only accepts those numbers.
 
 ## Judgement thresholds
 

@@ -10,13 +10,16 @@ from __future__ import annotations
 import re
 from datetime import date
 
+from port_brief.config import playbook as pb
 from port_brief.config.locations import LANE_THRESHOLDS, PORT_THRESHOLDS
 
-LIMITS = {"headline": 90, "standfirst": 340, "watchlist_note": 220, "section": 1100}
+LIMITS = {"headline": 90, "standfirst": 340, "watchlist_note": 220, "section": 1100, "port_note": 260, "inbound_note": 600}
 SECTIONS = ("ports", "lanes", "reliability", "advisories")
 ALWAYS_ALLOWED = set(range(0, 14))  # counts, "three to five days", "top 13", "D5"
 
 NUMBER_RE = re.compile(r"(?<![A-Za-z\d.])-?\d+(?:\.\d+)?")
+# A number followed (possibly via a range like "5–7") by a unit is a quantity, never a bare count.
+UNIT_AFTER_RE = re.compile(r"(?:\s*[–-]\s*\d+(?:\.\d+)?)*\s*(?:days?|hours?|hrs?|h\b|weeks?|pp\b|%|m/s|m\b|km\b|knots?|kn\b)", re.I)
 
 
 def _numbers_in(obj, out: list[float]) -> None:
@@ -46,24 +49,33 @@ def allowed_numbers(snapshot: dict, issue_date: str) -> list[float]:
     for pub in snapshot["sources"].get("advisories", {}).get("data", {}).get("publishers", {}).values():
         _numbers_in([i["title"] for i in pub["items"]], vals)
     _numbers_in([PORT_THRESHOLDS, LANE_THRESHOLDS], vals)
+    _numbers_in([pb.BUFFER, pb.INBOUND_DELAY, pb.CONGESTED_GAP_PP, pb.BUSY_GAP_PP, pb.CONGESTED_TIME_IN_PORT_PCT], vals)
     _numbers_in(issue_date, vals)
-    return sorted({abs(v) for v in vals} | {float(v) for v in ALWAYS_ALLOWED})
+    return sorted({abs(v) for v in vals})
 
 
 def unsupported_numbers(text: str, allowed: list[float]) -> list[str]:
+    """Numbers no data value rounds to. Small bare counts ("three", "top 13") are fine, but any
+    number carrying a unit (days, hours, %, pp, m/s...) must come from the data or the playbook."""
     bad = []
-    for token in NUMBER_RE.findall(text.replace(",", "")):
+    text = text.replace(",", "")
+    for m in NUMBER_RE.finditer(text):
+        token = m.group()
         t = abs(float(token))
         decimals = len(token.split(".")[1]) if "." in token else 0
         tol = 0.5 * 10 ** -decimals + 1e-9
-        if not any(abs(a - t) <= tol for a in allowed):
-            bad.append(token)
+        if any(abs(a - t) <= tol for a in allowed):
+            continue
+        if t in ALWAYS_ALLOWED and not UNIT_AFTER_RE.match(text, m.end()):
+            continue
+        bad.append(token)
     return bad
 
 
 def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
     errors = []
-    for key in ("headline", "standfirst", "watchlist_notes", "sections", "author"):
+    editorial.setdefault("watchlist_notes", {})
+    for key in ("headline", "standfirst", "sections", "author", "port_notes", "inbound_note"):
         if key not in editorial:
             errors.append(f"missing field: {key}")
     if errors:
@@ -86,6 +98,15 @@ def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
             errors.append(f"watchlist_notes.{loc_id}: not on the watchlist")
         check_len(f"watchlist_notes.{loc_id}", note, LIMITS["watchlist_note"])
 
+    port_ids = [p["id"] for p in snapshot.get("judgement", {}).get("ports_status", [])]
+    for pid in port_ids:
+        check_len(f"port_notes.{pid}", editorial["port_notes"].get(pid, ""), LIMITS["port_note"])
+    for pid in editorial["port_notes"]:
+        if pid not in port_ids:
+            errors.append(f"port_notes.{pid}: not a tracked port")
+    if not isinstance(editorial["inbound_note"], str) or len(editorial["inbound_note"]) > LIMITS["inbound_note"]:
+        errors.append(f"inbound_note: must be text of at most {LIMITS['inbound_note']} chars")
+
     picks = editorial.get("advisory_picks")
     if picks is not None:
         known = {i["url"] for p in snapshot["sources"].get("advisories", {}).get("data", {}).get("publishers", {}).values() for i in p["items"]}
@@ -96,7 +117,9 @@ def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
     allowed = allowed_numbers(snapshot, issue_date)
     texts = {"headline": editorial["headline"], "standfirst": editorial["standfirst"],
              **{f"sections.{k}": v for k, v in editorial["sections"].items()},
-             **{f"watchlist_notes.{k}": v for k, v in editorial["watchlist_notes"].items()}}
+             **{f"watchlist_notes.{k}": v for k, v in editorial["watchlist_notes"].items()},
+             **{f"port_notes.{k}": v for k, v in editorial["port_notes"].items()},
+             "inbound_note": editorial["inbound_note"]}
     for label, text in texts.items():
         bad = unsupported_numbers(text or "", allowed)
         if bad:
@@ -124,32 +147,64 @@ def _causes(item) -> str:
     return " and ".join(causes)
 
 
+def _clip(text: str, limit: int) -> str:
+    """Trim to the limit at a sentence boundary where possible."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    end = cut.rfind(". ")
+    return cut[: end + 1] if end > limit // 2 else cut[: limit - 1].rstrip() + "…"
+
+
 def fallback(snapshot: dict, issue_date: str) -> dict:
     j = snapshot.get("judgement", {})
     wl = j.get("watchlist", [])
     rel = snapshot["sources"].get("schedule_reliability", {}).get("data", {})
     si, xe, dv = rel.get("sea_intelligence"), rel.get("xeneta"), rel.get("divergence")
 
-    if wl:
-        top = wl[0]
-        headline = f"{top['name']}: {_causes(top)} risk {day_label(top['peak_day'])}"
+    statuses = j.get("ports_status", [])
+    flagged = [p for p in statuses if p["status"] != "normal"]
+    worst = max(flagged, key=lambda p: pb.STATUS_ORDER.index(p["status"]), default=None)
+    if worst:
+        headline = f"{worst['name']}: {worst['status_label'].lower()}"
+        if worst["windows"]:
+            headline += f" {worst['windows'][0]['label']}"
+        if len(flagged) > 1:
+            headline += f"; {len(flagged) - 1} more port{'s' if len(flagged) > 2 else ''} to watch"
+    elif statuses and any(p["data_gaps"] for p in statuses):
+        headline = "No weather disruption forecast at UK and North European ports this week"
+    elif statuses:
+        headline = "All UK and North European ports running normally this week"
     else:
-        headline = "Quiet weather outlook across UK ports and key lanes"
+        headline = "Port Brief"
     headline = headline[: LIMITS["headline"]]
 
-    deteriorating = [j["locations"][i]["name"] for i in j.get("deteriorating", [])]
     stand = []
-    if deteriorating:
-        stand.append(f"Conditions worsen over the next three to five days at {', '.join(deteriorating[:4])}.")
-    else:
-        stand.append("No port or lane we track is forecast to deteriorate over the next three to five days.")
+    if flagged:
+        stand.append("Action needed at " + ", ".join(f"{p['name']} ({p['status_label'].lower()})" for p in flagged[:4]) + ".")
+    elif statuses:
+        stand.append("No weather disruption forecast at the UK and North European ports we track. Good week to push releases and deliveries.")
+    inbound = j.get("inbound", [])
+    if inbound:
+        stand.append(f"Inbound: weather may delay {inbound[0]['trades']} by {inbound[0]['delay']}.")
     if si and si.get("global_pct") is not None:
-        stand.append(f"Sea-Intelligence puts global schedule reliability at {si['global_pct']}%")
-        if xe and xe.get("global_pct") is not None:
-            stand[-1] += f"; Xeneta measures {xe['global_pct']}%."
-        else:
-            stand[-1] += "."
-    standfirst = " ".join(stand)[: LIMITS["standfirst"]]
+        stand.append(f"Reliability: Sea-Intelligence {si['global_pct']}%"
+                     + (f", Xeneta {xe['global_pct']}%." if xe and xe.get("global_pct") is not None else "."))
+    standfirst = " ".join(stand)
+    if len(standfirst) > LIMITS["standfirst"]:
+        standfirst = " ".join(stand[:-1])[: LIMITS["standfirst"]]
+
+    port_notes = {}
+    for p in statuses:
+        action = " ".join(p["actions"])
+        note = f"{p['reasons'][0][0].upper()}{p['reasons'][0][1:]}. {action}" if p["reasons"] else action
+        if len(note) > LIMITS["port_note"]:
+            note = p["actions"][0]
+        port_notes[p["id"]] = _clip(note, LIMITS["port_note"])
+
+    inbound_note = (" ".join(f"{i['name']}: {i['action']}" for i in inbound[:2]) if inbound
+                    else "No weather on the main routes into the UK and North Europe is expected to delay arrivals this week.")
+    inbound_note = _clip(inbound_note, LIMITS["inbound_note"])
 
     notes = {}
     for w in wl:
@@ -157,18 +212,13 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
         notes[w["id"]] = (f"{w['level'].capitalize()} risk of {_causes(w)} {day_label(w['peak_day'])}"
                           f" ({reasons}). Trend: {w['trend']}.")[: LIMITS["watchlist_note"]]
 
-    ports = [a for a in j.get("locations", {}).values() if a["kind"] == "port"]
-    flagged_ports = [a for a in ports if a["outlook_3_5d"] != "none" or a["near_level"] != "none"]
-    if flagged_ports:
-        port_txt = "Ports with flagged days: " + "; ".join(
-            f"{a['name']} ({a['outlook_3_5d'] if a['outlook_3_5d'] != 'none' else a['near_level']}, {day_label(a['peak_day'])})"
-            for a in flagged_ports) + "."
+    if flagged:
+        port_txt = " ".join(f"{p['name']}: {p['status_label'].lower()}." for p in flagged)
+        port_txt += f" {len(statuses) - len(flagged)} of {len(statuses)} ports are running normally."
     else:
-        port_txt = "No crane or pilotage thresholds are forecast to be reached at the ports we track this week."
-    cong = j.get("congestion") or {}
-    if cong:
-        busiest = max(cong.values(), key=lambda c: c.get("occupancy_pct") or 0)
-        port_txt += f" Highest berth occupancy: {busiest['name']} at {busiest['occupancy_pct']}%."
+        port_txt = "All the ports we track are running normally, with no crane or pilotage limits forecast."
+    if any(p["data_gaps"] for p in statuses):
+        port_txt += " Congestion data was unavailable for this issue, so statuses reflect weather and port news only."
 
     lanes = [a for a in j.get("locations", {}).values() if a["kind"] == "lane"]
     flagged_lanes = [a for a in lanes if a["outlook_3_5d"] != "none" or a["near_level"] != "none"]
@@ -203,6 +253,8 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
         "headline": headline,
         "standfirst": standfirst,
         "watchlist_notes": notes,
+        "port_notes": port_notes,
+        "inbound_note": inbound_note,
         "sections": {"ports": port_txt[: LIMITS["section"]], "lanes": lane_txt[: LIMITS["section"]],
                      "reliability": rel_txt[: LIMITS["section"]], "advisories": adv_txt},
     }

@@ -67,13 +67,13 @@ def test_agulhas_swell_with_current_is_only_watch():
 def test_uk_relevance_ranks_above_equal_global_risk():
     s = set_day(hourly_series(), 4, wave_height=4.5)
     uk = wr.assess_location(BY_ID["western_approaches"], s, [])
-    glob = wr.assess_location(BY_ID["north_pacific"], s, [])
-    assert [w["id"] for w in wr.watchlist([glob, uk])] == ["western_approaches", "north_pacific"]
+    glob = wr.assess_location(BY_ID["suez"], s, [])
+    assert [w["id"] for w in wr.watchlist([glob, uk])] == ["western_approaches", "suez"]
 
 
 def test_cyclone_flag_counts_as_near_risk():
-    storms = [{"name": "TEST-26", "severity": "Tropical Storm", "nearby": [{"id": "shanghai", "distance_km": 400, "level": "likely"}]}]
-    a = wr.assess_location(BY_ID["shanghai"], hourly_series(), storms)
+    storms = [{"name": "TEST-26", "severity": "Tropical Storm", "nearby": [{"id": "taiwan_strait", "distance_km": 400, "level": "likely"}]}]
+    a = wr.assess_location(BY_ID["taiwan_strait"], hourly_series(), storms)
     assert a["near_level"] == "likely"
     assert wr.watchlist([a])[0]["causes"] == ["cyclone"]
 

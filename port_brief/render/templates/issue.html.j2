@@ -50,14 +50,14 @@ p { margin: 0 0 2.2mm; }
 .issue-date { text-align: right; font-size: 8pt; color: var(--ink2); }
 .issue-date strong { display: block; color: var(--ink); font-size: 10pt; }
 
-.headline { font-size: 19pt; line-height: 1.15; font-weight: 600; color: var(--ink); margin: 0 0 3mm; }
-.standfirst { font-size: 10.5pt; line-height: 1.45; color: var(--ink2); margin-bottom: 5mm; }
+.headline { font-size: 17pt; line-height: 1.15; font-weight: 600; color: var(--ink); margin: 0 0 3mm; }
+.standfirst { font-size: 10pt; line-height: 1.42; color: var(--ink2); margin-bottom: 4mm; }
 
 /* Stat tiles */
-.tiles { display: flex; gap: 3mm; margin-bottom: 5mm; }
-.tile { flex: 1; background: var(--surface); border: 0.6pt solid var(--rule); border-radius: 2mm; padding: 3mm 3.5mm; }
+.tiles { display: flex; gap: 3mm; margin-bottom: 4mm; }
+.tile { flex: 1; background: var(--surface); border: 0.6pt solid var(--rule); border-radius: 2mm; padding: 2.2mm 3mm; }
 .tile .label { font-size: 6.8pt; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
-.tile .value { font-size: 17pt; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.tile .value { font-size: 15pt; font-weight: 600; color: var(--ink); line-height: 1.2; }
 .tile .sub { font-size: 7pt; color: var(--muted); }
 
 /* Panels & tables */
@@ -99,11 +99,33 @@ ul.adv li { break-inside: avoid; }
 .fine { font-size: 7pt; color: var(--muted); line-height: 1.4; }
 .fine p { margin-bottom: 1.5mm; }
 .draft-banner { background: var(--watch); color: #1a1300; font-weight: 700; text-align: center; padding: 1.5mm; border-radius: 1mm; margin-bottom: 4mm; font-size: 8pt; letter-spacing: 0.1em; }
+
+/* Port status board */
+.board-title { margin-top: 1mm; }
+.board { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; margin-bottom: 3mm; }
+.card { background: var(--surface); border: 0.6pt solid var(--rule); border-left: 2.2mm solid var(--rule); border-radius: 2mm; padding: 2.2mm 3mm; break-inside: avoid; }
+.card.s-normal { border-left-color: #0ca30c; }
+.card.s-watch { border-left-color: #fab219; }
+.card.s-congested { border-left-color: #ec835a; }
+.card.s-disruption { border-left-color: #d03b3b; }
+.card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2mm; }
+.pname { font-size: 10.5pt; font-weight: 600; color: var(--ink); }
+.status { font-size: 6.8pt; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.5mm 1.8mm; border-radius: 1mm; }
+.status.s-normal { background: #0ca30c; color: #ffffff; }
+.status.s-watch { background: #fab219; color: #1a1300; }
+.status.s-congested { background: #ec835a; color: #1a0a00; }
+.status.s-disruption { background: #d03b3b; color: #ffffff; }
+.card .action { color: var(--ink); font-weight: 500; font-size: 8.2pt; line-height: 1.36; margin-bottom: 1.2mm; }
+.card .data { font-size: 7pt; color: var(--muted); margin: 0; }
+.sw.s-normal { background: #0ca30c; } .sw.s-watch { background: #fab219; } .sw.s-congested { background: #ec835a; } .sw.s-disruption { background: #d03b3b; }
+.tile .value .of { font-size: 10pt; color: var(--muted); font-weight: 400; }
+.notice { font-size: 7.5pt; color: var(--ink2); border: 0.6pt dashed #2f455c; border-radius: 1.5mm; padding: 1.5mm 2.5mm; margin-bottom: 2mm; }
 </style>
 </head>
 <body>
 
 {% if meta.mode == 'dry-run' %}<div class="draft-banner">DRY RUN · CACHED DATA · NOT FOR DISTRIBUTION</div>{% endif %}
+{% if meta.mode == 'illustration' %}<div class="draft-banner">ILLUSTRATION · SYNTHETIC CONGESTION AND WEATHER TO SHOW EVERY STATUS · NOT A REAL FORECAST</div>{% endif %}
 
 <div class="masthead">
   <div>
@@ -117,35 +139,35 @@ ul.adv li { break-inside: avoid; }
 <p class="standfirst">{{ ed.standfirst }}</p>
 
 <div class="tiles">
-  <div class="tile"><div class="label">Deteriorating in 3–5 days</div><div class="value">{{ deteriorating_count }}</div><div class="sub">of {{ ports|length + lanes|length }} ports &amp; lanes tracked</div></div>
-  <div class="tile"><div class="label">Global reliability · Sea-Intelligence</div><div class="value">{% if si and si.global_pct is not none %}{{ si.global_pct }}%{% else %}–{% endif %}</div><div class="sub">{% if si %}{{ si.period|period }}{% if si.mom_pp is not none %} · {{ si.mom_pp|pp }} m/m{% endif %}{% endif %}</div></div>
-  <div class="tile"><div class="label">Global reliability · Xeneta</div><div class="value">{% if xe and xe.global_pct is not none %}{{ xe.global_pct }}%{% else %}–{% endif %}</div><div class="sub">{% if xe %}{{ xe.period|period }}{% if xe.global_mom_pp is not none %} · {{ xe.global_mom_pp|pp }} m/m{% endif %}{% endif %}</div></div>
-  <div class="tile"><div class="label">Tropical cyclones</div><div class="value">{{ storms_near|length }}</div><div class="sub">near tracked locations · {{ storms|length }} active worldwide</div></div>
+  <div class="tile"><div class="label">Ports needing action</div><div class="value">{{ ports_flagged|length }} <span class="of">/ {{ port_board|length }}</span></div><div class="sub">UK &amp; North European gateways</div></div>
+  <div class="tile"><div class="label">Inbound delay risk</div><div class="value">{{ inbound|length }}</div><div class="sub">{% if inbound %}lanes, worst: {{ inbound[0].name }}{% else %}no lanes flagged{% endif %}</div></div>
+  <div class="tile"><div class="label">Reliability · Sea-Intelligence</div><div class="value">{% if si and si.global_pct is not none %}{{ si.global_pct }}%{% else %}–{% endif %}</div><div class="sub">{% if si %}{{ si.period|period }}{% if si.mom_pp is not none %} · {{ si.mom_pp|pp }} m/m{% endif %}{% endif %}</div></div>
+  <div class="tile"><div class="label">Reliability · Xeneta</div><div class="value">{% if xe and xe.global_pct is not none %}{{ xe.global_pct }}%{% else %}–{% endif %}</div><div class="sub">{% if xe %}{{ xe.period|period }}{% if xe.global_mom_pp is not none %} · {{ xe.global_mom_pp|pp }} m/m{% endif %}{% endif %}</div></div>
 </div>
 
-<div class="panel">
-  <h2><span class="kicker">The question this issue answers</span>Watchlist: where conditions turn next</h2>
-  {% if watchlist %}
-  <table>
-    <tr><th>Risk</th><th>Port / lane</th><th>When</th><th>Why</th><th>Trend</th></tr>
-    {% for w in watchlist %}
-    <tr>
-      <td><span class="chip {{ w.level }}">{{ w.level|glyph }} {{ w.level }}</span></td>
-      <td class="name">{{ w.name }}</td>
-      <td style="white-space:nowrap">{{ w.peak_day|day }}</td>
-      <td>{{ ed.watchlist_notes.get(w.id) or (w.causes|map('cause')|join(', ')) }}</td>
-      <td><span class="trend {{ w.trend }}">{{ w.trend }}</span></td>
-    </tr>
-    {% endfor %}
-  </table>
-  {% else %}
-  <p>No port or lane we track reaches a watch threshold in the next six days.</p>
-  {% endif %}
+{% if congestion_missing %}<div class="notice">Congestion data is not connected for this issue: port statuses reflect weather forecasts and port news only.</div>{% endif %}
+{% for region, label in [('uk', 'UK gateways'), ('north_europe', 'North European hubs')] %}
+<h2 class="board-title">{% if loop.first %}<span class="kicker">Port status · what to do this week</span>{% endif %}{{ label }}</h2>
+<div class="board">
+  {% for p in port_board if p.region == region %}
+  <div class="card s-{{ p.status }}">
+    <div class="card-head"><span class="pname">{{ p.name }}</span><span class="status s-{{ p.status }}">{{ p.status|status_icon }} {{ p.status_label }}</span></div>
+    <p class="action">{{ ed.port_notes.get(p.id) or p.actions|join(' ') }}</p>
+    <p class="data">
+      {% set c = p.congestion %}
+      {% if c and c.occupancy_pct is not none %}Berth occupancy {{ c.occupancy_pct|num(0) }}%{% if c.occupancy_gap_vs_mean_pct is not none %} ({{ c.occupancy_gap_vs_mean_pct|signed }} pp vs normal){% endif %}{% if c.time_in_port_median_h is not none %} · median {{ c.time_in_port_median_h|num(0) }} h in port{% endif %}{% else %}Congestion data unavailable{% endif %}
+      {% if p.windows %} · Weather: {{ p.windows[0].label }}{% else %} · No crane or pilotage limits forecast{% endif %}
+    </p>
+  </div>
+  {% endfor %}
 </div>
+{% endfor %}
+<div class="legend">{% for k in ['normal', 'watch', 'congested', 'disruption'] %}<span class="sw s-{{ k }}"></span>{{ k|status_icon }} {{ status_labels[k] }} {% endfor %}
+  · Weather windows in UK time. Congestion vs normal: Sinay berth occupancy compared with that port's usual level.</div>
 
 <!-- ========================= PORTS ========================= -->
 <div class="page-break"></div>
-<h2><span class="kicker">Ports · six-day operational outlook</span>UK and North European gateways first</h2>
+<h2><span class="kicker">Ports · six-day weather outlook</span>Crane and pilotage conditions</h2>
 <p>{{ ed.sections.ports }}</p>
 
 <div class="panel">
@@ -170,7 +192,24 @@ ul.adv li { break-inside: avoid; }
 </div>
 
 <!-- ========================= LANES ========================= -->
-<h2><span class="kicker">Lanes &amp; chokepoints</span>Sea state on the routes into Europe</h2>
+<h2><span class="kicker">On the way in · lanes &amp; chokepoints</span>Weather that could delay your arrivals</h2>
+<p>{{ ed.inbound_note }}</p>
+{% if inbound %}
+<div class="panel">
+  <table>
+    <tr><th>Risk</th><th>Lane</th><th>Affects</th><th>When</th><th>Expected delay</th></tr>
+    {% for i in inbound %}
+    <tr>
+      <td><span class="chip {{ i.level }}">{{ i.level|glyph }} {{ i.level }}</span></td>
+      <td class="name">{{ i.name }}</td>
+      <td>{{ i.trades }}{% if i.storm %}<br><span class="muted">{{ i.storm }}</span>{% endif %}</td>
+      <td style="white-space:nowrap">{{ i.from_day|day }}{% if i.to_day and i.to_day != i.from_day %} – {{ i.to_day|day }}{% endif %}</td>
+      <td style="white-space:nowrap"><strong>{{ i.delay }}</strong></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endif %}
 <p>{{ ed.sections.lanes }}</p>
 <div class="panel">
 <table class="strip">

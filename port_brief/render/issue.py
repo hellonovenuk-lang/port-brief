@@ -7,7 +7,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from port_brief.config.locations import BY_ID, LANE_THRESHOLDS, PORT_THRESHOLDS
+from port_brief.config import playbook as pb
+from port_brief.config.locations import BY_ID, LANE_THRESHOLDS, LOCATIONS, PORT_THRESHOLDS
 from port_brief.editorial.schema import CAUSE_TEXT, day_label
 from port_brief.render import charts
 
@@ -25,13 +26,15 @@ def period_label(p: str | None) -> str:
 
 
 def _env() -> Environment:
-    env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=select_autoescape(["html", "j2"]))
+    env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=select_autoescape(enabled_extensions=("html.j2",), default_for_string=False))
     env.filters["day"] = day_label
     env.filters["short_day"] = lambda d: date.fromisoformat(d).strftime("%a") if d else ""
     env.filters["glyph"] = lambda lvl: LEVEL_GLYPH.get(lvl, "")
     env.filters["cause"] = lambda c: CAUSE_TEXT.get(c, c)
     env.filters["pp"] = lambda v: "–" if v is None else f"{v:+.1f} pp"
     env.filters["period"] = period_label
+    env.filters["status_icon"] = lambda st: pb.STATUS_ICON.get(st, "")
+    env.filters["signed"] = lambda v: "–" if v is None else f"{v:+.0f}"
     env.filters["num"] = lambda v, nd=1: "–" if v is None else f"{v:.{nd}f}"
     return env
 
@@ -39,7 +42,8 @@ def _env() -> Environment:
 def context(snap: dict, editorial: dict, meta: dict) -> dict:
     j = snap["judgement"]
     rel = snap["sources"]["schedule_reliability"]["data"]
-    locs = sorted(j["locations"].values(), key=lambda a: (REGION_ORDER[a["region"]], a["name"]))
+    config_order = {loc["id"]: i for i, loc in enumerate(LOCATIONS)}
+    locs = sorted(j["locations"].values(), key=lambda a: (a["kind"] != "port", REGION_ORDER[a["region"]], config_order.get(a["id"], 99)))
     ports = [a for a in locs if a["kind"] == "port"]
     lanes = [a for a in locs if a["kind"] == "lane"]
     day_keys = [d["date"] for d in (ports or lanes)[0]["days"]] if locs else []
@@ -60,6 +64,11 @@ def context(snap: dict, editorial: dict, meta: dict) -> dict:
         "issue_long": f"{issue.strftime('%A')} {issue.day} {issue.strftime('%B %Y')}",
         "generated_at": snap["generated_at"],
         "watchlist": j["watchlist"],
+        "port_board": j.get("ports_status", []),
+        "ports_flagged": [p for p in j.get("ports_status", []) if p["status"] != "normal"],
+        "inbound": j.get("inbound", []),
+        "status_labels": pb.STATUS_LABEL,
+        "congestion_missing": any(p["data_gaps"] for p in j.get("ports_status", [])),
         "ports": ports,
         "lanes": lanes,
         "day_keys": day_keys,

@@ -1,13 +1,13 @@
 {
-  "run_id": "2026-09-30T1542Z",
-  "generated_at": "2026-09-30T15:42:12Z",
+  "run_id": "2026-09-30T1621Z",
+  "generated_at": "2026-09-30T16:21:46Z",
   "mode": "live",
   "sources": {
     "marine_weather": {
       "source": "marine_weather",
       "status": "ok",
-      "fetched_at": "2026-09-30T15:43:14Z",
-      "duration_ms": 2236,
+      "fetched_at": "2026-09-30T16:21:46Z",
+      "duration_ms": 2254,
       "attribution": "Weather data by Open-Meteo.com (CC BY 4.0)",
       "licence_note": "Open-Meteo free API is non-commercial only; a commercial plan is required once subscribers pay.",
       "errors": [],
@@ -21,14 +21,14 @@
           "direction": "deg (from; current: towards)"
         },
         "forecast_days": 7,
-        "history_file": "data/history/weather/2026-09-30T1542Z.json"
+        "history_file": "data/history/weather/2026-09-30T1621Z.json"
       }
     },
     "cyclones": {
       "source": "cyclones",
       "status": "ok",
-      "fetched_at": "2026-09-30T15:49:35Z",
-      "duration_ms": 1103,
+      "fetched_at": "2026-09-30T16:21:46Z",
+      "duration_ms": 1307,
       "attribution": "Tropical cyclone data: GDACS (Global Disaster Alert and Coordination System), European Commission JRC / UN OCHA",
       "licence_note": "",
       "errors": [],
@@ -109,13 +109,7 @@
             "lon": -108.0,
             "updated": "2026-09-30T03:00:00",
             "url": "https://www.gdacs.org/report.aspx?eventid=1001325&episodeid=38&eventtype=TC",
-            "nearby": [
-              {
-                "id": "la_long_beach",
-                "distance_km": 1027,
-                "level": "watch"
-              }
-            ]
+            "nearby": []
           },
           {
             "event_id": 1001323,
@@ -160,7 +154,7 @@
     "sinay_congestion": {
       "source": "sinay_congestion",
       "status": "skipped",
-      "fetched_at": "2026-09-30T15:42:12Z",
+      "fetched_at": "2026-09-30T16:21:46Z",
       "duration_ms": 0,
       "attribution": "Port congestion data: Sinay (sinay.ai)",
       "licence_note": "Check Sinay plan terms allow republishing figures in a paid newsletter.",
@@ -172,8 +166,8 @@
     "schedule_reliability": {
       "source": "schedule_reliability",
       "status": "ok",
-      "fetched_at": "2026-09-30T15:44:43Z",
-      "duration_ms": 6600,
+      "fetched_at": "2026-09-30T16:21:46Z",
+      "duration_ms": 9768,
       "attribution": "Schedule reliability: Sea-Intelligence Global Liner Performance report; Xeneta Schedule Reliability Scorecard",
       "licence_note": "",
       "errors": [],
@@ -574,8 +568,8 @@
     "advisories": {
       "source": "advisories",
       "status": "ok",
-      "fetched_at": "2026-09-30T15:44:21Z",
-      "duration_ms": 7062,
+      "fetched_at": "2026-09-30T16:21:46Z",
+      "duration_ms": 11634,
       "attribution": "Headlines link to the original publishers; some discovered via Google News.",
       "licence_note": "Headlines and links only. Google News RSS terms are for personal use: review before charging subscribers.",
       "errors": [],
@@ -596,19 +590,24 @@
                 "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOWFlZZk5IVDhjUXJuWWhOT0hEbE5Pakk1aElVWHNFeUVNRl80Rkc2dWxCaHlWcEVFUUlWQ2V6OEdrVGZtUV95VXpRR2N3NlI1QTltZHo2Yy1LY1pMa1BDZmJubE53WEFkcmxwdENrc0tyM3FYT1EwREw2d1Q1SE9QeEVXZnVzaWpkQjJRQURR?oc=5",
                 "published": "2026-09-25",
                 "via": "Google News / container-news.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Peel Ports reinstates weekly Greenock-Rotterdam container service",
                 "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOMEVrQWVvUW54UHE5UEJfcWdDWXF2S3hJRjlhRHpheTNGM25STTVyTUJmck1ELUhDS3dpUGFDSm1OSl8wRUtPbmFRVzhPWWVVb0tmOGpiSUtTazZna3NldFh1VVpVaEV3NVJfSG9sR3hheFpUVlJPWjIxYVJPZHM1RWJiMlRIWFJuQjhYYUhGRFpoRFBRemFZQWtDMmpvb3Z4a0YyVg?oc=5",
                 "published": "2026-09-24",
                 "via": "Google News / Container Management",
-                "is_new": false
+                "is_new": true
               }
             ]
           },
           "southampton": {
             "name": "Port of Southampton (ABP)",
+            "kind": "port",
+            "items": []
+          },
+          "london_gateway": {
+            "name": "London Gateway (DP World)",
             "kind": "port",
             "items": []
           },
@@ -621,30 +620,53 @@
                 "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNbDdDU2dBOFRwWVBfLWlTQVM0Uk5GbHZYT0E5QjcwSXlTMFQ4aXplVjQ2enBnRWVlYXBsX05GSkxUaF9ocjNUMzFQcU51VDBsRk5kQ0FZajBJQ1FfZVczRElWSUtqdm4tbkxSNFJuTkFUMl9WTTQ4bFVWVEJFRVlleUxRcFV2QlJzMkIzMDBUblRmWUk?oc=5",
                 "published": "2026-09-28",
                 "via": "Google News / container-news.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Rotterdam Temporary Transformer Could Ease Port Grid Limits",
                 "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQUkk0Z1A0SnU2OURKamFQSVR5MmdJb2diSGRBUTZuZ0hyX1VkOUlBcTlYd0Fka3RGejcwaHl4UzVwR0FuaThSQllxUHU2T0R4Qmpfb09uWm1WTkxJLWc4bmdJdDJLdzJSRHNzTUZfNGJSZE1ueE4xWHo4aUhMTGpidnA5ekFwQjlXZHEyLWtVM01YV0ItSlk0dDRJN1R6b2ltT1NXVzJjeGdCa3FqVk5Z?oc=5",
                 "published": "2026-09-28",
                 "via": "Google News / environmentenergyleader.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Port of Rotterdam to gain 500MW of temporary grid capacity",
                 "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQTXU0dWRmU2JYYk9tcjJfSmlpSnF2M2N0b1FETzBGSXBrNE4zMm9ULU5ERVpVQ2FaWFBHREc3Rnp5QUx1b21WNlpuejMzam1qTUFzYVFQUG5yTmVZQzhwYnV5azhRemJNYXlVU0VQWFB6OEtLUVd3X0psaElZLV9zNTN3OUJmVWJOSDMwVlVTWmh4N2Z0Sng4dmNxbHhRaC04X19Ea2p3OVU3bFN2YUs1X1AzRGVqaEM2WVJsdkpVSVJwYk9uS2QxbjVn?oc=5",
                 "published": "2026-09-25",
                 "via": "Google News / Port Technology",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Temporary transformer in Europoort relieves grid congestion",
                 "url": "https://www.portofrotterdam.com/en/news-and-press-releases/temporary-transformer-europoort-relieves-grid-congestion",
                 "published": "2026-09-25",
                 "via": "direct",
-                "is_new": false
+                "is_new": true
               }
             ]
+          },
+          "antwerp": {
+            "name": "Port of Antwerp-Bruges",
+            "kind": "port",
+            "items": [
+              {
+                "title": "Kazakhstan, Belgium's Antwerp Port explore new routes for Middle Corridor",
+                "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBoQjhLalBDR3kyTkt5ZzhKelNRTl8xb05qc0tLVmFXYzh2Q2FwY3dEUld4a3FzeDBtbjRRNnlMWkhpbGpRcEFrY0VCOFFLRV85UEpNM3RZcmtpY2xEcmFv?oc=5",
+                "published": "2026-09-28",
+                "via": "Google News / trend.az",
+                "is_new": true
+              }
+            ]
+          },
+          "bremerhaven": {
+            "name": "Bremerhaven",
+            "kind": "port",
+            "items": []
+          },
+          "hamburg": {
+            "name": "Port of Hamburg",
+            "kind": "port",
+            "items": []
           },
           "maersk": {
             "name": "Maersk",
@@ -655,42 +677,42 @@
                 "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNS0p2THJVeWdXclQ2dFhQcnBuOHFYLUYySEMySWZFY1pNbDF6NDh0TFJJM3c4Z1BsRXBIM05SS1lwT3lna1hNcFNMUzdibnZGMHRVSktzUUxPRS12VWtnci1mdGZfdnhZeE92RTJDUS1OLXpHekVlYWhQSGFUT21DNWFKTmI1WGo0ZmtxZFdqUHpXMWc0RHA2OVNhV0NEazgtX2c2ZFhfMVpsTW1IQUdYQUdET0RlTC11WlMxbGVVTUhwYkdLa2R0NGEybXFkLUZzYjhz?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / Data Portuaria",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Maersk, KTZ Express seek to expand joint service on TITR, other sea routes",
                 "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB4dW91OFlTNGNETktKRDg4ajBsNGpHSkduSTQwcDI5UXowbURPMWRhUXpQLTRTNTNYNm1Ba0JmT1p2QUdKMnJfdHJhRHhlSldDem52cXRSWjZyZEhwSFpn?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / trend.az",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Maersk implements peak season surcharge on Europe-South Africa route",
                 "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNaFVZOTRaaHZYMmFtVFlBYjJzMzJhQ2tiLUQtQm51OHItQ20xaW0weE1mTTNFLWdNLVA0YnlxcVd2YlBuVElHV1plY2NLN0pCdUM5dHNDb0g5WEI3MjUxLUhqd0tuZGt3RzF1RGJoRlBBWEg1QmtVeGk2amlMRENzUmZfVE5WSHNwbWM0TUE0THk1bW9DTlY1eE5ZSFNpVFJTODFjbWx2UVR4aHRCLUFjN2ZVeEpLZ0w0U1dESHFpbWNWQ0VxVUE?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / Data Portuaria",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Maersk adjusts inland fuel surcharge in Mexico to 2%",
                 "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNZVJRU2k4Q08wY19XUkpOSkpoR3pKbFFIZUJGQktWVHVwX3Z1TmowQnUtYmZXYzZJMFlieHR1Q1NQVm1vblVuQkItN2l2QlNoNU1yaDRSbURObE9KLWlnQ2tQSXExOVM2WHlwMXlkampkWjl0dktRNjVTSllhdEpYMnYydzRWSmRQemxxUWRBZlVvZldZTDNkQnNiLXlHbm9YTXViclp0QQ?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / Data Portuaria",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Europe to West Africa Service Enhancement 30 Sep 2026",
                 "url": "https://www.maersk.com/news/articles/2026/09/30/europe-to-west-africa-service-enhancement",
                 "published": "2026-09-30",
                 "via": "direct",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Implementation of Peak Season Surcharge (PSS) for F3W trade 30 Sep 2026",
                 "url": "https://www.maersk.com/news/articles/2026/09/30/pss-f3w-asia-to-south-india",
                 "published": "2026-09-30",
                 "via": "direct",
-                "is_new": false
+                "is_new": true
               }
             ]
           },
@@ -723,42 +745,42 @@
                 "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPSzNMalQ4Z2hpRjJOR2cxLU1YbHNDb3dnU3VxLUFGdGM5QmRnOUNvQzZBVVgxUFEwbkoyRjdCaUJjR2VYWER4LVN5ZnBydEt1VEZoRTc4RHkteVUtWHB2eFJSZ3BubkNkMzhzeVVrQ1NST2h4RkZNUG5Kc0JBYXctd2pqTTVYWHdSZEx4MFVOU3BndXNicnBTdmpkVVZ2OWFpRnZBQQ?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / Journal of Commerce",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Hapag-Lloyd GRI: South America East Coast Rates Rise November 2026 - News and Statistics",
                 "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOdHdPUWdXY0FjSVR0ckEwZ0MtUnRKSFlqR203VFpaWWlyNEhUbkI4bUxENXgtcmdVdW14TTVqMlo3VmRVQ1BmSVE4UkVQemhWUHRjRmJ1c3NiVThaUEZVcFQ1Z0VpUFVWTDlia1pvN2U2Y0J1SEdvM2dqc1p3dkNGSnd1ZzhndWRTcURQR3EwVVpLNWw1NFVtd2VhYUxUaFVUZ1dxMXcwXzRRU2lzVDR6ckhJWnctc0RKV1lhcERwdUF4YmdoSE5n?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / IndexBox",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Hapag-Lloyd's Planned Purchase of ZIM Integrated Shipping Services Faces Opposition from Israel",
                 "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxOak5IZkdQVFB0UHV1bkY1QjZGWkF1TEpzMGcwOEl4N3hGcDEyeEZwVE8yVDhpWGFOVDhBQi1Sd2pYbjBKOFY3WlBkNm1uMklsMnFheGgwaWFKVjBaMEJZOThmLTJkQzBPVmhScld1bFRSR0hXWE1tOE16MnhYZGxzYjlMNlFoWGtkVEpRTVQxTkNpcGtBWGpZZ1I4MVFOYW1GaUJDZFdOSlZXaU95cEM5TzZfa2pRbmhIc0FpN0NrbnFGckJYVGVISmdvdTI1V2xlTFJKYWNqQ3o5UUk5MHNCbXZR?oc=5",
                 "published": "2026-09-29",
                 "via": "Google News / marketscreener.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Hapag-Lloyd urges Israel to review improved offer for shipping services company ZIM",
                 "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxOM19GYkVKXzJIV1dsNlI1OFVzaEhoaHExYUhNLWMxVUNiLXRycnFlYjB6VnA2Z0d2MGhYYXJndTM5SDVBNi1hdDVwdkFXMGNhVTc0UUZ6MHJNenhXblF2UmlLVzNlekg2WGZDdWFHaWN3em5uREJqQnNLUWs2RlJqUEdyckZOLW16OEQ4LXktaE5rNGo2YUVGUndFNld0aS10bVpTYTdFcjhKUkhnR0J4MUZxNkhTZTlkWjlseVhidlZXV3hBSm5wYmlNSXNOQ0k2aXc?oc=5",
                 "published": "2026-09-29",
                 "via": "Google News / marketscreener.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Maersk, Hapag-Lloyd to resume Suez Canal routing for AE12 service from 27 October - Urban & Transport - Egypt",
                 "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5sNlNoY0J3QnEzTFVjcXJmdzBhVkV4dkR4TEcyZ3dOSkplUDgtVmk2ZTZFZngtc3J4UnJUbjBJb0o4cHc5c01IRTRRZkhUVVN2Vjg1UTJxMmY?oc=5",
                 "published": "2026-09-29",
                 "via": "Google News / Ahram Online",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "Hapag-Lloyd Raises Guidance Again on Strong Demand, Freight Rates",
                 "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNMG9PZndtMW5DX2o3TVJzbE9WOXF6cmtJVEdvODNDX0VpRzlSMVZGUGQyRzJLSEdDeUJhSUtqY3RWeGI0REZiREs4bjNZZ09wMjBzREl1NzRUQS14ZWR6b28xX21vanRnb0FiLVJ5RGVVN2wwN3llUXN3UW9LQmF5c0duS0JKVEpGbWFlSzN2cXBBRm5ZUF9YdWlZdk5wYy1GNUZ5bjc1VkRXWHVZNFhrX2R3?oc=5",
                 "published": "2026-09-29",
                 "via": "Google News / WSJ",
-                "is_new": false
+                "is_new": true
               }
             ]
           },
@@ -771,42 +793,42 @@
                 "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBsMDRROVktVXljMExFbmstN3B5LUs2MXFJM1ZELUNTNlEzTDQ0Nmd5UHRkR2hNWUg1dTBsZGNFQmhLd3drcU1lVG9OUkJuNDhlTGMzbGpTeW10eXg0OXJSZWtqM3hvUF9oRjlDa1E3UEFHd2dPcVRwcEQyUQ?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / container-news.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "CMA CGM backs down on promise to register 40 ships under the French flag amid threat of windfall tax on profits",
                 "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxPZFBQcVBGcksyaTVuOWprWjRLaGRmV1hQbmFIcHBnTGdtNUlqNkxEbDUwUG11YTdWZmN2eEx4M04td3NMU0tuYnVuNUZoYzBFNlp1a1I0cFZqRW5TXzF3aF9XM04yVWdLbjRaQmZvQU9zVzhEQU1mcnZUdS1fSFJCdk5jZGR4Ym5OYlpYWVBlUTM0OF9YYlRJVkVBc1pMR2owdUZwdk1BSk5NMlFDVHJfUDd5YW9BY0Fxdk1QZUJwT2U2SUxiX2k1LUVHOFoxZDBtMTEyRVoyLUdCR2w3TUo0S0lvUHhZRnNRY0xxZ1E4dFM0ejJ5blFkT1Y5RDF5cVU0QWVWZW0xYklBVVZr?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / Le Monde.fr",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "CMA CGM adds reefer surcharge from South America to North Europe",
                 "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOLWpsOFh6djNubE5MLUJDRVBRV3FTcHZsOUJaYTRlakFmNXNTdzRRSE1LMThkbUl2OTZLNmtIbDRIanFtalZHbWNIUTRzWUtEMnk1YTlJYTR6OXExcExDUVZabjJiemc5aVZ1VS04Mm00b2lOOEFaOHI5dmFtWklxek5Ec1NvYnl5cmV1b3NaemNKOXlNT3dR?oc=5",
                 "published": "2026-09-30",
                 "via": "Google News / container-news.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "CMA CGM Ship Rescues Four After Yacht Strikes Whale in South Pacific",
                 "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxON25jYi12aW5jSDZGQzIxLVY5UlkzLVdtLTNwSmtVTG1LeV8xNjVIaFBWV0kwTWlLMkVmcGtiZy1ySVBKZlI1OWxVMTIzYmJXRFpKalJRQ2pKS1Brc04tMGxrVkdhVkk5ZDAtTmhmbmZPbl9VRzMzNGt5ZXFfX0NXeUZmM3ppaTNqZmxIUTV0Vk9rTnpp?oc=5",
                 "published": "2026-09-29",
                 "via": "Google News / gCaptain",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "CMA CGM raises Asia to Latin America rates by USD 1,000 per container",
                 "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNb0lJQ0FZa1JDRDAxZ3B5SkM3bU91VmVEbXd1MFk2TF9ac1d5eDlJcGVJMmg1N2FOTlZhdzkxVnVhVThFUGlEMjNPUGx1SHFWaVlpSnFNTDE0dFR4YUZCTVpMMm12RmNTcWhRN1RGWW9jUGM2MDdsc0Y2NmxkYXk1ejR3Vl9JNkV2NUtvNV9WN0ptNG9ZSFhwdTFFU04?oc=5",
                 "published": "2026-09-27",
                 "via": "Google News / container-news.com",
-                "is_new": false
+                "is_new": true
               },
               {
                 "title": "CMA CGM adds Puerto Antioquia to revamped PEX2 service",
                 "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNLW9Cb3hoLU9VVXhDRnBwNUNqdDRTRHZpVXc0VWR3RlFRamRMQVJHdk9IcERPRjZZTnpRMWhyZHdaU0wwRk9SemVXX3F1Y0tYWHhoZXNZMV9SODhaVHBPT1JWclNrSEV6cjlEZFNjNFNLMnF6X2Y3bjJpRkNrcHQ1ZkxwVTJqV0U3UHc?oc=5",
                 "published": "2026-09-24",
                 "via": "Google News / container-news.com",
-                "is_new": false
+                "is_new": true
               }
             ]
           }
@@ -866,15 +888,15 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 9.8,
-            "gust_max": 12.9,
-            "hs_max": 0.94,
-            "swell_max": 0.52,
-            "swell_period_at_peak": 3.6,
+            "wind_max": 6.5,
+            "gust_max": 8.4,
+            "hs_max": 0.68,
+            "swell_max": 0.5,
+            "swell_period_at_peak": 3.5,
             "swell_dir_at_peak": 157,
-            "wave_dir_at_peak": 164,
-            "current_kmh_at_peak": 2.6,
-            "current_dir_at_peak": 231,
+            "wave_dir_at_peak": 166,
+            "current_kmh_at_peak": 3.1,
+            "current_dir_at_peak": 45,
             "flags": [],
             "level": "none"
           },
@@ -967,15 +989,16 @@
         "near_level": "none",
         "outlook_3_5d": "none",
         "trend": "stable",
-        "peak_day": "2026-09-30",
+        "peak_day": "2026-10-01",
         "peak": {
-          "gust_max": 12.9,
-          "wind_max": 9.8,
-          "hs_max": 0.94,
-          "swell_max": 0.52,
-          "swell_period_at_peak": 3.6
+          "gust_max": 9.9,
+          "wind_max": 7.7,
+          "hs_max": 0.42,
+          "swell_max": 0.36,
+          "swell_period_at_peak": 2.8
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       },
       "southampton": {
         "id": "southampton",
@@ -985,15 +1008,15 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 9.4,
-            "gust_max": 12.5,
-            "hs_max": 1.14,
-            "swell_max": 0.86,
-            "swell_period_at_peak": 4.7,
-            "swell_dir_at_peak": 170,
-            "wave_dir_at_peak": 176,
-            "current_kmh_at_peak": 0.9,
-            "current_dir_at_peak": 127,
+            "wind_max": 8.6,
+            "gust_max": 11.2,
+            "hs_max": 0.88,
+            "swell_max": 0.6,
+            "swell_period_at_peak": 5.2,
+            "swell_dir_at_peak": 222,
+            "wave_dir_at_peak": 206,
+            "current_kmh_at_peak": 1.8,
+            "current_dir_at_peak": 217,
             "flags": [],
             "level": "none"
           },
@@ -1088,13 +1111,14 @@
         "trend": "stable",
         "peak_day": "2026-09-30",
         "peak": {
-          "gust_max": 12.5,
-          "wind_max": 9.4,
-          "hs_max": 1.14,
-          "swell_max": 0.86,
-          "swell_period_at_peak": 4.7
+          "gust_max": 11.2,
+          "wind_max": 8.6,
+          "hs_max": 0.88,
+          "swell_max": 0.6,
+          "swell_period_at_peak": 5.2
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       },
       "london_gateway": {
         "id": "london_gateway",
@@ -1104,15 +1128,15 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 8.5,
-            "gust_max": 11.2,
-            "hs_max": 0.76,
-            "swell_max": 0.38,
-            "swell_period_at_peak": 4.4,
-            "swell_dir_at_peak": 46,
-            "wave_dir_at_peak": 140,
-            "current_kmh_at_peak": 1.2,
-            "current_dir_at_peak": 51,
+            "wind_max": 6.9,
+            "gust_max": 8.9,
+            "hs_max": 0.38,
+            "swell_max": 0.28,
+            "swell_period_at_peak": 3.0,
+            "swell_dir_at_peak": 117,
+            "wave_dir_at_peak": 134,
+            "current_kmh_at_peak": 1.7,
+            "current_dir_at_peak": 49,
             "flags": [],
             "level": "none"
           },
@@ -1205,15 +1229,16 @@
         "near_level": "none",
         "outlook_3_5d": "none",
         "trend": "stable",
-        "peak_day": "2026-09-30",
+        "peak_day": "2026-10-02",
         "peak": {
-          "gust_max": 11.2,
-          "wind_max": 8.5,
-          "hs_max": 0.76,
-          "swell_max": 0.38,
-          "swell_period_at_peak": 4.4
+          "gust_max": 10.2,
+          "wind_max": 8.1,
+          "hs_max": 0.26,
+          "swell_max": 0.1,
+          "swell_period_at_peak": 3.2
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       },
       "liverpool": {
         "id": "liverpool",
@@ -1223,23 +1248,17 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 12.6,
-            "gust_max": 17.2,
-            "hs_max": 0.98,
-            "swell_max": 0.48,
-            "swell_period_at_peak": 3.1,
-            "swell_dir_at_peak": 160,
-            "wave_dir_at_peak": 140,
-            "current_kmh_at_peak": 2.2,
+            "wind_max": 5.6,
+            "gust_max": 7.0,
+            "hs_max": 0.6,
+            "swell_max": 0.42,
+            "swell_period_at_peak": 3.9,
+            "swell_dir_at_peak": 248,
+            "wave_dir_at_peak": 222,
+            "current_kmh_at_peak": 1.5,
             "current_dir_at_peak": 284,
-            "flags": [
-              {
-                "type": "crane",
-                "level": "watch",
-                "reason": "gusts 17.2 m/s, wind 12.6 m/s"
-              }
-            ],
-            "level": "watch"
+            "flags": [],
+            "level": "none"
           },
           {
             "date": "2026-10-01",
@@ -1327,24 +1346,19 @@
           }
         ],
         "storm_flags": [],
-        "near_level": "watch",
+        "near_level": "none",
         "outlook_3_5d": "none",
-        "trend": "improving",
-        "peak_day": "2026-09-30",
+        "trend": "stable",
+        "peak_day": "2026-10-02",
         "peak": {
-          "gust_max": 17.2,
-          "wind_max": 12.6,
-          "hs_max": 0.98,
-          "swell_max": 0.48,
-          "swell_period_at_peak": 3.1
+          "gust_max": 14.0,
+          "wind_max": 10.8,
+          "hs_max": 1.04,
+          "swell_max": 0.56,
+          "swell_period_at_peak": 4.6
         },
-        "peak_flags": [
-          {
-            "type": "crane",
-            "level": "watch",
-            "reason": "gusts 17.2 m/s, wind 12.6 m/s"
-          }
-        ]
+        "peak_flags": [],
+        "windows": []
       },
       "rotterdam": {
         "id": "rotterdam",
@@ -1354,8 +1368,8 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 7.8,
-            "gust_max": 9.6,
+            "wind_max": 7.7,
+            "gust_max": 9.4,
             "hs_max": 0.52,
             "swell_max": 0.3,
             "swell_period_at_peak": 3.7,
@@ -1463,7 +1477,8 @@
           "swell_max": 0.48,
           "swell_period_at_peak": 3.2
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       },
       "antwerp": {
         "id": "antwerp",
@@ -1473,15 +1488,15 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 8.0,
+            "wind_max": 7.4,
             "gust_max": 10.3,
             "hs_max": 0.48,
             "swell_max": 0.26,
-            "swell_period_at_peak": 4.3,
-            "swell_dir_at_peak": 20,
-            "wave_dir_at_peak": 160,
-            "current_kmh_at_peak": 1.2,
-            "current_dir_at_peak": 321,
+            "swell_period_at_peak": 3.5,
+            "swell_dir_at_peak": 236,
+            "wave_dir_at_peak": 202,
+            "current_kmh_at_peak": 1.4,
+            "current_dir_at_peak": 0,
             "flags": [],
             "level": "none"
           },
@@ -1582,7 +1597,128 @@
           "swell_max": 0.48,
           "swell_period_at_peak": 3.1
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
+      },
+      "bremerhaven": {
+        "id": "bremerhaven",
+        "name": "Bremerhaven",
+        "kind": "port",
+        "region": "north_europe",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 7.0,
+            "gust_max": 8.6,
+            "hs_max": 0.58,
+            "swell_max": 0.24,
+            "swell_period_at_peak": 3.0,
+            "swell_dir_at_peak": 70,
+            "wave_dir_at_peak": 100,
+            "current_kmh_at_peak": 1.8,
+            "current_dir_at_peak": 307,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 7.1,
+            "gust_max": 9.1,
+            "hs_max": 0.56,
+            "swell_max": 0.3,
+            "swell_period_at_peak": 2.8,
+            "swell_dir_at_peak": 272,
+            "wave_dir_at_peak": 110,
+            "current_kmh_at_peak": 0.5,
+            "current_dir_at_peak": 135,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 5.3,
+            "gust_max": 6.9,
+            "hs_max": 0.26,
+            "swell_max": 0.24,
+            "swell_period_at_peak": 2.6,
+            "swell_dir_at_peak": 286,
+            "wave_dir_at_peak": 286,
+            "current_kmh_at_peak": 1.8,
+            "current_dir_at_peak": 114,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 5.3,
+            "gust_max": 7.2,
+            "hs_max": 0.62,
+            "swell_max": 0.44,
+            "swell_period_at_peak": 3.8,
+            "swell_dir_at_peak": 283,
+            "wave_dir_at_peak": 277,
+            "current_kmh_at_peak": 2.0,
+            "current_dir_at_peak": 100,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-04",
+            "wind_max": 6.9,
+            "gust_max": 9.2,
+            "hs_max": 1.4,
+            "swell_max": 0.52,
+            "swell_period_at_peak": 4.0,
+            "swell_dir_at_peak": 290,
+            "wave_dir_at_peak": 278,
+            "current_kmh_at_peak": 0.9,
+            "current_dir_at_peak": 79,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 8.0,
+            "gust_max": 10.4,
+            "hs_max": 1.42,
+            "swell_max": 0.86,
+            "swell_period_at_peak": 5.1,
+            "swell_dir_at_peak": 313,
+            "wave_dir_at_peak": 279,
+            "current_kmh_at_peak": 2.2,
+            "current_dir_at_peak": 99,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 8.3,
+            "gust_max": 10.9,
+            "hs_max": 1.26,
+            "swell_max": 0.9,
+            "swell_period_at_peak": 5.0,
+            "swell_dir_at_peak": 308,
+            "wave_dir_at_peak": 288,
+            "current_kmh_at_peak": 2.3,
+            "current_dir_at_peak": 108,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "none",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-10-05",
+        "peak": {
+          "gust_max": 10.4,
+          "wind_max": 8.0,
+          "hs_max": 1.42,
+          "swell_max": 0.86,
+          "swell_period_at_peak": 5.1
+        },
+        "peak_flags": [],
+        "windows": []
       },
       "hamburg": {
         "id": "hamburg",
@@ -1592,15 +1728,15 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 9.8,
-            "gust_max": 11.9,
-            "hs_max": 0.72,
+            "wind_max": 7.4,
+            "gust_max": 9.1,
+            "hs_max": 0.66,
             "swell_max": 0.22,
-            "swell_period_at_peak": 3.5,
-            "swell_dir_at_peak": 73,
-            "wave_dir_at_peak": 115,
+            "swell_period_at_peak": 3.3,
+            "swell_dir_at_peak": 63,
+            "wave_dir_at_peak": 106,
             "current_kmh_at_peak": 3.0,
-            "current_dir_at_peak": 295,
+            "current_dir_at_peak": 287,
             "flags": [],
             "level": "none"
           },
@@ -1621,7 +1757,7 @@
           {
             "date": "2026-10-02",
             "wind_max": 4.9,
-            "gust_max": 6.4,
+            "gust_max": 6.5,
             "hs_max": 0.34,
             "swell_max": 0.32,
             "swell_period_at_peak": 3.0,
@@ -1634,8 +1770,8 @@
           },
           {
             "date": "2026-10-03",
-            "wind_max": 5.4,
-            "gust_max": 7.2,
+            "wind_max": 5.7,
+            "gust_max": 7.8,
             "hs_max": 0.9,
             "swell_max": 0.58,
             "swell_period_at_peak": 4.2,
@@ -1648,8 +1784,8 @@
           },
           {
             "date": "2026-10-04",
-            "wind_max": 9.6,
-            "gust_max": 13.1,
+            "wind_max": 8.0,
+            "gust_max": 10.7,
             "hs_max": 1.7,
             "swell_max": 0.84,
             "swell_period_at_peak": 4.1,
@@ -1662,8 +1798,8 @@
           },
           {
             "date": "2026-10-05",
-            "wind_max": 10.2,
-            "gust_max": 15.2,
+            "wind_max": 8.9,
+            "gust_max": 11.9,
             "hs_max": 1.68,
             "swell_max": 1.08,
             "swell_period_at_peak": 5.2,
@@ -1671,14 +1807,8 @@
             "wave_dir_at_peak": 277,
             "current_kmh_at_peak": 1.5,
             "current_dir_at_peak": 104,
-            "flags": [
-              {
-                "type": "crane",
-                "level": "watch",
-                "reason": "gusts 15.2 m/s, wind 10.2 m/s"
-              }
-            ],
-            "level": "watch"
+            "flags": [],
+            "level": "none"
           },
           {
             "date": "2026-10-06",
@@ -1697,381 +1827,240 @@
         ],
         "storm_flags": [],
         "near_level": "none",
-        "outlook_3_5d": "watch",
-        "trend": "deteriorating",
+        "outlook_3_5d": "none",
+        "trend": "stable",
         "peak_day": "2026-10-05",
         "peak": {
-          "gust_max": 15.2,
-          "wind_max": 10.2,
+          "gust_max": 11.9,
+          "wind_max": 8.9,
           "hs_max": 1.68,
           "swell_max": 1.08,
           "swell_period_at_peak": 5.2
         },
-        "peak_flags": [
-          {
-            "type": "crane",
-            "level": "watch",
-            "reason": "gusts 15.2 m/s, wind 10.2 m/s"
-          }
-        ]
+        "peak_flags": [],
+        "windows": []
       },
-      "la_long_beach": {
-        "id": "la_long_beach",
-        "name": "Los Angeles / Long Beach",
-        "kind": "port",
-        "region": "global",
+      "dover_strait": {
+        "id": "dover_strait",
+        "name": "Dover Strait",
+        "kind": "lane",
+        "region": "uk",
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 8.7,
-            "gust_max": 10.9,
-            "hs_max": 1.26,
-            "swell_max": 0.96,
-            "swell_period_at_peak": 4.8,
-            "swell_dir_at_peak": 273,
-            "wave_dir_at_peak": 252,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 124,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 8.6,
-            "gust_max": 9.3,
-            "hs_max": 0.96,
-            "swell_max": 0.84,
-            "swell_period_at_peak": 7.7,
-            "swell_dir_at_peak": 277,
-            "wave_dir_at_peak": 264,
-            "current_kmh_at_peak": 0.3,
+            "wind_max": 6.3,
+            "gust_max": 8.0,
+            "hs_max": 0.84,
+            "swell_max": 0.62,
+            "swell_period_at_peak": 3.5,
+            "swell_dir_at_peak": 201,
+            "wave_dir_at_peak": 210,
+            "current_kmh_at_peak": 4.3,
             "current_dir_at_peak": 45,
             "flags": [],
             "level": "none"
           },
           {
-            "date": "2026-10-02",
-            "wind_max": 9.3,
-            "gust_max": 10.1,
-            "hs_max": 0.8,
-            "swell_max": 0.56,
-            "swell_period_at_peak": 6.7,
-            "swell_dir_at_peak": 277,
-            "wave_dir_at_peak": 259,
-            "current_kmh_at_peak": 0.5,
-            "current_dir_at_peak": 225,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 5.1,
-            "gust_max": 7.3,
-            "hs_max": 0.8,
-            "swell_max": 0.46,
-            "swell_period_at_peak": 11.2,
-            "swell_dir_at_peak": 162,
-            "wave_dir_at_peak": 254,
-            "current_kmh_at_peak": 0.7,
-            "current_dir_at_peak": 270,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 4.8,
-            "gust_max": 6.8,
-            "hs_max": 0.78,
-            "swell_max": 0.66,
-            "swell_period_at_peak": 10.6,
-            "swell_dir_at_peak": 165,
-            "wave_dir_at_peak": 179,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 270,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 4.5,
-            "gust_max": 6.0,
-            "hs_max": 0.96,
-            "swell_max": 0.78,
-            "swell_period_at_peak": 11.1,
-            "swell_dir_at_peak": 169,
-            "wave_dir_at_peak": 177,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 297,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 5.5,
-            "gust_max": 7.2,
-            "hs_max": 1.14,
-            "swell_max": 1.06,
-            "swell_period_at_peak": 10.8,
-            "swell_dir_at_peak": 170,
-            "wave_dir_at_peak": 176,
-            "current_kmh_at_peak": 1.0,
-            "current_dir_at_peak": 301,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [
-          {
-            "type": "cyclone",
-            "level": "watch",
-            "reason": "POLO-26 (Tropical Depression) 1027 km away"
-          }
-        ],
-        "near_level": "watch",
-        "outlook_3_5d": "none",
-        "trend": "improving",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 10.9,
-          "wind_max": 8.7,
-          "hs_max": 1.26,
-          "swell_max": 0.96,
-          "swell_period_at_peak": 4.8
-        },
-        "peak_flags": []
-      },
-      "shanghai": {
-        "id": "shanghai",
-        "name": "Shanghai",
-        "kind": "port",
-        "region": "global",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 9.8,
-            "gust_max": 12.9,
-            "hs_max": 0.66,
-            "swell_max": 0.22,
-            "swell_period_at_peak": 2.9,
-            "swell_dir_at_peak": 48,
-            "wave_dir_at_peak": 33,
-            "current_kmh_at_peak": 3.2,
-            "current_dir_at_peak": 117,
-            "flags": [],
-            "level": "none"
-          },
-          {
             "date": "2026-10-01",
-            "wind_max": 10.0,
-            "gust_max": 13.5,
-            "hs_max": 0.88,
-            "swell_max": 0.12,
-            "swell_period_at_peak": 4.8,
-            "swell_dir_at_peak": 11,
-            "wave_dir_at_peak": 30,
-            "current_kmh_at_peak": 2.6,
-            "current_dir_at_peak": 115,
+            "wind_max": 9.3,
+            "gust_max": 12.1,
+            "hs_max": 0.94,
+            "swell_max": 0.46,
+            "swell_period_at_peak": 4.0,
+            "swell_dir_at_peak": 235,
+            "wave_dir_at_peak": 235,
+            "current_kmh_at_peak": 4.0,
+            "current_dir_at_peak": 39,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-02",
-            "wind_max": 8.7,
-            "gust_max": 12.0,
-            "hs_max": 0.76,
-            "swell_max": 0.18,
-            "swell_period_at_peak": 3.4,
-            "swell_dir_at_peak": 12,
-            "wave_dir_at_peak": 40,
-            "current_kmh_at_peak": 2.4,
-            "current_dir_at_peak": 132,
+            "wind_max": 6.6,
+            "gust_max": 8.5,
+            "hs_max": 0.66,
+            "swell_max": 0.5,
+            "swell_period_at_peak": 3.9,
+            "swell_dir_at_peak": 233,
+            "wave_dir_at_peak": 238,
+            "current_kmh_at_peak": 1.5,
+            "current_dir_at_peak": 210,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-03",
-            "wind_max": 5.7,
-            "gust_max": 8.0,
-            "hs_max": 0.52,
-            "swell_max": 0.34,
-            "swell_period_at_peak": 2.8,
-            "swell_dir_at_peak": 56,
-            "wave_dir_at_peak": 61,
-            "current_kmh_at_peak": 2.8,
-            "current_dir_at_peak": 125,
+            "wind_max": 5.4,
+            "gust_max": 6.9,
+            "hs_max": 0.34,
+            "swell_max": 0.3,
+            "swell_period_at_peak": 5.5,
+            "swell_dir_at_peak": 245,
+            "wave_dir_at_peak": 237,
+            "current_kmh_at_peak": 2.2,
+            "current_dir_at_peak": 42,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-04",
-            "wind_max": 10.1,
-            "gust_max": 13.7,
-            "hs_max": 0.86,
-            "swell_max": 0.16,
-            "swell_period_at_peak": 2.4,
-            "swell_dir_at_peak": 100,
-            "wave_dir_at_peak": 337,
-            "current_kmh_at_peak": 0.9,
-            "current_dir_at_peak": 217,
+            "wind_max": 5.9,
+            "gust_max": 7.4,
+            "hs_max": 0.62,
+            "swell_max": 0.28,
+            "swell_period_at_peak": 3.1,
+            "swell_dir_at_peak": 215,
+            "wave_dir_at_peak": 239,
+            "current_kmh_at_peak": 2.5,
+            "current_dir_at_peak": 45,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-05",
-            "wind_max": 11.8,
-            "gust_max": 16.2,
-            "hs_max": 1.1,
-            "swell_max": 0.14,
-            "swell_period_at_peak": 3.7,
-            "swell_dir_at_peak": 29,
-            "wave_dir_at_peak": 338,
-            "current_kmh_at_peak": 1.1,
-            "current_dir_at_peak": 189,
-            "flags": [
-              {
-                "type": "crane",
-                "level": "watch",
-                "reason": "gusts 16.2 m/s, wind 11.8 m/s"
-              }
-            ],
-            "level": "watch"
+            "wind_max": 7.4,
+            "gust_max": 9.4,
+            "hs_max": 0.5,
+            "swell_max": 0.32,
+            "swell_period_at_peak": 3.0,
+            "swell_dir_at_peak": 226,
+            "wave_dir_at_peak": 233,
+            "current_kmh_at_peak": 2.3,
+            "current_dir_at_peak": 45,
+            "flags": [],
+            "level": "none"
           },
           {
             "date": "2026-10-06",
-            "wind_max": 10.7,
-            "gust_max": 14.2,
-            "hs_max": 0.84,
-            "swell_max": 0.2,
-            "swell_period_at_peak": 3.1,
-            "swell_dir_at_peak": 31,
-            "wave_dir_at_peak": 334,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 198,
+            "wind_max": 7.4,
+            "gust_max": 9.4,
+            "hs_max": 0.42,
+            "swell_max": 0.32,
+            "swell_period_at_peak": 2.6,
+            "swell_dir_at_peak": 230,
+            "wave_dir_at_peak": 237,
+            "current_kmh_at_peak": 1.2,
+            "current_dir_at_peak": 63,
             "flags": [],
             "level": "none"
           }
         ],
         "storm_flags": [],
         "near_level": "none",
-        "outlook_3_5d": "watch",
-        "trend": "deteriorating",
-        "peak_day": "2026-10-05",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-10-01",
         "peak": {
-          "gust_max": 16.2,
-          "wind_max": 11.8,
-          "hs_max": 1.1,
-          "swell_max": 0.14,
-          "swell_period_at_peak": 3.7
+          "gust_max": 12.1,
+          "wind_max": 9.3,
+          "hs_max": 0.94,
+          "swell_max": 0.46,
+          "swell_period_at_peak": 4.0
         },
-        "peak_flags": [
-          {
-            "type": "crane",
-            "level": "watch",
-            "reason": "gusts 16.2 m/s, wind 11.8 m/s"
-          }
-        ]
+        "peak_flags": [],
+        "windows": []
       },
-      "singapore": {
-        "id": "singapore",
-        "name": "Singapore",
-        "kind": "port",
-        "region": "global",
+      "german_bight": {
+        "id": "german_bight",
+        "name": "German Bight",
+        "kind": "lane",
+        "region": "north_europe",
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 3.0,
-            "gust_max": 8.3,
-            "hs_max": 0.06,
-            "swell_max": 0.04,
-            "swell_period_at_peak": 2.1,
-            "swell_dir_at_peak": 75,
-            "wave_dir_at_peak": 101,
-            "current_kmh_at_peak": 3.4,
-            "current_dir_at_peak": 254,
+            "wind_max": 7.9,
+            "gust_max": 9.7,
+            "hs_max": 0.84,
+            "swell_max": 0.4,
+            "swell_period_at_peak": 3.9,
+            "swell_dir_at_peak": 78,
+            "wave_dir_at_peak": 113,
+            "current_kmh_at_peak": 0.9,
+            "current_dir_at_peak": 90,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-01",
-            "wind_max": 2.9,
-            "gust_max": 8.0,
-            "hs_max": 0.04,
-            "swell_max": 0.02,
-            "swell_period_at_peak": 2.5,
-            "swell_dir_at_peak": 71,
-            "wave_dir_at_peak": 61,
-            "current_kmh_at_peak": 3.5,
-            "current_dir_at_peak": 255,
+            "wind_max": 10.4,
+            "gust_max": 12.2,
+            "hs_max": 0.8,
+            "swell_max": 0.52,
+            "swell_period_at_peak": 3.5,
+            "swell_dir_at_peak": 99,
+            "wave_dir_at_peak": 116,
+            "current_kmh_at_peak": 1.6,
+            "current_dir_at_peak": 84,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-02",
-            "wind_max": 3.2,
-            "gust_max": 8.3,
-            "hs_max": 0.02,
-            "swell_max": 0.02,
-            "swell_period_at_peak": 3.2,
-            "swell_dir_at_peak": 68,
-            "wave_dir_at_peak": 63,
-            "current_kmh_at_peak": 4.1,
-            "current_dir_at_peak": 255,
+            "wind_max": 6.2,
+            "gust_max": 8.2,
+            "hs_max": 0.4,
+            "swell_max": 0.36,
+            "swell_period_at_peak": 3.0,
+            "swell_dir_at_peak": 258,
+            "wave_dir_at_peak": 264,
+            "current_kmh_at_peak": 1.6,
+            "current_dir_at_peak": 96,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-03",
-            "wind_max": 2.6,
-            "gust_max": 7.5,
-            "hs_max": 0.04,
-            "swell_max": 0.04,
-            "swell_period_at_peak": 1.8,
-            "swell_dir_at_peak": 269,
-            "wave_dir_at_peak": 265,
-            "current_kmh_at_peak": 4.2,
-            "current_dir_at_peak": 250,
+            "wind_max": 6.7,
+            "gust_max": 9.0,
+            "hs_max": 0.98,
+            "swell_max": 0.58,
+            "swell_period_at_peak": 4.5,
+            "swell_dir_at_peak": 275,
+            "wave_dir_at_peak": 259,
+            "current_kmh_at_peak": 0.4,
+            "current_dir_at_peak": 297,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-04",
-            "wind_max": 3.3,
-            "gust_max": 9.6,
-            "hs_max": 0.14,
-            "swell_max": 0.12,
-            "swell_period_at_peak": 2.1,
-            "swell_dir_at_peak": 255,
-            "wave_dir_at_peak": 241,
-            "current_kmh_at_peak": 4.1,
-            "current_dir_at_peak": 255,
+            "wind_max": 8.9,
+            "gust_max": 11.9,
+            "hs_max": 1.78,
+            "swell_max": 0.62,
+            "swell_period_at_peak": 4.2,
+            "swell_dir_at_peak": 262,
+            "wave_dir_at_peak": 277,
+            "current_kmh_at_peak": 0.8,
+            "current_dir_at_peak": 117,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-05",
-            "wind_max": 3.5,
-            "gust_max": 9.9,
-            "hs_max": 0.22,
-            "swell_max": 0.14,
-            "swell_period_at_peak": 1.9,
-            "swell_dir_at_peak": 157,
-            "wave_dir_at_peak": 188,
-            "current_kmh_at_peak": 3.7,
-            "current_dir_at_peak": 256,
+            "wind_max": 9.2,
+            "gust_max": 12.2,
+            "hs_max": 1.78,
+            "swell_max": 1.1,
+            "swell_period_at_peak": 5.5,
+            "swell_dir_at_peak": 315,
+            "wave_dir_at_peak": 279,
+            "current_kmh_at_peak": 1.7,
+            "current_dir_at_peak": 108,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-06",
-            "wind_max": 3.4,
-            "gust_max": 9.6,
-            "hs_max": 0.06,
-            "swell_max": 0.04,
-            "swell_period_at_peak": 2.0,
-            "swell_dir_at_peak": 155,
-            "wave_dir_at_peak": 198,
-            "current_kmh_at_peak": 3.8,
-            "current_dir_at_peak": 253,
+            "wind_max": 8.9,
+            "gust_max": 12.0,
+            "hs_max": 1.6,
+            "swell_max": 1.18,
+            "swell_period_at_peak": 5.8,
+            "swell_dir_at_peak": 317,
+            "wave_dir_at_peak": 280,
+            "current_kmh_at_peak": 1.7,
+            "current_dir_at_peak": 108,
             "flags": [],
             "level": "none"
           }
@@ -2082,13 +2071,506 @@
         "trend": "stable",
         "peak_day": "2026-10-05",
         "peak": {
-          "gust_max": 9.9,
-          "wind_max": 3.5,
-          "hs_max": 0.22,
-          "swell_max": 0.14,
-          "swell_period_at_peak": 1.9
+          "gust_max": 12.2,
+          "wind_max": 9.2,
+          "hs_max": 1.78,
+          "swell_max": 1.1,
+          "swell_period_at_peak": 5.5
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
+      },
+      "western_approaches": {
+        "id": "western_approaches",
+        "name": "Western Approaches",
+        "kind": "lane",
+        "region": "uk",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 9.5,
+            "gust_max": 17.1,
+            "hs_max": 3.92,
+            "swell_max": 3.54,
+            "swell_period_at_peak": 8.2,
+            "swell_dir_at_peak": 227,
+            "wave_dir_at_peak": 233,
+            "current_kmh_at_peak": 1.5,
+            "current_dir_at_peak": 54,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 10.2,
+            "gust_max": 14.3,
+            "hs_max": 4.86,
+            "swell_max": 4.78,
+            "swell_period_at_peak": 10.2,
+            "swell_dir_at_peak": 284,
+            "wave_dir_at_peak": 283,
+            "current_kmh_at_peak": 1.8,
+            "current_dir_at_peak": 186,
+            "flags": [
+              {
+                "type": "heavy_weather",
+                "level": "watch",
+                "reason": "sea 4.86 m, wind 10.2 m/s"
+              }
+            ],
+            "level": "watch"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 9.2,
+            "gust_max": 11.9,
+            "hs_max": 3.8,
+            "swell_max": 3.52,
+            "swell_period_at_peak": 9.6,
+            "swell_dir_at_peak": 290,
+            "wave_dir_at_peak": 281,
+            "current_kmh_at_peak": 1.9,
+            "current_dir_at_peak": 221,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 5.0,
+            "gust_max": 6.3,
+            "hs_max": 2.34,
+            "swell_max": 2.34,
+            "swell_period_at_peak": 7.8,
+            "swell_dir_at_peak": 281,
+            "wave_dir_at_peak": 281,
+            "current_kmh_at_peak": 0.2,
+            "current_dir_at_peak": 180,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-04",
+            "wind_max": 2.9,
+            "gust_max": 4.1,
+            "hs_max": 1.48,
+            "swell_max": 1.46,
+            "swell_period_at_peak": 7.3,
+            "swell_dir_at_peak": 290,
+            "wave_dir_at_peak": 289,
+            "current_kmh_at_peak": 1.5,
+            "current_dir_at_peak": 210,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 5.9,
+            "gust_max": 7.7,
+            "hs_max": 1.32,
+            "swell_max": 1.28,
+            "swell_period_at_peak": 7.3,
+            "swell_dir_at_peak": 300,
+            "wave_dir_at_peak": 301,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 342,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 6.2,
+            "gust_max": 8.2,
+            "hs_max": 1.78,
+            "swell_max": 1.76,
+            "swell_period_at_peak": 9.7,
+            "swell_dir_at_peak": 308,
+            "wave_dir_at_peak": 307,
+            "current_kmh_at_peak": 1.5,
+            "current_dir_at_peak": 346,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "watch",
+        "outlook_3_5d": "none",
+        "trend": "improving",
+        "peak_day": "2026-10-01",
+        "peak": {
+          "gust_max": 14.3,
+          "wind_max": 10.2,
+          "hs_max": 4.86,
+          "swell_max": 4.78,
+          "swell_period_at_peak": 10.2
+        },
+        "peak_flags": [
+          {
+            "type": "heavy_weather",
+            "level": "watch",
+            "reason": "sea 4.86 m, wind 10.2 m/s"
+          }
+        ],
+        "windows": []
+      },
+      "biscay": {
+        "id": "biscay",
+        "name": "Bay of Biscay",
+        "kind": "lane",
+        "region": "uk",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 11.9,
+            "gust_max": 14.8,
+            "hs_max": 3.64,
+            "swell_max": 3.1,
+            "swell_period_at_peak": 8.4,
+            "swell_dir_at_peak": 265,
+            "wave_dir_at_peak": 259,
+            "current_kmh_at_peak": 1.4,
+            "current_dir_at_peak": 90,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 9.6,
+            "gust_max": 13.4,
+            "hs_max": 3.94,
+            "swell_max": 3.94,
+            "swell_period_at_peak": 10.3,
+            "swell_dir_at_peak": 297,
+            "wave_dir_at_peak": 297,
+            "current_kmh_at_peak": 0.7,
+            "current_dir_at_peak": 194,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 8.3,
+            "gust_max": 10.6,
+            "hs_max": 3.62,
+            "swell_max": 3.62,
+            "swell_period_at_peak": 10.2,
+            "swell_dir_at_peak": 303,
+            "wave_dir_at_peak": 303,
+            "current_kmh_at_peak": 0.7,
+            "current_dir_at_peak": 76,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 9.4,
+            "gust_max": 11.6,
+            "hs_max": 2.36,
+            "swell_max": 2.12,
+            "swell_period_at_peak": 9.3,
+            "swell_dir_at_peak": 308,
+            "wave_dir_at_peak": 317,
+            "current_kmh_at_peak": 0.9,
+            "current_dir_at_peak": 217,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-04",
+            "wind_max": 9.9,
+            "gust_max": 13.2,
+            "hs_max": 1.84,
+            "swell_max": 1.26,
+            "swell_period_at_peak": 8.3,
+            "swell_dir_at_peak": 309,
+            "wave_dir_at_peak": 6,
+            "current_kmh_at_peak": 0.4,
+            "current_dir_at_peak": 333,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 10.0,
+            "gust_max": 13.4,
+            "hs_max": 1.54,
+            "swell_max": 0.96,
+            "swell_period_at_peak": 8.2,
+            "swell_dir_at_peak": 312,
+            "wave_dir_at_peak": 16,
+            "current_kmh_at_peak": 0.8,
+            "current_dir_at_peak": 207,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 7.1,
+            "gust_max": 11.0,
+            "hs_max": 1.3,
+            "swell_max": 0.92,
+            "swell_period_at_peak": 8.4,
+            "swell_dir_at_peak": 317,
+            "wave_dir_at_peak": 5,
+            "current_kmh_at_peak": 0.3,
+            "current_dir_at_peak": 315,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "none",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-09-30",
+        "peak": {
+          "gust_max": 14.8,
+          "wind_max": 11.9,
+          "hs_max": 3.64,
+          "swell_max": 3.1,
+          "swell_period_at_peak": 8.4
+        },
+        "peak_flags": [],
+        "windows": []
+      },
+      "gibraltar": {
+        "id": "gibraltar",
+        "name": "Strait of Gibraltar",
+        "kind": "lane",
+        "region": "north_europe",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 1.7,
+            "gust_max": 3.4,
+            "hs_max": 0.88,
+            "swell_max": 0.86,
+            "swell_period_at_peak": 7.7,
+            "swell_dir_at_peak": 283,
+            "wave_dir_at_peak": 283,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 146,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 3.9,
+            "gust_max": 7.4,
+            "hs_max": 1.06,
+            "swell_max": 1.06,
+            "swell_period_at_peak": 8.6,
+            "swell_dir_at_peak": 285,
+            "wave_dir_at_peak": 285,
+            "current_kmh_at_peak": 1.7,
+            "current_dir_at_peak": 238,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 9.3,
+            "gust_max": 15.6,
+            "hs_max": 1.1,
+            "swell_max": 1.02,
+            "swell_period_at_peak": 8.8,
+            "swell_dir_at_peak": 288,
+            "wave_dir_at_peak": 345,
+            "current_kmh_at_peak": 1.4,
+            "current_dir_at_peak": 247,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 8.5,
+            "gust_max": 14.5,
+            "hs_max": 1.02,
+            "swell_max": 0.58,
+            "swell_period_at_peak": 7.7,
+            "swell_dir_at_peak": 288,
+            "wave_dir_at_peak": 69,
+            "current_kmh_at_peak": 1.7,
+            "current_dir_at_peak": 72,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-04",
+            "wind_max": 8.9,
+            "gust_max": 15.3,
+            "hs_max": 0.98,
+            "swell_max": 0.46,
+            "swell_period_at_peak": 6.0,
+            "swell_dir_at_peak": 50,
+            "wave_dir_at_peak": 73,
+            "current_kmh_at_peak": 2.9,
+            "current_dir_at_peak": 68,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 5.3,
+            "gust_max": 11.3,
+            "hs_max": 0.96,
+            "swell_max": 0.32,
+            "swell_period_at_peak": 6.1,
+            "swell_dir_at_peak": 44,
+            "wave_dir_at_peak": 76,
+            "current_kmh_at_peak": 3.2,
+            "current_dir_at_peak": 71,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 2.7,
+            "gust_max": 11.0,
+            "hs_max": 0.84,
+            "swell_max": 0.36,
+            "swell_period_at_peak": 4.5,
+            "swell_dir_at_peak": 81,
+            "wave_dir_at_peak": 75,
+            "current_kmh_at_peak": 0.7,
+            "current_dir_at_peak": 76,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "none",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-10-02",
+        "peak": {
+          "gust_max": 15.6,
+          "wind_max": 9.3,
+          "hs_max": 1.1,
+          "swell_max": 1.02,
+          "swell_period_at_peak": 8.8
+        },
+        "peak_flags": [],
+        "windows": []
+      },
+      "mid_north_atlantic": {
+        "id": "mid_north_atlantic",
+        "name": "Mid-North Atlantic",
+        "kind": "lane",
+        "region": "global",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 12.6,
+            "gust_max": 17.2,
+            "hs_max": 3.8,
+            "swell_max": 2.26,
+            "swell_period_at_peak": 8.2,
+            "swell_dir_at_peak": 352,
+            "wave_dir_at_peak": 308,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 18,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 11.6,
+            "gust_max": 15.8,
+            "hs_max": 3.64,
+            "swell_max": 2.24,
+            "swell_period_at_peak": 10.1,
+            "swell_dir_at_peak": 11,
+            "wave_dir_at_peak": 312,
+            "current_kmh_at_peak": 0.9,
+            "current_dir_at_peak": 90,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 8.4,
+            "gust_max": 11.2,
+            "hs_max": 2.82,
+            "swell_max": 2.08,
+            "swell_period_at_peak": 9.7,
+            "swell_dir_at_peak": 4,
+            "wave_dir_at_peak": 329,
+            "current_kmh_at_peak": 0.7,
+            "current_dir_at_peak": 270,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 5.6,
+            "gust_max": 7.3,
+            "hs_max": 2.28,
+            "swell_max": 1.96,
+            "swell_period_at_peak": 9.2,
+            "swell_dir_at_peak": 350,
+            "wave_dir_at_peak": 334,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 18,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-04",
+            "wind_max": 8.0,
+            "gust_max": 10.7,
+            "hs_max": 1.54,
+            "swell_max": 1.26,
+            "swell_period_at_peak": 8.2,
+            "swell_dir_at_peak": 347,
+            "wave_dir_at_peak": 338,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 288,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 5.4,
+            "gust_max": 7.0,
+            "hs_max": 1.42,
+            "swell_max": 0.94,
+            "swell_period_at_peak": 7.8,
+            "swell_dir_at_peak": 318,
+            "wave_dir_at_peak": 296,
+            "current_kmh_at_peak": 0.7,
+            "current_dir_at_peak": 270,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 8.6,
+            "gust_max": 10.9,
+            "hs_max": 1.7,
+            "swell_max": 1.22,
+            "swell_period_at_peak": 7.6,
+            "swell_dir_at_peak": 312,
+            "wave_dir_at_peak": 337,
+            "current_kmh_at_peak": 1.1,
+            "current_dir_at_peak": 261,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "none",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-09-30",
+        "peak": {
+          "gust_max": 17.2,
+          "wind_max": 12.6,
+          "hs_max": 3.8,
+          "swell_max": 2.26,
+          "swell_period_at_peak": 8.2
+        },
+        "peak_flags": [],
+        "windows": []
       },
       "agulhas": {
         "id": "agulhas",
@@ -2098,15 +2580,15 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 15.7,
-            "gust_max": 21.4,
-            "hs_max": 3.5,
+            "wind_max": 12.8,
+            "gust_max": 16.7,
+            "hs_max": 3.36,
             "swell_max": 2.38,
             "swell_period_at_peak": 8.2,
             "swell_dir_at_peak": 113,
-            "wave_dir_at_peak": 91,
-            "current_kmh_at_peak": 2.4,
-            "current_dir_at_peak": 207,
+            "wave_dir_at_peak": 99,
+            "current_kmh_at_peak": 1.7,
+            "current_dir_at_peak": 238,
             "flags": [],
             "level": "none"
           },
@@ -2210,117 +2692,478 @@
         "near_level": "none",
         "outlook_3_5d": "none",
         "trend": "stable",
-        "peak_day": "2026-09-30",
+        "peak_day": "2026-10-04",
         "peak": {
-          "gust_max": 21.4,
-          "wind_max": 15.7,
-          "hs_max": 3.5,
-          "swell_max": 2.38,
-          "swell_period_at_peak": 8.2
+          "gust_max": 16.9,
+          "wind_max": 12.7,
+          "hs_max": 2.7,
+          "swell_max": 1.8,
+          "swell_period_at_peak": 10.6
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       },
-      "biscay": {
-        "id": "biscay",
-        "name": "Bay of Biscay",
+      "suez": {
+        "id": "suez",
+        "name": "Suez approaches (Port Said)",
         "kind": "lane",
-        "region": "uk",
+        "region": "global",
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 12.9,
-            "gust_max": 17.3,
-            "hs_max": 3.82,
-            "swell_max": 3.1,
-            "swell_period_at_peak": 8.4,
-            "swell_dir_at_peak": 265,
-            "wave_dir_at_peak": 256,
-            "current_kmh_at_peak": 1.0,
-            "current_dir_at_peak": 59,
+            "wind_max": 7.1,
+            "gust_max": 9.3,
+            "hs_max": 0.98,
+            "swell_max": 0.88,
+            "swell_period_at_peak": 4.4,
+            "swell_dir_at_peak": 317,
+            "wave_dir_at_peak": 316,
+            "current_kmh_at_peak": 0.5,
+            "current_dir_at_peak": 135,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-01",
-            "wind_max": 10.1,
-            "gust_max": 15.4,
-            "hs_max": 3.94,
-            "swell_max": 3.94,
-            "swell_period_at_peak": 10.3,
-            "swell_dir_at_peak": 297,
-            "wave_dir_at_peak": 297,
-            "current_kmh_at_peak": 0.7,
-            "current_dir_at_peak": 194,
+            "wind_max": 6.2,
+            "gust_max": 8.6,
+            "hs_max": 0.84,
+            "swell_max": 0.8,
+            "swell_period_at_peak": 4.6,
+            "swell_dir_at_peak": 317,
+            "wave_dir_at_peak": 314,
+            "current_kmh_at_peak": 0.4,
+            "current_dir_at_peak": 117,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-02",
-            "wind_max": 8.3,
-            "gust_max": 10.6,
-            "hs_max": 3.62,
-            "swell_max": 3.62,
-            "swell_period_at_peak": 10.2,
-            "swell_dir_at_peak": 303,
-            "wave_dir_at_peak": 303,
-            "current_kmh_at_peak": 0.7,
-            "current_dir_at_peak": 76,
+            "wind_max": 8.4,
+            "gust_max": 11.7,
+            "hs_max": 0.6,
+            "swell_max": 0.58,
+            "swell_period_at_peak": 4.3,
+            "swell_dir_at_peak": 313,
+            "wave_dir_at_peak": 307,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 124,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 6.0,
+            "gust_max": 8.5,
+            "hs_max": 0.48,
+            "swell_max": 0.42,
+            "swell_period_at_peak": 4.2,
+            "swell_dir_at_peak": 312,
+            "wave_dir_at_peak": 306,
+            "current_kmh_at_peak": 0.4,
+            "current_dir_at_peak": 90,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-04",
+            "wind_max": 4.1,
+            "gust_max": 5.9,
+            "hs_max": 0.52,
+            "swell_max": 0.4,
+            "swell_period_at_peak": 4.4,
+            "swell_dir_at_peak": 304,
+            "wave_dir_at_peak": 314,
+            "current_kmh_at_peak": 0.5,
+            "current_dir_at_peak": 135,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 5.8,
+            "gust_max": 7.7,
+            "hs_max": 0.38,
+            "swell_max": 0.3,
+            "swell_period_at_peak": 4.5,
+            "swell_dir_at_peak": 306,
+            "wave_dir_at_peak": 312,
+            "current_kmh_at_peak": 0.3,
+            "current_dir_at_peak": 135,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 4.3,
+            "gust_max": 5.8,
+            "hs_max": 0.4,
+            "swell_max": 0.26,
+            "swell_period_at_peak": 4.8,
+            "swell_dir_at_peak": 302,
+            "wave_dir_at_peak": 316,
+            "current_kmh_at_peak": 0.3,
+            "current_dir_at_peak": 135,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "none",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-10-02",
+        "peak": {
+          "gust_max": 11.7,
+          "wind_max": 8.4,
+          "hs_max": 0.6,
+          "swell_max": 0.58,
+          "swell_period_at_peak": 4.3
+        },
+        "peak_flags": [],
+        "windows": []
+      },
+      "bab_el_mandeb": {
+        "id": "bab_el_mandeb",
+        "name": "Bab-el-Mandeb / Gulf of Aden",
+        "kind": "lane",
+        "region": "global",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 8.9,
+            "gust_max": 11.8,
+            "hs_max": 0.82,
+            "swell_max": 0.4,
+            "swell_period_at_peak": 4.0,
+            "swell_dir_at_peak": 95,
+            "wave_dir_at_peak": 86,
+            "current_kmh_at_peak": 1.6,
+            "current_dir_at_peak": 264,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 7.4,
+            "gust_max": 10.5,
+            "hs_max": 0.8,
+            "swell_max": 0.54,
+            "swell_period_at_peak": 3.5,
+            "swell_dir_at_peak": 77,
+            "wave_dir_at_peak": 86,
+            "current_kmh_at_peak": 1.6,
+            "current_dir_at_peak": 264,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 9.0,
+            "gust_max": 11.8,
+            "hs_max": 0.9,
+            "swell_max": 0.52,
+            "swell_period_at_peak": 3.6,
+            "swell_dir_at_peak": 76,
+            "wave_dir_at_peak": 83,
+            "current_kmh_at_peak": 2.2,
+            "current_dir_at_peak": 270,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-03",
             "wind_max": 9.4,
-            "gust_max": 11.6,
-            "hs_max": 2.36,
-            "swell_max": 2.12,
-            "swell_period_at_peak": 9.3,
-            "swell_dir_at_peak": 308,
-            "wave_dir_at_peak": 317,
-            "current_kmh_at_peak": 0.9,
-            "current_dir_at_peak": 217,
+            "gust_max": 12.3,
+            "hs_max": 1.2,
+            "swell_max": 0.44,
+            "swell_period_at_peak": 4.0,
+            "swell_dir_at_peak": 56,
+            "wave_dir_at_peak": 82,
+            "current_kmh_at_peak": 2.3,
+            "current_dir_at_peak": 274,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-04",
-            "wind_max": 9.9,
-            "gust_max": 13.2,
-            "hs_max": 1.84,
+            "wind_max": 10.0,
+            "gust_max": 13.4,
+            "hs_max": 1.32,
+            "swell_max": 0.86,
+            "swell_period_at_peak": 4.4,
+            "swell_dir_at_peak": 79,
+            "wave_dir_at_peak": 87,
+            "current_kmh_at_peak": 2.5,
+            "current_dir_at_peak": 278,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 9.4,
+            "gust_max": 12.3,
+            "hs_max": 1.06,
+            "swell_max": 0.74,
+            "swell_period_at_peak": 4.5,
+            "swell_dir_at_peak": 81,
+            "wave_dir_at_peak": 89,
+            "current_kmh_at_peak": 2.5,
+            "current_dir_at_peak": 270,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 9.4,
+            "gust_max": 12.4,
+            "hs_max": 1.06,
+            "swell_max": 0.58,
+            "swell_period_at_peak": 4.4,
+            "swell_dir_at_peak": 74,
+            "wave_dir_at_peak": 89,
+            "current_kmh_at_peak": 2.7,
+            "current_dir_at_peak": 274,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "none",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-10-04",
+        "peak": {
+          "gust_max": 13.4,
+          "wind_max": 10.0,
+          "hs_max": 1.32,
+          "swell_max": 0.86,
+          "swell_period_at_peak": 4.4
+        },
+        "peak_flags": [],
+        "windows": []
+      },
+      "arabian_sea": {
+        "id": "arabian_sea",
+        "name": "Arabian Sea",
+        "kind": "lane",
+        "region": "global",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 1.4,
+            "gust_max": 2.6,
+            "hs_max": 1.1,
+            "swell_max": 0.82,
+            "swell_period_at_peak": 9.2,
+            "swell_dir_at_peak": 177,
+            "wave_dir_at_peak": 195,
+            "current_kmh_at_peak": 0.5,
+            "current_dir_at_peak": 45,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 3.5,
+            "gust_max": 5.1,
+            "hs_max": 1.06,
+            "swell_max": 0.96,
+            "swell_period_at_peak": 10.6,
+            "swell_dir_at_peak": 183,
+            "wave_dir_at_peak": 194,
+            "current_kmh_at_peak": 0.3,
+            "current_dir_at_peak": 45,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 4.5,
+            "gust_max": 6.1,
+            "hs_max": 1.06,
+            "swell_max": 1.04,
+            "swell_period_at_peak": 9.8,
+            "swell_dir_at_peak": 188,
+            "wave_dir_at_peak": 182,
+            "current_kmh_at_peak": 0.5,
+            "current_dir_at_peak": 0,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 5.0,
+            "gust_max": 6.4,
+            "hs_max": 1.06,
+            "swell_max": 0.96,
+            "swell_period_at_peak": 10.1,
+            "swell_dir_at_peak": 178,
+            "wave_dir_at_peak": 181,
+            "current_kmh_at_peak": 0.4,
+            "current_dir_at_peak": 27,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-04",
+            "wind_max": 3.9,
+            "gust_max": 6.1,
+            "hs_max": 1.04,
+            "swell_max": 0.96,
+            "swell_period_at_peak": 9.3,
+            "swell_dir_at_peak": 179,
+            "wave_dir_at_peak": 175,
+            "current_kmh_at_peak": 0.2,
+            "current_dir_at_peak": 90,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-05",
+            "wind_max": 2.6,
+            "gust_max": 4.2,
+            "hs_max": 0.94,
+            "swell_max": 0.92,
+            "swell_period_at_peak": 9.1,
+            "swell_dir_at_peak": 173,
+            "wave_dir_at_peak": 172,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 72,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-06",
+            "wind_max": 2.5,
+            "gust_max": 3.7,
+            "hs_max": 0.86,
+            "swell_max": 0.7,
+            "swell_period_at_peak": 8.1,
+            "swell_dir_at_peak": 170,
+            "wave_dir_at_peak": 168,
+            "current_kmh_at_peak": 0.4,
+            "current_dir_at_peak": 27,
+            "flags": [],
+            "level": "none"
+          }
+        ],
+        "storm_flags": [],
+        "near_level": "none",
+        "outlook_3_5d": "none",
+        "trend": "stable",
+        "peak_day": "2026-10-03",
+        "peak": {
+          "gust_max": 6.4,
+          "wind_max": 5.0,
+          "hs_max": 1.06,
+          "swell_max": 0.96,
+          "swell_period_at_peak": 10.1
+        },
+        "peak_flags": [],
+        "windows": []
+      },
+      "sri_lanka": {
+        "id": "sri_lanka",
+        "name": "South of Sri Lanka",
+        "kind": "lane",
+        "region": "global",
+        "days": [
+          {
+            "date": "2026-09-30",
+            "wind_max": 6.9,
+            "gust_max": 9.1,
+            "hs_max": 1.64,
+            "swell_max": 1.02,
+            "swell_period_at_peak": 8.1,
+            "swell_dir_at_peak": 161,
+            "wave_dir_at_peak": 191,
+            "current_kmh_at_peak": 1.4,
+            "current_dir_at_peak": 90,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-01",
+            "wind_max": 6.1,
+            "gust_max": 8.0,
+            "hs_max": 1.68,
             "swell_max": 1.26,
-            "swell_period_at_peak": 8.3,
-            "swell_dir_at_peak": 309,
-            "wave_dir_at_peak": 6,
+            "swell_period_at_peak": 12.1,
+            "swell_dir_at_peak": 190,
+            "wave_dir_at_peak": 181,
+            "current_kmh_at_peak": 1.8,
+            "current_dir_at_peak": 96,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-02",
+            "wind_max": 3.6,
+            "gust_max": 5.7,
+            "hs_max": 1.64,
+            "swell_max": 1.56,
+            "swell_period_at_peak": 10.1,
+            "swell_dir_at_peak": 175,
+            "wave_dir_at_peak": 178,
+            "current_kmh_at_peak": 0.9,
+            "current_dir_at_peak": 90,
+            "flags": [],
+            "level": "none"
+          },
+          {
+            "date": "2026-10-03",
+            "wind_max": 4.2,
+            "gust_max": 5.8,
+            "hs_max": 1.52,
+            "swell_max": 1.5,
+            "swell_period_at_peak": 9.7,
+            "swell_dir_at_peak": 174,
+            "wave_dir_at_peak": 175,
             "current_kmh_at_peak": 0.4,
             "current_dir_at_peak": 333,
             "flags": [],
             "level": "none"
           },
           {
+            "date": "2026-10-04",
+            "wind_max": 4.3,
+            "gust_max": 6.3,
+            "hs_max": 1.4,
+            "swell_max": 1.4,
+            "swell_period_at_peak": 9.1,
+            "swell_dir_at_peak": 168,
+            "wave_dir_at_peak": 169,
+            "current_kmh_at_peak": 0.5,
+            "current_dir_at_peak": 0,
+            "flags": [],
+            "level": "none"
+          },
+          {
             "date": "2026-10-05",
-            "wind_max": 10.0,
-            "gust_max": 13.4,
-            "hs_max": 1.54,
-            "swell_max": 0.96,
-            "swell_period_at_peak": 8.2,
-            "swell_dir_at_peak": 312,
-            "wave_dir_at_peak": 16,
-            "current_kmh_at_peak": 0.8,
-            "current_dir_at_peak": 207,
+            "wind_max": 3.3,
+            "gust_max": 5.9,
+            "hs_max": 1.28,
+            "swell_max": 1.06,
+            "swell_period_at_peak": 7.3,
+            "swell_dir_at_peak": 158,
+            "wave_dir_at_peak": 163,
+            "current_kmh_at_peak": 0.4,
+            "current_dir_at_peak": 90,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-06",
-            "wind_max": 7.1,
-            "gust_max": 11.0,
+            "wind_max": 1.9,
+            "gust_max": 5.5,
             "hs_max": 1.3,
-            "swell_max": 0.92,
-            "swell_period_at_peak": 8.4,
-            "swell_dir_at_peak": 317,
-            "wave_dir_at_peak": 5,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 315,
+            "swell_max": 0.98,
+            "swell_period_at_peak": 7.8,
+            "swell_dir_at_peak": 153,
+            "wave_dir_at_peak": 166,
+            "current_kmh_at_peak": 0.6,
+            "current_dir_at_peak": 288,
             "flags": [],
             "level": "none"
           }
@@ -2331,281 +3174,14 @@
         "trend": "stable",
         "peak_day": "2026-09-30",
         "peak": {
-          "gust_max": 17.3,
-          "wind_max": 12.9,
-          "hs_max": 3.82,
-          "swell_max": 3.1,
-          "swell_period_at_peak": 8.4
+          "gust_max": 9.1,
+          "wind_max": 6.9,
+          "hs_max": 1.64,
+          "swell_max": 1.02,
+          "swell_period_at_peak": 8.1
         },
-        "peak_flags": []
-      },
-      "western_approaches": {
-        "id": "western_approaches",
-        "name": "Western Approaches",
-        "kind": "lane",
-        "region": "uk",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 13.8,
-            "gust_max": 20.0,
-            "hs_max": 4.48,
-            "swell_max": 3.68,
-            "swell_period_at_peak": 8.2,
-            "swell_dir_at_peak": 229,
-            "wave_dir_at_peak": 227,
-            "current_kmh_at_peak": 1.0,
-            "current_dir_at_peak": 121,
-            "flags": [
-              {
-                "type": "heavy_weather",
-                "level": "watch",
-                "reason": "sea 4.48 m, wind 13.8 m/s"
-              }
-            ],
-            "level": "watch"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 10.2,
-            "gust_max": 14.3,
-            "hs_max": 4.86,
-            "swell_max": 4.78,
-            "swell_period_at_peak": 10.2,
-            "swell_dir_at_peak": 284,
-            "wave_dir_at_peak": 283,
-            "current_kmh_at_peak": 1.8,
-            "current_dir_at_peak": 186,
-            "flags": [
-              {
-                "type": "heavy_weather",
-                "level": "watch",
-                "reason": "sea 4.86 m, wind 10.2 m/s"
-              }
-            ],
-            "level": "watch"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 9.2,
-            "gust_max": 11.9,
-            "hs_max": 3.8,
-            "swell_max": 3.52,
-            "swell_period_at_peak": 9.6,
-            "swell_dir_at_peak": 290,
-            "wave_dir_at_peak": 281,
-            "current_kmh_at_peak": 1.9,
-            "current_dir_at_peak": 221,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 5.0,
-            "gust_max": 6.3,
-            "hs_max": 2.34,
-            "swell_max": 2.34,
-            "swell_period_at_peak": 7.8,
-            "swell_dir_at_peak": 281,
-            "wave_dir_at_peak": 281,
-            "current_kmh_at_peak": 0.2,
-            "current_dir_at_peak": 180,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 2.9,
-            "gust_max": 4.1,
-            "hs_max": 1.48,
-            "swell_max": 1.46,
-            "swell_period_at_peak": 7.3,
-            "swell_dir_at_peak": 290,
-            "wave_dir_at_peak": 289,
-            "current_kmh_at_peak": 1.5,
-            "current_dir_at_peak": 210,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 5.9,
-            "gust_max": 7.7,
-            "hs_max": 1.32,
-            "swell_max": 1.28,
-            "swell_period_at_peak": 7.3,
-            "swell_dir_at_peak": 300,
-            "wave_dir_at_peak": 301,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 342,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 6.2,
-            "gust_max": 8.2,
-            "hs_max": 1.78,
-            "swell_max": 1.76,
-            "swell_period_at_peak": 9.7,
-            "swell_dir_at_peak": 308,
-            "wave_dir_at_peak": 307,
-            "current_kmh_at_peak": 1.5,
-            "current_dir_at_peak": 346,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "watch",
-        "outlook_3_5d": "none",
-        "trend": "improving",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 20.0,
-          "wind_max": 13.8,
-          "hs_max": 4.48,
-          "swell_max": 3.68,
-          "swell_period_at_peak": 8.2
-        },
-        "peak_flags": [
-          {
-            "type": "heavy_weather",
-            "level": "watch",
-            "reason": "sea 4.48 m, wind 13.8 m/s"
-          }
-        ]
-      },
-      "mid_north_atlantic": {
-        "id": "mid_north_atlantic",
-        "name": "Mid-North Atlantic",
-        "kind": "lane",
-        "region": "global",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 12.9,
-            "gust_max": 18.0,
-            "hs_max": 4.46,
-            "swell_max": 3.4,
-            "swell_period_at_peak": 8.4,
-            "swell_dir_at_peak": 344,
-            "wave_dir_at_peak": 327,
-            "current_kmh_at_peak": 1.4,
-            "current_dir_at_peak": 230,
-            "flags": [
-              {
-                "type": "heavy_weather",
-                "level": "watch",
-                "reason": "sea 4.46 m, wind 12.9 m/s"
-              }
-            ],
-            "level": "watch"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 11.6,
-            "gust_max": 15.8,
-            "hs_max": 3.64,
-            "swell_max": 2.24,
-            "swell_period_at_peak": 10.1,
-            "swell_dir_at_peak": 11,
-            "wave_dir_at_peak": 312,
-            "current_kmh_at_peak": 0.9,
-            "current_dir_at_peak": 90,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 8.4,
-            "gust_max": 11.2,
-            "hs_max": 2.82,
-            "swell_max": 2.08,
-            "swell_period_at_peak": 9.7,
-            "swell_dir_at_peak": 4,
-            "wave_dir_at_peak": 329,
-            "current_kmh_at_peak": 0.7,
-            "current_dir_at_peak": 270,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 5.6,
-            "gust_max": 7.3,
-            "hs_max": 2.28,
-            "swell_max": 1.96,
-            "swell_period_at_peak": 9.2,
-            "swell_dir_at_peak": 350,
-            "wave_dir_at_peak": 334,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 18,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 8.0,
-            "gust_max": 10.7,
-            "hs_max": 1.54,
-            "swell_max": 1.26,
-            "swell_period_at_peak": 8.2,
-            "swell_dir_at_peak": 347,
-            "wave_dir_at_peak": 338,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 288,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 5.4,
-            "gust_max": 7.0,
-            "hs_max": 1.42,
-            "swell_max": 0.94,
-            "swell_period_at_peak": 7.8,
-            "swell_dir_at_peak": 318,
-            "wave_dir_at_peak": 296,
-            "current_kmh_at_peak": 0.7,
-            "current_dir_at_peak": 270,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 8.6,
-            "gust_max": 10.9,
-            "hs_max": 1.7,
-            "swell_max": 1.22,
-            "swell_period_at_peak": 7.6,
-            "swell_dir_at_peak": 312,
-            "wave_dir_at_peak": 337,
-            "current_kmh_at_peak": 1.1,
-            "current_dir_at_peak": 261,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "watch",
-        "outlook_3_5d": "none",
-        "trend": "improving",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 18.0,
-          "wind_max": 12.9,
-          "hs_max": 4.46,
-          "swell_max": 3.4,
-          "swell_period_at_peak": 8.4
-        },
-        "peak_flags": [
-          {
-            "type": "heavy_weather",
-            "level": "watch",
-            "reason": "sea 4.46 m, wind 12.9 m/s"
-          }
-        ]
+        "peak_flags": [],
+        "windows": []
       },
       "malacca": {
         "id": "malacca",
@@ -2615,15 +3191,15 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 5.7,
-            "gust_max": 8.1,
-            "hs_max": 0.42,
-            "swell_max": 0.32,
-            "swell_period_at_peak": 2.7,
-            "swell_dir_at_peak": 143,
-            "wave_dir_at_peak": 150,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 45,
+            "wind_max": 4.8,
+            "gust_max": 7.4,
+            "hs_max": 0.18,
+            "swell_max": 0.14,
+            "swell_period_at_peak": 5.2,
+            "swell_dir_at_peak": 323,
+            "wave_dir_at_peak": 329,
+            "current_kmh_at_peak": 2.7,
+            "current_dir_at_peak": 312,
             "flags": [],
             "level": "none"
           },
@@ -2716,117 +3292,118 @@
         "near_level": "none",
         "outlook_3_5d": "none",
         "trend": "stable",
-        "peak_day": "2026-09-30",
+        "peak_day": "2026-10-04",
         "peak": {
-          "gust_max": 8.1,
-          "wind_max": 5.7,
-          "hs_max": 0.42,
-          "swell_max": 0.32,
-          "swell_period_at_peak": 2.7
+          "gust_max": 8.0,
+          "wind_max": 5.5,
+          "hs_max": 0.1,
+          "swell_max": 0.08,
+          "swell_period_at_peak": 1.9
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       },
-      "suez": {
-        "id": "suez",
-        "name": "Suez approaches (Port Said)",
+      "taiwan_strait": {
+        "id": "taiwan_strait",
+        "name": "Taiwan Strait",
         "kind": "lane",
         "region": "global",
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 7.3,
-            "gust_max": 9.7,
-            "hs_max": 1.0,
-            "swell_max": 0.94,
-            "swell_period_at_peak": 5.5,
-            "swell_dir_at_peak": 317,
-            "wave_dir_at_peak": 315,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 117,
+            "wind_max": 3.1,
+            "gust_max": 4.8,
+            "hs_max": 0.3,
+            "swell_max": 0.24,
+            "swell_period_at_peak": 2.7,
+            "swell_dir_at_peak": 236,
+            "wave_dir_at_peak": 243,
+            "current_kmh_at_peak": 1.5,
+            "current_dir_at_peak": 346,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-01",
-            "wind_max": 6.6,
-            "gust_max": 8.7,
-            "hs_max": 0.84,
-            "swell_max": 0.8,
-            "swell_period_at_peak": 4.6,
-            "swell_dir_at_peak": 317,
-            "wave_dir_at_peak": 314,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 117,
+            "wind_max": 7.6,
+            "gust_max": 9.8,
+            "hs_max": 0.38,
+            "swell_max": 0.18,
+            "swell_period_at_peak": 5.7,
+            "swell_dir_at_peak": 42,
+            "wave_dir_at_peak": 29,
+            "current_kmh_at_peak": 0.3,
+            "current_dir_at_peak": 135,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-02",
-            "wind_max": 8.9,
-            "gust_max": 11.8,
-            "hs_max": 0.6,
-            "swell_max": 0.58,
-            "swell_period_at_peak": 4.3,
-            "swell_dir_at_peak": 313,
-            "wave_dir_at_peak": 307,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 124,
+            "wind_max": 12.3,
+            "gust_max": 16.1,
+            "hs_max": 1.62,
+            "swell_max": 1.48,
+            "swell_period_at_peak": 5.2,
+            "swell_dir_at_peak": 33,
+            "wave_dir_at_peak": 35,
+            "current_kmh_at_peak": 1.1,
+            "current_dir_at_peak": 279,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-03",
-            "wind_max": 6.6,
-            "gust_max": 8.7,
-            "hs_max": 0.48,
-            "swell_max": 0.42,
-            "swell_period_at_peak": 4.2,
-            "swell_dir_at_peak": 312,
-            "wave_dir_at_peak": 306,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 90,
+            "wind_max": 10.2,
+            "gust_max": 13.1,
+            "hs_max": 1.44,
+            "swell_max": 1.38,
+            "swell_period_at_peak": 5.3,
+            "swell_dir_at_peak": 30,
+            "wave_dir_at_peak": 33,
+            "current_kmh_at_peak": 0.3,
+            "current_dir_at_peak": 135,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-04",
-            "wind_max": 3.5,
-            "gust_max": 5.4,
-            "hs_max": 0.52,
-            "swell_max": 0.4,
-            "swell_period_at_peak": 4.4,
-            "swell_dir_at_peak": 304,
-            "wave_dir_at_peak": 314,
-            "current_kmh_at_peak": 0.5,
-            "current_dir_at_peak": 135,
+            "wind_max": 8.2,
+            "gust_max": 10.9,
+            "hs_max": 0.92,
+            "swell_max": 0.7,
+            "swell_period_at_peak": 4.5,
+            "swell_dir_at_peak": 35,
+            "wave_dir_at_peak": 34,
+            "current_kmh_at_peak": 1.0,
+            "current_dir_at_peak": 301,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-05",
-            "wind_max": 5.4,
-            "gust_max": 7.7,
-            "hs_max": 0.38,
-            "swell_max": 0.3,
-            "swell_period_at_peak": 4.5,
-            "swell_dir_at_peak": 306,
-            "wave_dir_at_peak": 312,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 135,
+            "wind_max": 15.6,
+            "gust_max": 22.3,
+            "hs_max": 3.18,
+            "swell_max": 0.42,
+            "swell_period_at_peak": 5.0,
+            "swell_dir_at_peak": 39,
+            "wave_dir_at_peak": 37,
+            "current_kmh_at_peak": 2.1,
+            "current_dir_at_peak": 232,
             "flags": [],
             "level": "none"
           },
           {
             "date": "2026-10-06",
-            "wind_max": 3.8,
-            "gust_max": 5.8,
-            "hs_max": 0.4,
-            "swell_max": 0.26,
-            "swell_period_at_peak": 4.8,
-            "swell_dir_at_peak": 302,
-            "wave_dir_at_peak": 316,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 135,
+            "wind_max": 15.4,
+            "gust_max": 22.1,
+            "hs_max": 3.22,
+            "swell_max": 0.34,
+            "swell_period_at_peak": 8.2,
+            "swell_dir_at_peak": 84,
+            "wave_dir_at_peak": 37,
+            "current_kmh_at_peak": 2.3,
+            "current_dir_at_peak": 219,
             "flags": [],
             "level": "none"
           }
@@ -2835,15 +3412,16 @@
         "near_level": "none",
         "outlook_3_5d": "none",
         "trend": "stable",
-        "peak_day": "2026-10-02",
+        "peak_day": "2026-10-05",
         "peak": {
-          "gust_max": 11.8,
-          "wind_max": 8.9,
-          "hs_max": 0.6,
-          "swell_max": 0.58,
-          "swell_period_at_peak": 4.3
+          "gust_max": 22.3,
+          "wind_max": 15.6,
+          "hs_max": 3.18,
+          "swell_max": 0.42,
+          "swell_period_at_peak": 5.0
         },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       },
       "panama": {
         "id": "panama",
@@ -2853,8 +3431,8 @@
         "days": [
           {
             "date": "2026-09-30",
-            "wind_max": 4.1,
-            "gust_max": 6.9,
+            "wind_max": 3.8,
+            "gust_max": 5.2,
             "hs_max": 0.96,
             "swell_max": 0.96,
             "swell_period_at_peak": 6.0,
@@ -2962,1055 +3540,11 @@
           "swell_max": 0.66,
           "swell_period_at_peak": 6.0
         },
-        "peak_flags": []
-      },
-      "gibraltar": {
-        "id": "gibraltar",
-        "name": "Strait of Gibraltar",
-        "kind": "lane",
-        "region": "north_europe",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 2.6,
-            "gust_max": 5.2,
-            "hs_max": 0.88,
-            "swell_max": 0.86,
-            "swell_period_at_peak": 7.7,
-            "swell_dir_at_peak": 283,
-            "wave_dir_at_peak": 283,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 146,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 4.3,
-            "gust_max": 7.8,
-            "hs_max": 1.06,
-            "swell_max": 1.06,
-            "swell_period_at_peak": 8.6,
-            "swell_dir_at_peak": 285,
-            "wave_dir_at_peak": 285,
-            "current_kmh_at_peak": 1.7,
-            "current_dir_at_peak": 238,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 9.7,
-            "gust_max": 16.1,
-            "hs_max": 1.1,
-            "swell_max": 1.02,
-            "swell_period_at_peak": 8.8,
-            "swell_dir_at_peak": 288,
-            "wave_dir_at_peak": 345,
-            "current_kmh_at_peak": 1.4,
-            "current_dir_at_peak": 247,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 7.8,
-            "gust_max": 13.3,
-            "hs_max": 1.02,
-            "swell_max": 0.58,
-            "swell_period_at_peak": 7.7,
-            "swell_dir_at_peak": 288,
-            "wave_dir_at_peak": 69,
-            "current_kmh_at_peak": 1.7,
-            "current_dir_at_peak": 72,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 7.3,
-            "gust_max": 12.9,
-            "hs_max": 0.98,
-            "swell_max": 0.46,
-            "swell_period_at_peak": 6.0,
-            "swell_dir_at_peak": 50,
-            "wave_dir_at_peak": 73,
-            "current_kmh_at_peak": 2.9,
-            "current_dir_at_peak": 68,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 4.6,
-            "gust_max": 11.3,
-            "hs_max": 0.96,
-            "swell_max": 0.32,
-            "swell_period_at_peak": 6.1,
-            "swell_dir_at_peak": 44,
-            "wave_dir_at_peak": 76,
-            "current_kmh_at_peak": 3.2,
-            "current_dir_at_peak": 71,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 2.7,
-            "gust_max": 11.0,
-            "hs_max": 0.84,
-            "swell_max": 0.36,
-            "swell_period_at_peak": 4.5,
-            "swell_dir_at_peak": 81,
-            "wave_dir_at_peak": 75,
-            "current_kmh_at_peak": 0.7,
-            "current_dir_at_peak": 76,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "none",
-        "outlook_3_5d": "none",
-        "trend": "stable",
-        "peak_day": "2026-10-02",
-        "peak": {
-          "gust_max": 16.1,
-          "wind_max": 9.7,
-          "hs_max": 1.1,
-          "swell_max": 1.02,
-          "swell_period_at_peak": 8.8
-        },
-        "peak_flags": []
-      },
-      "dover_strait": {
-        "id": "dover_strait",
-        "name": "Dover Strait",
-        "kind": "lane",
-        "region": "uk",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 10.8,
-            "gust_max": 14.4,
-            "hs_max": 1.16,
-            "swell_max": 0.68,
-            "swell_period_at_peak": 3.8,
-            "swell_dir_at_peak": 199,
-            "wave_dir_at_peak": 190,
-            "current_kmh_at_peak": 2.6,
-            "current_dir_at_peak": 231,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 9.3,
-            "gust_max": 12.1,
-            "hs_max": 0.94,
-            "swell_max": 0.46,
-            "swell_period_at_peak": 4.0,
-            "swell_dir_at_peak": 235,
-            "wave_dir_at_peak": 235,
-            "current_kmh_at_peak": 4.0,
-            "current_dir_at_peak": 39,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 6.6,
-            "gust_max": 8.5,
-            "hs_max": 0.66,
-            "swell_max": 0.5,
-            "swell_period_at_peak": 3.9,
-            "swell_dir_at_peak": 233,
-            "wave_dir_at_peak": 238,
-            "current_kmh_at_peak": 1.5,
-            "current_dir_at_peak": 210,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 5.4,
-            "gust_max": 6.9,
-            "hs_max": 0.34,
-            "swell_max": 0.3,
-            "swell_period_at_peak": 5.5,
-            "swell_dir_at_peak": 245,
-            "wave_dir_at_peak": 237,
-            "current_kmh_at_peak": 2.2,
-            "current_dir_at_peak": 42,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 5.9,
-            "gust_max": 7.4,
-            "hs_max": 0.62,
-            "swell_max": 0.28,
-            "swell_period_at_peak": 3.1,
-            "swell_dir_at_peak": 215,
-            "wave_dir_at_peak": 239,
-            "current_kmh_at_peak": 2.5,
-            "current_dir_at_peak": 45,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 7.4,
-            "gust_max": 9.4,
-            "hs_max": 0.5,
-            "swell_max": 0.32,
-            "swell_period_at_peak": 3.0,
-            "swell_dir_at_peak": 226,
-            "wave_dir_at_peak": 233,
-            "current_kmh_at_peak": 2.3,
-            "current_dir_at_peak": 45,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 7.4,
-            "gust_max": 9.4,
-            "hs_max": 0.42,
-            "swell_max": 0.32,
-            "swell_period_at_peak": 2.6,
-            "swell_dir_at_peak": 230,
-            "wave_dir_at_peak": 237,
-            "current_kmh_at_peak": 1.2,
-            "current_dir_at_peak": 63,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "none",
-        "outlook_3_5d": "none",
-        "trend": "stable",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 14.4,
-          "wind_max": 10.8,
-          "hs_max": 1.16,
-          "swell_max": 0.68,
-          "swell_period_at_peak": 3.8
-        },
-        "peak_flags": []
-      },
-      "german_bight": {
-        "id": "german_bight",
-        "name": "German Bight",
-        "kind": "lane",
-        "region": "north_europe",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 9.9,
-            "gust_max": 12.2,
-            "hs_max": 0.92,
-            "swell_max": 0.4,
-            "swell_period_at_peak": 3.8,
-            "swell_dir_at_peak": 76,
-            "wave_dir_at_peak": 115,
-            "current_kmh_at_peak": 1.1,
-            "current_dir_at_peak": 72,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 10.4,
-            "gust_max": 12.2,
-            "hs_max": 0.8,
-            "swell_max": 0.52,
-            "swell_period_at_peak": 3.5,
-            "swell_dir_at_peak": 99,
-            "wave_dir_at_peak": 116,
-            "current_kmh_at_peak": 1.6,
-            "current_dir_at_peak": 84,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 5.5,
-            "gust_max": 6.9,
-            "hs_max": 0.4,
-            "swell_max": 0.36,
-            "swell_period_at_peak": 3.0,
-            "swell_dir_at_peak": 258,
-            "wave_dir_at_peak": 264,
-            "current_kmh_at_peak": 1.6,
-            "current_dir_at_peak": 96,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 7.1,
-            "gust_max": 9.4,
-            "hs_max": 0.98,
-            "swell_max": 0.58,
-            "swell_period_at_peak": 4.5,
-            "swell_dir_at_peak": 275,
-            "wave_dir_at_peak": 259,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 297,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 10.0,
-            "gust_max": 13.3,
-            "hs_max": 1.78,
-            "swell_max": 0.62,
-            "swell_period_at_peak": 4.2,
-            "swell_dir_at_peak": 262,
-            "wave_dir_at_peak": 277,
-            "current_kmh_at_peak": 0.8,
-            "current_dir_at_peak": 117,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 10.6,
-            "gust_max": 14.7,
-            "hs_max": 1.78,
-            "swell_max": 1.1,
-            "swell_period_at_peak": 5.5,
-            "swell_dir_at_peak": 315,
-            "wave_dir_at_peak": 279,
-            "current_kmh_at_peak": 1.7,
-            "current_dir_at_peak": 108,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 8.9,
-            "gust_max": 12.0,
-            "hs_max": 1.6,
-            "swell_max": 1.18,
-            "swell_period_at_peak": 5.8,
-            "swell_dir_at_peak": 317,
-            "wave_dir_at_peak": 280,
-            "current_kmh_at_peak": 1.7,
-            "current_dir_at_peak": 108,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "none",
-        "outlook_3_5d": "none",
-        "trend": "stable",
-        "peak_day": "2026-10-05",
-        "peak": {
-          "gust_max": 14.7,
-          "wind_max": 10.6,
-          "hs_max": 1.78,
-          "swell_max": 1.1,
-          "swell_period_at_peak": 5.5
-        },
-        "peak_flags": []
-      },
-      "bab_el_mandeb": {
-        "id": "bab_el_mandeb",
-        "name": "Bab-el-Mandeb / Gulf of Aden",
-        "kind": "lane",
-        "region": "global",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 8.9,
-            "gust_max": 11.8,
-            "hs_max": 0.82,
-            "swell_max": 0.42,
-            "swell_period_at_peak": 3.0,
-            "swell_dir_at_peak": 98,
-            "wave_dir_at_peak": 86,
-            "current_kmh_at_peak": 1.6,
-            "current_dir_at_peak": 264,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 7.4,
-            "gust_max": 10.5,
-            "hs_max": 0.8,
-            "swell_max": 0.54,
-            "swell_period_at_peak": 3.5,
-            "swell_dir_at_peak": 77,
-            "wave_dir_at_peak": 86,
-            "current_kmh_at_peak": 1.6,
-            "current_dir_at_peak": 264,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 9.0,
-            "gust_max": 11.8,
-            "hs_max": 0.9,
-            "swell_max": 0.52,
-            "swell_period_at_peak": 3.6,
-            "swell_dir_at_peak": 76,
-            "wave_dir_at_peak": 83,
-            "current_kmh_at_peak": 2.2,
-            "current_dir_at_peak": 270,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 9.4,
-            "gust_max": 12.3,
-            "hs_max": 1.2,
-            "swell_max": 0.44,
-            "swell_period_at_peak": 4.0,
-            "swell_dir_at_peak": 56,
-            "wave_dir_at_peak": 82,
-            "current_kmh_at_peak": 2.3,
-            "current_dir_at_peak": 274,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 10.0,
-            "gust_max": 13.4,
-            "hs_max": 1.32,
-            "swell_max": 0.86,
-            "swell_period_at_peak": 4.4,
-            "swell_dir_at_peak": 79,
-            "wave_dir_at_peak": 87,
-            "current_kmh_at_peak": 2.5,
-            "current_dir_at_peak": 278,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 9.4,
-            "gust_max": 12.3,
-            "hs_max": 1.06,
-            "swell_max": 0.74,
-            "swell_period_at_peak": 4.5,
-            "swell_dir_at_peak": 81,
-            "wave_dir_at_peak": 89,
-            "current_kmh_at_peak": 2.5,
-            "current_dir_at_peak": 270,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 9.4,
-            "gust_max": 12.4,
-            "hs_max": 1.06,
-            "swell_max": 0.58,
-            "swell_period_at_peak": 4.4,
-            "swell_dir_at_peak": 74,
-            "wave_dir_at_peak": 89,
-            "current_kmh_at_peak": 2.7,
-            "current_dir_at_peak": 274,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "none",
-        "outlook_3_5d": "none",
-        "trend": "stable",
-        "peak_day": "2026-10-04",
-        "peak": {
-          "gust_max": 13.4,
-          "wind_max": 10.0,
-          "hs_max": 1.32,
-          "swell_max": 0.86,
-          "swell_period_at_peak": 4.4
-        },
-        "peak_flags": []
-      },
-      "arabian_sea": {
-        "id": "arabian_sea",
-        "name": "Arabian Sea",
-        "kind": "lane",
-        "region": "global",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 2.3,
-            "gust_max": 3.6,
-            "hs_max": 1.18,
-            "swell_max": 0.96,
-            "swell_period_at_peak": 10.5,
-            "swell_dir_at_peak": 172,
-            "wave_dir_at_peak": 197,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 45,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 3.5,
-            "gust_max": 5.1,
-            "hs_max": 1.06,
-            "swell_max": 0.96,
-            "swell_period_at_peak": 10.6,
-            "swell_dir_at_peak": 183,
-            "wave_dir_at_peak": 194,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 45,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 4.5,
-            "gust_max": 6.1,
-            "hs_max": 1.06,
-            "swell_max": 1.04,
-            "swell_period_at_peak": 9.8,
-            "swell_dir_at_peak": 188,
-            "wave_dir_at_peak": 182,
-            "current_kmh_at_peak": 0.5,
-            "current_dir_at_peak": 0,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 5.0,
-            "gust_max": 6.4,
-            "hs_max": 1.06,
-            "swell_max": 0.96,
-            "swell_period_at_peak": 10.1,
-            "swell_dir_at_peak": 178,
-            "wave_dir_at_peak": 181,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 27,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 3.9,
-            "gust_max": 6.1,
-            "hs_max": 1.04,
-            "swell_max": 0.96,
-            "swell_period_at_peak": 9.3,
-            "swell_dir_at_peak": 179,
-            "wave_dir_at_peak": 175,
-            "current_kmh_at_peak": 0.2,
-            "current_dir_at_peak": 90,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 2.6,
-            "gust_max": 4.2,
-            "hs_max": 0.94,
-            "swell_max": 0.92,
-            "swell_period_at_peak": 9.1,
-            "swell_dir_at_peak": 173,
-            "wave_dir_at_peak": 172,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 72,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 2.5,
-            "gust_max": 3.7,
-            "hs_max": 0.86,
-            "swell_max": 0.7,
-            "swell_period_at_peak": 8.1,
-            "swell_dir_at_peak": 170,
-            "wave_dir_at_peak": 168,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 27,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "none",
-        "outlook_3_5d": "none",
-        "trend": "stable",
-        "peak_day": "2026-10-03",
-        "peak": {
-          "gust_max": 6.4,
-          "wind_max": 5.0,
-          "hs_max": 1.06,
-          "swell_max": 0.96,
-          "swell_period_at_peak": 10.1
-        },
-        "peak_flags": []
-      },
-      "taiwan_strait": {
-        "id": "taiwan_strait",
-        "name": "Taiwan Strait",
-        "kind": "lane",
-        "region": "global",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 4.2,
-            "gust_max": 6.1,
-            "hs_max": 0.32,
-            "swell_max": 0.26,
-            "swell_period_at_peak": 2.9,
-            "swell_dir_at_peak": 234,
-            "wave_dir_at_peak": 227,
-            "current_kmh_at_peak": 2.7,
-            "current_dir_at_peak": 4,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 7.6,
-            "gust_max": 9.8,
-            "hs_max": 0.38,
-            "swell_max": 0.18,
-            "swell_period_at_peak": 5.7,
-            "swell_dir_at_peak": 42,
-            "wave_dir_at_peak": 29,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 135,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 12.3,
-            "gust_max": 16.1,
-            "hs_max": 1.62,
-            "swell_max": 1.48,
-            "swell_period_at_peak": 5.2,
-            "swell_dir_at_peak": 33,
-            "wave_dir_at_peak": 35,
-            "current_kmh_at_peak": 1.1,
-            "current_dir_at_peak": 279,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 10.2,
-            "gust_max": 13.1,
-            "hs_max": 1.44,
-            "swell_max": 1.38,
-            "swell_period_at_peak": 5.3,
-            "swell_dir_at_peak": 30,
-            "wave_dir_at_peak": 33,
-            "current_kmh_at_peak": 0.3,
-            "current_dir_at_peak": 135,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 8.2,
-            "gust_max": 10.9,
-            "hs_max": 0.92,
-            "swell_max": 0.7,
-            "swell_period_at_peak": 4.5,
-            "swell_dir_at_peak": 35,
-            "wave_dir_at_peak": 34,
-            "current_kmh_at_peak": 1.0,
-            "current_dir_at_peak": 301,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 15.6,
-            "gust_max": 22.3,
-            "hs_max": 3.18,
-            "swell_max": 0.42,
-            "swell_period_at_peak": 5.0,
-            "swell_dir_at_peak": 39,
-            "wave_dir_at_peak": 37,
-            "current_kmh_at_peak": 2.1,
-            "current_dir_at_peak": 232,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 15.4,
-            "gust_max": 22.1,
-            "hs_max": 3.22,
-            "swell_max": 0.34,
-            "swell_period_at_peak": 8.2,
-            "swell_dir_at_peak": 84,
-            "wave_dir_at_peak": 37,
-            "current_kmh_at_peak": 2.3,
-            "current_dir_at_peak": 219,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "none",
-        "outlook_3_5d": "none",
-        "trend": "stable",
-        "peak_day": "2026-10-05",
-        "peak": {
-          "gust_max": 22.3,
-          "wind_max": 15.6,
-          "hs_max": 3.18,
-          "swell_max": 0.42,
-          "swell_period_at_peak": 5.0
-        },
-        "peak_flags": []
-      },
-      "north_pacific": {
-        "id": "north_pacific",
-        "name": "North Pacific (transpacific)",
-        "kind": "lane",
-        "region": "global",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 13.3,
-            "gust_max": 17.8,
-            "hs_max": 3.38,
-            "swell_max": 2.78,
-            "swell_period_at_peak": 7.6,
-            "swell_dir_at_peak": 186,
-            "wave_dir_at_peak": 202,
-            "current_kmh_at_peak": 1.4,
-            "current_dir_at_peak": 140,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 15.2,
-            "gust_max": 20.4,
-            "hs_max": 4.28,
-            "swell_max": 3.14,
-            "swell_period_at_peak": 7.9,
-            "swell_dir_at_peak": 285,
-            "wave_dir_at_peak": 276,
-            "current_kmh_at_peak": 2.2,
-            "current_dir_at_peak": 145,
-            "flags": [
-              {
-                "type": "heavy_weather",
-                "level": "watch",
-                "reason": "sea 4.28 m, wind 15.2 m/s"
-              }
-            ],
-            "level": "watch"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 13.8,
-            "gust_max": 18.4,
-            "hs_max": 2.92,
-            "swell_max": 2.86,
-            "swell_period_at_peak": 7.0,
-            "swell_dir_at_peak": 287,
-            "wave_dir_at_peak": 285,
-            "current_kmh_at_peak": 2.3,
-            "current_dir_at_peak": 113,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 13.1,
-            "gust_max": 16.6,
-            "hs_max": 4.14,
-            "swell_max": 2.96,
-            "swell_period_at_peak": 8.8,
-            "swell_dir_at_peak": 285,
-            "wave_dir_at_peak": 275,
-            "current_kmh_at_peak": 2.4,
-            "current_dir_at_peak": 54,
-            "flags": [
-              {
-                "type": "heavy_weather",
-                "level": "watch",
-                "reason": "sea 4.14 m, wind 13.1 m/s"
-              }
-            ],
-            "level": "watch"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 11.3,
-            "gust_max": 14.9,
-            "hs_max": 4.18,
-            "swell_max": 3.32,
-            "swell_period_at_peak": 8.6,
-            "swell_dir_at_peak": 278,
-            "wave_dir_at_peak": 275,
-            "current_kmh_at_peak": 3.0,
-            "current_dir_at_peak": 65,
-            "flags": [
-              {
-                "type": "heavy_weather",
-                "level": "watch",
-                "reason": "sea 4.18 m, wind 11.3 m/s"
-              }
-            ],
-            "level": "watch"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 6.9,
-            "gust_max": 10.1,
-            "hs_max": 2.98,
-            "swell_max": 2.76,
-            "swell_period_at_peak": 7.5,
-            "swell_dir_at_peak": 293,
-            "wave_dir_at_peak": 289,
-            "current_kmh_at_peak": 1.9,
-            "current_dir_at_peak": 146,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 10.4,
-            "gust_max": 14.3,
-            "hs_max": 2.36,
-            "swell_max": 1.7,
-            "swell_period_at_peak": 6.8,
-            "swell_dir_at_peak": 297,
-            "wave_dir_at_peak": 161,
-            "current_kmh_at_peak": 2.4,
-            "current_dir_at_peak": 73,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "watch",
-        "outlook_3_5d": "watch",
-        "trend": "stable",
-        "peak_day": "2026-10-03",
-        "peak": {
-          "gust_max": 16.6,
-          "wind_max": 13.1,
-          "hs_max": 4.14,
-          "swell_max": 2.96,
-          "swell_period_at_peak": 8.8
-        },
-        "peak_flags": [
-          {
-            "type": "heavy_weather",
-            "level": "watch",
-            "reason": "sea 4.14 m, wind 13.1 m/s"
-          }
-        ]
-      },
-      "sri_lanka": {
-        "id": "sri_lanka",
-        "name": "South of Sri Lanka",
-        "kind": "lane",
-        "region": "global",
-        "days": [
-          {
-            "date": "2026-09-30",
-            "wind_max": 8.1,
-            "gust_max": 10.4,
-            "hs_max": 1.64,
-            "swell_max": 1.16,
-            "swell_period_at_peak": 8.8,
-            "swell_dir_at_peak": 167,
-            "wave_dir_at_peak": 191,
-            "current_kmh_at_peak": 1.4,
-            "current_dir_at_peak": 90,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-01",
-            "wind_max": 6.1,
-            "gust_max": 8.0,
-            "hs_max": 1.68,
-            "swell_max": 1.26,
-            "swell_period_at_peak": 12.1,
-            "swell_dir_at_peak": 190,
-            "wave_dir_at_peak": 181,
-            "current_kmh_at_peak": 1.8,
-            "current_dir_at_peak": 96,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-02",
-            "wind_max": 3.6,
-            "gust_max": 5.7,
-            "hs_max": 1.64,
-            "swell_max": 1.56,
-            "swell_period_at_peak": 10.1,
-            "swell_dir_at_peak": 175,
-            "wave_dir_at_peak": 178,
-            "current_kmh_at_peak": 0.9,
-            "current_dir_at_peak": 90,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-03",
-            "wind_max": 4.2,
-            "gust_max": 5.8,
-            "hs_max": 1.52,
-            "swell_max": 1.5,
-            "swell_period_at_peak": 9.7,
-            "swell_dir_at_peak": 174,
-            "wave_dir_at_peak": 175,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 333,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-04",
-            "wind_max": 4.3,
-            "gust_max": 6.3,
-            "hs_max": 1.4,
-            "swell_max": 1.4,
-            "swell_period_at_peak": 9.1,
-            "swell_dir_at_peak": 168,
-            "wave_dir_at_peak": 169,
-            "current_kmh_at_peak": 0.5,
-            "current_dir_at_peak": 0,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-05",
-            "wind_max": 3.3,
-            "gust_max": 5.9,
-            "hs_max": 1.28,
-            "swell_max": 1.06,
-            "swell_period_at_peak": 7.3,
-            "swell_dir_at_peak": 158,
-            "wave_dir_at_peak": 163,
-            "current_kmh_at_peak": 0.4,
-            "current_dir_at_peak": 90,
-            "flags": [],
-            "level": "none"
-          },
-          {
-            "date": "2026-10-06",
-            "wind_max": 1.9,
-            "gust_max": 5.5,
-            "hs_max": 1.3,
-            "swell_max": 0.98,
-            "swell_period_at_peak": 7.8,
-            "swell_dir_at_peak": 153,
-            "wave_dir_at_peak": 166,
-            "current_kmh_at_peak": 0.6,
-            "current_dir_at_peak": 288,
-            "flags": [],
-            "level": "none"
-          }
-        ],
-        "storm_flags": [],
-        "near_level": "none",
-        "outlook_3_5d": "none",
-        "trend": "stable",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 10.4,
-          "wind_max": 8.1,
-          "hs_max": 1.64,
-          "swell_max": 1.16,
-          "swell_period_at_peak": 8.8
-        },
-        "peak_flags": []
+        "peak_flags": [],
+        "windows": []
       }
     },
     "watchlist": [
-      {
-        "id": "hamburg",
-        "name": "Hamburg",
-        "kind": "port",
-        "region": "north_europe",
-        "level": "watch",
-        "trend": "deteriorating",
-        "peak_day": "2026-10-05",
-        "peak": {
-          "gust_max": 15.2,
-          "wind_max": 10.2,
-          "hs_max": 1.68,
-          "swell_max": 1.08,
-          "swell_period_at_peak": 5.2
-        },
-        "causes": [
-          "crane"
-        ],
-        "reasons": [
-          "gusts 15.2 m/s, wind 10.2 m/s"
-        ],
-        "score": 18.2
-      },
-      {
-        "id": "liverpool",
-        "name": "Liverpool",
-        "kind": "port",
-        "region": "uk",
-        "level": "watch",
-        "trend": "improving",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 17.2,
-          "wind_max": 12.6,
-          "hs_max": 0.98,
-          "swell_max": 0.48,
-          "swell_period_at_peak": 3.1
-        },
-        "causes": [
-          "crane"
-        ],
-        "reasons": [
-          "gusts 17.2 m/s, wind 12.6 m/s"
-        ],
-        "score": 15.0
-      },
-      {
-        "id": "la_long_beach",
-        "name": "Los Angeles / Long Beach",
-        "kind": "port",
-        "region": "global",
-        "level": "watch",
-        "trend": "improving",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 10.9,
-          "wind_max": 8.7,
-          "hs_max": 1.26,
-          "swell_max": 0.96,
-          "swell_period_at_peak": 4.8
-        },
-        "causes": [
-          "cyclone"
-        ],
-        "reasons": [
-          "POLO-26 (Tropical Depression) 1027 km away"
-        ],
-        "score": 15.0
-      },
       {
         "id": "western_approaches",
         "name": "Western Approaches",
@@ -4018,98 +3552,205 @@
         "region": "uk",
         "level": "watch",
         "trend": "improving",
-        "peak_day": "2026-09-30",
+        "peak_day": "2026-10-01",
         "peak": {
-          "gust_max": 20.0,
-          "wind_max": 13.8,
-          "hs_max": 4.48,
-          "swell_max": 3.68,
-          "swell_period_at_peak": 8.2
+          "gust_max": 14.3,
+          "wind_max": 10.2,
+          "hs_max": 4.86,
+          "swell_max": 4.78,
+          "swell_period_at_peak": 10.2
         },
         "causes": [
           "heavy_weather"
         ],
         "reasons": [
-          "sea 4.48 m, wind 13.8 m/s"
+          "sea 4.86 m, wind 10.2 m/s"
         ],
         "score": 15.0
-      },
-      {
-        "id": "shanghai",
-        "name": "Shanghai",
-        "kind": "port",
-        "region": "global",
-        "level": "watch",
-        "trend": "deteriorating",
-        "peak_day": "2026-10-05",
-        "peak": {
-          "gust_max": 16.2,
-          "wind_max": 11.8,
-          "hs_max": 1.1,
-          "swell_max": 0.14,
-          "swell_period_at_peak": 3.7
-        },
-        "causes": [
-          "crane"
-        ],
-        "reasons": [
-          "gusts 16.2 m/s, wind 11.8 m/s"
-        ],
-        "score": 14.0
-      },
-      {
-        "id": "mid_north_atlantic",
-        "name": "Mid-North Atlantic",
-        "kind": "lane",
-        "region": "global",
-        "level": "watch",
-        "trend": "improving",
-        "peak_day": "2026-09-30",
-        "peak": {
-          "gust_max": 18.0,
-          "wind_max": 12.9,
-          "hs_max": 4.46,
-          "swell_max": 3.4,
-          "swell_period_at_peak": 8.4
-        },
-        "causes": [
-          "heavy_weather"
-        ],
-        "reasons": [
-          "sea 4.46 m, wind 12.9 m/s"
-        ],
-        "score": 10.0
-      },
-      {
-        "id": "north_pacific",
-        "name": "North Pacific (transpacific)",
-        "kind": "lane",
-        "region": "global",
-        "level": "watch",
-        "trend": "stable",
-        "peak_day": "2026-10-03",
-        "peak": {
-          "gust_max": 16.6,
-          "wind_max": 13.1,
-          "hs_max": 4.14,
-          "swell_max": 2.96,
-          "swell_period_at_peak": 8.8
-        },
-        "causes": [
-          "heavy_weather"
-        ],
-        "reasons": [
-          "sea 4.14 m, wind 13.1 m/s"
-        ],
-        "score": 10.0
       }
     ],
-    "deteriorating": [
-      "hamburg",
-      "shanghai"
+    "deteriorating": [],
+    "forecast_drift": [
+      {
+        "id": "hamburg",
+        "name": "Hamburg",
+        "date": "2026-10-05",
+        "gust_now": 11.9,
+        "gust_prev": 15.2,
+        "gust_delta": -3.3,
+        "hs_now": 1.68,
+        "hs_prev": 1.68,
+        "hs_delta": 0.0,
+        "since_run": "2026-09-30T1542Z"
+      }
     ],
-    "forecast_drift": [],
     "congestion": {},
+    "ports_status": [
+      {
+        "id": "felixstowe",
+        "name": "Felixstowe",
+        "region": "uk",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      },
+      {
+        "id": "southampton",
+        "name": "Southampton",
+        "region": "uk",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      },
+      {
+        "id": "london_gateway",
+        "name": "London Gateway",
+        "region": "uk",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      },
+      {
+        "id": "liverpool",
+        "name": "Liverpool",
+        "region": "uk",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      },
+      {
+        "id": "rotterdam",
+        "name": "Rotterdam",
+        "region": "north_europe",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      },
+      {
+        "id": "antwerp",
+        "name": "Antwerp",
+        "region": "north_europe",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      },
+      {
+        "id": "bremerhaven",
+        "name": "Bremerhaven",
+        "region": "north_europe",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      },
+      {
+        "id": "hamburg",
+        "name": "Hamburg",
+        "region": "north_europe",
+        "status": "normal",
+        "status_label": "Running normally",
+        "reasons": [],
+        "actions": [
+          "No weather disruption forecast. Speak to your carrier about release and delivery now."
+        ],
+        "windows": [],
+        "congestion": null,
+        "headlines": [],
+        "data_gaps": [
+          "Congestion data unavailable this issue; status based on weather and port news only."
+        ]
+      }
+    ],
+    "inbound": [
+      {
+        "id": "western_approaches",
+        "name": "Western Approaches",
+        "trades": "transatlantic and Cape-routed Asia arrivals into the Channel",
+        "level": "watch",
+        "from_day": "2026-10-01",
+        "to_day": "2026-10-01",
+        "peak_sea": 4.86,
+        "peak_wind": 10.2,
+        "storm": null,
+        "delay": "up to 1 day",
+        "action": "Expect transatlantic and Cape-routed Asia arrivals into the Channel to run up to 1 day late. Don't book haulage against the published ETA; confirm the revised ETA with your carrier."
+      },
+      {
+        "id": "agulhas",
+        "name": "Cape of Good Hope / Agulhas",
+        "trades": "Asia\u2013North Europe services routed via the Cape",
+        "level": "watch",
+        "from_day": "2026-10-06",
+        "to_day": "2026-10-06",
+        "peak_sea": 4.04,
+        "peak_wind": 13.5,
+        "storm": null,
+        "delay": "up to 1 day",
+        "action": "Expect Asia\u2013North Europe services routed via the Cape to run up to 1 day late. Don't book haulage against the published ETA; confirm the revised ETA with your carrier."
+      }
+    ],
     "storms": [
       {
         "event_id": 1001321,
@@ -4186,13 +3827,7 @@
         "lon": -108.0,
         "updated": "2026-09-30T03:00:00",
         "url": "https://www.gdacs.org/report.aspx?eventid=1001325&episodeid=38&eventtype=TC",
-        "nearby": [
-          {
-            "id": "la_long_beach",
-            "distance_km": 1027,
-            "level": "watch"
-          }
-        ]
+        "nearby": []
       },
       {
         "event_id": 1001323,
@@ -4228,6 +3863,6 @@
         "nearby": []
       }
     ],
-    "forecast_issued": "2026-09-30T15:42:12Z"
+    "forecast_issued": "2026-09-30T16:21:46Z"
   }
 }

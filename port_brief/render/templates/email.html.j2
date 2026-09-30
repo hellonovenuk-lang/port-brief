@@ -13,16 +13,23 @@
     <h1 style="margin:0 0 10px;font-size:22px;line-height:1.25;color:#0b1826;">{{ ed.headline }}</h1>
     <p style="margin:0 0 16px;font-size:15px;line-height:1.5;color:#3a4856;">{{ ed.standfirst }}</p>
   </td></tr>
-  {% if watchlist %}
-  <tr><td style="padding:0 24px;">
-    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">Watchlist</div>
+  {% set chip = {'normal': 'background:#0ca30c;color:#ffffff;', 'watch': 'background:#fab219;color:#1a1300;', 'congested': 'background:#ec835a;color:#1a0a00;', 'disruption': 'background:#d03b3b;color:#ffffff;'} %}
+  {% for region, label in [('uk', 'UK gateways'), ('north_europe', 'North European hubs')] %}
+  <tr><td style="padding:{{ '0' if loop.first else '14px' }} 24px 0;">
+    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">{{ label }}</div>
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
-    {% for w in watchlist[:5] %}
-      <tr><td style="padding:7px 0;border-top:1px solid #e3e8ec;vertical-align:top;width:70px;">
-        <span style="display:inline-block;font-size:10px;font-weight:bold;text-transform:uppercase;padding:2px 6px;border-radius:3px;{% if w.level == 'likely' %}background:#d03b3b;color:#ffffff;{% else %}background:#fab219;color:#1a1300;{% endif %}">{{ w.level }}</span></td>
-        <td style="padding:7px 0;border-top:1px solid #e3e8ec;"><strong>{{ w.name }}</strong> · {{ w.peak_day|day }}<br><span style="color:#5b6875;font-size:13px;">{{ ed.watchlist_notes.get(w.id) or (w.causes|map('cause')|join(', ')) }}</span></td></tr>
+    {% for p in port_board if p.region == region %}
+      <tr><td style="padding:8px 0;border-top:1px solid #e3e8ec;vertical-align:top;width:118px;">
+        <span style="display:inline-block;font-size:10px;font-weight:bold;text-transform:uppercase;padding:2px 6px;border-radius:3px;{{ chip[p.status] }}">{{ p.status|status_icon }} {{ p.status_label }}</span></td>
+        <td style="padding:8px 0;border-top:1px solid #e3e8ec;"><strong>{{ p.name }}</strong><br><span style="color:#3a4856;font-size:13px;line-height:1.45;">{{ ed.port_notes.get(p.id) or p.actions|join(' ') }}</span></td></tr>
     {% endfor %}
     </table>
+  </td></tr>
+  {% endfor %}
+  {% if inbound %}
+  <tr><td style="padding:14px 24px 0;">
+    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">On the way in</div>
+    <p style="margin:0;font-size:13px;line-height:1.5;color:#3a4856;">{{ ed.inbound_note }}</p>
   </td></tr>
   {% endif %}
   <tr><td style="padding:16px 24px 4px;">

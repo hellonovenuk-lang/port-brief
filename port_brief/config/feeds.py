@@ -2,7 +2,7 @@
 
 Each publisher tries its own site first (`direct`). Several sites (Felixstowe, ABP, MSC,
 Hapag-Lloyd, CMA CGM) block scripted requests, so every publisher also has a Google News
-RSS query as a fallback; Google News items must name the publisher in the headline
+RSS query as a fallback (Antwerp-Bruges, DP World and bremenports render their news client-side too); Google News items must name the publisher in the headline
 (`must_mention`). Selectors live here so a site redesign is a config fix.
 """
 
@@ -34,6 +34,11 @@ FEEDS = [
         "gnews": '"Port of Southampton" OR "Southampton container"',
     },
     {
+        "id": "london_gateway", "must_mention": ["London Gateway"], "name": "London Gateway (DP World)", "kind": "port",
+        "direct": None,  # DP World news pages are client-rendered
+        "gnews": '"London Gateway" (port OR container OR DP World)',
+    },
+    {
         "id": "rotterdam", "must_mention": ["Rotterdam"], "name": "Port of Rotterdam", "kind": "port",
         "direct": {
             "type": "html",
@@ -43,6 +48,21 @@ FEEDS = [
             "date_regex": r"(\d{1,2}) / (\d{1,2}) / (\d{4})",  # d / m / yyyy
         },
         "gnews": '"Port of Rotterdam"',
+    },
+    {
+        "id": "antwerp", "must_mention": ["Antwerp"], "name": "Port of Antwerp-Bruges", "kind": "port",
+        "direct": None,  # news list is client-rendered
+        "gnews": '"Port of Antwerp" OR "Antwerp-Bruges"',
+    },
+    {
+        "id": "bremerhaven", "must_mention": ["Bremerhaven"], "name": "Bremerhaven", "kind": "port",
+        "direct": None,
+        "gnews": '"Bremerhaven" (port OR container OR terminal OR Eurogate)',
+    },
+    {
+        "id": "hamburg", "must_mention": ["Hamburg"], "name": "Port of Hamburg", "kind": "port",
+        "direct": None,
+        "gnews": '"Port of Hamburg" OR "Hamburg port" OR "HHLA"',
     },
     {
         "id": "maersk", "must_mention": ["Maersk"], "name": "Maersk", "kind": "carrier",

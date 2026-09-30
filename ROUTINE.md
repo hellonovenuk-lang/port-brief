@@ -55,9 +55,10 @@ Read `drafts/$ISSUE/facts.md` in full, then overwrite `drafts/$ISSUE/editorial.j
 {
   "issue_date": "ISSUE",
   "author": "claude",
-  "headline": "≤ 90 chars",
-  "standfirst": "≤ 340 chars: the two or three things a UK forwarder must know this week",
-  "watchlist_notes": { "<watchlist id>": "≤ 220 chars each, one per watchlist entry" },
+  "headline": "≤ 90 chars: the most important port action this week",
+  "standfirst": "≤ 340 chars: the two or three things a UK importer must do this week",
+  "port_notes": { "<port id>": "≤ 260 chars, one for EVERY port in facts.md" },
+  "inbound_note": "≤ 600 chars: which arrivals may run late, by how much, and what to do",
   "sections": {
     "ports": "≤ 1100 chars", "lanes": "≤ 1100 chars",
     "reliability": "≤ 1100 chars", "advisories": "≤ 1100 chars"
@@ -66,17 +67,28 @@ Read `drafts/$ISSUE/facts.md` in full, then overwrite `drafts/$ISSUE/editorial.j
 }
 ```
 
+The readers are small importer teams, so every port gets a status and an action:
+- **Port notes are the heart of the issue.** Start from the playbook action in facts.md and make it
+  specific to that port and this week. Keep the status exactly as given, and keep the playbook buffers
+  (2–3 days, 24–48 hours and so on). Don't invent new ones.
+- Use this shape: *what's happening, then what to do*. Write in the second person with concrete verbs:
+  "tell your haulier", "speak to your carrier about release now", "add 2–3 days to inland plans for boxes landing in the next 2 weeks".
+- **Disruption likely**: name the window exactly as given (UK time) and the cause (wind or swell), then give the haulier and collection advice.
+- **Congested**: say how far above normal it is, then the buffer and pre-booking advice.
+- **Running normally**: say so plainly and encourage acting now (release, delivery, booking slots).
+- If congestion data is unavailable, the PDF shows one notice above the board, so don't repeat it in every note. Never imply congestion is normal ("no weather disruption forecast", not "no delays").
+
 House style:
 - British English, plain and practical. Write for someone booking or tracking boxes today, not for analysts.
-- Lead with the operational consequence ("expect crane stoppages at Hamburg on Monday"), then the evidence.
-- Weather is a **forecast signal**, not an event. Use "watch" and "likely" consistently with the data. Never say a port *will* close.
-- UK gateways first (Felixstowe, Southampton, London Gateway, Liverpool), then the North European hubs, then global lanes.
+- Weather is a **forecast signal**, not an event. Say "likely", never "will close".
+- UK gateways first (Felixstowe, Southampton, London Gateway, Liverpool), then Rotterdam, Antwerp, Bremerhaven and Hamburg.
 - Reliability: always give Sea-Intelligence and Xeneta **separately with their periods**. Their gap is the story:
   explain it as different methodologies, never as one being wrong. Don't average them.
 - Advisories: pick surcharges, service changes, routing (Suez/Cape), closures and disruption. Drop corporate
   news, earnings, M&A and anything not operational.
-- **Every number you write must come from facts.md.** Rounding is fine (49.9% → "about 50%"). Do not compute
-  new figures, and do not bring in outside knowledge or figures from memory.
+- **Every number you write must come from facts.md** (data or playbook). Rounding is fine (49.9% → "about 50%").
+  Do not compute new figures or bring in outside knowledge. The validator rejects unit-bearing numbers
+  (days, hours, %, pp, m/s) that are not in the data.
 
 Then validate:
 

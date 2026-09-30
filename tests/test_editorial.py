@@ -13,6 +13,15 @@ SNAP = {
         "locations": {"biscay": {"name": "Bay of Biscay", "kind": "lane", "outlook_3_5d": "likely", "near_level": "none",
                                  "trend": "deteriorating", "peak_day": "2026-10-04"}},
         "deteriorating": ["biscay"],
+        "ports_status": [
+            {"id": "felixstowe", "name": "Felixstowe", "region": "uk", "status": "congested", "status_label": "Congested",
+             "reasons": ["berth occupancy 82%, +12 pp above normal"], "actions": ["Busier than normal. Add 2–3 days to inland plans for containers arriving in the next 2 weeks."],
+             "windows": [], "congestion": {"occupancy_pct": 82, "occupancy_gap_vs_mean_pct": 12}, "headlines": [], "data_gaps": []},
+            {"id": "hamburg", "name": "Hamburg", "region": "north_europe", "status": "normal", "status_label": "Running normally",
+             "reasons": [], "actions": ["No weather disruption forecast. Speak to your carrier about release and delivery now."],
+             "windows": [], "congestion": None, "headlines": [], "data_gaps": ["Congestion data unavailable"]},
+        ],
+        "inbound": [],
         "forecast_drift": [],
         "congestion": {},
         "storms": [],
@@ -41,6 +50,9 @@ def good_editorial():
         "sections": {"ports": "Quiet at UK gateways.", "lanes": "Biscay deteriorates into the weekend.",
                      "reliability": "Sea-Intelligence fell 5.9 pp to 49.9%.", "advisories": "Maersk adds a USD 500 PSS."},
         "advisory_picks": ["https://example.com/a"],
+        "port_notes": {"felixstowe": "Congested: berths 12 pp busier than normal. Add 2–3 days for boxes landing in the next 2 weeks and tell your haulier.",
+                       "hamburg": "No weather disruption forecast. Speak to your carrier about release now."},
+        "inbound_note": "No lane delays expected.",
     }
 
 
@@ -80,3 +92,22 @@ def test_fallback_always_validates(snap):
     fb = schema.fallback(snap, "2026-10-01")
     assert fb["author"] == "template"
     assert schema.validate(fb, snap, "2026-10-01") == []
+
+
+def test_every_port_needs_a_note():
+    ed = good_editorial()
+    del ed["port_notes"]["hamburg"]
+    assert any("port_notes.hamburg" in e for e in schema.validate(ed, SNAP, "2026-10-01"))
+
+
+def test_invented_buffer_is_rejected():
+    ed = good_editorial()
+    ed["port_notes"]["felixstowe"] = "Congested: add 5–7 days to inland plans."
+    errors = " ".join(schema.validate(ed, SNAP, "2026-10-01"))
+    assert "port_notes.felixstowe" in errors and "7" in errors
+
+
+def test_fallback_has_a_note_per_port():
+    fb = schema.fallback(SNAP, "2026-10-01")
+    assert set(fb["port_notes"]) == {"felixstowe", "hamburg"}
+    assert "2–3 days" in fb["port_notes"]["felixstowe"]

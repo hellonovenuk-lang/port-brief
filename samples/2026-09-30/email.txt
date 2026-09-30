@@ -1,15 +1,21 @@
 PORT BRIEF · Wednesday 30 September 2026
 
-Hamburg and Shanghai gusts build into Monday as reliability slides below 50%
+Calm week at UK and North European ports: a good window to clear releases
 
-UK gateways look workable through the weekend, with Liverpool&#39;s gusts easing from Thursday. The weather risk shifts to Hamburg and Shanghai on Monday 5 October. August reliability fell again: Sea-Intelligence 49.9% (down 5.9 pp), Xeneta 29%.
+No weather disruption is forecast at any of the eight ports we track, so push releases and deliveries through now. On the way in, Atlantic arrivals into the Channel may run up to 1 day late. August reliability: Sea-Intelligence 49.9%, Xeneta 29%.
 
-WATCHLIST
-- [WATCH] Hamburg, Mon 5 Oct: Gusts to 15.2 m/s on Mon 5 Oct after a blustery Sunday in the German Bight. Intermittent crane stoppages possible; allow slack on Monday cut-offs.
-- [WATCH] Liverpool, Wed 30 Sep: Gusts reached 17.2 m/s today and ease from Thursday. Watch for knock-on berth delays rather than new stoppages.
-- [WATCH] Los Angeles / Long Beach, Wed 30 Sep: Tropical depression POLO-26 is 1027 km away. Local wind and sea stay below our thresholds all week; monitor only.
-- [WATCH] Western Approaches, Wed 30 Sep: Seas of 4.5 m today and 4.9 m Thursday, easing to 2.3 m by Saturday. Expect short delays on Atlantic arrivals into the Channel.
-- [WATCH] Shanghai, Mon 5 Oct: Gusts to 16.2 m/s on Mon 5 Oct and 14.2 m/s on Tuesday. Crane interruptions possible; build a day into early-week loadings.
+PORT STATUS
+- Felixstowe [RUNNING NORMALLY]: No crane or pilotage limits forecast all week. Speak to your carrier about release and delivery now and book haulage slots while the weather holds.
+- Southampton [RUNNING NORMALLY]: No crane or pilotage limits forecast all week. A good week to clear releases: confirm delivery dates with your carrier and haulier now.
+- London Gateway [RUNNING NORMALLY]: No crane or pilotage limits forecast all week. Speak to your carrier about release now and lock in weekend haulage while slots are easy to get.
+- Liverpool [RUNNING NORMALLY]: No crane or pilotage limits forecast all week. Speak to your carrier about release and delivery now.
+- Rotterdam [RUNNING NORMALLY]: No crane or pilotage limits forecast all week. If you tranship via Rotterdam, confirm your feeder connection now while conditions are settled.
+- Antwerp [RUNNING NORMALLY]: No crane or pilotage limits forecast all week. Speak to your carrier about release and onward delivery now.
+- Bremerhaven [RUNNING NORMALLY]: No crane or pilotage limits forecast all week. Speak to your carrier about release and feeder connections now.
+- Hamburg [RUNNING NORMALLY]: Monday's wind risk has eased in the latest forecast, and no limits are now expected. Speak to your carrier about release now.
+
+ON THE WAY IN
+Two lanes may slow arrivals. Seas of 4.9 m in the Western Approaches on Thursday could push transatlantic and Cape-routed Asia arrivals into the Channel up to 1 day late. Off the Cape, 4 m seas on Tuesday 6 October may add up to 1 day to Asia–North Europe services routed that way. Don't book haulage against the published ETA; confirm the revised ETA with your carrier.
 
 SCHEDULE RELIABILITY
 Sea-Intelligence 49.9% (Aug 2026) · Xeneta 29% (Aug 2026)

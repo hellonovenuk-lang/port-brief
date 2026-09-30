@@ -1,0 +1,26 @@
+PORT BRIEF · Wednesday 30 September 2026
+
+Felixstowe congested and London Gateway wind stoppage likely Saturday
+
+Action needed at Felixstowe (congested), London Gateway (disruption likely), Liverpool (watch), Rotterdam (watch). Inbound: weather may delay transatlantic and Cape-routed Asia arrivals into the Channel by up to 1 day. Reliability: Sea-Intelligence 49.9%, Xeneta 29%.
+
+PORT STATUS
+- Felixstowe [CONGESTED]: Berth occupancy 84%, 13 pp above normal. Add 2–3 days to inland plans for containers arriving in the next 2 weeks, pre-book haulage and check your free time.
+- Southampton [RUNNING NORMALLY]: Running as expected with no predicted delays. Speak to your carrier about release and delivery now to keep it that way.
+- London Gateway [DISRUPTION LIKELY]: Crane stoppages likely Sat 3 Oct 11:00–20:00 with gusts to 22 m/s. Tell your haulier to expect longer waits and allow 24–48 hours on collections.
+- Liverpool [WATCH]: Intermittent crane stoppages possible Sun 4 Oct 07:00–13:00. Allow 12–24 hours and avoid tight Sunday cut-offs.
+- Rotterdam [WATCH]: Busier than usual at 7 pp above normal occupancy. Keep an eye on berthing times if you tranship here and avoid tight feeder connections.
+- Antwerp [RUNNING NORMALLY]: Running as expected with no predicted delays. Speak to your carrier about release and delivery now.
+- Bremerhaven [CONGESTED]: Ships spending 36% longer in port than usual. Add 2–3 days to inland plans for containers arriving in the next 2 weeks and pre-book haulage.
+- Hamburg [DISRUPTION LIKELY]: Reported 24-hour strike on Monday. Check your terminal's latest notice before booking collections and allow 24–48 hours.
+
+ON THE WAY IN
+Western Approaches: Expect transatlantic and Cape-routed Asia arrivals into the Channel to run up to 1 day late. Don't book haulage against the published ETA; confirm the revised ETA with your carrier. Cape of Good Hope / Agulhas: Expect Asia–North Europe services routed via the Cape to run up to 1 day late. Don't book haulage against the published ETA; confirm the revised ETA with your carrier.
+
+SCHEDULE RELIABILITY
+Sea-Intelligence 49.9% (Aug 2026) · Xeneta 29% (Aug 2026)
+
+Full brief (PDF): {{PDF_URL}}
+
+Headlines link to the original publishers; some discovered via Google News. Port congestion data: Sinay (sinay.ai). Schedule reliability: Sea-Intelligence Global Liner Performance report; Xeneta Schedule Reliability Scorecard. Tropical cyclone data: GDACS (Global Disaster Alert and Coordination System), European Commission JRC / UN OCHA. Weather data by Open-Meteo.com (CC BY 4.0). 
+Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}

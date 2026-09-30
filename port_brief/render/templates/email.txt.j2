@@ -3,10 +3,13 @@ PORT BRIEF · {{ issue_long }}
 {{ ed.headline }}
 
 {{ ed.standfirst }}
-{% if watchlist %}
-WATCHLIST
-{% for w in watchlist[:5] %}- [{{ w.level|upper }}] {{ w.name }}, {{ w.peak_day|day }}: {{ ed.watchlist_notes.get(w.id) or (w.causes|map('cause')|join(', ')) }}
-{% endfor %}{% endif %}
+
+PORT STATUS
+{% for p in port_board %}- {{ p.name }} [{{ p.status_label|upper }}]: {{ ed.port_notes.get(p.id) or p.actions|join(' ') }}
+{% endfor %}{% if inbound %}
+ON THE WAY IN
+{{ ed.inbound_note }}
+{% endif %}
 SCHEDULE RELIABILITY
 {% if si and si.global_pct is not none %}Sea-Intelligence {{ si.global_pct }}% ({{ si.period|period }}){% endif %}{% if xe and xe.global_pct is not none %} · Xeneta {{ xe.global_pct }}% ({{ xe.period|period }}){% endif %}
 
