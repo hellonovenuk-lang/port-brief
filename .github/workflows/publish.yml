@@ -1,0 +1,52 @@
+name: Publish approved issue
+
+# Merging an issue/<date> pull request is the editor's approval. Closing it unmerged sends nothing.
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'issue/')
+    runs-on: ubuntu-latest
+    env:
+      PUBLISH_MODE: ${{ vars.PUBLISH_MODE || 'test' }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      RESEND_SEGMENT_ID: ${{ secrets.RESEND_SEGMENT_ID }}
+      RESEND_FROM: ${{ vars.RESEND_FROM }}
+      TEST_RECIPIENT: ${{ vars.TEST_RECIPIENT }}
+      PDF_BASE_URL: ${{ vars.PDF_BASE_URL }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: pip install httpx
+
+      - name: Issue date from branch
+        id: issue
+        run: echo "date=${HEAD_REF#issue/}" >> "$GITHUB_OUTPUT"
+        env:
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+
+      - name: Build PDF site
+        run: python -m port_brief.publish.send site
+
+      - name: Deploy PDFs to Netlify
+        run: npx --yes netlify-cli@17 deploy --prod --dir site --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN" --message "Port Brief ${{ steps.issue.outputs.date }}"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Send (${{ env.PUBLISH_MODE }} mode)
+        run: python -m port_brief.publish.send email --date "${{ steps.issue.outputs.date }}"

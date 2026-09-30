@@ -1,0 +1,33 @@
+{
+  "issue_date": "2026-09-30",
+  "author": "claude",
+  "headline": "Hamburg and Shanghai gusts build into Monday as reliability slides below 50%",
+  "standfirst": "UK gateways look workable through the weekend, with Liverpool's gusts easing from Thursday. The weather risk shifts to Hamburg and Shanghai on Monday 5 October. August reliability fell again: Sea-Intelligence 49.9% (down 5.9 pp), Xeneta 29%.",
+  "watchlist_notes": {
+    "hamburg": "Gusts to 15.2 m/s on Mon 5 Oct after a blustery Sunday in the German Bight. Intermittent crane stoppages possible; allow slack on Monday cut-offs.",
+    "liverpool": "Gusts reached 17.2 m/s today and ease from Thursday. Watch for knock-on berth delays rather than new stoppages.",
+    "la_long_beach": "Tropical depression POLO-26 is 1027 km away. Local wind and sea stay below our thresholds all week; monitor only.",
+    "western_approaches": "Seas of 4.5 m today and 4.9 m Thursday, easing to 2.3 m by Saturday. Expect short delays on Atlantic arrivals into the Channel.",
+    "shanghai": "Gusts to 16.2 m/s on Mon 5 Oct and 14.2 m/s on Tuesday. Crane interruptions possible; build a day into early-week loadings.",
+    "mid_north_atlantic": "4.5 m seas today, easing to 2.3 m by Saturday. Transatlantic delays should be short-lived.",
+    "north_pacific": "Seas of 4.3 m Thursday and 4.1 to 4.2 m over the weekend keep transpacific sailings under pressure."
+  },
+  "sections": {
+    "ports": "No UK gateway reaches a crane or pilotage threshold in the six-day outlook. Felixstowe, Southampton and London Gateway see gusts of around 13 m/s today, then a quiet weekend. Liverpool touched watch level today with 17.2 m/s gusts but calms from Thursday. The one North European concern is Hamburg on Monday: gusts of 15.2 m/s and seas of 1.7 m follow a windy Sunday in the German Bight. Sinay congestion figures were not available for this issue.",
+    "lanes": "Atlantic weather is the near-term story. The Western Approaches and mid-North Atlantic are both at watch level today with seas around 4.5 m, but both ease sharply by the weekend, so westbound delays should be brief. Biscay peaks at 3.9 m on Thursday, below our threshold. Further afield, the North Pacific stays rough for transpacific sailings, and off the Cape a south-westerly swell builds to 4 m by Tuesday 6 October. The Taiwan Strait turns windy from Monday, with gusts of 22.3 m/s. Of ten active tropical cyclones, only POLO-26 is within 1,200 km of a location we track.",
+    "reliability": "Sea-Intelligence puts August global schedule reliability at 49.9%, down 5.9 pp on July and 15.2 pp on a year ago, with late vessels arriving 6.81 days behind schedule on average. Xeneta measures 29%, down 4 pp. The 20.9 pp gap is methodology, not error: Sea-Intelligence counts an arrival as on time within one day of schedule, while Xeneta counts only arrivals on the scheduled day. The two agree at the top, with Maersk and Hapag-Lloyd first and second on both. They disagree most on Yang Ming: 40.1% against 6%.",
+    "advisories": "Two routing moves stand out. Maersk and Hapag-Lloyd plan to resume Suez Canal routing on the AE12 service from 27 October, and Hapag-Lloyd is reported to be restoring Suez transits on its India to US East Coast service. Surcharges keep building: Maersk peak season surcharges on South America to Europe (USD 500) and Europe to South Africa, a CMA CGM reefer surcharge from South America to North Europe, and new FAK rates from MSC and CMA CGM on Asia to Europe and the Mediterranean."
+  },
+  "advisory_picks": [
+    "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5sNlNoY0J3QnEzTFVjcXJmdzBhVkV4dkR4TEcyZ3dOSkplUDgtVmk2ZTZFZngtc3J4UnJUbjBJb0o4cHc5c01IRTRRZkhUVVN2Vjg1UTJxMmY?oc=5",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxPSzNMalQ4Z2hpRjJOR2cxLU1YbHNDb3dnU3VxLUFGdGM5QmRnOUNvQzZBVVgxUFEwbkoyRjdCaUJjR2VYWER4LVN5ZnBydEt1VEZoRTc4RHkteVUtWHB2eFJSZ3BubkNkMzhzeVVrQ1NST2h4RkZNUG5Kc0JBYXctd2pqTTVYWHdSZEx4MFVOU3BndXNicnBTdmpkVVZ2OWFpRnZBQQ?oc=5",
+    "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNS0p2THJVeWdXclQ2dFhQcnBuOHFYLUYySEMySWZFY1pNbDF6NDh0TFJJM3c4Z1BsRXBIM05SS1lwT3lna1hNcFNMUzdibnZGMHRVSktzUUxPRS12VWtnci1mdGZfdnhZeE92RTJDUS1OLXpHekVlYWhQSGFUT21DNWFKTmI1WGo0ZmtxZFdqUHpXMWc0RHA2OVNhV0NEazgtX2c2ZFhfMVpsTW1IQUdYQUdET0RlTC11WlMxbGVVTUhwYkdLa2R0NGEybXFkLUZzYjhz?oc=5",
+    "https://news.google.com/rss/articles/CBMixgFBVV95cUxNaFVZOTRaaHZYMmFtVFlBYjJzMzJhQ2tiLUQtQm51OHItQ20xaW0weE1mTTNFLWdNLVA0YnlxcVd2YlBuVElHV1plY2NLN0pCdUM5dHNDb0g5WEI3MjUxLUhqd0tuZGt3RzF1RGJoRlBBWEg1QmtVeGk2amlMRENzUmZfVE5WSHNwbWM0TUE0THk1bW9DTlY1eE5ZSFNpVFJTODFjbWx2UVR4aHRCLUFjN2ZVeEpLZ0w0U1dESHFpbWNWQ0VxVUE?oc=5",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxOLWpsOFh6djNubE5MLUJDRVBRV3FTcHZsOUJaYTRlakFmNXNTdzRRSE1LMThkbUl2OTZLNmtIbDRIanFtalZHbWNIUTRzWUtEMnk1YTlJYTR6OXExcExDUVZabjJiemc5aVZ1VS04Mm00b2lOOEFaOHI5dmFtWklxek5Ec1NvYnl5cmV1b3NaemNKOXlNT3dR?oc=5",
+    "https://news.google.com/rss/articles/CBMif0FVX3lxTE90OEt1am5ZeE9LTElWR2RmTWhiOS1RR2EtaHcyVVV6MjhPTWM1a1psRFZUQmJlTUYtY2V2SFJEaVFlNzVYM3ptSnlVbld0aXFkZzhtYThzQ0gwWXBFSzB6blV0WnVqaU1VcHBtNm1CNjljd25TeDlBVWs5d3F2bTA?oc=5",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTFBsMDRROVktVXljMExFbmstN3B5LUs2MXFJM1ZELUNTNlEzTDQ0Nmd5UHRkR2hNWUg1dTBsZGNFQmhLd3drcU1lVG9OUkJuNDhlTGMzbGpTeW10eXg0OXJSZWtqM3hvUF9oRjlDa1E3UEFHd2dPcVRwcEQyUQ?oc=5",
+    "https://news.google.com/rss/articles/CBMihgFBVV95cUxQVmxHeEtoY3h5NUJ5M1BDclp5VXNVSlM2YnUyUEZPQ2NCRTlyNE85N2g3QnpSZmVENVZVRnZJSklUVWRVZmNzMFBtTEhSY1hNcVdIc1NWMTJDbldoUmRpSW5XWGFlbmxzTmJ2czUxRWpaVEFORG10bVFhRzlyN2hiNDZtOXFBUQ?oc=5",
+    "https://www.maersk.com/news/articles/2026/09/30/europe-to-west-africa-service-enhancement",
+    "https://www.portofrotterdam.com/en/news-and-press-releases/temporary-transformer-europoort-relieves-grid-congestion"
+  ]
+}

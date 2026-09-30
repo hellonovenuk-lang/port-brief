@@ -1,0 +1,151 @@
+{
+  "source": "Sea-Intelligence",
+  "methodology": "Share of vessel arrivals within one day of scheduled arrival; 34 trade lanes, 60+ carriers (GLP report).",
+  "period": "2026-08",
+  "global_pct": 49.9,
+  "mom_pp": -5.9,
+  "yoy_pp": -15.2,
+  "avg_delay_late_days": 6.81,
+  "carriers": [
+    {
+      "rank": 1,
+      "carrier": "Maersk",
+      "pct": 67.3
+    },
+    {
+      "rank": 2,
+      "carrier": "Hapag-Lloyd",
+      "pct": 61.5
+    },
+    {
+      "rank": 3,
+      "carrier": "MSC",
+      "pct": 55.2
+    },
+    {
+      "rank": 4,
+      "carrier": "CMA CGM",
+      "pct": 50.6
+    },
+    {
+      "rank": 5,
+      "carrier": "ZIM",
+      "pct": 43.8
+    },
+    {
+      "rank": 6,
+      "carrier": "COSCO",
+      "pct": 43.2
+    },
+    {
+      "rank": 7,
+      "carrier": "ONE",
+      "pct": 42.8
+    },
+    {
+      "rank": 8,
+      "carrier": "OOCL",
+      "pct": 41.5
+    },
+    {
+      "rank": 9,
+      "carrier": "Yang Ming",
+      "pct": 40.1
+    },
+    {
+      "rank": 10,
+      "carrier": "HMM",
+      "pct": 39.3
+    },
+    {
+      "rank": 11,
+      "carrier": "Evergreen",
+      "pct": 36.4
+    },
+    {
+      "rank": 12,
+      "carrier": "PIL",
+      "pct": 32.0
+    },
+    {
+      "rank": 13,
+      "carrier": "Wan Hai",
+      "pct": 23.2
+    }
+  ],
+  "series": {
+    "2021-01": 34.4,
+    "2021-02": 34.4,
+    "2021-03": 40.2,
+    "2021-04": 38.9,
+    "2021-05": 38.6,
+    "2021-06": 39.2,
+    "2021-07": 35.1,
+    "2021-08": 33.1,
+    "2021-09": 33.5,
+    "2021-10": 33.9,
+    "2021-11": 32.8,
+    "2021-12": 31.2,
+    "2022-01": 30.1,
+    "2022-02": 34.0,
+    "2022-03": 35.3,
+    "2022-04": 33.8,
+    "2022-05": 36.3,
+    "2022-06": 39.6,
+    "2022-07": 40.0,
+    "2022-08": 45.8,
+    "2022-09": 45.1,
+    "2022-10": 51.5,
+    "2022-11": 56.2,
+    "2022-12": 56.1,
+    "2023-01": 52.1,
+    "2023-02": 60.1,
+    "2023-03": 62.4,
+    "2023-04": 64.1,
+    "2023-05": 66.7,
+    "2023-06": 64.0,
+    "2023-07": 63.9,
+    "2023-08": 62.9,
+    "2023-09": 64.3,
+    "2023-10": 64.3,
+    "2023-11": 61.7,
+    "2023-12": 56.6,
+    "2024-01": 51.4,
+    "2024-02": 53.0,
+    "2024-03": 54.7,
+    "2024-04": 52.2,
+    "2024-05": 55.8,
+    "2024-06": 54.5,
+    "2024-07": 52.2,
+    "2024-08": 52.5,
+    "2024-09": 50.4,
+    "2024-10": 50.3,
+    "2024-11": 54.7,
+    "2024-12": 53.7,
+    "2025-01": 51.4,
+    "2025-02": 54.0,
+    "2025-03": 57.0,
+    "2025-04": 58.4,
+    "2025-05": 65.9,
+    "2025-06": 67.3,
+    "2025-07": 65.2,
+    "2025-08": 65.1,
+    "2025-09": 65.0,
+    "2025-10": 61.3,
+    "2025-11": 63.9,
+    "2025-12": 62.8,
+    "2026-01": 62.2,
+    "2026-02": 58.3,
+    "2026-03": 62.0,
+    "2026-04": 62.2,
+    "2026-05": 64.5,
+    "2026-06": 62.5,
+    "2026-07": 55.8,
+    "2026-08": 49.9
+  },
+  "release_title": "Global Schedule Reliability Continues to Plummet in August",
+  "release_url": "https://www.sea-intelligence.com/press-room/410-global-schedule-reliability-continues-to-plummet-in-august",
+  "data_url": "https://www.sea-intelligence.com/images/press_docs/GLP-Sept2026/20260928_-_Sea-Intelligence_GLP_Press_Release_-_September_2026.xlsx",
+  "text": "Sea-Intelligence has published issue 181 of the Global Liner Performance (GLP) report , with schedule reliability figures up to and including August 2026. As the 120-page report is quite comprehensive and covers schedule reliability across 34 different trade lanes and 60+ carriers, this press release will only cover highlights from the full report.\nIn the backdrop of severe port congestion in Asia, global schedule declined sharply M/M for the second consecutive month, with the latest M/M decline of -5.9 percentage points dropping the August figure to 49.9%; the lowest point since September 2022. With declining schedule reliability, the average delay for LATE vessel arrivals also deteriorated, increasing M/M by 0.60 days to 6.81 days. This is the highest level reached since March 2022. On a Y/Y level, the August 2026 figure was 1.92 days higher.\nMaersk was the most reliable top-13 carrier in August 2026 with schedule reliability of 67.3%, followed by Hapag-Lloyd with schedule reliability of 61.5%. MSC and CMA CGM followed with 55.2% and 50.6%, respectively, and were the only two carriers in the 50\u201160% range. Wan Hai was the least reliable carrier with schedule reliability of 23.2%. No carrier recorded a M/M improvement in reliability in August 2026. ONE recorded the smallest M/M decline of -3.5 percentage points while PIL recorded the largest M/M decline of \u201110.1 percentage points. On a Y/Y level, none of the 13 carriers recorded an improvement in schedule reliability in August 2026, with Maersk recording the smallest Y/Y decline of -8.9 percentage points, and PIL recording the largest Y/Y decline of -31.1 percentage points. PIL was one of twelve carriers with a double-digit Y/Y decline.\nIn July/August 2026 Gemini was the most reliable carrier alliance with schedule reliability of 77.8%, followed by MSC with 70.1%, and Ocean Alliance with 48.3%. Premier Alliance was the least reliable carrier alliance with schedule reliability of 43.2%.\nAll quotes can be attributed to: Alan Murphy, CEO, Sea-Intelligence. For more information, please contact: This email address is being protected from spambots. You need JavaScript enabled to view it. , This email address is being protected from spambots. You need JavaScript enabled to view it.",
+  "extracted_by_model": false
+}

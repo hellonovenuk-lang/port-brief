@@ -1,0 +1,23 @@
+{
+  "period": "2026-08",
+  "global_pct": 29,
+  "global_mom_pp": -4,
+  "carriers": [
+    {"rank": 1, "carrier": "Maersk", "pct": 51, "prev_pct": 57, "delta_pp": -6, "avg_delay_days": 2.8},
+    {"rank": 2, "carrier": "Hapag-Lloyd", "pct": 46, "prev_pct": 53, "delta_pp": -7, "avg_delay_days": 2.8},
+    {"rank": 3, "carrier": "CMA CGM", "pct": 33, "prev_pct": 40, "delta_pp": -7, "avg_delay_days": 3.7},
+    {"rank": 4, "carrier": "ZIM", "pct": 31, "prev_pct": 36, "delta_pp": -5, "avg_delay_days": 4.4},
+    {"rank": 5, "carrier": "ONE", "pct": 29, "prev_pct": 28, "delta_pp": 1, "avg_delay_days": 5.4},
+    {"rank": 6, "carrier": "MSC", "pct": 24, "prev_pct": 27, "delta_pp": -3, "avg_delay_days": 5.0},
+    {"rank": 7, "carrier": "COSCO", "pct": 22, "prev_pct": 28, "delta_pp": -6, "avg_delay_days": 5.7},
+    {"rank": 8, "carrier": "Evergreen", "pct": 20, "prev_pct": 17, "delta_pp": 3, "avg_delay_days": 6.8},
+    {"rank": 9, "carrier": "PIL", "pct": 10, "prev_pct": 14, "delta_pp": -4, "avg_delay_days": 7.3},
+    {"rank": 10, "carrier": "Wan Hai", "pct": 9, "prev_pct": 9, "delta_pp": 0, "avg_delay_days": 8.5},
+    {"rank": 11, "carrier": "HMM", "pct": 9, "prev_pct": 13, "delta_pp": -4, "avg_delay_days": 9.1},
+    {"rank": 12, "carrier": "Yang Ming", "pct": 6, "prev_pct": 10, "delta_pp": -4, "avg_delay_days": 10.1}
+  ],
+  "carrier_count_note": "Xeneta ranks 12 carriers (OOCL is not listed separately).",
+  "extracted_by_model": true,
+  "extracted_from": "data/reliability/xeneta/2026-08/carrier-rankings.png",
+  "verified": false
+}

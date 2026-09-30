@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en-GB">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Port Brief · {{ issue_long }}</title></head>
+<body style="margin:0;padding:0;background:#eef2f5;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef2f5;"><tr><td align="center" style="padding:16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:6px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;color:#1d2a36;">
+  <tr><td style="background:#0b1826;padding:18px 24px;">
+    <div style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#ffffff;">PORT<span style="color:#3fb6c9;">·</span>BRIEF</div>
+    <div style="font-size:12px;color:#8a96a3;margin-top:2px;">{{ issue_long }}</div>
+  </td></tr>
+  <tr><td style="padding:22px 24px 6px;">
+    <h1 style="margin:0 0 10px;font-size:22px;line-height:1.25;color:#0b1826;">{{ ed.headline }}</h1>
+    <p style="margin:0 0 16px;font-size:15px;line-height:1.5;color:#3a4856;">{{ ed.standfirst }}</p>
+  </td></tr>
+  {% if watchlist %}
+  <tr><td style="padding:0 24px;">
+    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">Watchlist</div>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
+    {% for w in watchlist[:5] %}
+      <tr><td style="padding:7px 0;border-top:1px solid #e3e8ec;vertical-align:top;width:70px;">
+        <span style="display:inline-block;font-size:10px;font-weight:bold;text-transform:uppercase;padding:2px 6px;border-radius:3px;{% if w.level == 'likely' %}background:#d03b3b;color:#ffffff;{% else %}background:#fab219;color:#1a1300;{% endif %}">{{ w.level }}</span></td>
+        <td style="padding:7px 0;border-top:1px solid #e3e8ec;"><strong>{{ w.name }}</strong> · {{ w.peak_day|day }}<br><span style="color:#5b6875;font-size:13px;">{{ ed.watchlist_notes.get(w.id) or (w.causes|map('cause')|join(', ')) }}</span></td></tr>
+    {% endfor %}
+    </table>
+  </td></tr>
+  {% endif %}
+  <tr><td style="padding:16px 24px 4px;">
+    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">Schedule reliability</div>
+    <p style="margin:0;font-size:14px;line-height:1.5;">
+      {% if si and si.global_pct is not none %}Sea-Intelligence <strong>{{ si.global_pct }}%</strong> ({{ si.period|period }}){% endif %}{% if xe and xe.global_pct is not none %} · Xeneta <strong>{{ xe.global_pct }}%</strong> ({{ xe.period|period }}){% endif %}
+    </p>
+  </td></tr>
+  <tr><td align="center" style="padding:22px 24px;">
+    <a href="{{ '{{PDF_URL}}' }}" style="display:inline-block;background:#0b1826;color:#ffffff;text-decoration:none;font-weight:bold;font-size:15px;padding:12px 26px;border-radius:4px;">Read the full brief (PDF)</a>
+  </td></tr>
+  <tr><td style="padding:14px 24px 20px;border-top:1px solid #e3e8ec;font-size:11px;line-height:1.5;color:#7a8794;">
+    {% for a in attributions %}{{ a.rstrip(".") }}. {% endfor %}<br>
+    Weather flags are forecast-based signals, not port notices. Confirm with your terminal or carrier.<br><br>
+    <a href="{{ '{{{RESEND_UNSUBSCRIBE_URL}}}' }}" style="color:#7a8794;">Unsubscribe</a>
+  </td></tr>
+</table>
+</td></tr></table>
+</body>
+</html>
