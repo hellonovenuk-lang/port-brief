@@ -1,0 +1,2 @@
+Land polygons: Natural Earth (public domain), via the world-atlas package (ISC licence).
+https://www.naturalearthdata.com/  https://github.com/topojson/world-atlas

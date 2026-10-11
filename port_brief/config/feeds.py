@@ -11,7 +11,7 @@ GOOGLE_NEWS_RSS = "https://news.google.com/rss/search"
 # Only operational items make the newsletter. Matched case-insensitively against titles.
 RELEVANCE_KEYWORDS = [
     "advisory", "surcharge", "congestion", "disruption", "strike", "industrial action",
-    "weather", "storm", "wind", "closure", "closed", "suspend", "delay", "service",
+    "weather", "storm", "high winds", "gale", "closure", "closed", "suspend", "delay", "service",
     "schedule", "rates", "rate increase", "gri", "pss", "fak", "peak season", "emergency",
     "suez", "red sea", "hormuz", "route", "rerout", "omission", "blank", "cape of good hope",
     "berth", "outage", "cyber", "canal", "tariff", "port call", "transit",

@@ -12,7 +12,7 @@ arriving in the next 2 weeks."* The brief also covers weather on the routes in (
 schedule reliability, and port and carrier advisories.
 
 Samples:
-- [`samples/2026-09-30/`](samples/2026-09-30/): a real issue from live data.
+- [`samples/2026-10-11/`](samples/2026-10-11/): a real issue from live data.
 - [`samples/illustration/`](samples/illustration/): synthetic inputs showing every port status.
 
 ## How it runs
@@ -52,6 +52,24 @@ Sea-Intelligence and Xeneta are stored and shown **separately**. The gap between
 material, not an error to reconcile. Sea-Intelligence counts an arrival as on time if it is within one day
 of schedule; Xeneta counts only arrivals on the scheduled day.
 
+## Design
+
+The issue is set as a broadsheet briefing: a white A4 page, Source Serif 4 for text and Source Sans 3 for
+tables and captions (both OFL, bundled), one navy ink for the masthead, and status colours only as small
+squares beside the status word.
+
+The layout avoids the common tells of machine-made design: dark dashboards, stat tiles, cards with
+coloured edges, pill badges, uppercase eyebrow labels, gradients and glyph icons.
+
+- **Page 1** leads with the ports table: status, what to do, and when.
+- **Page 2** has two maps drawn from Natural Earth data:
+  - A world map marking only the sea areas forecast to delay ships heading for Europe.
+  - A North European ports map coloured by status.
+- **Calm places are left off the maps**, so a quiet week shows an empty map and says so.
+
+The writing is checked as well as the numbers. `validate` rejects em dashes, "it's not X, it's Y",
+rhetorical questions and similar machine-writing tics (`STYLE_RULES` in `editorial/schema.py`).
+
 ## Architecture
 
 ```
@@ -60,7 +78,7 @@ port_brief/
   collect.py      orchestrator: runs every source in isolation, writes one snapshot per run
   judgement/      weather → operational flags, 3–5 day outlook, forecast drift, ranked watchlist
   editorial/      facts sheet, editorial schema, number validator, templated fallback
-  render/         WeasyPrint PDF, email HTML/text, matplotlib charts, bundled IBM Plex fonts
+  render/         WeasyPrint PDF, email HTML/text, matplotlib charts and maps, bundled Source Serif/Sans fonts
   publish/        Netlify site build + Resend send (used only by publish.yml)
 data/             committed history (each routine run starts in a fresh container)
   snapshots/      <run>.json + latest.json: consolidated snapshot incl. judgement and source health

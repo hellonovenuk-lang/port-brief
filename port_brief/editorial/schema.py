@@ -72,6 +72,31 @@ def unsupported_numbers(text: str, allowed: list[float]) -> list[str]:
     return bad
 
 
+# Writing tics that read as machine-written. Each is a validation error, so the editor rewrites.
+STYLE_RULES = [
+    (re.compile("\u2014"), "em dash: use a full stop, comma or colon"),
+    (re.compile(r"\b(it|this|that)(?:'s| is| was)\s+not\b[^.]{0,80}?[,;:]\s*(it|this|that)(?:'s| is| was)\b", re.I),
+     "'it's not X, it's Y' construction"),
+    (re.compile(r"\bnot (?:just|only|merely)\b[^.]{0,80}?\bbut\b", re.I), "'not just X but Y' construction"),
+    (re.compile(r"\bno [^,.]{1,30}, no [^,.]{1,30}(?:,|\.)\s*just\b", re.I), "'no X, no Y, just Z' construction"),
+    (re.compile(r"\b(?:delve|delves|delving|tapestry|landscape|seamless(?:ly)?|robust|pivotal|crucial|game[- ]changer|"
+                r"unprecedented|navigate|navigating|ever-changing|ever-evolving|testament|underscores?|"
+                r"in today's|it's worth noting|it is worth noting|at the end of the day|rest assured|buckle up)\b", re.I),
+     "stock phrase"),
+    (re.compile(r"\?"), "rhetorical question"),
+    (re.compile(r"!"), "exclamation mark"),
+]
+
+
+def style_issues(text: str) -> list[str]:
+    found = []
+    for rx, why in STYLE_RULES:
+        m = rx.search(text or "")
+        if m:
+            found.append(f"{why} ({m.group(0)[:40]!r})")
+    return found
+
+
 def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
     errors = []
     editorial.setdefault("watchlist_notes", {})
@@ -124,6 +149,8 @@ def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
         bad = unsupported_numbers(text or "", allowed)
         if bad:
             errors.append(f"{label}: numbers not found in the data: {', '.join(bad)}")
+        for issue in style_issues(text):
+            errors.append(f"{label}: {issue}")
     return errors
 
 
@@ -147,6 +174,15 @@ def _causes(item) -> str:
     return " and ".join(causes)
 
 
+def _period(p: str) -> str:
+    y, m = p.split("-", 1)
+    return f"{m} {y}" if m.startswith("Q") else f"{date(int(y), int(m), 1):%B %Y}"
+
+
+def _join(names: list[str]) -> str:
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
+
+
 def _clip(text: str, limit: int) -> str:
     """Trim to the limit at a sentence boundary where possible."""
     if len(text) <= limit:
@@ -164,13 +200,16 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
 
     statuses = j.get("ports_status", [])
     flagged = [p for p in statuses if p["status"] != "normal"]
-    worst = max(flagged, key=lambda p: pb.STATUS_ORDER.index(p["status"]), default=None)
-    if worst:
-        headline = f"{worst['name']}: {worst['status_label'].lower()}"
-        if worst["windows"]:
-            headline += f" {worst['windows'][0]['label']}"
-        if len(flagged) > 1:
-            headline += f"; {len(flagged) - 1} more port{'s' if len(flagged) > 2 else ''} to watch"
+    by_status = {k: [p["name"] for p in statuses if p["status"] == k] for k in pb.STATUS_ORDER}
+    weather_ports = [p for p in flagged if p["windows"]]
+    if by_status["disruption"]:
+        headline = f"Disruption likely at {_join(by_status['disruption'])}"
+    elif by_status["congested"]:
+        headline = f"{_join(by_status['congested'])} running busier than normal"
+    elif weather_ports:
+        first = min(weather_ports, key=lambda p: p["windows"][0]["start"])
+        headline = (f"Wind may pause crane work at {len(weather_ports)} of {len(statuses)} ports this week"
+                    if len(weather_ports) > 1 else f"Wind may pause crane work at {first['name']} this week")
     elif statuses and any(p["data_gaps"] for p in statuses):
         headline = "No weather disruption forecast at UK and North European ports this week"
     elif statuses:
@@ -181,12 +220,14 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
 
     stand = []
     if flagged:
-        stand.append("Action needed at " + ", ".join(f"{p['name']} ({p['status_label'].lower()})" for p in flagged[:4]) + ".")
+        for status in ("disruption", "congested", "watch"):
+            if by_status[status]:
+                stand.append(f"{pb.STATUS_LABEL[status]}: {_join(by_status[status])}.")
     elif statuses:
-        stand.append("No weather disruption forecast at the UK and North European ports we track. Good week to push releases and deliveries.")
+        stand.append("No weather disruption is forecast at the UK and North European ports we track.")
     inbound = j.get("inbound", [])
     if inbound:
-        stand.append(f"Inbound: weather may delay {inbound[0]['trades']} by {inbound[0]['delay']}.")
+        stand.append(f"Rough seas in the {inbound[0]['name']} may delay {inbound[0]['trades']} by {inbound[0]['delay']}.")
     if si and si.get("global_pct") is not None:
         stand.append(f"Reliability: Sea-Intelligence {si['global_pct']}%"
                      + (f", Xeneta {xe['global_pct']}%." if xe and xe.get("global_pct") is not None else "."))
@@ -196,11 +237,10 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
 
     port_notes = {}
     for p in statuses:
-        action = " ".join(p["actions"])
-        note = f"{p['reasons'][0][0].upper()}{p['reasons'][0][1:]}. {action}" if p["reasons"] else action
-        if len(note) > LIMITS["port_note"]:
-            note = p["actions"][0]
-        port_notes[p["id"]] = _clip(note, LIMITS["port_note"])
+        # Weather windows already sit in the action and the Detail column, so lead with the action.
+        lead = "" if p["windows"] or not p["reasons"] else f"{p['reasons'][0][0].upper()}{p['reasons'][0][1:]}. "
+        note = lead + " ".join(p["actions"])
+        port_notes[p["id"]] = _clip(note if len(note) <= LIMITS["port_note"] else p["actions"][0], LIMITS["port_note"])
 
     inbound_note = (" ".join(f"{i['name']}: {i['action']}" for i in inbound[:2]) if inbound
                     else "No weather on the main routes into the UK and North Europe is expected to delay arrivals this week.")
@@ -230,15 +270,15 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
         lane_txt += " Tropical cyclones near tracked locations: " + ", ".join(s["name"] for s in storms_near) + "."
 
     if si and si.get("global_pct") is not None:
-        rel_txt = f"Sea-Intelligence: {si['global_pct']}% on time in {si['period']}"
+        rel_txt = f"Sea-Intelligence puts global schedule reliability at {si['global_pct']}% for {_period(si['period'])}"
         if si.get("mom_pp") is not None:
-            rel_txt += f" ({si['mom_pp']:+} pp month on month)"
+            rel_txt += f", {abs(si['mom_pp'])} points {'down' if si['mom_pp'] < 0 else 'up'} on the month before"
         rel_txt += "."
         if xe and xe.get("global_pct") is not None:
-            rel_txt += f" Xeneta: {xe['global_pct']}% for {xe['period']}."
+            rel_txt += f" Xeneta measures {xe['global_pct']}% for {_period(xe['period'])}."
         if dv and dv.get("comparable"):
-            rel_txt += (f" The two benchmarks sit {abs(dv['global_gap_pp'])} pp apart because they define 'on time' differently;"
-                        " read them as two views of the same trend, not as a contradiction.")
+            rel_txt += (f" The two benchmarks sit {abs(dv['global_gap_pp'])} points apart because they define on time differently."
+                        " Use them as two views of the same trend.")
     else:
         rel_txt = "Schedule reliability figures were unavailable for this issue."
 

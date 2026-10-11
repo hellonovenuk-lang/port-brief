@@ -1,5 +1,5 @@
-"""Static SVG charts for the PDF. Palette validated for the navy surface (see README):
-series 1 Sea-Intelligence #3987e5, series 2 Xeneta #d95926."""
+"""Static SVG charts for the PDF, on a white page. Two-series palette validated on white
+(dataviz validator): Sea-Intelligence #1f5fa8, Xeneta #d0602a."""
 
 from __future__ import annotations
 
@@ -15,21 +15,21 @@ from matplotlib import font_manager  # noqa: E402
 from port_brief import paths  # noqa: E402
 from port_brief.sources.schedule_reliability import norm_carrier  # noqa: E402
 
-SURFACE = "#0f1e2e"
-INK = "#ffffff"
-INK2 = "#c3cad3"
-MUTED = "#8a96a3"
-GRID = "#1e3044"
-AXIS = "#2f455c"
-SI = "#3987e5"
-XE = "#d95926"
+SURFACE = "#ffffff"
+INK = "#111111"
+INK2 = "#333333"
+MUTED = "#6b6b66"
+GRID = "#e6e5df"
+AXIS = "#b9b8ae"
+SI = "#1f5fa8"
+XE = "#d0602a"
 
 FONTS = paths.ROOT / "port_brief" / "render" / "fonts"
-for _f in FONTS.glob("IBMPlexSans-*.ttf"):
+for _f in FONTS.glob("SourceSans3-*.ttf"):
     font_manager.fontManager.addfont(str(_f))
 
 plt.rcParams.update({
-    "font.family": "IBM Plex Sans", "font.size": 8.5, "text.color": INK2,
+    "font.family": "Source Sans 3", "font.size": 8.5, "text.color": INK2,
     "axes.edgecolor": AXIS, "axes.labelcolor": MUTED, "xtick.color": MUTED, "ytick.color": MUTED,
     "axes.facecolor": SURFACE, "figure.facecolor": SURFACE, "svg.fonttype": "path",
 })

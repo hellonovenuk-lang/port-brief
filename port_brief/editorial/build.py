@@ -118,6 +118,10 @@ def prepare(issue_date: str | None = None, dry_run: bool = False) -> tuple[str, 
     _write(d / "snapshot.json", snap)
     (d / "facts.md").write_text(facts_markdown(snap, issue_date))
     meta = _read(d / "meta.json") or {"issue_date": issue_date, "pdf_token": secrets.token_urlsafe(9)}
+    if not dry_run:
+        # Issues merged to main live in drafts/<date>/; this one is the next in sequence.
+        earlier = [x for x in paths.DRAFTS.glob("20*-*-*") if x.name < issue_date and (x / "meta.json").exists()]
+        meta["issue_number"] = len(earlier) + 1
     meta.update(run_id=snap["run_id"], mode=snap["mode"])
     _write(d / "meta.json", meta)
     return issue_date, d, snap

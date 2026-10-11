@@ -1,50 +1,49 @@
 <!doctype html>
 <html lang="en-GB">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Port Brief · {{ issue_long }}</title></head>
-<body style="margin:0;padding:0;background:#eef2f5;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef2f5;"><tr><td align="center" style="padding:16px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:#ffffff;border-radius:6px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;color:#1d2a36;">
-  <tr><td style="background:#0b1826;padding:18px 24px;">
-    <div style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#ffffff;">PORT<span style="color:#3fb6c9;">·</span>BRIEF</div>
-    <div style="font-size:12px;color:#8a96a3;margin-top:2px;">{{ issue_long }}</div>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light">
+<title>Port Brief, {{ issue_long }}</title></head>
+<body style="margin:0;padding:0;background:#ffffff;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#ffffff;"><tr><td align="center" style="padding:24px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;font-family:Georgia,'Times New Roman',serif;color:#111111;">
+  <tr><td style="padding:0 0 6px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td style="font-size:28px;font-weight:bold;color:#14365c;">Port Brief</td>
+      <td align="right" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#333333;">{% if issue_number %}Issue {{ issue_number }}, {% endif %}{{ issue_long }}</td>
+    </tr></table>
   </td></tr>
-  <tr><td style="padding:22px 24px 6px;">
-    <h1 style="margin:0 0 10px;font-size:22px;line-height:1.25;color:#0b1826;">{{ ed.headline }}</h1>
-    <p style="margin:0 0 16px;font-size:15px;line-height:1.5;color:#3a4856;">{{ ed.standfirst }}</p>
+  <tr><td style="border-top:2px solid #14365c;border-bottom:1px solid #14365c;height:2px;font-size:0;line-height:0;">&nbsp;</td></tr>
+  <tr><td style="padding:20px 0 4px;">
+    <h1 style="margin:0 0 10px;font-size:26px;line-height:1.2;font-weight:bold;color:#111111;">{{ ed.headline }}</h1>
+    <p style="margin:0 0 18px;font-size:16px;line-height:1.5;color:#222222;">{{ ed.standfirst }}</p>
   </td></tr>
-  {% set chip = {'normal': 'background:#0ca30c;color:#ffffff;', 'watch': 'background:#fab219;color:#1a1300;', 'congested': 'background:#ec835a;color:#1a0a00;', 'disruption': 'background:#d03b3b;color:#ffffff;'} %}
-  {% for region, label in [('uk', 'UK gateways'), ('north_europe', 'North European hubs')] %}
-  <tr><td style="padding:{{ '0' if loop.first else '14px' }} 24px 0;">
-    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">{{ label }}</div>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;">
-    {% for p in port_board if p.region == region %}
-      <tr><td style="padding:8px 0;border-top:1px solid #e3e8ec;vertical-align:top;width:118px;">
-        <span style="display:inline-block;font-size:10px;font-weight:bold;text-transform:uppercase;padding:2px 6px;border-radius:3px;{{ chip[p.status] }}">{{ p.status|status_icon }} {{ p.status_label }}</span></td>
-        <td style="padding:8px 0;border-top:1px solid #e3e8ec;"><strong>{{ p.name }}</strong><br><span style="color:#3a4856;font-size:13px;line-height:1.45;">{{ ed.port_notes.get(p.id) or p.actions|join(' ') }}</span></td></tr>
-    {% endfor %}
-    </table>
+  <tr><td style="border-top:1px solid #111111;padding:10px 0 4px;font-size:18px;font-weight:bold;">The ports this week</td></tr>
+  {% for region, label in [('uk', 'United Kingdom'), ('north_europe', 'North Europe')] %}
+  <tr><td style="padding:10px 0 2px;font-style:italic;color:#55554f;font-size:14px;">{{ label }}</td></tr>
+  {% for p in port_board if p.region == region %}
+  <tr><td style="padding:8px 0;border-bottom:1px solid #e3e2dc;font-size:15px;line-height:1.45;">
+    <strong>{{ p.name }}</strong>
+    <span style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#333333;">&nbsp;&nbsp;<span style="display:inline-block;width:8px;height:8px;background:{{ status_colours[p.status] }};"></span>&nbsp;{{ p.status_label }}</span><br>
+    {{ ed.port_notes.get(p.id) or p.actions|join(' ') }}
   </td></tr>
   {% endfor %}
-  {% if inbound %}
-  <tr><td style="padding:14px 24px 0;">
-    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">On the way in</div>
-    <p style="margin:0;font-size:13px;line-height:1.5;color:#3a4856;">{{ ed.inbound_note }}</p>
+  {% endfor %}
+  {% if congestion_missing %}<tr><td style="padding:8px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#55554f;">Congestion figures were not available for this issue, so statuses reflect weather forecasts and port news only.</td></tr>{% endif %}
+  <tr><td style="padding:18px 0 4px;font-size:18px;font-weight:bold;border-bottom:0;">On the way in</td></tr>
+  <tr><td style="font-size:15px;line-height:1.5;padding-bottom:6px;">{{ ed.inbound_note }}</td></tr>
+  <tr><td style="padding:14px 0 4px;font-size:18px;font-weight:bold;">Schedule reliability</td></tr>
+  <tr><td style="font-size:15px;line-height:1.5;padding-bottom:6px;">
+    {% if si and si.global_pct is not none %}Sea-Intelligence: {{ si.global_pct }}% of ships on time in {{ si.period|period }}.{% endif %}
+    {% if xe and xe.global_pct is not none %} Xeneta: {{ xe.global_pct }}% in {{ xe.period|period }}.{% endif %}
+    The two measure differently; the full brief explains the gap.
   </td></tr>
-  {% endif %}
-  <tr><td style="padding:16px 24px 4px;">
-    <div style="font-size:11px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;color:#1d7f8f;margin-bottom:6px;">Schedule reliability</div>
-    <p style="margin:0;font-size:14px;line-height:1.5;">
-      {% if si and si.global_pct is not none %}Sea-Intelligence <strong>{{ si.global_pct }}%</strong> ({{ si.period|period }}){% endif %}{% if xe and xe.global_pct is not none %} · Xeneta <strong>{{ xe.global_pct }}%</strong> ({{ xe.period|period }}){% endif %}
-    </p>
+  <tr><td style="padding:22px 0;">
+    <a href="{{ '{{PDF_URL}}' }}" style="display:inline-block;background:#14365c;color:#ffffff;text-decoration:none;font-family:Arial,Helvetica,sans-serif;font-weight:bold;font-size:15px;padding:12px 22px;">Read the full brief (PDF)</a>
+    <p style="margin:10px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#55554f;">Includes the weather maps, six-day port forecast, carrier reliability tables and this week's notices.</p>
   </td></tr>
-  <tr><td align="center" style="padding:22px 24px;">
-    <a href="{{ '{{PDF_URL}}' }}" style="display:inline-block;background:#0b1826;color:#ffffff;text-decoration:none;font-weight:bold;font-size:15px;padding:12px 26px;border-radius:4px;">Read the full brief (PDF)</a>
-  </td></tr>
-  <tr><td style="padding:14px 24px 20px;border-top:1px solid #e3e8ec;font-size:11px;line-height:1.5;color:#7a8794;">
+  <tr><td style="border-top:1px solid #b9b8ae;padding:12px 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.5;color:#6b6b66;">
     {% for a in attributions %}{{ a.rstrip(".") }}. {% endfor %}<br>
-    Weather flags are forecast-based signals, not port notices. Confirm with your terminal or carrier.<br><br>
-    <a href="{{ '{{{RESEND_UNSUBSCRIBE_URL}}}' }}" style="color:#7a8794;">Unsubscribe</a>
+    Weather flags are forecasts, not port notices. Confirm with your terminal or carrier before changing plans.<br><br>
+    <a href="{{ '{{{RESEND_UNSUBSCRIBE_URL}}}' }}" style="color:#6b6b66;">Unsubscribe</a>
   </td></tr>
 </table>
 </td></tr></table>

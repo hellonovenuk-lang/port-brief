@@ -12,7 +12,8 @@ STATUS_LABEL = {
     "congested": "Congested",
     "disruption": "Disruption likely",
 }
-STATUS_ICON = {"normal": "●", "watch": "▲", "congested": "■", "disruption": "◆"}
+# Status colours: used only as small markers beside the status word, never on their own.
+STATUS_COLOUR = {"normal": "#2e7d32", "watch": "#b7791f", "congested": "#c4581d", "disruption": "#b3261e"}
 
 # Congestion triggers (Sinay commercial-vessel occupancy, percentage points above that port's usual level).
 CONGESTED_GAP_PP = 10.0
@@ -47,14 +48,14 @@ ACTIONS = {
         "and allow " + BUFFER["disruption_hours"] + "."
     ),
     "congested": (
-        "Busier than normal. Add " + BUFFER["congested_days"] + " to inland plans for containers arriving in "
+        "Berths are busier than normal. Add " + BUFFER["congested_days"] + " to inland plans for containers arriving in "
         + BUFFER["congested_horizon"] + ", pre-book haulage and check free time and demurrage."
     ),
     "watch_weather": (
         "Intermittent stoppages possible {window}. Allow " + BUFFER["watch_hours"] + " and avoid tight cut-offs."
     ),
     "watch_news": "Reported: {headline}. Check your terminal's latest notice before booking collections.",
-    "watch_busy": "Busier than usual. Keep an eye on vessel berthing times and avoid tight cut-offs.",
+    "watch_busy": "Berths are busier than usual. Watch vessel berthing times and avoid tight cut-offs.",
     "normal": "No predicted delays. Speak to your carrier about release and delivery now to keep it that way.",
     "normal_no_congestion": "No weather disruption forecast. Speak to your carrier about release and delivery now.",
 }

@@ -2,316 +2,232 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<title>Port Brief · {{ issue_long }}</title>
+<title>Port Brief, {{ issue_long }}</title>
 <style>
-@font-face { font-family: "Plex"; src: url("../fonts/IBMPlexSans-Regular.ttf"); font-weight: 400; }
-@font-face { font-family: "Plex"; src: url("../fonts/IBMPlexSans-Medium.ttf"); font-weight: 500; }
-@font-face { font-family: "Plex"; src: url("../fonts/IBMPlexSans-SemiBold.ttf"); font-weight: 600; }
-@font-face { font-family: "Plex"; src: url("../fonts/IBMPlexSans-Bold.ttf"); font-weight: 700; }
-@font-face { font-family: "PlexMono"; src: url("../fonts/IBMPlexMono-Regular.ttf"); }
+@font-face { font-family: "PBSerif"; src: url("../fonts/SourceSerif4-Regular.ttf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "PBSerif"; src: url("../fonts/SourceSerif4-It.ttf"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "PBSerif"; src: url("../fonts/SourceSerif4-Semibold.ttf"); font-weight: 600; }
+@font-face { font-family: "PBSerif"; src: url("../fonts/SourceSerif4-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "PBSans"; src: url("../fonts/SourceSans3-Regular.ttf"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "PBSans"; src: url("../fonts/SourceSans3-It.ttf"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "PBSans"; src: url("../fonts/SourceSans3-Semibold.ttf"); font-weight: 600; }
+@font-face { font-family: "PBSans"; src: url("../fonts/SourceSans3-Bold.ttf"); font-weight: 700; }
 
-:root {
-  --page: #0b1826;
-  --surface: #0f1e2e;
-  --raised: #142739;
-  --ink: #ffffff;
-  --ink2: #c3cad3;
-  --muted: #8a96a3;
-  --rule: #1e3044;
-  --brand: #3fb6c9;
-  --watch: #fab219;
-  --likely: #d03b3b;
-  --si: #3987e5;
-  --xe: #d95926;
-}
 @page {
   size: A4;
-  margin: 14mm 13mm 16mm 13mm;
-  background: var(--page);
-  @bottom-left { content: "Port Brief · {{ issue_long }}"; font: 7pt "Plex"; color: #8a96a3; }
-  @bottom-right { content: counter(page) " / " counter(pages); font: 7pt "Plex"; color: #8a96a3; }
+  margin: 16mm 18mm 18mm 18mm;
+  @bottom-left { content: "Port Brief, {{ issue_long }}"; font: 7.5pt "PBSans"; color: #6b6b66; }
+  @bottom-right { content: counter(page) " of " counter(pages); font: 7.5pt "PBSans"; color: #6b6b66; }
 }
-* { box-sizing: border-box; }
-body { font-family: "Plex", sans-serif; font-size: 8.8pt; line-height: 1.45; color: var(--ink2); margin: 0; background: var(--page); }
-h1, h2, h3 { color: var(--ink); margin: 0; font-weight: 600; }
-h2 { font-size: 12.5pt; letter-spacing: 0.01em; margin: 0 0 2.5mm; }
-h2 .kicker { display: block; font-size: 7pt; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand); margin-bottom: 1mm; }
-h3 { font-size: 9.5pt; margin: 0 0 1.5mm; }
-p { margin: 0 0 2.2mm; }
-.page-break { break-before: page; }
-.muted { color: var(--muted); }
-.mono, td.num { font-family: "PlexMono", monospace; font-variant-numeric: tabular-nums; }
+@page :first { @bottom-left { content: none; } }
+
+html { color: #111; }
+body { font-family: "PBSerif", Georgia, serif; font-size: 9.6pt; line-height: 1.42; margin: 0; background: #fff; hyphens: auto; }
+p { margin: 0 0 2.4mm; }
+a { color: inherit; text-decoration: none; }
+.sans { font-family: "PBSans", sans-serif; }
+.small { font-family: "PBSans", sans-serif; font-size: 7.8pt; color: #55554f; line-height: 1.35; }
+.num { font-family: "PBSans", sans-serif; font-variant-numeric: tabular-nums lining-nums; }
 
 /* Masthead */
-.masthead { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1.2pt solid var(--brand); padding-bottom: 2.5mm; margin-bottom: 5mm; }
-.brand { font-size: 22pt; font-weight: 700; color: var(--ink); letter-spacing: 0.06em; }
-.brand span { color: var(--brand); }
-.tagline { font-size: 7.5pt; color: var(--muted); letter-spacing: 0.04em; }
-.issue-date { text-align: right; font-size: 8pt; color: var(--ink2); }
-.issue-date strong { display: block; color: var(--ink); font-size: 10pt; }
+.mast { display: flex; justify-content: space-between; align-items: baseline; }
+.wordmark { white-space: nowrap; font-size: 30pt; font-weight: 700; letter-spacing: -0.01em; color: #14365c; line-height: 1; }
+.dateline { font-family: "PBSans", sans-serif; font-size: 8.5pt; color: #333; text-align: right; }
+.tagline { font-style: italic; font-size: 9pt; color: #55554f; margin: 1.5mm 0 0; }
+.rule-double { border-top: 1.4pt solid #14365c; border-bottom: 0.5pt solid #14365c; height: 1.2pt; margin: 2.5mm 0 5mm; }
+.notice-line { font-family: "PBSans", sans-serif; font-size: 8pt; color: #b3261e; margin-bottom: 3mm; }
 
-.headline { font-size: 17pt; line-height: 1.15; font-weight: 600; color: var(--ink); margin: 0 0 3mm; }
-.standfirst { font-size: 10pt; line-height: 1.42; color: var(--ink2); margin-bottom: 4mm; }
+h1 { font-size: 21pt; font-weight: 600; line-height: 1.12; margin: 0 0 3mm; letter-spacing: -0.005em; }
+.lede { font-size: 11pt; line-height: 1.42; color: #222; margin-bottom: 5mm; max-width: 150mm; }
+h2 { font-size: 13.5pt; font-weight: 700; margin: 7mm 0 2.5mm; padding-top: 2mm; border-top: 0.6pt solid #111; }
+h2.first { margin-top: 0; }
+h3 { font-size: 10pt; font-weight: 700; margin: 4mm 0 1.5mm; }
+.page-break { break-before: page; }
 
-/* Stat tiles */
-.tiles { display: flex; gap: 3mm; margin-bottom: 4mm; }
-.tile { flex: 1; background: var(--surface); border: 0.6pt solid var(--rule); border-radius: 2mm; padding: 2.2mm 3mm; }
-.tile .label { font-size: 6.8pt; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
-.tile .value { font-size: 15pt; font-weight: 600; color: var(--ink); line-height: 1.2; }
-.tile .sub { font-size: 7pt; color: var(--muted); }
-
-/* Panels & tables */
-.panel { background: var(--surface); border: 0.6pt solid var(--rule); border-radius: 2mm; padding: 3.5mm 4mm; margin-bottom: 4mm; }
+/* Tables */
 table { width: 100%; border-collapse: collapse; }
-th { text-align: left; font-size: 6.8pt; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding: 1.2mm 1.5mm; border-bottom: 0.6pt solid var(--rule); }
-td { padding: 1.5mm 1.5mm; border-bottom: 0.4pt solid var(--rule); vertical-align: top; }
-tr:last-child td { border-bottom: none; }
-table.compact td { padding-top: 0.8mm; padding-bottom: 0.8mm; }
-td.name { color: var(--ink); font-weight: 500; white-space: nowrap; }
+th { font-family: "PBSans", sans-serif; font-weight: 600; font-size: 7.8pt; text-align: left; color: #333; padding: 1.4mm 2mm 1.4mm 0; border-bottom: 0.6pt solid #111; vertical-align: bottom; }
+td { padding: 1.6mm 2mm 1.6mm 0; border-bottom: 0.4pt solid #d8d7d0; vertical-align: top; }
+tr.group td { font-style: italic; color: #55554f; border-bottom: 0.4pt solid #b9b8ae; padding-top: 3.2mm; padding-bottom: 1mm; }
+tr { break-inside: avoid; }
+table.compact td { padding-top: 0.9mm; padding-bottom: 0.9mm; font-size: 9pt; }
 
-.chip { display: inline-block; font-size: 6.8pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.4mm 1.6mm; border-radius: 1mm; }
-.chip.watch { background: var(--watch); color: #1a1300; }
-.chip.likely { background: var(--likely); color: #ffffff; }
-.trend { font-size: 7.5pt; color: var(--muted); }
-.trend.deteriorating { color: var(--ink); font-weight: 600; }
+/* The ports table */
+table.ports td { font-size: 9.2pt; line-height: 1.36; }
+table.ports td.port { font-weight: 700; width: 26mm; }
+table.ports td.status { width: 30mm; font-family: "PBSans", sans-serif; font-size: 8.4pt; white-space: nowrap; }
+table.ports td.detail { width: 36mm; font-size: 7.4pt; }
+.sq { display: inline-block; width: 2.2mm; height: 2.2mm; margin-right: 1.4mm; vertical-align: 0.1mm; }
 
-/* Heat strip */
-table.strip td.cell { text-align: center; padding: 1.1mm 0.5mm; white-space: nowrap; font-family: "PlexMono", monospace; font-size: 6.6pt; color: var(--muted); border-left: 1.5pt solid var(--surface); border-bottom: 1.5pt solid var(--surface); }
-table.strip td.cell.watch { background: var(--watch); color: #1a1300; }
-table.strip td.cell.likely { background: var(--likely); color: #ffffff; }
-table.strip td.cell.none { background: var(--raised); }
-table.strip td.cell b { font-family: "Plex"; font-size: 6.6pt; margin-right: 0.8mm; }
-table.strip td { padding-top: 1.1mm; padding-bottom: 1.1mm; }
-table.strip th.day { text-align: center; }
-.legend { font-size: 7pt; color: var(--muted); margin-top: 2mm; }
-.legend .sw { display: inline-block; width: 3mm; height: 3mm; border-radius: 0.6mm; vertical-align: -0.4mm; margin: 0 1mm 0 3mm; }
+/* Figures */
+figure { margin: 0 0 4mm; break-inside: avoid; }
+figure svg { width: 100%; height: auto; display: block; }
+figcaption { font-family: "PBSans", sans-serif; font-size: 7.8pt; color: #55554f; margin-top: 1.2mm; line-height: 1.35; }
+.fig-title { font-family: "PBSans", sans-serif; font-weight: 600; font-size: 8.4pt; margin-bottom: 1.2mm; }
+.two { display: table; width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; }
+.two > * { display: table-cell; vertical-align: top; width: 50%; }
+.two > * + * { padding-left: 7mm; }
 
-.cols { display: flex; gap: 4mm; align-items: flex-start; }
-.cols > * { flex: 1; }
-.chart svg { width: 100%; height: auto; }
-ul.adv { list-style: none; padding: 0; margin: 0; }
-ul.adv li { padding: 1.2mm 0; border-bottom: 0.4pt solid var(--rule); }
-ul.adv li:last-child { border-bottom: none; }
-ul.adv a { color: var(--ink); text-decoration: none; }
-.new { color: var(--brand); font-weight: 700; font-size: 6.5pt; letter-spacing: 0.08em; margin-right: 1mm; }
-.adv-panel { break-inside: auto; }
-ul.adv li { break-inside: avoid; }
-.fine { font-size: 7pt; color: var(--muted); line-height: 1.4; }
-.fine p { margin-bottom: 1.5mm; }
-.draft-banner { background: var(--watch); color: #1a1300; font-weight: 700; text-align: center; padding: 1.5mm; border-radius: 1mm; margin-bottom: 4mm; font-size: 8pt; letter-spacing: 0.1em; }
+/* Forecast grid */
+table.grid td, table.grid th { text-align: center; padding: 1.2mm 0.6mm; font-size: 7.8pt; }
+table.grid td:first-child, table.grid th:first-child { text-align: left; font-family: "PBSerif", serif; font-size: 8.8pt; }
+table.grid td.watch { background: #fbf1dc; font-weight: 700; }
+table.grid td.likely { background: #f6dcd8; font-weight: 700; }
 
-/* Port status board */
-.board-title { margin-top: 1mm; }
-.board { display: grid; grid-template-columns: 1fr 1fr; gap: 2.4mm; margin-bottom: 3mm; }
-.card { background: var(--surface); border: 0.6pt solid var(--rule); border-left: 2.2mm solid var(--rule); border-radius: 2mm; padding: 2.2mm 3mm; break-inside: avoid; }
-.card.s-normal { border-left-color: #0ca30c; }
-.card.s-watch { border-left-color: #fab219; }
-.card.s-congested { border-left-color: #ec835a; }
-.card.s-disruption { border-left-color: #d03b3b; }
-.card-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2mm; }
-.pname { font-size: 10.5pt; font-weight: 600; color: var(--ink); }
-.status { font-size: 6.8pt; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.5mm 1.8mm; border-radius: 1mm; }
-.status.s-normal { background: #0ca30c; color: #ffffff; }
-.status.s-watch { background: #fab219; color: #1a1300; }
-.status.s-congested { background: #ec835a; color: #1a0a00; }
-.status.s-disruption { background: #d03b3b; color: #ffffff; }
-.card .action { color: var(--ink); font-weight: 500; font-size: 8.2pt; line-height: 1.36; margin-bottom: 1.2mm; }
-.card .data { font-size: 7pt; color: var(--muted); margin: 0; }
-.sw.s-normal { background: #0ca30c; } .sw.s-watch { background: #fab219; } .sw.s-congested { background: #ec835a; } .sw.s-disruption { background: #d03b3b; }
-.tile .value .of { font-size: 10pt; color: var(--muted); font-weight: 400; }
-.notice { font-size: 7.5pt; color: var(--ink2); border: 0.6pt dashed #2f455c; border-radius: 1.5mm; padding: 1.5mm 2.5mm; margin-bottom: 2mm; }
+/* Prose in columns */
+.cols { column-count: 2; column-gap: 7mm; }
+.notices .pub { font-family: "PBSans", sans-serif; font-weight: 700; font-size: 8.2pt; margin: 2.5mm 0 1mm; break-after: avoid; }
+.notices .item { margin: 0 0 1.8mm; break-inside: avoid; }
+.notices .item .src { display: block; }
+.footnotes { margin-top: 6mm; border-top: 0.4pt solid #b9b8ae; padding-top: 2mm; }
+.footnotes p { margin-bottom: 1.4mm; }
 </style>
 </head>
 <body>
 
-{% if meta.mode == 'dry-run' %}<div class="draft-banner">DRY RUN · CACHED DATA · NOT FOR DISTRIBUTION</div>{% endif %}
-{% if meta.mode == 'illustration' %}<div class="draft-banner">ILLUSTRATION · SYNTHETIC CONGESTION AND WEATHER TO SHOW EVERY STATUS · NOT A REAL FORECAST</div>{% endif %}
+{% if meta.mode == 'dry-run' %}<p class="notice-line">Dry run from cached data. Not for distribution.</p>{% endif %}
+{% if meta.mode == 'illustration' %}<p class="notice-line">Illustration with synthetic congestion and weather, to show each port status. Not a real forecast.</p>{% endif %}
 
-<div class="masthead">
-  <div>
-    <div class="brand">PORT<span>·</span>BRIEF</div>
-    <div class="tagline">Freight intelligence for UK forwarders, importers &amp; logistics managers</div>
-  </div>
-  <div class="issue-date"><strong>{{ issue_long }}</strong>Forecast run {{ generated_at[:16].replace('T', ' ') }} UTC</div>
+<div class="mast">
+  <div class="wordmark">Port Brief</div>
+  <div class="dateline">{% if issue_number %}Issue {{ issue_number }}, {% endif %}{{ issue_long }}</div>
 </div>
+<p class="tagline">Port and shipping conditions for UK importers, forwarders and logistics teams</p>
+<div class="rule-double"></div>
 
-<h1 class="headline">{{ ed.headline }}</h1>
-<p class="standfirst">{{ ed.standfirst }}</p>
+<h1>{{ ed.headline }}</h1>
+<p class="lede">{{ ed.standfirst }}</p>
 
-<div class="tiles">
-  <div class="tile"><div class="label">Ports needing action</div><div class="value">{{ ports_flagged|length }} <span class="of">/ {{ port_board|length }}</span></div><div class="sub">UK &amp; North European gateways</div></div>
-  <div class="tile"><div class="label">Inbound delay risk</div><div class="value">{{ inbound|length }}</div><div class="sub">{% if inbound %}lanes, worst: {{ inbound[0].name }}{% else %}no lanes flagged{% endif %}</div></div>
-  <div class="tile"><div class="label">Reliability · Sea-Intelligence</div><div class="value">{% if si and si.global_pct is not none %}{{ si.global_pct }}%{% else %}–{% endif %}</div><div class="sub">{% if si %}{{ si.period|period }}{% if si.mom_pp is not none %} · {{ si.mom_pp|pp }} m/m{% endif %}{% endif %}</div></div>
-  <div class="tile"><div class="label">Reliability · Xeneta</div><div class="value">{% if xe and xe.global_pct is not none %}{{ xe.global_pct }}%{% else %}–{% endif %}</div><div class="sub">{% if xe %}{{ xe.period|period }}{% if xe.global_mom_pp is not none %} · {{ xe.global_mom_pp|pp }} m/m{% endif %}{% endif %}</div></div>
-</div>
-
-{% if congestion_missing %}<div class="notice">Congestion data is not connected for this issue: port statuses reflect weather forecasts and port news only.</div>{% endif %}
-{% for region, label in [('uk', 'UK gateways'), ('north_europe', 'North European hubs')] %}
-<h2 class="board-title">{% if loop.first %}<span class="kicker">Port status · what to do this week</span>{% endif %}{{ label }}</h2>
-<div class="board">
+<h2 class="first">The ports this week</h2>
+<table class="ports">
+  <tr><th>Port</th><th>Status</th><th>What to do</th><th>Detail</th></tr>
+  {% for region, label in [('uk', 'United Kingdom'), ('north_europe', 'North Europe')] %}
+  <tr class="group"><td colspan="4">{{ label }}</td></tr>
   {% for p in port_board if p.region == region %}
-  <div class="card s-{{ p.status }}">
-    <div class="card-head"><span class="pname">{{ p.name }}</span><span class="status s-{{ p.status }}">{{ p.status|status_icon }} {{ p.status_label }}</span></div>
-    <p class="action">{{ ed.port_notes.get(p.id) or p.actions|join(' ') }}</p>
-    <p class="data">
-      {% set c = p.congestion %}
-      {% if c and c.occupancy_pct is not none %}Berth occupancy {{ c.occupancy_pct|num(0) }}%{% if c.occupancy_gap_vs_mean_pct is not none %} ({{ c.occupancy_gap_vs_mean_pct|signed }} pp vs normal){% endif %}{% if c.time_in_port_median_h is not none %} · median {{ c.time_in_port_median_h|num(0) }} h in port{% endif %}{% else %}Congestion data unavailable{% endif %}
-      {% if p.windows %} · Weather: {{ p.windows[0].label }}{% else %} · No crane or pilotage limits forecast{% endif %}
-    </p>
-  </div>
+  <tr>
+    <td class="port">{{ p.name }}</td>
+    <td class="status"><span class="sq" style="background: {{ status_colours[p.status] }}"></span>{{ p.status_label }}</td>
+    <td>{{ ed.port_notes.get(p.id) or p.actions|join(' ') }}</td>
+    <td class="detail small">
+      {%- if p.windows %}{{ 'Windy spell' if p.windows|length == 1 else 'Windy spells' }}:{% for w in p.windows[:3] %}<br>{{ w.short or w.label }}{% if w.peak_gust %}, {{ w.peak_gust|num(0) }} m/s{% endif %}{% endfor %}{% if p.windows|length > 3 %}<br>and {{ p.windows|length - 3 }} more{% endif %}<br>{% endif %}
+      {%- set c = p.congestion %}
+      {%- if c and c.occupancy_pct is not none %}Berths {{ c.occupancy_pct|num(0) }}% occupied{% if c.occupancy_gap_vs_mean_pct is not none %}, {{ c.occupancy_gap_vs_mean_pct|signed }} points on normal{% endif %}.{% if c.time_in_port_median_h is not none %} Median stay {{ c.time_in_port_median_h|num(0) }} hours.{% endif %}
+      {%- elif not p.windows %}No crane or pilotage limits forecast.{% endif %}
+    </td>
+  </tr>
   {% endfor %}
+  {% endfor %}
+</table>
+<p class="small" style="margin-top:2mm">
+  {% if congestion_missing %}Congestion figures were not available for this issue, so each status reflects weather forecasts and port news only. {% endif %}
+  Weather times are UK local time. Buffers follow the Port Brief playbook and assume normal carrier free time.
+</p>
+
+<!-- Weather -->
+<h2>Weather on the routes into Europe</h2>
+<p>{{ ed.inbound_note }}</p>
+
+<figure>
+  {{ world_map_svg|safe }}
+  <figcaption>{% if inbound_outside %}Circled: sea areas where the forecast for the next six days is rough enough to slow ships heading for Europe (amber: possible delay; red: delay likely).{% else %}No sea area on the main routes into Europe is forecast to be rough enough to delay ships in the next six days.{% endif %}{% if storms_near %} Rings mark tropical storms near a shipping lane.{% endif %} The box shows the area of the ports map.</figcaption>
+</figure>
+
+<div class="two">
+  <figure>
+    <div class="fig-title">North European ports</div>
+    {{ europe_map_svg|safe }}
+    <figcaption>Ports coloured by this week's status: {% for k, label in [('normal', 'running normally'), ('watch', 'watch'), ('congested', 'congested'), ('disruption', 'disruption likely')] %}<span style="white-space:nowrap"><span class="sq" style="background: {{ status_colours[k] }}"></span>{{ label }}</span>{{ ', ' if not loop.last else '.' }} {% endfor %}</figcaption>
+  </figure>
+  <div>
+    <div class="fig-title">Expected delays on the way in</div>
+    {% if inbound %}
+    <table>
+      <tr><th>Sea area</th><th>When</th><th>Delay</th></tr>
+      {% for i in inbound %}
+      <tr>
+        <td><strong>{{ i.name }}</strong><br><span class="small">{{ i.trades|sentence }}{% if i.storm %}. {{ i.storm }}{% endif %}</span></td>
+        <td class="small" style="white-space:nowrap">{{ i.from_day|day }}{% if i.to_day and i.to_day != i.from_day %} to {{ i.to_day|day }}{% endif %}</td>
+        <td class="small" style="white-space:nowrap">{{ i.delay|sentence }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <p class="small">None this week.</p>
+    {% endif %}
+    {% if drift %}
+    <div class="fig-title" style="margin-top:4mm">Forecast changes since the last issue</div>
+    <table>
+      <tr><th>Where</th><th>Day</th><th>Gusts, m/s</th><th>Sea, m</th></tr>
+      {% for d in drift %}
+      <tr><td>{{ d.name }}</td><td class="small">{{ d.date|day }}</td>
+        <td class="num small">{{ d.gust_prev|num(0) }} to {{ d.gust_now|num(0) }}</td>
+        <td class="num small">{{ d.hs_prev|num(1) }} to {{ d.hs_now|num(1) }}</td></tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </div>
 </div>
-{% endfor %}
-<div class="legend">{% for k in ['normal', 'watch', 'congested', 'disruption'] %}<span class="sw s-{{ k }}"></span>{{ k|status_icon }} {{ status_labels[k] }} {% endfor %}
-  · Weather windows in UK time. Congestion vs normal: Sinay berth occupancy compared with that port's usual level.</div>
 
-<!-- ========================= PORTS ========================= -->
-<div class="page-break"></div>
-<h2><span class="kicker">Ports · six-day weather outlook</span>Crane and pilotage conditions</h2>
-<p>{{ ed.sections.ports }}</p>
-
-<div class="panel">
-<table class="strip">
-  <tr><th>Port</th>{% for d in day_keys %}<th class="day">{{ d|short_day }}<br><span class="mono">{{ d[8:] }}</span></th>{% endfor %}<th>Occupancy</th></tr>
+<h3>Six-day forecast at the ports</h3>
+<table class="grid">
+  <tr><th>Peak gusts (m/s) and sea (m)</th>{% for d in day_keys %}<th>{{ d|short_day }} {{ d[8:]|int }}</th>{% endfor %}</tr>
   {% for a in ports %}
   <tr>
-    <td class="name">{{ a.name }}</td>
-    {% for d in a.days %}
-    <td class="cell {{ d.level }}">{% if d.level != 'none' %}<b>{{ d.level|glyph }}</b>{% endif %}{{ d.gust_max|num(0) }} · {{ d.hs_max|num(1) }}</td>
-    {% endfor %}
-    {% set c = congestion.get(a.id) %}
-    <td class="num">{% if c and c.occupancy_pct is not none %}{{ c.occupancy_pct|num(0) }}%{% if c.occupancy_gap_vs_mean_pct is not none %} <span class="muted">({{ c.occupancy_gap_vs_mean_pct|num(0) }})</span>{% endif %}{% else %}<span class="muted">n/a</span>{% endif %}</td>
+    <td>{{ a.name }}</td>
+    {% for d in a.days %}<td class="num {{ d.level }}">{{ d.gust_max|num(0) }} / {{ d.hs_max|num(1) }}</td>{% endfor %}
   </tr>
   {% endfor %}
 </table>
-<div class="legend">Cells: peak gust m/s · peak sea m (UTC days).
-  <span class="sw" style="background:#fab219"></span>▲ Watch
-  <span class="sw" style="background:#d03b3b"></span>◆ Likely
-  — crane stoppages from gusts ≥ {{ port_t.crane_watch_gust|num(0) }} / {{ port_t.crane_likely_gust|num(0) }} m/s; pilot boarding from sea ≥ {{ port_t.pilot_watch_hs }} / {{ port_t.pilot_likely_hs }} m or long-period swell.
-  Occupancy: Sinay berth occupancy (gap vs port's usual level, pp).</div>
+<p class="small" style="margin-top:1.5mm">Shaded amber where gusts reach {{ port_t.crane_watch_gust|num(0) }} m/s or seas reach {{ port_t.pilot_watch_hs }} m, when crane work or pilot boarding may pause; red from {{ port_t.crane_likely_gust|num(0) }} m/s or {{ port_t.pilot_likely_hs }} m, when it usually stops. Days run midnight to midnight UTC.</p>
+
+<!-- Reliability -->
+<h2>Schedule reliability</h2>
+<div class="cols"><p>{{ ed.sections.reliability }}</p></div>
+
+<div class="two">
+  <figure>
+    <div class="fig-title">Share of ships arriving on time, worldwide</div>
+    {% if trend_svg %}{{ trend_svg|safe }}{% else %}<p class="small">Not available this issue.</p>{% endif %}
+  </figure>
+  <figure>
+    <div class="fig-title">The same carriers, measured two ways{% if dv and dv.period %}, {{ dv.period|period }}{% endif %}</div>
+    {% if dumbbell_svg %}{{ dumbbell_svg|safe }}{% else %}<p class="small">Not available this issue.</p>{% endif %}
+  </figure>
 </div>
 
-<!-- ========================= LANES ========================= -->
-<h2><span class="kicker">On the way in · lanes &amp; chokepoints</span>Weather that could delay your arrivals</h2>
-<p>{{ ed.inbound_note }}</p>
-{% if inbound %}
-<div class="panel">
-  <table>
-    <tr><th>Risk</th><th>Lane</th><th>Affects</th><th>When</th><th>Expected delay</th></tr>
-    {% for i in inbound %}
-    <tr>
-      <td><span class="chip {{ i.level }}">{{ i.level|glyph }} {{ i.level }}</span></td>
-      <td class="name">{{ i.name }}</td>
-      <td>{{ i.trades }}{% if i.storm %}<br><span class="muted">{{ i.storm }}</span>{% endif %}</td>
-      <td style="white-space:nowrap">{{ i.from_day|day }}{% if i.to_day and i.to_day != i.from_day %} – {{ i.to_day|day }}{% endif %}</td>
-      <td style="white-space:nowrap"><strong>{{ i.delay }}</strong></td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-{% endif %}
-<p>{{ ed.sections.lanes }}</p>
-<div class="panel">
-<table class="strip">
-  <tr><th>Lane</th>{% for d in day_keys %}<th class="day">{{ d|short_day }}<br><span class="mono">{{ d[8:] }}</span></th>{% endfor %}</tr>
-  {% for a in lanes %}
-  <tr>
-    <td class="name">{{ a.name }}</td>
-    {% for d in a.days %}
-    <td class="cell {{ d.level }}">{% if d.level != 'none' %}<b>{{ d.level|glyph }}</b>{% endif %}{{ d.hs_max|num(1) }} · {{ d.wind_max|num(0) }}</td>
-    {% endfor %}
-  </tr>
+<table class="compact">
+  <tr><th>Carrier</th><th>Sea-Intelligence{% if si %}, {{ si.period|period }}{% endif %}</th><th>Xeneta{% if xe %}, {{ xe.period|period }}{% endif %}</th><th>Difference, points</th></tr>
+  {% set xe_rows = dv.carriers if dv and dv.comparable else [] %}
+  {% for c in (si.carriers if si else []) %}
+    {% set m = (xe_rows|selectattr('carrier', 'equalto', c.carrier)|list) %}
+    <tr><td>{{ c.carrier }}</td><td class="num">{{ c.pct|num(1) }}%</td>
+      {% if m %}<td class="num">{{ m[0].xeneta_pct|num(0) }}%</td><td class="num">{{ m[0].gap_pp|signed }}</td>{% else %}<td class="small">Not ranked</td><td></td>{% endif %}</tr>
   {% endfor %}
 </table>
-<div class="legend">Cells: peak sea m · peak wind m/s.
-  <span class="sw" style="background:#fab219"></span>▲ Watch (sea ≥ {{ lane_t.lane_watch_hs|num(0) }} m or gale)
-  <span class="sw" style="background:#d03b3b"></span>◆ Likely (sea ≥ {{ lane_t.lane_likely_hs|num(0) }} m or severe gale). Agulhas also flags south-west swell against the current.</div>
+<div class="small" style="margin-top:2mm">
+  {% if si %}<p>Sea-Intelligence counts an arrival as on time if it is within one day of schedule (34 trade lanes, 60+ carriers).{% if si.avg_delay_late_days %} Late ships arrived {{ si.avg_delay_late_days }} days behind schedule on average.{% endif %}{% if si.stale_since %} The latest release could not be reached, so these are the last published figures.{% endif %}</p>{% endif %}
+  {% if xe %}<p>Xeneta counts only arrivals on the scheduled day.{% if xe.carrier_count_note %} {{ xe.carrier_count_note }}{% endif %}</p>{% endif %}
 </div>
 
-<div class="cols">
-  <div class="panel">
-    <h3>Forecast drift since the last run</h3>
-    {% if drift %}
-    <table>
-      <tr><th>Where</th><th>Day</th><th>Gust</th><th>Sea</th></tr>
-      {% for d in drift %}
-      <tr><td class="name">{{ d.name }}</td><td>{{ d.date|day }}</td>
-        <td class="num">{{ d.gust_prev|num(0) }}→{{ d.gust_now|num(0) }}</td>
-        <td class="num">{{ d.hs_prev|num(1) }}→{{ d.hs_now|num(1) }}</td></tr>
-      {% endfor %}
-    </table>
-    {% else %}<p class="muted">No material change versus the previous forecast{% if not drift %} (or no previous run to compare){% endif %}.</p>{% endif %}
-  </div>
-  <div class="panel">
-    <h3>Tropical cyclones</h3>
-    {% if storms %}
-    <table>
-      <tr><th>Storm</th><th>Strength</th><th>Nearest tracked</th></tr>
-      {% for s in storms[:5] %}
-      <tr><td class="name">{{ s.name }}</td><td>{{ s.severity or s.alert_level }}</td>
-        <td>{% if s.nearby %}{{ by_id[s.nearby[0].id].name }} · {{ s.nearby[0].distance_km }} km{% else %}<span class="muted">none within 1,200 km</span>{% endif %}</td></tr>
-      {% endfor %}
-    </table>
-    {% else %}<p class="muted">No active tropical cyclones.</p>{% endif %}
-  </div>
-</div>
-
-<!-- ========================= RELIABILITY ========================= -->
-<h2 style="margin-top:6mm"><span class="kicker">Schedule reliability · monthly, ~4–6 weeks lagged</span>Two benchmarks, two definitions of on time</h2>
-<p>{{ ed.sections.reliability }}</p>
-
-<div class="cols">
-  <div class="panel chart">
-    <h3>Global on-time share</h3>
-    {% if trend_svg %}{{ trend_svg|safe }}{% else %}<p class="muted">Unavailable.</p>{% endif %}
-  </div>
-  <div class="panel chart">
-    <h3>Carriers: same month, two methods</h3>
-    {% if dumbbell_svg %}{{ dumbbell_svg|safe }}{% else %}<p class="muted">Unavailable.</p>{% endif %}
-  </div>
-</div>
-
-<div class="panel">
-  <table class="compact">
-    <tr><th>Carrier</th><th>Sea-Intelligence{% if si %} {{ si.period|period }}{% endif %}</th><th>Rank</th><th>Xeneta{% if xe %} {{ xe.period|period }}{% endif %}</th><th>Rank</th><th>Gap</th></tr>
-    {% set xe_rows = dv.carriers if dv and dv.comparable else [] %}
-    {% for c in (si.carriers if si else []) %}
-      {% set m = (xe_rows|selectattr('carrier', 'equalto', c.carrier)|list) %}
-      <tr><td class="name">{{ c.carrier }}</td><td class="num">{{ c.pct|num(1) }}%</td><td class="num">{{ c.rank }}</td>
-        {% if m %}<td class="num">{{ m[0].xeneta_pct|num(0) }}%</td><td class="num">{{ m[0].xeneta_rank }}</td><td class="num">{{ m[0].gap_pp|pp }}</td>
-        {% else %}<td class="muted">–</td><td></td><td></td>{% endif %}</tr>
-    {% endfor %}
-  </table>
-  <div class="fine" style="margin-top:2mm">
-    {% if si %}<p><strong>Sea-Intelligence</strong>: {{ si.methodology }}{% if si.avg_delay_late_days %} Average delay for late arrivals {{ si.avg_delay_late_days }} days.{% endif %}{% if si.stale_since %} <em>Latest release not reachable; showing last published figures.</em>{% endif %}</p>{% endif %}
-    {% if xe %}<p><strong>Xeneta</strong>: {{ xe.methodology }}{% if xe.carrier_count_note %} {{ xe.carrier_count_note }}{% endif %}</p>{% endif %}
-    {% if dv and dv.comparable %}<p>Gap = Sea-Intelligence minus Xeneta, percentage points. {{ dv.note }}</p>{% elif dv %}<p>{{ dv.note }}</p>{% endif %}
-  </div>
-</div>
-
-<!-- ========================= ADVISORIES ========================= -->
-<h2 style="margin-top:6mm"><span class="kicker">Port &amp; carrier notices · past seven days</span>Advisories</h2>
+<!-- Notices -->
+<h2>Notices from ports and carriers</h2>
 <p>{{ ed.sections.advisories }}</p>
-{% for kind, label in [('port', 'Ports'), ('carrier', 'Carriers')] %}
-<div class="panel adv-panel">
-  <h3>{{ label }}</h3>
-  {% set groups = adv_groups|selectattr('kind', 'equalto', kind)|list %}
-  {% if groups %}
-  <ul class="adv">
-    {% for g in groups %}{% for i in g['items'] %}
-    <li>{% if i.is_new %}<span class="new">NEW</span>{% endif %}<a href="{{ i.url }}">{{ i.title }}</a>
-      <span class="muted"> · {{ g.name }} · {{ i.published or '' }} · {{ i.via.replace('Google News / ', '') if i.via != 'direct' else 'official site' }}</span></li>
-    {% endfor %}{% endfor %}
-  </ul>
-  {% else %}<p class="muted">Nothing operational this week.</p>{% endif %}
+<div class="cols notices">
+  {% for g in adv_groups %}
+  <div class="pub">{{ g.name }}</div>
+  {% for i in g['items'] %}
+  <div class="item"><a href="{{ i.url }}">{{ i.title }}</a>
+    <span class="small src">{{ i.via.replace('Google News / ', '') if i.via != 'direct' else 'Official notice' }}{% if i.published %}, {{ i.published|day }}{% endif %}{% if i.is_new %}. New since the last issue{% endif %}</span></div>
+  {% endfor %}
+  {% else %}
+  <p class="small">No operational notices this week.</p>
+  {% endfor %}
 </div>
-{% endfor %}
 
-<div class="panel fine">
-  <h3>Sources, method &amp; data health</h3>
-  <p>Weather is treated as a leading indicator: flags mark days when forecast wind or sea state reach levels at which crane work or pilot boarding is commonly suspended, or heavy weather slows transits. They are probabilistic signals, not port notices; always confirm with your terminal or carrier.</p>
-  <p>{% for a in attributions %}{{ a.rstrip(".") }}.{% if not loop.last %} {% endif %}{% endfor %}</p>
-  <p>Data health this run: {% for name, h in health.items() %}{{ name.replace('_', ' ') }} <strong>{{ h.status }}</strong>{% if not loop.last %} · {% endif %}{% endfor %}.</p>
+<div class="footnotes small">
+  <p><strong>How to read this brief.</strong> Weather flags are forecasts, not port notices: they mark the hours when wind or sea is likely to reach the levels at which terminals usually pause crane work or pilots stop boarding. Always confirm with your terminal or carrier before changing plans.</p>
+  <p><strong>Sources.</strong> {% for a in attributions %}{{ a.rstrip('.') }}.{% if not loop.last %} {% endif %}{% endfor %} Maps use Natural Earth data.</p>
+  <p><strong>Data this issue.</strong> {% for name, h in health.items() %}{{ health_names.get(name, name) }}: {{ health_words.get(h.status, h.status) }}{% if not loop.last %}; {% endif %}{% endfor %}.</p>
 </div>
 
 </body>

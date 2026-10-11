@@ -79,6 +79,13 @@ The readers are small importer teams, so every port gets a status and an action:
 - If congestion data is unavailable, the PDF shows one notice above the board, so don't repeat it in every note. Never imply congestion is normal ("no weather disruption forecast", not "no delays").
 
 House style:
+- Write like a trade-paper reporter: plain declarative sentences of varied length. The headline states the
+  news in sentence case (who or where, what happens, when), for example "Wind threatens London Gateway on Friday".
+- `validate` rejects these machine-writing tics, so avoid them from the start: em dashes; "it's not X, it's Y";
+  "not just X but Y"; "no X, no Y, just Z"; rhetorical questions; exclamation marks; stock words
+  (delve, landscape, navigate, seamless, robust, pivotal, crucial, unprecedented, testament, underscore,
+  "in today's", "it's worth noting").
+- No scene-setting openers ("As the week begins..."), no lists of three for rhythm, no summing-up last line.
 - British English, plain and practical. Write for someone booking or tracking boxes today, not for analysts.
 - Weather is a **forecast signal**, not an event. Say "likely", never "will close".
 - UK gateways first (Felixstowe, Southampton, London Gateway, Liverpool), then Rotterdam, Antwerp, Bremerhaven and Hamburg.
@@ -106,7 +113,7 @@ python -m port_brief render --date $ISSUE
 python -m pytest -q
 ```
 
-Look at `drafts/$ISSUE/preview.png`, and render the other pages if needed
+Look at `drafts/$ISSUE/preview.png` and the maps on page 2, and render the other pages if needed
 (`python -c "import pypdfium2 as p; ..."`). Check for overflowing text, empty sections and
 anything that reads wrong. Fix it and re-render.
 

@@ -28,6 +28,7 @@ from port_brief.sources.base import Context, SourceResult, http_get
 SI_BASE = "https://www.sea-intelligence.com"
 SI_PRESS_ROOM = f"{SI_BASE}/press-room"
 XENETA_RSS = "https://www.xeneta.com/blog/rss.xml"
+XENETA_BLOG = "https://www.xeneta.com/blog"
 
 ATTRIBUTION = "Schedule reliability: Sea-Intelligence Global Liner Performance report; Xeneta Schedule Reliability Scorecard"
 
@@ -155,7 +156,13 @@ def fetch_xeneta(ctx: Context) -> dict:
     feed = feedparser.parse(http_get(ctx, "schedule_reliability", XENETA_RSS).text)
     post = next((e for e in feed.entries if "schedule-reliability-scorecard" in e.link), None)
     if post is None:
-        raise ValueError("no Schedule Reliability Scorecard post in Xeneta RSS")
+        # The RSS only carries recent posts; the blog index keeps the scorecard linked for longer.
+        soup = BeautifulSoup(http_get(ctx, "schedule_reliability", XENETA_BLOG).text, "lxml")
+        link = next((a["href"] for a in soup.find_all("a", href=True) if "schedule-reliability-scorecard" in a["href"]), None)
+        if link is None:
+            raise ValueError("no Schedule Reliability Scorecard post in Xeneta RSS or blog index")
+        title = link.rstrip("/").rsplit("/", 1)[-1].replace("-", " ")
+        post = feedparser.FeedParserDict(link=link, title=title)
     period = xeneta_period(post.title)
     if not period:
         raise ValueError(f"cannot read period from title {post.title!r}")

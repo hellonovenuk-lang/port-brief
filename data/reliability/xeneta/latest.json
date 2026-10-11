@@ -2,9 +2,9 @@
   "source": "Xeneta",
   "methodology": "Share of vessel arrivals on the scheduled day (eeSea data); Xeneta Ocean Benchmark.",
   "period": "2026-08",
-  "release_title": "Xeneta Schedule Reliability Scorecard - August 2026",
+  "release_title": "xeneta schedule reliability scorecard august 2026",
   "release_url": "https://www.xeneta.com/blog/xeneta-schedule-reliability-scorecard-august-2026",
-  "published": "Thu, 17 Sep 2026 06:59:04 GMT",
+  "published": null,
   "images": {
     "global-reliability": "data/reliability/xeneta/2026-08/global-reliability.png",
     "carrier-rankings": "data/reliability/xeneta/2026-08/carrier-rankings.png"

@@ -10,10 +10,13 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from port_brief.config import playbook as pb
 from port_brief.config.locations import BY_ID, LANE_THRESHOLDS, LOCATIONS, PORT_THRESHOLDS
 from port_brief.editorial.schema import CAUSE_TEXT, day_label
-from port_brief.render import charts
+from port_brief.render import charts, worldmap
 
 TEMPLATES = Path(__file__).parent / "templates"
-LEVEL_GLYPH = {"watch": "▲", "likely": "◆", "none": ""}
+HEALTH_NAMES = {"marine_weather": "weather", "cyclones": "tropical storms", "sinay_congestion": "congestion",
+                "schedule_reliability": "schedule reliability", "advisories": "notices"}
+HEALTH_WORDS = {"ok": "complete", "partial": "partly available", "failed": "unavailable",
+                "skipped": "not connected", "stale": "last published figures"}
 UNCURATED_PER_PUBLISHER = 3
 REGION_ORDER = {"uk": 0, "north_europe": 1, "global": 2}
 
@@ -29,11 +32,10 @@ def _env() -> Environment:
     env = Environment(loader=FileSystemLoader(TEMPLATES), autoescape=select_autoescape(enabled_extensions=("html.j2",), default_for_string=False))
     env.filters["day"] = day_label
     env.filters["short_day"] = lambda d: date.fromisoformat(d).strftime("%a") if d else ""
-    env.filters["glyph"] = lambda lvl: LEVEL_GLYPH.get(lvl, "")
     env.filters["cause"] = lambda c: CAUSE_TEXT.get(c, c)
     env.filters["pp"] = lambda v: "–" if v is None else f"{v:+.1f} pp"
     env.filters["period"] = period_label
-    env.filters["status_icon"] = lambda st: pb.STATUS_ICON.get(st, "")
+    env.filters["sentence"] = lambda t: (t[:1].upper() + t[1:]) if t else t
     env.filters["signed"] = lambda v: "–" if v is None else f"{v:+.0f}"
     env.filters["num"] = lambda v, nd=1: "–" if v is None else f"{v:.{nd}f}"
     return env
@@ -68,6 +70,13 @@ def context(snap: dict, editorial: dict, meta: dict) -> dict:
         "ports_flagged": [p for p in j.get("ports_status", []) if p["status"] != "normal"],
         "inbound": j.get("inbound", []),
         "status_labels": pb.STATUS_LABEL,
+        "status_colours": pb.STATUS_COLOUR,
+        "issue_number": meta.get("issue_number"),
+        "world_map_svg": worldmap.world_map(j.get("inbound", []), j["storms"]),
+        "europe_map_svg": worldmap.north_europe_map(j.get("ports_status", []), j.get("inbound", [])),
+        "inbound_outside": [i for i in j.get("inbound", []) if i["id"] not in worldmap.EUROPE_MAP_LANES],
+        "health_names": HEALTH_NAMES,
+        "health_words": HEALTH_WORDS,
         "congestion_missing": any(p["data_gaps"] for p in j.get("ports_status", [])),
         "ports": ports,
         "lanes": lanes,

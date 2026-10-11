@@ -149,6 +149,14 @@ def window_label(start_utc: datetime, end_utc: datetime) -> str:
     return f"{day(s)} {s:%H:%M} – {day(e)} {e:%H:%M}"
 
 
+def short_window_label(start_utc: datetime, end_utc: datetime) -> str:
+    """'Mon 12:00–21:00' or 'Sat 14:00–Sun 01:00' (UK time) for narrow table columns."""
+    s, e = start_utc.astimezone(UK_TZ), end_utc.astimezone(UK_TZ)
+    if s.date() == e.date():
+        return f"{s:%a %H:%M}–{e:%H:%M}"
+    return f"{s:%a %H:%M}–{e:%a %H:%M}"
+
+
 def exceedance_windows(loc: dict, hourly: dict, now: datetime | None = None) -> list[dict]:
     """Contiguous future hours where a port's operational thresholds are exceeded."""
     times = hourly.get("time") or []
@@ -180,6 +188,7 @@ def exceedance_windows(loc: dict, hourly: dict, now: datetime | None = None) -> 
             "start": w["start"].strftime("%Y-%m-%dT%H:%MZ"),
             "end": end.strftime("%Y-%m-%dT%H:%MZ"),
             "label": window_label(w["start"], end),
+            "short": short_window_label(w["start"], end),
             "hours": len(w["idx"]),
             "level": LEVEL_NAMES[worst(w["flags"])],
             "causes": sorted({f["type"] for f in w["flags"]}),
