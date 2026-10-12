@@ -20,7 +20,7 @@ Samples:
 ```
 Mon & Thu 05:50 UK   Claude Code Routine (scheduled cloud session) follows ROUTINE.md:
                        collect → judge → [read Xeneta image if new] → draft → write editorial → validate → render
-                       → opens PR "Port Brief · <date>: <headline>" with the PDF, a preview and a check list
+                       → opens PR "Port Brief, <date>: <headline>" with the PDF, a preview and a check list
 You                  review the PR on GitHub (or the GitHub mobile app)
                        Merge   = approve → publish.yml deploys the PDF to Netlify and sends via Resend
                        Close   = reject  → nothing is sent

@@ -25,6 +25,7 @@ from datetime import date, datetime, timezone
 import httpx
 
 from port_brief import paths
+from port_brief.render.issue import email_subject
 
 RESEND_API = "https://api.resend.com"
 SITE = paths.ROOT / "site"
@@ -76,7 +77,7 @@ def send_email(issue_date: str) -> None:
     pdf_url = f"{os.environ['PDF_BASE_URL'].rstrip('/')}/{pdf_path_for(d)}"
     html = (d / "email.html").read_text().replace("{{PDF_URL}}", pdf_url)
     text = (d / "email.txt").read_text().replace("{{PDF_URL}}", pdf_url)
-    subject = f"Port Brief · {editorial['headline']}"
+    subject = email_subject(editorial)
     sender = os.environ["RESEND_FROM"]
     mode = os.environ.get("PUBLISH_MODE", "test")
 

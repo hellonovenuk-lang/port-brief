@@ -36,6 +36,10 @@ class SlopError(RuntimeError):
     """A template or editorial change reintroduced a banned pattern (see STYLE.md)."""
 
 
+def email_subject(editorial: dict) -> str:
+    return f"Port Brief: {editorial['headline']}"
+
+
 def period_label(p: str | None) -> str:
     if not p:
         return ""
@@ -173,7 +177,8 @@ def render_issue(d: Path, snap: dict, editorial: dict, meta: dict) -> Path:
     email_html = env.get_template("email.html.j2").render(**ctx)
     email_txt = env.get_template("email.txt.j2").render(**ctx)
     problems = [f"issue: {p}" for p in slop.render_issues(html)] + [f"email: {p}" for p in slop.render_issues(email_html)] \
-        + [f"email text: {p}" for p in slop.render_issues(email_txt)]
+        + [f"email text: {p}" for p in slop.render_issues(email_txt)] \
+        + [f"subject: {p}" for p in slop.render_issues(email_subject(editorial))]
     if problems:
         raise SlopError("Rendered issue breaks STYLE.md:\n  " + "\n  ".join(problems))
     pdf_path = d / f"port-brief-{editorial['issue_date']}.pdf"

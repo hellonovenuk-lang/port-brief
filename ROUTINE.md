@@ -128,7 +128,7 @@ git commit -m "Port Brief $ISSUE"
 git push -u origin issue/$ISSUE
 ```
 
-Open a PR from `issue/$ISSUE` into `main`, titled **`Port Brief · <Weekday D Month YYYY>: <headline>`**.
+Open a PR from `issue/$ISSUE` into `main`, titled **`Port Brief, <Weekday D Month YYYY>: <headline>`**.
 Write the body in this order:
 
 1. The page-1 preview: `![Page 1](https://github.com/<owner>/<repo>/blob/issue/$ISSUE/drafts/$ISSUE/preview.png?raw=true)`,

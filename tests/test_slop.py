@@ -58,3 +58,10 @@ def test_hatch_patterns_are_allowed():
 @pytest.mark.parametrize("path", sorted(SAMPLES.glob("*/email.html")) + sorted(SAMPLES.glob("*/email.txt")))
 def test_committed_samples_are_clean(path):
     assert slop.render_issues(path.read_text()) == []
+
+
+def test_email_subject_is_clean():
+    from port_brief.render.issue import email_subject
+    subject = email_subject({"headline": "Wind threatens London Gateway on Friday"})
+    assert subject == "Port Brief: Wind threatens London Gateway on Friday"
+    assert slop.render_issues(subject) == []
