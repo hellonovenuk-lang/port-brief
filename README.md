@@ -12,7 +12,7 @@ arriving in the next 2 weeks."* The brief also covers weather on the routes in (
 schedule reliability, and port and carrier advisories.
 
 Samples:
-- [`samples/2026-10-11/`](samples/2026-10-11/): a real issue from live data.
+- [`samples/2026-10-12/`](samples/2026-10-12/): a real issue from live data.
 - [`samples/illustration/`](samples/illustration/): synthetic inputs showing every port status.
 
 ## How it runs
@@ -39,6 +39,7 @@ You                  review the PR on GitHub (or the GitHub mobile app)
 | Source | What | Access | Cadence | Failure mode |
 |---|---|---|---|---|
 | Open-Meteo Marine + Forecast | Wave, swell, wind-wave height, swell period/direction, current, wind, gusts. 8 ports + 14 lanes, 7 days hourly | No key | Every run | `partial`/`failed`; issue shows no weather |
+| Open-Meteo Marine (storm field) | Daily peak wave height on a 3–4° grid of about 1,200 sea points along the routes into Europe | No key | Every run | No shading on the map; the key still lists flagged lanes |
 | GDACS | Active tropical cyclones, distance to each port/lane | No key | Every run | Cyclone panel empty |
 | Sinay Congestion API v1 | Berth occupancy %, gap vs the port's mean, time in port, vessels in port. One batch call for all 8 ports | `SINAY_API_KEY` | Every run | `skipped` (no key) or `failed`; column shows n/a |
 | Sea-Intelligence GLP | Global reliability series + top-13 carriers, parsed from the `.xlsx` attached to each press release | No key | Monthly, ~4 weeks lag | Last good month reused, marked stale |
@@ -62,10 +63,21 @@ The layout avoids the common tells of machine-made design: dark dashboards, stat
 coloured edges, pill badges, uppercase eyebrow labels, gradients and glyph icons.
 
 - **Page 1** leads with the ports table: status, what to do, and when.
-- **Page 2** has two maps drawn from Natural Earth data:
-  - A world map marking only the sea areas forecast to delay ships heading for Europe.
-  - A North European ports map coloured by status.
-- **Calm places are left off the maps**, so a quiet week shows an empty map and says so.
+- **Page 2** has the weather maps. They carry no words apart from small numbers:
+  - **World map** of the routes into Europe: the Atlantic, Mediterranean, Cape, Indian Ocean and Asia. The empty Pacific is cropped out.
+  - **Storm field**: rough seas are shaded where they are actually forecast, from a grid of about 1,200 sea points (Open-Meteo marine, 8 requests per run). The six-day peak sea height sets the severity:
+
+    | Severity | Peak seas | Colour | Pattern | Expected delay |
+    |---|---|---|---|---|
+    | Rough | 4 m+ | amber | plain | up to 1 day |
+    | Severe | 6 m+ | orange | dotted | 1–2 days |
+    | Extreme | 8 m+ | red | hatched | 2 days or more |
+
+    The patterns keep the steps distinct when printed in black and white.
+  - **Named areas**: each rough area is assigned to its nearest named sea area (the tracked lanes plus a small gazetteer in `judgement/storm_areas.py`). It gets a number on the map and a row in the key table (name, routes affected, severity, days, peak seas, expected delay).
+  - **Off-route areas** say "only if routed through it" rather than a delay.
+  - **North European ports map**: the 8 ports coloured by status, with the same shading and numbers.
+- **Calm areas are not shaded or named.** A quiet week shows a clear map and says so.
 
 The writing is checked as well as the numbers. `validate` rejects em dashes, "it's not X, it's Y",
 rhetorical questions and similar machine-writing tics (`STYLE_RULES` in `editorial/schema.py`).
@@ -137,7 +149,7 @@ These are starting heuristics, not published standards. They're set in
 |---|---|---|---|
 | Crane (ports) | gust ≥ 15 m/s or wind ≥ 13 m/s | gust ≥ 20 m/s or wind ≥ 17 m/s | STS cranes typically stop around 20 m/s at boom height; 10 m model winds under-read that, so gusts lead |
 | Pilot boarding (ports) | sea ≥ 2.5 m, or swell ≥ 1.5 m at ≥ 10 s | sea ≥ 3.5 m, or swell ≥ 2.5 m at ≥ 12 s | Boarding is suspended in heavy sea or long-period swell |
-| Heavy weather (lanes) | sea ≥ 4 m or wind ≥ 17.2 m/s (F8) | sea ≥ 6 m or wind ≥ 20.8 m/s (F9) | Speed loss and routing |
+| Heavy weather (lanes) | sea ≥ 4 m or wind ≥ 17.2 m/s (F8) | sea ≥ 6 m or wind ≥ 20.8 m/s (F9); **extreme** from 8 m or 24.5 m/s (F10) | Speed loss and routing |
 | Agulhas | SW swell (200–260°) with sea ≥ 4 m | …and running against the current | Abnormal-wave risk |
 | Cyclone | within 1,200 km | within 500 km | GDACS current position |
 

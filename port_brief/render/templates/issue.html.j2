@@ -81,6 +81,13 @@ table.grid td.likely { background: #f6dcd8; font-weight: 700; }
 .notices .item .src { display: block; }
 .footnotes { margin-top: 6mm; border-top: 0.4pt solid #b9b8ae; padding-top: 2mm; }
 .footnotes p { margin-bottom: 1.4mm; }
+table.key td.n, table.key th.n { width: 8mm; }
+.disc { display: inline-block; width: 4.2mm; height: 4.2mm; line-height: 4.2mm; border-radius: 50%; border: 0.6pt solid #111; text-align: center; font-family: "PBSans", sans-serif; font-weight: 700; font-size: 7pt; }
+.swatch { display: inline-block; width: 5mm; height: 2.6mm; margin: 0 1.2mm 0 1.6mm; vertical-align: -0.2mm; opacity: 0.85; }
+.swatch.sev-likely { background-image: radial-gradient(#4a2e0c 0.35pt, transparent 0.5pt); background-size: 1.1mm 1.1mm; }
+.swatch.sev-extreme { background-image: repeating-linear-gradient(45deg, #4a2e0c 0 0.3pt, transparent 0.3pt 1.1mm); }
+ul.drift { list-style: none; padding: 0; margin: 0; font-family: "PBSans", sans-serif; font-size: 8pt; line-height: 1.35; }
+ul.drift li { padding: 1.2mm 0; border-bottom: 0.4pt solid #d8d7d0; }
 </style>
 </head>
 <body>
@@ -129,41 +136,45 @@ table.grid td.likely { background: #f6dcd8; font-weight: 700; }
 
 <figure>
   {{ world_map_svg|safe }}
-  <figcaption>{% if inbound_outside %}Circled: sea areas where the forecast for the next six days is rough enough to slow ships heading for Europe (amber: possible delay; red: delay likely).{% else %}No sea area on the main routes into Europe is forecast to be rough enough to delay ships in the next six days.{% endif %}{% if storms_near %} Rings mark tropical storms near a shipping lane.{% endif %} The box shows the area of the ports map.</figcaption>
+  <figcaption class="legend-line">Highest seas over the next six days:
+    {% for k in ['watch', 'likely', 'extreme'] %}<span style="white-space:nowrap"><span class="swatch sev-{{ k }}" style="background-color: {{ severity_colours[k] }}"></span>{{ severity_labels[k] }} {{ severity_sea[k]|num(0) }} m+</span>{{ ',' if not loop.last else '.' }} {% endfor %}
+    Numbers refer to the table below. The box is the ports map.{% if not field_ok %} Sea-state shading was not available for this issue.{% endif %}</figcaption>
 </figure>
 
-<div class="two">
+{% if key_items %}
+<table class="key">
+  <tr><th class="n">No.</th><th>Sea area</th><th>Severity</th><th>When</th><th>Peak seas</th><th>Expected delay</th></tr>
+  {% for i in key_items %}
+  <tr>
+    <td class="n"><span class="disc">{{ i.n }}</span></td>
+    <td><strong>{{ i.name }}</strong><br><span class="small">{{ i.trades|sentence }}</span></td>
+    <td class="small" style="white-space:nowrap"><span class="sq" style="background: {{ severity_colours[i.level] }}"></span>{{ i.severity }}</td>
+    <td class="small" style="white-space:nowrap">{% if i.from_day %}{{ i.from_day|day }}{% if i.to_day and i.to_day != i.from_day %} to {{ i.to_day|day }}{% endif %}{% else %}Now{% endif %}</td>
+    <td class="small num">{% if i.peak_sea %}{{ i.peak_sea|num(1) }} m{% endif %}</td>
+    <td class="small" style="white-space:nowrap">{{ i.delay|sentence }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="small">No sea area on the main routes into Europe is forecast to be rough enough to delay ships in the next six days.</p>
+{% endif %}
+
+<div class="two" style="margin-top:4mm">
   <figure>
     <div class="fig-title">North European ports</div>
     {{ europe_map_svg|safe }}
     <figcaption>Ports coloured by this week's status: {% for k, label in [('normal', 'running normally'), ('watch', 'watch'), ('congested', 'congested'), ('disruption', 'disruption likely')] %}<span style="white-space:nowrap"><span class="sq" style="background: {{ status_colours[k] }}"></span>{{ label }}</span>{{ ', ' if not loop.last else '.' }} {% endfor %}</figcaption>
   </figure>
   <div>
-    <div class="fig-title">Expected delays on the way in</div>
-    {% if inbound %}
-    <table>
-      <tr><th>Sea area</th><th>When</th><th>Delay</th></tr>
-      {% for i in inbound %}
-      <tr>
-        <td><strong>{{ i.name }}</strong><br><span class="small">{{ i.trades|sentence }}{% if i.storm %}. {{ i.storm }}{% endif %}</span></td>
-        <td class="small" style="white-space:nowrap">{{ i.from_day|day }}{% if i.to_day and i.to_day != i.from_day %} to {{ i.to_day|day }}{% endif %}</td>
-        <td class="small" style="white-space:nowrap">{{ i.delay|sentence }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-    {% else %}
-    <p class="small">None this week.</p>
-    {% endif %}
+    <div class="fig-title">Forecast changes since the last issue</div>
     {% if drift %}
-    <div class="fig-title" style="margin-top:4mm">Forecast changes since the last issue</div>
-    <table>
-      <tr><th>Where</th><th>Day</th><th>Gusts, m/s</th><th>Sea, m</th></tr>
+    <ul class="drift">
       {% for d in drift %}
-      <tr><td>{{ d.name }}</td><td class="small">{{ d.date|day }}</td>
-        <td class="num small">{{ d.gust_prev|num(0) }} to {{ d.gust_now|num(0) }}</td>
-        <td class="num small">{{ d.hs_prev|num(1) }} to {{ d.hs_now|num(1) }}</td></tr>
+      <li><strong>{{ d.name }}</strong>, {{ d.date|day }}: {% if d.gust_delta and d.gust_delta|abs >= 3 %}gusts {{ d.gust_prev|num(0) }} to {{ d.gust_now|num(0) }} m/s{% endif %}{% if d.gust_delta and d.gust_delta|abs >= 3 and d.hs_delta and d.hs_delta|abs >= 1 %}, {% endif %}{% if d.hs_delta and d.hs_delta|abs >= 1 %}seas {{ d.hs_prev|num(1) }} to {{ d.hs_now|num(1) }} m{% endif %}</li>
       {% endfor %}
-    </table>
+    </ul>
+    {% else %}
+    <p class="small">No material change in the forecasts since the last issue.</p>
     {% endif %}
   </div>
 </div>

@@ -4,13 +4,14 @@
   "headline": "Felixstowe congested as wind threatens London Gateway on Wednesday",
   "standfirst": "Disruption likely: London Gateway and Hamburg. Congested: Felixstowe and Bremerhaven. Watch: Liverpool and Rotterdam. Rough seas in the Bay of Biscay may delay Asia, Mediterranean and West Africa services into the UK by 1–2 days. Reliability: Sea-Intelligence 49.9%, Xeneta 29%.",
   "watchlist_notes": {
-    "mid_north_atlantic": "Likely risk of heavy weather Wed 14 Oct (sea 6.26 m, wind 20.9 m/s). Trend: deteriorating.",
-    "london_gateway": "Watch risk of crane stoppages Fri 16 Oct (gusts 18.8 m/s, wind 14.4 m/s). Trend: deteriorating.",
-    "antwerp": "Watch risk of crane stoppages Fri 16 Oct (gusts 16.3 m/s, wind 11.8 m/s). Trend: deteriorating.",
-    "felixstowe": "Watch risk of crane stoppages Fri 16 Oct (gusts 15.0 m/s, wind 9.9 m/s). Trend: stable.",
-    "southampton": "Watch risk of crane stoppages Fri 16 Oct (gusts 16.1 m/s, wind 12.1 m/s). Trend: stable.",
-    "bremerhaven": "Watch risk of crane stoppages Sun 11 Oct (gusts 17.9 m/s, wind 12.8 m/s). Trend: improving.",
-    "hamburg": "Watch risk of crane stoppages Sun 11 Oct (gusts 18.0 m/s, wind 10.6 m/s). Trend: improving."
+    "liverpool": "Likely risk of crane stoppages Tue 13 Oct (gusts 22.4 m/s, wind 15.9 m/s). Trend: improving.",
+    "mid_north_atlantic": "Likely risk of heavy weather Thu 15 Oct (sea 4.62 m, wind 8.2 m/s). Trend: improving.",
+    "felixstowe": "Watch risk of crane stoppages Mon 12 Oct (gusts 15.2 m/s, wind 11.3 m/s). Trend: improving.",
+    "southampton": "Watch risk of crane stoppages Mon 12 Oct (gusts 16.0 m/s, wind 11.8 m/s). Trend: improving.",
+    "rotterdam": "Watch risk of crane stoppages Sat 17 Oct (gusts 18.0 m/s, wind 8.4 m/s). Trend: stable.",
+    "antwerp": "Watch risk of crane stoppages Fri 16 Oct (gusts 19.3 m/s, wind 13.8 m/s). Trend: stable.",
+    "bremerhaven": "Watch risk of crane stoppages Sat 17 Oct (gusts 17.8 m/s, wind 13.3 m/s). Trend: stable.",
+    "hamburg": "Watch risk of crane stoppages Sat 17 Oct (gusts 17.8 m/s, wind 13.2 m/s). Trend: stable."
   },
   "port_notes": {
     "felixstowe": "Berths are 13 points busier than normal. Add 2–3 days to inland plans for containers arriving in the next 2 weeks, pre-book haulage and check your free time.",
@@ -25,7 +26,7 @@
   "inbound_note": "Two storms matter for European arrivals. Biscay turns severe on Wednesday and Thursday, so services from Asia, the Mediterranean and West Africa into the UK are likely to run 1–2 days late. Ships rounding the Cape on Friday may lose up to 1 day. Don't book haulage against the published ETA.",
   "sections": {
     "ports": "Felixstowe: congested. London Gateway: disruption likely. Liverpool: watch. Rotterdam: watch. Bremerhaven: congested. Hamburg: disruption likely. 2 of 8 ports are running normally.",
-    "lanes": "Lanes with flagged days: Mid-North Atlantic (Wed 14 Oct).",
+    "lanes": "Lanes with flagged days: Mid-North Atlantic (Thu 15 Oct).",
     "reliability": "Sea-Intelligence puts global schedule reliability at 49.9% for August 2026, 5.9 points down on the month before. Xeneta measures 29% for August 2026. The two benchmarks sit 20.9 points apart because they define on time differently. Use them as two views of the same trend.",
     "advisories": "Operational notices from the past week from the ports and carriers we follow. Items marked NEW did not appear in a previous issue."
   }

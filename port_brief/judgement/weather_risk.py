@@ -13,10 +13,10 @@ from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from port_brief import paths
-from port_brief.judgement import port_status
+from port_brief.judgement import port_status, storm_areas
 from port_brief.config.locations import AGULHAS, BY_ID, LOCATIONS, RELEVANCE, thresholds_for
 
-LEVELS = {"none": 0, "watch": 1, "likely": 2}
+LEVELS = {"none": 0, "watch": 1, "likely": 2, "extreme": 3}  # extreme is used for lanes only
 LEVEL_NAMES = {v: k for k, v in LEVELS.items()}
 DAYS = 7
 DRIFT_GUST_MS = 3.0
@@ -109,7 +109,9 @@ def day_flags(loc: dict, day: dict) -> list[dict]:
             flags.append({"type": "pilot", "level": "watch", "reason": f"sea {hs} m, swell {swell} m @ {period} s"})
     else:
         hs, wind = day["hs_max"], day["wind_max"]
-        if _ge(hs, t["lane_likely_hs"]) or _ge(wind, t["lane_likely_wind"]):
+        if _ge(hs, t["lane_extreme_hs"]) or _ge(wind, t["lane_extreme_wind"]):
+            flags.append({"type": "heavy_weather", "level": "extreme", "reason": f"sea {hs} m, wind {wind} m/s"})
+        elif _ge(hs, t["lane_likely_hs"]) or _ge(wind, t["lane_likely_wind"]):
             flags.append({"type": "heavy_weather", "level": "likely", "reason": f"sea {hs} m, wind {wind} m/s"})
         elif _ge(hs, t["lane_watch_hs"]) or _ge(wind, t["lane_watch_wind"]):
             flags.append({"type": "heavy_weather", "level": "watch", "reason": f"sea {hs} m, wind {wind} m/s"})
@@ -347,6 +349,7 @@ def judge(snapshot: dict) -> dict:
         "congestion": congestion,
         "ports_status": port_status.ports_status(snapshot, assessments, congestion),
         "inbound": port_status.inbound(assessments),
+        "storm_areas": storm_areas.storm_areas(((snapshot["sources"].get("storm_field") or {}).get("data") or {}).get("points") or []),
         "storms": storms,
         "forecast_issued": snapshot["generated_at"],
     }

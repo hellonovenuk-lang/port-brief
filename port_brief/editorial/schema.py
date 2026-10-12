@@ -49,7 +49,7 @@ def allowed_numbers(snapshot: dict, issue_date: str) -> list[float]:
     for pub in snapshot["sources"].get("advisories", {}).get("data", {}).get("publishers", {}).values():
         _numbers_in([i["title"] for i in pub["items"]], vals)
     _numbers_in([PORT_THRESHOLDS, LANE_THRESHOLDS], vals)
-    _numbers_in([pb.BUFFER, pb.INBOUND_DELAY, pb.CONGESTED_GAP_PP, pb.BUSY_GAP_PP, pb.CONGESTED_TIME_IN_PORT_PCT], vals)
+    _numbers_in([pb.BUFFER, pb.INBOUND_DELAY, pb.SEVERITY_SEA_M, pb.CONGESTED_GAP_PP, pb.BUSY_GAP_PP, pb.CONGESTED_TIME_IN_PORT_PCT], vals)
     _numbers_in(issue_date, vals)
     return sorted({abs(v) for v in vals})
 

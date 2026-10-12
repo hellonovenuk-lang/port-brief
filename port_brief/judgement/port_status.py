@@ -129,11 +129,11 @@ def inbound(assessments: dict) -> list[dict]:
         a = assessments.get(loc["id"])
         if loc["kind"] != "lane" or not a:
             continue
-        levels = [d["level"] for d in a["days"]]
-        worst = "likely" if "likely" in levels else "watch" if "watch" in levels else "none"
-        if worst == "none" and not a["storm_flags"]:
+        rank = {"none": 0, "watch": 1, "likely": 2, "extreme": 3}
+        levels = [d["level"] for d in a["days"]] + [f["level"] for f in a["storm_flags"]]
+        worst = max(levels, key=rank.get, default="none")
+        if worst == "none":
             continue
-        worst = "likely" if any(f["level"] == "likely" for f in a["storm_flags"]) else (worst if worst != "none" else "watch")
         flagged_days = [d for d in a["days"] if d["level"] != "none"]
         delay = pb.INBOUND_DELAY[worst]
         out.append({
@@ -141,6 +141,7 @@ def inbound(assessments: dict) -> list[dict]:
             "name": loc["name"],
             "trades": loc.get("inbound_trades", ""),
             "level": worst,
+            "severity": pb.SEVERITY_LABEL[worst],
             "from_day": flagged_days[0]["date"] if flagged_days else None,
             "to_day": flagged_days[-1]["date"] if flagged_days else None,
             "peak_sea": max((d["hs_max"] or 0 for d in flagged_days), default=None),
@@ -150,5 +151,5 @@ def inbound(assessments: dict) -> list[dict]:
             "action": f"Expect {loc.get('inbound_trades', 'affected services')} to run {delay} late. "
                       "Don't book haulage against the published ETA; confirm the revised ETA with your carrier.",
         })
-    order = {"likely": 0, "watch": 1}
+    order = {"extreme": 0, "likely": 1, "watch": 2}
     return sorted(out, key=lambda x: (order[x["level"]], BY_ID[x["id"]]["region"] != "uk"))

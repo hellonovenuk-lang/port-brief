@@ -1,8 +1,9 @@
 """Two static maps for the weather section.
 
-World map: only lanes forecast to slow ships, plus storms near tracked locations, are marked.
-North Europe map: the eight ports coloured by this week's status, plus any flagged nearby lane.
-Calm places are deliberately left off; an empty map is the message on a quiet week.
+World map: the storm field (six-day peak seas, shaded only where Rough or worse) with a small
+number on each flagged sea area or nearby tropical storm. No other words go on the map; the
+numbers key into the table printed beneath it.
+North Europe map: the eight ports coloured by this week's status, plus the same field and numbers.
 
 Land is Natural Earth (public domain) via world-atlas TopoJSON, decoded here so no GIS
 libraries are needed.
@@ -24,7 +25,6 @@ from matplotlib.patches import Polygon, Rectangle  # noqa: E402
 
 from port_brief.config import playbook as pb  # noqa: E402
 from port_brief.config.locations import BY_ID  # noqa: E402
-from port_brief.editorial.schema import day_label  # noqa: E402
 from port_brief.render import charts  # noqa: E402  (registers fonts and the light theme)
 
 GEO = Path(__file__).parent / "geo"
@@ -32,9 +32,8 @@ LAND = "#e4e3dc"
 COAST = "#b9b8ae"
 INK = charts.INK
 MUTED = charts.MUTED
-LEVEL_COLOUR = {"watch": pb.STATUS_COLOUR["watch"], "likely": pb.STATUS_COLOUR["disruption"]}
 
-WORLD_EXTENT = (-180, 180, -50, 72)
+WORLD_EXTENT = (-100, 150, -46, 68)  # every route into Europe; the empty Pacific is left out
 NORTH_EUROPE_EXTENT = (-8.5, 11, 48.6, 56.3)
 
 
@@ -115,60 +114,109 @@ def _svg(fig) -> str:
     return svg[svg.index("<svg"):]
 
 
-def _label(ax, x, y, title, sub, extent, colour=INK):
-    x0, x1, _, _ = extent
-    near_europe = -25 < x < 30 and y > 30  # keep labels off the ports-map box
-    right = x < x1 - (x1 - x0) * 0.22 and not near_europe
-    ax.annotate(f"{title}\n{sub}" if sub else title, (x, y), textcoords="offset points",
-                xytext=(7 if right else -7, 0), ha="left" if right else "right", va="center",
-                fontsize=7, color=colour, linespacing=1.15, zorder=6)
+# GDACS storm wording to our three-step severity.
+STORM_LEVEL = [("hurricane", "extreme"), ("typhoon", "extreme"), ("cyclone", "extreme"),
+               ("storm", "likely"), ("depression", "watch")]
 
 
-def world_map(inbound: list[dict], storms: list[dict]) -> str:
-    fig, ax = plt.subplots(figsize=(6.9, 2.75))
-    _base(ax, WORLD_EXTENT, "110m")
-    x0, x1, y0, y1 = NORTH_EUROPE_EXTENT
-    ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, edgecolor=INK, linewidth=0.8, zorder=4))
+def key_items(areas: list[dict], inbound: list[dict], storms: list[dict]) -> list[dict]:
+    """One numbered list shared by both maps and the key table, most severe first.
 
-    for item in inbound:
-        loc = BY_ID[item["id"]]
-        if x0 <= loc["lon"] <= x1 and y0 <= loc["lat"] <= y1:
-            continue  # shown on the North Europe map
-        colour = LEVEL_COLOUR[item["level"]]
-        ax.scatter([loc["lon"]], [loc["lat"]], s=150 if item["level"] == "likely" else 90, color=colour,
-                   alpha=0.35, edgecolor=colour, linewidth=1, zorder=5)
-        ax.scatter([loc["lon"]], [loc["lat"]], s=10, color=colour, zorder=6)
-        when = day_label(item["from_day"]) if item.get("from_day") else ""
-        _label(ax, loc["lon"], loc["lat"], item["name"], f"{when}, {item['delay']} late".strip(", "), WORLD_EXTENT)
-
+    Every rough area in the storm field gets a row; tracked lanes flagged for wind alone, and
+    tropical storms near a route, are added when no area already covers them."""
+    rank = {"watch": 1, "likely": 2, "extreme": 3}
+    items = [{**a, "kind": "sea"} for a in areas]
+    by_id = {i["id"]: i for i in items}
+    for lane in inbound:
+        if lane["id"] in by_id:
+            area = by_id[lane["id"]]
+            if rank[lane["level"]] > rank[area["level"]]:
+                area.update(level=lane["level"], severity=lane["severity"], delay=lane["delay"])
+            continue
+        loc = BY_ID[lane["id"]]
+        items.append({**lane, "lon": loc["lon"], "lat": loc["lat"], "kind": "sea"})
     for s in storms:
         if not s.get("nearby"):
             continue
-        ax.scatter([s["lon"]], [s["lat"]], s=70, facecolor="none", edgecolor=pb.STATUS_COLOUR["disruption"], linewidth=1.2, zorder=5)
-        _label(ax, s["lon"], s["lat"], s["name"], s.get("severity") or "", WORLD_EXTENT)
+        sev = (s.get("severity") or "").lower()
+        level = next((lvl for word, lvl in STORM_LEVEL if word in sev), "watch")
+        near = BY_ID[s["nearby"][0]["id"]]
+        items.append({"id": f"storm-{s.get('event_id')}", "name": f"Tropical storm {s['name']}", "kind": "storm",
+                      "lon": s["lon"], "lat": s["lat"], "level": level, "severity": pb.SEVERITY_LABEL[level],
+                      "from_day": None, "to_day": None, "peak_sea": None, "delay": pb.INBOUND_DELAY[level],
+                      "trades": f"{s.get('severity') or 'Tropical storm'}, {s['nearby'][0]['distance_km']} km from {near['name']}"})
+    order = {"extreme": 0, "likely": 1, "watch": 2}
+    items.sort(key=lambda x: order[x["level"]])
+    for n, item in enumerate(items, start=1):
+        item["n"] = n
+    return items
+
+
+def _storm_field(ax, field: list[list], extent):
+    """Shade the six-day peak sea height where it reaches the Rough threshold or more."""
+    if not field or len(field) < 10:
+        return
+    import numpy as np
+    from matplotlib.tri import Triangulation
+
+    xs = np.array([p[0] for p in field], dtype=float)
+    ys = np.array([p[1] for p in field], dtype=float)
+    zs = np.array([p[2] for p in field], dtype=float)
+    tri = Triangulation(xs, ys)
+    # Don't bridge gaps between corridors or across continents.
+    t = tri.triangles
+    edge = np.maximum.reduce([np.hypot(xs[t[:, a]] - xs[t[:, b]], ys[t[:, a]] - ys[t[:, b]]) for a, b in ((0, 1), (1, 2), (2, 0))])
+    tri.set_mask(edge > 6.5)
+    levels = [pb.SEVERITY_SEA_M["watch"], pb.SEVERITY_SEA_M["likely"], pb.SEVERITY_SEA_M["extreme"], 40]
+    steps = ["watch", "likely", "extreme"]
+    plt.rcParams["hatch.color"] = "#4a2e0c"
+    plt.rcParams["hatch.linewidth"] = 0.35
+    ax.tricontourf(tri, zs, levels=levels, colors=[pb.SEVERITY_COLOUR[k] for k in steps],
+                   hatches=[pb.SEVERITY_HATCH[k] for k in steps], alpha=0.8, zorder=0.5, antialiased=True)
+
+
+def _marker(ax, x, y, n):
+    ax.scatter([x], [y], s=52, color="white", edgecolor=INK, linewidth=0.7, zorder=7)
+    ax.text(x, y, str(n), ha="center", va="center_baseline", fontsize=5.6, fontweight="bold", color=INK, zorder=8)
+
+
+def world_map(items: list[dict], field: list[list]) -> str:
+    fig, ax = plt.subplots(figsize=(6.9, 3.4))
+    _base(ax, WORLD_EXTENT, "110m")
+    _storm_field(ax, field, WORLD_EXTENT)
+    x0, x1, y0, y1 = NORTH_EUROPE_EXTENT
+    ax.add_patch(Rectangle((x0, y0), x1 - x0, y1 - y0, fill=False, edgecolor=INK, linewidth=0.7, zorder=4))
+    placed: list[tuple[float, float]] = []
+    for item in items:
+        if item["lon"] is None:
+            continue  # the "other rough areas" row has no single position
+        if x0 <= item["lon"] <= x1 and y0 <= item["lat"] <= y1:
+            continue  # numbered on the North Europe map
+        x, y = item["lon"], item["lat"]
+        # Nudge a marker that would sit on top of one already placed.
+        for _ in range(6):
+            if all(abs(x - px) > 4.5 or abs(y - py) > 3.5 for px, py in placed):
+                break
+            y -= 4
+        placed.append((x, y))
+        _marker(ax, x, y, item["n"])
     return _svg(fig)
 
 
-def north_europe_map(ports_status: list[dict], inbound: list[dict]) -> str:
+def north_europe_map(ports_status: list[dict], items: list[dict], field: list[list]) -> str:
     fig, ax = plt.subplots(figsize=(3.4, 2.9))
     _base(ax, NORTH_EUROPE_EXTENT, "50m")
+    _storm_field(ax, field, NORTH_EUROPE_EXTENT)
     x0, x1, y0, y1 = NORTH_EUROPE_EXTENT
-    for item in inbound:
-        loc = BY_ID[item["id"]]
-        if not (x0 <= loc["lon"] <= x1 and y0 <= loc["lat"] <= y1):
-            continue
-        colour = LEVEL_COLOUR[item["level"]]
-        ax.scatter([loc["lon"]], [loc["lat"]], s=300, color=colour, alpha=0.25, edgecolor=colour, linewidth=1, zorder=3)
-        low = loc["lat"] < y0 + 1.5
-        ax.annotate(f"{item['name']}, {day_label(item['from_day'])}", (loc["lon"], loc["lat"]), textcoords="offset points",
-                    xytext=(4 if low else 0, 11 if low else -13), ha="left" if low else "center", va="bottom" if low else "top",
-                    fontsize=6.3, color=INK, style="italic", zorder=6)
+    for item in items:
+        if item["lon"] is not None and x0 <= item["lon"] <= x1 and y0 <= item["lat"] <= y1:
+            _marker(ax, item["lon"], item["lat"], item["n"])
     for p in ports_status:
         lon, lat = PORT_MAP_COORDS[p["id"]]
-        loc = {"lon": lon, "lat": lat}
-        ax.scatter([loc["lon"]], [loc["lat"]], s=22, color=pb.STATUS_COLOUR[p["status"]], edgecolor="white", linewidth=0.8, zorder=5)
-        ax.annotate(p["name"], (loc["lon"], loc["lat"]), textcoords="offset points", xytext=PORT_LABEL_OFFSET.get(p["id"], (5, 2)),
-                    fontsize=6.8, color=INK, zorder=6, ha="right" if PORT_LABEL_OFFSET.get(p["id"], (5, 2))[0] < 0 else "left")
+        off = PORT_LABEL_OFFSET.get(p["id"], (5, 2))
+        ax.scatter([lon], [lat], s=22, color=pb.STATUS_COLOUR[p["status"]], edgecolor="white", linewidth=0.8, zorder=5)
+        ax.annotate(p["name"], (lon, lat), textcoords="offset points", xytext=off,
+                    fontsize=6.8, color=INK, zorder=6, ha="right" if off[0] < 0 else "left")
     return _svg(fig)
 
 

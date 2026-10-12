@@ -58,7 +58,7 @@ Read `drafts/$ISSUE/facts.md` in full, then overwrite `drafts/$ISSUE/editorial.j
   "headline": "≤ 90 chars: the most important port action this week",
   "standfirst": "≤ 340 chars: the two or three things a UK importer must do this week",
   "port_notes": { "<port id>": "≤ 260 chars, one for EVERY port in facts.md" },
-  "inbound_note": "≤ 600 chars: which arrivals may run late, by how much, and what to do",
+  "inbound_note": "at most 2 sentences: the worst sea areas from facts.md by name and severity word (Rough, Severe, Extreme), which arrivals run late and by how much",
   "sections": {
     "ports": "≤ 1100 chars", "lanes": "≤ 1100 chars",
     "reliability": "≤ 1100 chars", "advisories": "≤ 1100 chars"
@@ -87,6 +87,7 @@ House style:
   "in today's", "it's worth noting").
 - No scene-setting openers ("As the week begins..."), no lists of three for rhythm, no summing-up last line.
 - British English, plain and practical. Write for someone booking or tracking boxes today, not for analysts.
+- The weather map carries no words. The numbered key beneath it comes from the data, so the inbound note only picks out what matters most for UK importers.
 - Weather is a **forecast signal**, not an event. Say "likely", never "will close".
 - UK gateways first (Felixstowe, Southampton, London Gateway, Liverpool), then Rotterdam, Antwerp, Bremerhaven and Hamburg.
 - Reliability: always give Sea-Intelligence and Xeneta **separately with their periods**. Their gap is the story:

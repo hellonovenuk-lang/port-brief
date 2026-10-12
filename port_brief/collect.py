@@ -6,11 +6,12 @@ import json
 from pathlib import Path
 
 from port_brief import paths
-from port_brief.sources import advisories, cyclones, marine_weather, schedule_reliability, sinay_congestion
+from port_brief.sources import advisories, cyclones, marine_weather, schedule_reliability, sinay_congestion, storm_field
 from port_brief.sources.base import Context, iso, run_source
 
 SOURCES = {
     "marine_weather": marine_weather.fetch,
+    "storm_field": storm_field.fetch,
     "cyclones": cyclones.fetch,
     "sinay_congestion": sinay_congestion.fetch,
     "schedule_reliability": schedule_reliability.fetch,

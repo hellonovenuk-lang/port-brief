@@ -54,6 +54,12 @@ def facts_markdown(snap: dict, issue_date: str) -> str:
                      + (f" Storm: {i['storm']}." if i.get("storm") else ""))
     if not j.get("inbound"):
         lines.append("- none flagged")
+    lines += ["", "## Rough sea areas on the map (numbered in this order; severity Rough 4 m+, Severe 6 m+, Extreme 8 m+)", ""]
+    for n, a in enumerate(j.get("storm_areas", []), start=1):
+        lines.append(f"- ({n}) {a['name']}: {a['severity']}, peak seas {a['peak_sea']} m on {schema.day_label(a['peak_day'])}, "
+                     f"{schema.day_label(a['from_day'])} to {schema.day_label(a['to_day'])}; affects {a['trades']}; delay {a['delay']}.")
+    if not j.get("storm_areas"):
+        lines.append("- none")
     lines += ["", "## Playbook buffers you may quote", "",
               f"- {pb.BUFFER}", f"- inbound delays: {pb.INBOUND_DELAY}", "",
               "## Watchlist (ranked)", ""]

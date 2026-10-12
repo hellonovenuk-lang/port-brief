@@ -30,7 +30,17 @@ BUFFER = {
 }
 
 # Inbound lane delay estimates by weather level.
-INBOUND_DELAY = {"watch": "up to 1 day", "likely": "1–2 days"}
+INBOUND_DELAY = {"watch": "up to 1 day", "likely": "1–2 days", "extreme": "2 days or more"}
+
+# Rough areas away from the main lanes: only ships routed through them are affected.
+OFF_ROUTE_DELAY = "only if routed through it"
+
+# Sea-area severity on the weather map and in the delays key. Each step also has a hatch so the
+# map separates them when printed in black and white.
+SEVERITY_LABEL = {"watch": "Rough", "likely": "Severe", "extreme": "Extreme"}
+SEVERITY_SEA_M = {"watch": 4.0, "likely": 6.0, "extreme": 8.0}
+SEVERITY_COLOUR = {"watch": "#d9a441", "likely": "#d9762b", "extreme": "#b3261e"}
+SEVERITY_HATCH = {"watch": None, "likely": "....", "extreme": "////"}
 
 # Port headlines that change the status on their own (matched case-insensitively).
 DISRUPTION_KEYWORDS = ["strike", "industrial action", "walkout", "closure", "closed", "shut", "cyber", "outage", "suspend"]

@@ -31,6 +31,8 @@ LANE_THRESHOLDS = {
     "lane_likely_hs": 6.0,
     "lane_watch_wind": 17.2,  # Beaufort 8
     "lane_likely_wind": 20.8,  # Beaufort 9
+    "lane_extreme_hs": 8.0,
+    "lane_extreme_wind": 24.5,  # Beaufort 10
 }
 
 # Agulhas: swell from the south-west running against the south-west-flowing current

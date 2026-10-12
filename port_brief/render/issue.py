@@ -21,6 +21,15 @@ UNCURATED_PER_PUBLISHER = 3
 REGION_ORDER = {"uk": 0, "north_europe": 1, "global": 2}
 
 
+PORT_IDS = {loc["id"] for loc in LOCATIONS if loc["kind"] == "port"}
+
+
+def _crosses_limit(d: dict) -> bool:
+    """A lane forecast change only matters if it moves the sea state across the Rough line."""
+    rough = pb.SEVERITY_SEA_M["watch"]
+    return d.get("hs_prev") is not None and d.get("hs_now") is not None and (d["hs_prev"] >= rough) != (d["hs_now"] >= rough)
+
+
 def period_label(p: str | None) -> str:
     if not p:
         return ""
@@ -60,6 +69,12 @@ def context(snap: dict, editorial: dict, meta: dict) -> dict:
 
     si, xe, dv = rel.get("sea_intelligence"), rel.get("xeneta"), rel.get("divergence")
     issue = date.fromisoformat(editorial["issue_date"])
+    key = worldmap.key_items(j.get("storm_areas", []), j.get("inbound", []), j["storms"])
+    field = ((snap["sources"].get("storm_field") or {}).get("data") or {}).get("points") or []
+    # Shade only cells that belong to an area in the key, so every splodge on the map has a number.
+    keyed = {tuple(m) for a in j.get("storm_areas", []) for m in a.get("members", [])}
+    below_rough = pb.SEVERITY_SEA_M["watch"] - 0.1
+    field = [p if (p[0], p[1]) in keyed else [p[0], p[1], min(p[2], below_rough), p[3]] for p in field]
     return {
         "ed": editorial,
         "meta": meta,
@@ -72,9 +87,13 @@ def context(snap: dict, editorial: dict, meta: dict) -> dict:
         "status_labels": pb.STATUS_LABEL,
         "status_colours": pb.STATUS_COLOUR,
         "issue_number": meta.get("issue_number"),
-        "world_map_svg": worldmap.world_map(j.get("inbound", []), j["storms"]),
-        "europe_map_svg": worldmap.north_europe_map(j.get("ports_status", []), j.get("inbound", [])),
-        "inbound_outside": [i for i in j.get("inbound", []) if i["id"] not in worldmap.EUROPE_MAP_LANES],
+        "world_map_svg": worldmap.world_map(key, field),
+        "europe_map_svg": worldmap.north_europe_map(j.get("ports_status", []), key, field),
+        "key_items": key,
+        "field_ok": bool(field),
+        "severity_labels": pb.SEVERITY_LABEL,
+        "severity_colours": pb.SEVERITY_COLOUR,
+        "severity_sea": pb.SEVERITY_SEA_M,
         "health_names": HEALTH_NAMES,
         "health_words": HEALTH_WORDS,
         "congestion_missing": any(p["data_gaps"] for p in j.get("ports_status", [])),
@@ -82,7 +101,7 @@ def context(snap: dict, editorial: dict, meta: dict) -> dict:
         "lanes": lanes,
         "day_keys": day_keys,
         "congestion": j.get("congestion") or {},
-        "drift": j["forecast_drift"][:6],
+        "drift": [d for d in j["forecast_drift"] if d["id"] in PORT_IDS or _crosses_limit(d)][:5],
         "storms": sorted(j["storms"], key=lambda s: (not s.get("nearby"), s["nearby"][0]["distance_km"] if s.get("nearby") else 0)),
         "storms_near": [s for s in j["storms"] if s.get("nearby")],
         "by_id": BY_ID,
