@@ -1,16 +1,21 @@
-PORT BRIEF
+Port Brief
 {% if issue_number %}Issue {{ issue_number }}, {% endif %}{{ issue_long }}
 
 {{ ed.headline }}
 
-1  PORT HEALTH CHECK
+{{ ed.summary.ports|full_stop }} {{ ed.summary.weather|full_stop }} {{ ed.summary.news|full_stop }}
+
+Port health
+-----------
 {% for p in port_rows %}- {{ p.name }} [{{ p.status_label }}]: {{ p.note }}
 {% endfor %}{% if congestion_missing %}(Congestion data is not yet connected; statuses reflect weather and port news only.)
 {% endif %}
-2  WEATHER ON THE WAY IN
+Weather on the way in
+---------------------
 {% for r in routes %}- {{ r.name }}: {{ r.delay|sentence }}
 {% endfor %}
-3  NEWS AND NOTICES
+News and notices
+----------------
 {% for i in (notices_ports + notices_lines)[:6] %}- [{{ i.tag_label }}] {{ i.title }}
 {% endfor %}
 Open the full brief (PDF): {{ '{{PDF_URL}}' }}

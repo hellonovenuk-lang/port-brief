@@ -1,19 +1,23 @@
-PORT BRIEF
+Port Brief
 Issue 12, Sunday 11 October 2026
 
 Felixstowe congested as wind threatens London Gateway on Wednesday
 
-1  PORT HEALTH CHECK
-- Felixstowe [Congested]: Berths 13 points over normal: add 2–3 days to inland plans for the next 2 weeks
-- Southampton [Running normally]: No delays expected: book release and delivery now
-- London Gateway [Disruption likely]: Cranes likely stopped Wed 11:00–20:00: warn your haulier, allow 24–48 hours
-- Liverpool [Watch]: Gusty Thu morning: avoid tight Thursday cut-offs
-- Rotterdam [Watch]: Busier than usual: avoid tight feeder connections
-- Antwerp [Running normally]: No delays expected: book release and delivery now
-- Bremerhaven [Congested]: Ships staying 36% longer: add 2–3 days for the next 2 weeks
-- Hamburg [Disruption likely]: Strike reported for Monday: check terminal notices, allow 24–48 hours
+Felixstowe and Bremerhaven are congested, and wind threatens London Gateway on Wednesday. Severe seas in Biscay put Asia and West Africa services 1 to 2 days late. A strike is reported at Hamburg for Monday.
 
-2  WEATHER ON THE WAY IN
+Port health
+-----------
+- Felixstowe [Congested]: Berths are 13 points over normal. Add 2–3 days to inland plans for the next 2 weeks.
+- Southampton [Running normally]: No delays expected. Book release and delivery now.
+- London Gateway [Disruption likely]: Cranes likely stop Wed 11:00–20:00. Warn your haulier and allow 24–48 hours.
+- Liverpool [Watch]: Gusty on Thursday morning. Avoid tight Thursday cut-offs.
+- Rotterdam [Watch]: Berths are busier than usual. Avoid tight feeder connections.
+- Antwerp [Running normally]: No delays expected. Book release and delivery now.
+- Bremerhaven [Congested]: Ships are staying 36% longer than usual. Add 2–3 days for the next 2 weeks.
+- Hamburg [Disruption likely]: A strike is reported for Monday. Check terminal notices and allow 24–48 hours.
+
+Weather on the way in
+---------------------
 - Asia via the Cape: 1–2 days
 - Asia via Suez: 1–2 days
 - US East Coast and Canada: 1–2 days
@@ -22,7 +26,8 @@ Felixstowe congested as wind threatens London Gateway on Wednesday
 - West Africa: 1–2 days
 - North Sea feeders: Up to 1 day
 
-3  NEWS AND NOTICES
+News and notices
+----------------
 - [Other] Smart berths: What West African ports can learn from Rotterdam
 - [Surcharge] Maersk raises U.S. surcharge to USD 215: what it means for Maersk stock
 - [Surcharge] Maersk raises U.S. inland fuel surcharge to USD 215: stock pre-market at EUR 3,335.50

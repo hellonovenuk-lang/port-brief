@@ -1,20 +1,24 @@
-PORT BRIEF
+Port Brief
 Issue 1, Monday 12 October 2026
 
-Liverpool cranes likely stopped on Tuesday as Atlantic storms slow arrivals
+Liverpool cranes likely to stop on Tuesday as Atlantic storms slow arrivals
 
-1  PORT HEALTH CHECK
-- Felixstowe [Watch]: Gusty Mon 20:00–21:00 only: release and deliver as planned
-- Southampton [Watch]: Gusty Mon and Tue mornings: avoid tight morning cut-offs
-- London Gateway [Running normally]: Clear all week: book release and delivery now
-- Liverpool [Disruption likely]: Cranes likely stopped Tue 10:00–22:00: move collections to Wed, allow 24–48 hours
-- Rotterdam [Watch]: Gusty Tue 16:00–18:00: allow 12–24 hours on feeder connections
-- Antwerp [Watch]: Gusty Tue afternoon and from Fri evening: allow 12–24 hours
-- Bremerhaven [Watch]: Gusty Tue night to Wed 10:00: allow 12–24 hours on Wed calls
-- Hamburg [Watch]: Gusty Tue 12:00–15:00 and Tue night: keep Wed morning flexible
+Gales will likely stop cranes at Liverpool on Tuesday. Six other ports see short gusty spells. Ships from North America face delays of 2 days or more, and Cape-routed Asia services 1 to 2 days. Hapag-Lloyd has suspended bookings to three Philippine ports.
+
+Port health
+-----------
+- Felixstowe [Watch]: A gusty hour on Monday evening, then settled. Release and deliver as planned.
+- Southampton [Watch]: Short gusty spells on Monday and Tuesday mornings. Avoid tight morning cut-offs.
+- London Gateway [Running normally]: Clear all week. Book release and delivery now.
+- Liverpool [Disruption likely]: Cranes likely stop Tue 10:00–22:00. Move collections to Wednesday and allow 24–48 hours.
+- Rotterdam [Watch]: Gusts near crane limits on Tuesday from 16:00 to 18:00. Allow 12–24 hours on feeders.
+- Antwerp [Watch]: Gusty on Tuesday afternoon and from Friday evening. Allow 12–24 hours.
+- Bremerhaven [Watch]: Gusty from Tuesday night to Wednesday 10:00. Allow 12–24 hours on Wednesday calls.
+- Hamburg [Watch]: Gusty on Tuesday afternoon and overnight. Keep Wednesday morning plans flexible.
 (Congestion data is not yet connected; statuses reflect weather and port news only.)
 
-2  WEATHER ON THE WAY IN
+Weather on the way in
+---------------------
 - Asia via the Cape: 1–2 days
 - Asia via Suez: Up to 1 day
 - US East Coast and Canada: 2 days or more
@@ -23,7 +27,8 @@ Liverpool cranes likely stopped on Tuesday as Atlantic storms slow arrivals
 - West Africa: 1–2 days
 - North Sea feeders: No weather delay
 
-3  NEWS AND NOTICES
+News and notices
+----------------
 - [Surcharge] Maersk raises U.S. inland haulage fuel surcharge to USD 215 per container
 - [Service change] MSC and ONE to take over Ipanema service VSA from April 2027
 - [Service change] MSC Restores Direct Karachi Service to Seven European Ports

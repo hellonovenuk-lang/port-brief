@@ -11,6 +11,7 @@ import re
 from datetime import date
 
 from port_brief.config import playbook as pb
+from port_brief.editorial import slop
 from port_brief.config.locations import LANE_THRESHOLDS, PORT_THRESHOLDS
 
 # Short by design: the issue is read at a glance, so every field has a tight limit.
@@ -74,29 +75,9 @@ def unsupported_numbers(text: str, allowed: list[float]) -> list[str]:
     return bad
 
 
-# Writing tics that read as machine-written. Each is a validation error, so the editor rewrites.
-STYLE_RULES = [
-    (re.compile("\u2014"), "em dash: use a full stop, comma or colon"),
-    (re.compile(r"\b(it|this|that)(?:'s| is| was)\s+not\b[^.]{0,80}?[,;:]\s*(it|this|that)(?:'s| is| was)\b", re.I),
-     "'it's not X, it's Y' construction"),
-    (re.compile(r"\bnot (?:just|only|merely)\b[^.]{0,80}?\bbut\b", re.I), "'not just X but Y' construction"),
-    (re.compile(r"\bno [^,.]{1,30}, no [^,.]{1,30}(?:,|\.)\s*just\b", re.I), "'no X, no Y, just Z' construction"),
-    (re.compile(r"\b(?:delve|delves|delving|tapestry|landscape|seamless(?:ly)?|robust|pivotal|crucial|game[- ]changer|"
-                r"unprecedented|navigate|navigating|ever-changing|ever-evolving|testament|underscores?|"
-                r"in today's|it's worth noting|it is worth noting|at the end of the day|rest assured|buckle up)\b", re.I),
-     "stock phrase"),
-    (re.compile(r"\?"), "rhetorical question"),
-    (re.compile(r"!"), "exclamation mark"),
-]
-
-
 def style_issues(text: str) -> list[str]:
-    found = []
-    for rx, why in STYLE_RULES:
-        m = rx.search(text or "")
-        if m:
-            found.append(f"{why} ({m.group(0)[:40]!r})")
-    return found
+    """Writing tics that read as machine-made. Rules live in editorial/slop.py and STYLE.md."""
+    return slop.text_issues(text)
 
 
 def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
@@ -133,6 +114,8 @@ def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
         for url in picks:
             if url not in known:
                 errors.append(f"advisory_picks: unknown url {url[:80]}")
+
+    errors += slop.notes_issues(editorial["port_notes"])
 
     allowed = allowed_numbers(snapshot, issue_date)
     texts = {"headline": editorial["headline"],
@@ -199,18 +182,23 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
     # Summary: one line per part.
     flagged = [(k, by_status[k]) for k in ("disruption", "congested", "watch") if by_status[k]]
     if flagged:
-        ports_line = "; ".join(f"{pb.STATUS_LABEL[k]}: {_join(names)}" for k, names in flagged)
+        worst_status, worst_names = flagged[0]
+        ports_line = f"{pb.STATUS_LABEL[worst_status]} at {_join(worst_names)}."
+        others = sum(len(names) for _, names in flagged[1:])
+        if others:
+            ports_line += f" {others} more port{'s' if others > 1 else ''} to watch."
     else:
-        ports_line = "All eight ports running normally" if not any(p["data_gaps"] for p in statuses) else "No weather disruption at any of the eight ports"
+        ports_line = ("All eight ports are running normally." if not any(p["data_gaps"] for p in statuses)
+                      else "No weather disruption is forecast at any of the eight ports.")
     if worst_route:
-        weather_line = f"{worst_route['name']}: {worst_route['severity'].lower()} seas, {worst_route['delay']}"
+        weather_line = f"{worst_route['severity']} seas put {worst_route['name']} arrivals {worst_route['delay']} late."
         if len(rough_routes) > 1:
-            weather_line += f"; {len(rough_routes) - 1} more route{'s' if len(rough_routes) > 2 else ''} affected"
+            weather_line += f" {len(rough_routes) - 1} more route{'s' if len(rough_routes) > 2 else ''} affected."
     else:
-        weather_line = "No weather delays on the routes into the UK"
+        weather_line = "No weather delays on the routes into the UK."
     adv = snapshot["sources"].get("advisories", {}).get("data", {}).get("publishers", {})
     n_items = sum(len(p["items"]) for p in adv.values())
-    news_line = f"{n_items} notices from ports and shipping lines" if n_items else "No new notices from ports or shipping lines"
+    news_line = f"{n_items} notices from ports and shipping lines this week." if n_items else "No new notices from ports or shipping lines."
 
     if by_status["disruption"]:
         headline = f"Disruption likely at {_join(by_status['disruption'])}"
@@ -233,7 +221,7 @@ def fallback(snapshot: dict, issue_date: str) -> dict:
     if si and si.get("global_pct") is not None:
         rel_txt = f"On time in {_period(si['period'])}: Sea-Intelligence {si['global_pct']}%"
         if xe and xe.get("global_pct") is not None:
-            rel_txt += f", Xeneta {xe['global_pct']}% (stricter measure)"
+            rel_txt += f" and Xeneta {xe['global_pct']}%, which uses a stricter measure"
         rel_txt += "."
 
     return {

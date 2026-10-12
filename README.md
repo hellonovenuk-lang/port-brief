@@ -78,7 +78,7 @@ Each issue runs in three parts, built to be read at a glance:
 
 Calm areas are not shaded or named. A quiet week shows a clear map and all-grey route strips.
 
-The writing is checked as well as the numbers. `validate` rejects em dashes, "it's not X, it's Y",
+**[STYLE.md](STYLE.md) is binding.** Its rules are enforced by `port_brief/editorial/slop.py`: `validate` rejects editorial copy that breaks them, and rendering fails if the finished PDF or email does. The writing is checked as well as the numbers. `validate` rejects em dashes, "it's not X, it's Y",
 rhetorical questions and similar machine-writing tics (`STYLE_RULES` in `editorial/schema.py`).
 
 ## Architecture

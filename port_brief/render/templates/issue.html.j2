@@ -43,18 +43,11 @@ h1 { font-family: "PBSerif", serif; font-size: 19pt; font-weight: 600; line-heig
 .overview { display: table; width: 100%; table-layout: fixed; margin-bottom: 4mm; }
 .overview > div { display: table-cell; vertical-align: top; }
 .overview .lines { width: 47%; padding-right: 5mm; }
-.ov-line { display: table; width: 100%; border-top: 0.5pt solid #d8d7d0; padding: 2mm 0; }
-.ov-line:last-child { border-bottom: 0.5pt solid #d8d7d0; }
-.ov-num { display: table-cell; width: 7mm; font-family: "PBSerif", serif; font-weight: 700; font-size: 15pt; color: #14365c; vertical-align: top; line-height: 1; }
-.ov-body { display: table-cell; }
-.ov-title { font-weight: 700; font-size: 8pt; color: #333; }
-.ov-text { font-family: "PBSerif", serif; font-size: 10.2pt; line-height: 1.3; }
+.lede { font-family: "PBSerif", serif; font-size: 11pt; line-height: 1.42; color: #222; }
 .overview svg { width: 100%; height: auto; display: block; }
 
 /* Part headings */
 h2 { font-family: "PBSerif", serif; font-size: 14pt; font-weight: 700; margin: 4mm 0 2mm; padding-top: 1.5mm; border-top: 1pt solid #111; }
-h2 .part { color: #14365c; margin-right: 2mm; }
-h2 .sub { font-family: "PBSans", sans-serif; font-weight: 400; font-size: 8.4pt; color: #55554f; margin-left: 2mm; }
 
 table { width: 100%; border-collapse: collapse; }
 th { font-weight: 600; font-size: 7.4pt; text-align: left; color: #333; padding: 1mm 1.5mm 1mm 0; border-bottom: 0.6pt solid #111; vertical-align: bottom; }
@@ -70,14 +63,14 @@ tr.group td { font-family: "PBSerif", serif; font-style: italic; color: #55554f;
 .gauge .fill { position: absolute; left: 0; top: 0; bottom: 0; }
 .gauge .tick { position: absolute; top: -0.8mm; bottom: -0.8mm; width: 0.5mm; background: #111; }
 .gauge.empty { background: repeating-linear-gradient(135deg, #e6e5df 0 0.6mm, #f5f4f0 0.6mm 1.4mm); }
-.gauge-label { font-size: 7pt; color: #55554f; margin-top: 0.6mm; white-space: nowrap; }
+.gauge-label { font-size: 6.6pt; line-height: 1.25; color: #55554f; margin-top: 0.6mm; white-space: nowrap; }
 .days { white-space: nowrap; }
 .day { display: inline-block; width: 3.6mm; text-align: center; margin-right: 0.4mm; }
 .day b { display: block; font-size: 5.8pt; color: #6b6b66; font-weight: 600; }
 .day i { display: block; height: 3.6mm; background: #eeeee9; }
 .day i.watch { background: #b7791f; }
 .day i.likely { background: #b3261e; }
-.action { font-family: "PBSerif", serif; font-size: 9pt; line-height: 1.28; }
+.action { font-family: "PBSerif", serif; font-size: 8.8pt; line-height: 1.26; }
 
 /* Routes */
 figure { margin: 0 0 2.5mm; break-inside: avoid; }
@@ -105,7 +98,7 @@ table.key td { padding: 0.9mm 1.5mm 0.9mm 0; font-size: 7.6pt; }
 .two > div + div { padding-left: 6mm; }
 .col-title { font-weight: 700; font-size: 8.6pt; border-bottom: 0.6pt solid #111; padding-bottom: 1mm; margin-bottom: 1mm; }
 .notice { padding: 1.3mm 0; border-bottom: 0.4pt solid #e1e0da; break-inside: avoid; }
-.notice .tag { font-size: 6.8pt; font-weight: 700; white-space: nowrap; margin-right: 1.5mm; }
+.notice .tag { font-size: 7pt; font-weight: 700; white-space: nowrap; margin-right: 1.5mm; color: #333; }
 .notice .head { font-family: "PBSerif", serif; font-size: 8.8pt; line-height: 1.25; }
 .notice .src { display: block; font-size: 6.8pt; color: #6b6b66; margin-top: 0.3mm; }
 .rel { margin-top: 4mm; }
@@ -128,34 +121,30 @@ table.key td { padding: 0.9mm 1.5mm 0.9mm 0; font-size: 7.6pt; }
 <h1>{{ ed.headline }}</h1>
 
 <div class="overview">
-  <div class="lines">
-    {% for n, key, title in [(1, 'ports', 'Port health'), (2, 'weather', 'Weather on the way in'), (3, 'news', 'News and notices')] %}
-    <div class="ov-line"><div class="ov-num">{{ n }}</div><div class="ov-body"><div class="ov-title">{{ title }}</div><div class="ov-text">{{ ed.summary[key] }}</div></div></div>
-    {% endfor %}
-  </div>
+  <div class="lines"><p class="lede">{{ ed.summary.ports|full_stop }} {{ ed.summary.weather|full_stop }} {{ ed.summary.news|full_stop }}</p></div>
   <div>{{ europe_map_svg|safe }}
     <div class="small">{% for k, label in [('normal', 'Running normally'), ('watch', 'Watch'), ('congested', 'Congested'), ('disruption', 'Disruption likely')] %}<span style="white-space:nowrap"><span class="sq" style="background: {{ status_colours[k] }}"></span>{{ label }}</span>&nbsp;&nbsp; {% endfor %}</div>
   </div>
 </div>
 
 <!-- PART 1 -->
-<h2><span class="part">1</span>Port health check<span class="sub">Congestion, the next seven days of weather, and what to do</span></h2>
+<h2>Port health</h2>
 <table>
   <tr><th>Port</th><th>Berth occupancy vs normal</th><th>Crane weather, next 7 days</th><th>What to do</th></tr>
   {% for region, label in [('uk', 'United Kingdom'), ('north_europe', 'North Europe')] %}
   <tr class="group"><td colspan="4">{{ label }}</td></tr>
   {% for p in port_rows if p.region == region %}
   <tr>
-    <td style="width:33mm"><div class="port-name">{{ p.name }}</div><div class="status"><span class="sq" style="background: {{ status_colours[p.status] }}"></span>{{ p.status_label }}</div></td>
-    <td style="width:36mm">
+    <td style="width:29mm"><div class="port-name">{{ p.name }}</div><div class="status"><span class="sq" style="background: {{ status_colours[p.status] }}"></span>{{ p.status_label }}</div></td>
+    <td style="width:37mm">
       {% if p.occ is not none %}
       <div class="gauge"><div class="fill" style="width: {{ [p.occ, 100]|min }}%; background: {{ p.gauge_colour }}"></div>{% if p.normal is not none %}<div class="tick" style="left: {{ [[p.normal, 0]|max, 100]|min }}%"></div>{% endif %}</div>
-      <div class="gauge-label">{{ p.occ|num(0) }}%{% if p.gap is not none %}, {{ p.gap|signed }} on normal{% endif %}{% if p.tip is not none %} · stay {{ p.tip|num(0) }} h{% if p.tip_trend == 'up' %} ↑{% elif p.tip_trend == 'down' %} ↓{% endif %}{% endif %}</div>
+      <div class="gauge-label">{{ p.occ|num(0) }}% full{% if p.gap is not none %}, {{ p.gap|abs|num(0) }} {{ 'over' if p.gap >= 0 else 'under' }} normal{% endif %}{% if p.tip is not none %}<br>Ships stay {{ p.tip|num(0) }} h{% if p.tip_trend == 'up' %}, longer than usual{% elif p.tip_trend == 'down' %}, shorter than usual{% endif %}{% endif %}</div>
       {% else %}
       <div class="gauge empty"></div><div class="gauge-label">Awaiting data</div>
       {% endif %}
     </td>
-    <td style="width:34mm" class="days">{% for d in p.days %}<span class="day"><b>{{ (d.date|short_day)[:1] }}</b><i class="{{ d.level }}"></i></span>{% endfor %}</td>
+    <td style="width:29mm" class="days">{% for d in p.days %}<span class="day"><b>{{ (d.date|short_day)[:1] }}</b><i class="{{ d.level }}"></i></span>{% endfor %}</td>
     <td class="action">{{ p.note }}</td>
   </tr>
   {% endfor %}
@@ -168,7 +157,7 @@ table.key td { padding: 0.9mm 1.5mm 0.9mm 0; font-size: 7.6pt; }
 
 <!-- PART 2 -->
 <div class="page-break"></div>
-<h2><span class="part">2</span>Weather on the way in<span class="sub">Rough seas on the routes into the UK, next six days</span></h2>
+<h2>Weather on the way in</h2>
 <figure>
   {{ world_map_svg|safe }}
   <figcaption>{% for k in ['watch', 'likely', 'extreme'] %}<span style="white-space:nowrap"><span class="swatch sev-{{ k }}" style="background-color: {{ severity_colours[k] }}"></span>{{ severity_labels[k] }} {{ severity_sea[k]|num(0) }} m+</span> {% endfor %} &nbsp;Numbers match the route strips and key below.{% if not field_ok %} Sea-state shading unavailable this issue.{% endif %}</figcaption>
@@ -204,16 +193,15 @@ table.key td { padding: 0.9mm 1.5mm 0.9mm 0; font-size: 7.6pt; }
 
 <!-- PART 3 -->
 <div class="page-break"></div>
-<h2><span class="part">3</span>News and notices<span class="sub">From the ports and shipping lines, past seven days</span></h2>
+<h2>News and notices</h2>
 {% if ed.sections.advisories %}<p class="serif" style="font-size:9.6pt">{{ ed.sections.advisories }}</p>{% endif %}
-<p class="small">{% for k, label in [('disruption', 'Disruption'), ('surcharge', 'Surcharge'), ('service', 'Service change'), ('other', 'Other')] %}<span class="sq" style="background: {{ tag_colours[k] }}"></span>{{ label }}&nbsp;&nbsp; {% endfor %}</p>
 <div class="two">
   {% for title, items in [('Ports', notices_ports), ('Shipping lines', notices_lines)] %}
   <div>
     <div class="col-title">{{ title }}</div>
     {% for i in items %}
-    <div class="notice"><span class="tag" style="color: {{ tag_colours[i.tag] }}"><span class="sq" style="background: {{ tag_colours[i.tag] }}"></span>{{ i.tag_label }}</span><a class="head" href="{{ i.url }}">{{ i.title }}</a>
-      <span class="src">{{ i.publisher }}{% if i.published %}, {{ i.published|day }}{% endif %}{% if i.is_new %} · new{% endif %}</span></div>
+    <div class="notice"><span class="tag">{{ i.tag_label }}</span><a class="head" href="{{ i.url }}">{{ i.title }}</a>
+      <span class="src">{{ i.publisher }}{% if i.published %}, {{ i.published|day }}{% endif %}{% if i.is_new %}, new{% endif %}</span></div>
     {% else %}
     <p class="small">Nothing operational this week.</p>
     {% endfor %}
@@ -227,16 +215,16 @@ table.key td { padding: 0.9mm 1.5mm 0.9mm 0; font-size: 7.6pt; }
     {% if dumbbell_svg %}{{ dumbbell_svg|safe }}{% else %}<p class="small">Not available this issue.</p>{% endif %}
   </div>
   <div>
-    <div class="col-title">What the figures mean</div>
+    <div class="col-title">How each is measured</div>
     <p class="serif" style="font-size:9.2pt">{{ ed.sections.reliability }}</p>
     <p class="small">Share of ships arriving on time. Sea-Intelligence counts arrivals within a day of schedule; Xeneta counts only arrivals on the scheduled day, so its figures run lower.</p>
   </div>
 </div>
 
 <div class="foot">
-  <p>Weather flags are forecasts, not port notices. Confirm with your terminal or carrier before changing plans.</p>
+  <p>Weather flags come from forecasts. Check with your terminal or carrier before changing plans.</p>
   <p>{% for a in attributions %}{{ a.rstrip('.') }}.{% if not loop.last %} {% endif %}{% endfor %} Maps use Natural Earth data.</p>
-  <p>Data this issue: {% for name, h in health.items() %}{{ health_names.get(name, name) }} {{ health_words.get(h.status, h.status) }}{% if not loop.last %}; {% endif %}{% endfor %}.</p>
+  <p>Data this issue: {% for name, h in health.items() %}{{ health_names.get(name, name) }} {{ health_words.get(h.status, h.status) }}{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
 </div>
 
 </body>

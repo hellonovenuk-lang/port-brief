@@ -1,25 +1,25 @@
 {
   "issue_date": "2026-10-12",
   "author": "claude",
-  "headline": "Liverpool cranes likely stopped on Tuesday as Atlantic storms slow arrivals",
+  "headline": "Liverpool cranes likely to stop on Tuesday as Atlantic storms slow arrivals",
   "summary": {
-    "ports": "Liverpool likely stops cranes Tue 10:00–22:00; gusty spells at six other ports; London Gateway clear",
-    "weather": "US East Coast and Canada services 2 days or more late; Asia via the Cape 1–2 days",
-    "news": "Hapag-Lloyd suspends bookings to three Philippine ports; MSC restores Karachi to Europe"
+    "ports": "Gales will likely stop cranes at Liverpool on Tuesday. Six other ports see short gusty spells.",
+    "weather": "Ships from North America face delays of 2 days or more, and Cape-routed Asia services 1 to 2 days.",
+    "news": "Hapag-Lloyd has suspended bookings to three Philippine ports."
   },
   "port_notes": {
-    "felixstowe": "Gusty Mon 20:00–21:00 only: release and deliver as planned",
-    "southampton": "Gusty Mon and Tue mornings: avoid tight morning cut-offs",
-    "london_gateway": "Clear all week: book release and delivery now",
-    "liverpool": "Cranes likely stopped Tue 10:00–22:00: move collections to Wed, allow 24–48 hours",
-    "rotterdam": "Gusty Tue 16:00–18:00: allow 12–24 hours on feeder connections",
-    "antwerp": "Gusty Tue afternoon and from Fri evening: allow 12–24 hours",
-    "bremerhaven": "Gusty Tue night to Wed 10:00: allow 12–24 hours on Wed calls",
-    "hamburg": "Gusty Tue 12:00–15:00 and Tue night: keep Wed morning flexible"
+    "felixstowe": "A gusty hour on Monday evening, then settled. Release and deliver as planned.",
+    "southampton": "Short gusty spells on Monday and Tuesday mornings. Avoid tight morning cut-offs.",
+    "london_gateway": "Clear all week. Book release and delivery now.",
+    "liverpool": "Cranes likely stop Tue 10:00–22:00. Move collections to Wednesday and allow 24–48 hours.",
+    "rotterdam": "Gusts near crane limits on Tuesday from 16:00 to 18:00. Allow 12–24 hours on feeders.",
+    "antwerp": "Gusty on Tuesday afternoon and from Friday evening. Allow 12–24 hours.",
+    "bremerhaven": "Gusty from Tuesday night to Wednesday 10:00. Allow 12–24 hours on Wednesday calls.",
+    "hamburg": "Gusty on Tuesday afternoon and overnight. Keep Wednesday morning plans flexible."
   },
-  "inbound_note": "Confirm revised ETAs for anything coming from North America or round the Cape before you book haulage.",
+  "inbound_note": "Confirm revised ETAs for cargo from North America or round the Cape before you book haulage.",
   "sections": {
-    "advisories": "Hapag-Lloyd has stopped taking bookings to three Philippine ports, and MSC has restored a direct Karachi service to seven European ports. Surcharges keep rising on US inland haulage and West Africa.",
+    "advisories": "Hapag-Lloyd has stopped taking bookings to three Philippine ports. MSC has restored a direct Karachi service to seven European ports. Surcharges are rising on US inland haulage and West Africa.",
     "reliability": "In August, Sea-Intelligence counted 49.9% of ships on time and Xeneta 29%. Plan on about half of arrivals missing their scheduled day."
   },
   "advisory_picks": [

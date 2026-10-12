@@ -80,7 +80,7 @@ The readers are small importer teams, so every port gets a status and an action:
   Examples: "Cranes likely stopped Tue 10:00–22:00: move collections to Wed" or "Add 2–3 days to inland plans for the next 2 weeks".
 - If congestion data is unavailable, the PDF says so once. Never imply congestion is normal.
 
-House style:
+House style (STYLE.md is binding; read it before writing):
 - Write like a trade-paper reporter: plain declarative sentences of varied length. The headline states the
   news in sentence case (who or where, what happens, when), for example "Wind threatens London Gateway on Friday".
 - `validate` rejects these machine-writing tics, so avoid them from the start: em dashes; "it's not X, it's Y";
@@ -112,7 +112,7 @@ templated fallback is used, and say so in the PR.
 ## 6. Render and check
 
 ```bash
-python -m port_brief render --date $ISSUE
+python -m port_brief render --date $ISSUE   # fails with SlopError if anything breaks STYLE.md
 python -m pytest -q
 ```
 

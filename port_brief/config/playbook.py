@@ -69,20 +69,20 @@ ACTIONS = {
     ),
     "watch_news": "Reported: {headline}. Check your terminal's latest notice before booking collections.",
     "watch_busy": "Berths are busier than usual. Watch vessel berthing times and avoid tight cut-offs.",
-    "normal": "No predicted delays. Speak to your carrier about release and delivery now to keep it that way.",
+    "normal": "No predicted delays. Speak to your carrier about release and delivery now.",
     "normal_no_congestion": "No weather disruption forecast. Speak to your carrier about release and delivery now.",
 }
 
-# One-line actions for the port rows (90 characters or fewer once filled in).
+# One-line actions for the port rows: situation, then action, in plain sentences (90 characters or fewer).
 SHORT_ACTIONS = {
-    "disruption_weather": "Cranes likely stopped {window}: warn your haulier, allow " + BUFFER["disruption_hours"],
-    "disruption_news": "Reported disruption: check terminal notices, allow " + BUFFER["disruption_hours"],
-    "congested": "Add " + BUFFER["congested_days"] + " to inland plans for " + BUFFER["congested_horizon"],
-    "watch_weather": "Gusty {window}: allow " + BUFFER["watch_hours"],
-    "watch_news": "Reported delays: check terminal notices before booking",
-    "watch_busy": "Busier than usual: avoid tight cut-offs",
-    "normal": "No delays expected: book release and delivery now",
-    "normal_no_congestion": "No weather delays forecast: book release and delivery now",
+    "disruption_weather": "Cranes likely stop {window}. Warn your haulier and allow " + BUFFER["disruption_hours"] + ".",
+    "disruption_news": "Disruption reported. Check terminal notices and allow " + BUFFER["disruption_hours"] + ".",
+    "congested": "Berths are busier than normal. Add " + BUFFER["congested_days"] + " to inland plans for " + BUFFER["congested_horizon"] + ".",
+    "watch_weather": "Gusts near crane limits {window}. Allow " + BUFFER["watch_hours"] + ".",
+    "watch_news": "Delays reported. Check terminal notices before booking.",
+    "watch_busy": "Berths are busier than usual. Avoid tight cut-offs.",
+    "normal": "No delays expected. Book release and delivery now.",
+    "normal_no_congestion": "No weather delays forecast. Book release and delivery now.",
 }
 
 NO_CONGESTION_DATA = "Congestion data unavailable this issue; status based on weather and port news only."

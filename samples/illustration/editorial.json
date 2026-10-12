@@ -3,23 +3,23 @@
   "author": "illustration",
   "headline": "Felixstowe congested as wind threatens London Gateway on Wednesday",
   "summary": {
-    "ports": "Felixstowe and Bremerhaven congested; London Gateway wind Wed; Hamburg strike Mon",
-    "weather": "Severe seas in Biscay: Asia and West Africa services 1–2 days late",
-    "news": "Strike reported at Hamburg for Monday"
+    "ports": "Felixstowe and Bremerhaven are congested, and wind threatens London Gateway on Wednesday.",
+    "weather": "Severe seas in Biscay put Asia and West Africa services 1 to 2 days late.",
+    "news": "A strike is reported at Hamburg for Monday."
   },
   "port_notes": {
-    "felixstowe": "Berths 13 points over normal: add 2–3 days to inland plans for the next 2 weeks",
-    "southampton": "No delays expected: book release and delivery now",
-    "london_gateway": "Cranes likely stopped Wed 11:00–20:00: warn your haulier, allow 24–48 hours",
-    "liverpool": "Gusty Thu morning: avoid tight Thursday cut-offs",
-    "rotterdam": "Busier than usual: avoid tight feeder connections",
-    "antwerp": "No delays expected: book release and delivery now",
-    "bremerhaven": "Ships staying 36% longer: add 2–3 days for the next 2 weeks",
-    "hamburg": "Strike reported for Monday: check terminal notices, allow 24–48 hours"
+    "felixstowe": "Berths are 13 points over normal. Add 2–3 days to inland plans for the next 2 weeks.",
+    "southampton": "No delays expected. Book release and delivery now.",
+    "london_gateway": "Cranes likely stop Wed 11:00–20:00. Warn your haulier and allow 24–48 hours.",
+    "liverpool": "Gusty on Thursday morning. Avoid tight Thursday cut-offs.",
+    "rotterdam": "Berths are busier than usual. Avoid tight feeder connections.",
+    "antwerp": "No delays expected. Book release and delivery now.",
+    "bremerhaven": "Ships are staying 36% longer than usual. Add 2–3 days for the next 2 weeks.",
+    "hamburg": "A strike is reported for Monday. Check terminal notices and allow 24–48 hours."
   },
   "inbound_note": "Confirm revised ETAs for anything routed past Biscay this week before you book haulage.",
   "sections": {
     "advisories": "",
-    "reliability": "On time in August 2026: Sea-Intelligence 49.9%, Xeneta 29% (stricter measure)."
+    "reliability": "On time in August 2026: Sea-Intelligence 49.9% and Xeneta 29%, which uses a stricter measure."
   }
 }

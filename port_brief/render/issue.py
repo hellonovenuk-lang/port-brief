@@ -10,6 +10,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from port_brief.config import playbook as pb
 from port_brief.config.locations import BY_ID, LANE_THRESHOLDS, LOCATIONS, PORT_THRESHOLDS
 from port_brief.editorial.schema import CAUSE_TEXT, day_label
+from port_brief.editorial import slop
 from port_brief.editorial.tags import TAG_COLOUR, tag_for
 from port_brief.render import charts, worldmap
 
@@ -31,6 +32,10 @@ def _crosses_limit(d: dict) -> bool:
     return d.get("hs_prev") is not None and d.get("hs_now") is not None and (d["hs_prev"] >= rough) != (d["hs_now"] >= rough)
 
 
+class SlopError(RuntimeError):
+    """A template or editorial change reintroduced a banned pattern (see STYLE.md)."""
+
+
 def period_label(p: str | None) -> str:
     if not p:
         return ""
@@ -46,6 +51,7 @@ def _env() -> Environment:
     env.filters["pp"] = lambda v: "–" if v is None else f"{v:+.1f} pp"
     env.filters["period"] = period_label
     env.filters["sentence"] = lambda t: (t[:1].upper() + t[1:]) if t else t
+    env.filters["full_stop"] = lambda t: (t.rstrip() if t.rstrip().endswith((".", "!", "?")) else t.rstrip() + ".") if t else ""
     env.filters["signed"] = lambda v: "–" if v is None else f"{v:+.0f}"
     env.filters["num"] = lambda v, nd=1: "–" if v is None else f"{v:.{nd}f}"
     return env
@@ -164,11 +170,17 @@ def render_issue(d: Path, snap: dict, editorial: dict, meta: dict) -> Path:
     ctx = context(snap, editorial, meta)
     html = env.get_template("issue.html.j2").render(**ctx)
     (d / "issue.html").write_text(html)
+    email_html = env.get_template("email.html.j2").render(**ctx)
+    email_txt = env.get_template("email.txt.j2").render(**ctx)
+    problems = [f"issue: {p}" for p in slop.render_issues(html)] + [f"email: {p}" for p in slop.render_issues(email_html)] \
+        + [f"email text: {p}" for p in slop.render_issues(email_txt)]
+    if problems:
+        raise SlopError("Rendered issue breaks STYLE.md:\n  " + "\n  ".join(problems))
     pdf_path = d / f"port-brief-{editorial['issue_date']}.pdf"
     HTML(string=html, base_url=str(TEMPLATES)).write_pdf(pdf_path)
 
-    (d / "email.html").write_text(env.get_template("email.html.j2").render(**ctx))
-    (d / "email.txt").write_text(env.get_template("email.txt.j2").render(**ctx))
+    (d / "email.html").write_text(email_html)
+    (d / "email.txt").write_text(email_txt)
     _preview(pdf_path, d / "preview.png")
     return pdf_path
 

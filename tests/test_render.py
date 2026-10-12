@@ -62,23 +62,6 @@ def test_extreme_lane_level():
     assert a["days"][3]["level"] == "extreme"
 
 
-@pytest.mark.parametrize("text", [
-    "It's not a delay, it's a reset.",
-    "Felixstowe is calm — for now.",
-    "This is not just congestion but a backlog.",
-    "No queues, no strikes, just calm.",
-    "Why wait to book?",
-    "Shippers must navigate a shifting landscape.",
-    "Book now!",
-])
-def test_style_lint_catches_machine_tics(text):
-    assert schema.style_issues(text)
-
-
-def test_style_lint_allows_plain_advice():
-    assert schema.style_issues("Felixstowe is congested. Add 2–3 days to inland plans and tell your haulier.") == []
-
-
 def test_route_delay_comes_from_worst_segment():
     from port_brief.judgement import routes
 
