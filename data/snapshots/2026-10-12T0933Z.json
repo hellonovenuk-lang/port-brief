@@ -10521,6 +10521,7 @@
         "actions": [
           "Intermittent stoppages possible Mon 12 Oct 20:00\u201321:00. Allow 12\u201324 hours and avoid tight cut-offs."
         ],
+        "short_action": "Gusty Mon 20:00\u201321:00: allow 12\u201324 hours",
         "windows": [
           {
             "start": "2026-10-12T19:00Z",
@@ -10554,6 +10555,7 @@
         "actions": [
           "Intermittent stoppages possible Mon 12 Oct 10:00\u201311:00. Allow 12\u201324 hours and avoid tight cut-offs."
         ],
+        "short_action": "Gusty Mon 10:00\u201311:00: allow 12\u201324 hours",
         "windows": [
           {
             "start": "2026-10-12T09:00Z",
@@ -10598,6 +10600,7 @@
         "actions": [
           "No weather disruption forecast. Speak to your carrier about release and delivery now."
         ],
+        "short_action": "No weather delays forecast: book release and delivery now",
         "windows": [],
         "congestion": null,
         "headlines": [],
@@ -10617,6 +10620,7 @@
         "actions": [
           "Operations likely suspended Tue 13 Oct 10:00\u201322:00. Tell your haulier to expect longer waits and re-booked slots, and allow 24\u201348 hours on collections and vessel arrivals around that window."
         ],
+        "short_action": "Cranes likely stopped Tue 10:00\u201322:00: warn your haulier, allow 24\u201348 hours",
         "windows": [
           {
             "start": "2026-10-13T06:00Z",
@@ -10663,6 +10667,7 @@
         "actions": [
           "Intermittent stoppages possible Tue 13 Oct 16:00\u201318:00. Allow 12\u201324 hours and avoid tight cut-offs."
         ],
+        "short_action": "Gusty Tue 16:00\u201318:00: allow 12\u201324 hours",
         "windows": [
           {
             "start": "2026-10-13T15:00Z",
@@ -10722,6 +10727,7 @@
         "actions": [
           "Intermittent stoppages possible Tue 13 Oct 15:00\u201318:00. Allow 12\u201324 hours and avoid tight cut-offs."
         ],
+        "short_action": "Gusty Tue 15:00\u201318:00: allow 12\u201324 hours",
         "windows": [
           {
             "start": "2026-10-13T14:00Z",
@@ -10781,6 +10787,7 @@
         "actions": [
           "Intermittent stoppages possible Tue 13 Oct 21:00 \u2013 Wed 14 Oct 10:00. Allow 12\u201324 hours and avoid tight cut-offs."
         ],
+        "short_action": "Gusty Tue 21:00\u2013Wed 10:00: allow 12\u201324 hours",
         "windows": [
           {
             "start": "2026-10-13T20:00Z",
@@ -10853,6 +10860,7 @@
         "actions": [
           "Intermittent stoppages possible Tue 13 Oct 12:00\u201315:00. Allow 12\u201324 hours and avoid tight cut-offs."
         ],
+        "short_action": "Gusty Tue 12:00\u201315:00: allow 12\u201324 hours",
         "windows": [
           {
             "start": "2026-10-13T11:00Z",
@@ -11493,31 +11501,11 @@
         "from_day": "2026-10-14",
         "to_day": "2026-10-17",
         "delay": "1\u20132 days",
-        "cells": 25,
+        "cells": 19,
         "members": [
           [
-            1.0,
-            -40.0
-          ],
-          [
-            1.0,
-            -37.0
-          ],
-          [
-            1.0,
-            -34.0
-          ],
-          [
             4.0,
             -40.0
-          ],
-          [
-            4.0,
-            -37.0
-          ],
-          [
-            4.0,
-            -34.0
           ],
           [
             7.0,
@@ -11526,10 +11514,6 @@
           [
             7.0,
             -37.0
-          ],
-          [
-            7.0,
-            -34.0
           ],
           [
             10.0,
@@ -11594,6 +11578,56 @@
           [
             34.0,
             -42.0
+          ]
+        ]
+      },
+      {
+        "id": "area-off-namibia",
+        "name": "Off Namibia",
+        "trades": "Asia\u2013North Europe services routed via the Cape",
+        "on_lane": true,
+        "lon": 1.0,
+        "lat": -37.0,
+        "level": "watch",
+        "severity": "Rough",
+        "peak_sea": 5.2,
+        "peak_day": "2026-10-14",
+        "from_day": "2026-10-14",
+        "to_day": "2026-10-15",
+        "delay": "up to 1 day",
+        "cells": 8,
+        "members": [
+          [
+            -2.0,
+            -37.0
+          ],
+          [
+            -2.0,
+            -34.0
+          ],
+          [
+            1.0,
+            -40.0
+          ],
+          [
+            1.0,
+            -37.0
+          ],
+          [
+            1.0,
+            -34.0
+          ],
+          [
+            4.0,
+            -37.0
+          ],
+          [
+            4.0,
+            -34.0
+          ],
+          [
+            7.0,
+            -34.0
           ]
         ]
       },
@@ -11666,16 +11700,16 @@
         "name": "South Atlantic",
         "trades": "South America East Coast and Cape-routed services",
         "on_lane": false,
-        "lon": -2.0,
-        "lat": -34.0,
+        "lon": -11.0,
+        "lat": -40.0,
         "level": "watch",
         "severity": "Rough",
-        "peak_sea": 5.1,
-        "peak_day": "2026-10-14",
+        "peak_sea": 5.0,
+        "peak_day": "2026-10-15",
         "from_day": "2026-10-12",
         "to_day": "2026-10-16",
         "delay": "only if routed through it",
-        "cells": 17,
+        "cells": 15,
         "members": [
           [
             -44.0,
@@ -11736,14 +11770,6 @@
           [
             -2.0,
             -40.0
-          ],
-          [
-            -2.0,
-            -37.0
-          ],
-          [
-            -2.0,
-            -34.0
           ]
         ]
       },
@@ -11804,6 +11830,301 @@
             -26.0
           ]
         ]
+      }
+    ],
+    "routes": [
+      {
+        "id": "asia_cape",
+        "name": "Asia via the Cape",
+        "segments": [
+          {
+            "id": "area-south-china-sea",
+            "short": "S China Sea",
+            "level": "none"
+          },
+          {
+            "id": "malacca",
+            "short": "Malacca",
+            "level": "none"
+          },
+          {
+            "id": "sri_lanka",
+            "short": "Sri Lanka",
+            "level": "none"
+          },
+          {
+            "id": "area-western-indian-ocean",
+            "short": "Indian Ocean",
+            "level": "none"
+          },
+          {
+            "id": "agulhas",
+            "short": "Cape",
+            "level": "likely"
+          },
+          {
+            "id": "area-off-namibia",
+            "short": "Namibia",
+            "level": "watch"
+          },
+          {
+            "id": "area-off-west-africa",
+            "short": "W Africa",
+            "level": "none"
+          },
+          {
+            "id": "area-off-portugal",
+            "short": "Portugal",
+            "level": "watch"
+          },
+          {
+            "id": "biscay",
+            "short": "Biscay",
+            "level": "none"
+          },
+          {
+            "id": "western_approaches",
+            "short": "W Approaches",
+            "level": "likely"
+          },
+          {
+            "id": "dover_strait",
+            "short": "Dover",
+            "level": "none"
+          }
+        ],
+        "level": "likely",
+        "severity": "Severe",
+        "delay": "1\u20132 days"
+      },
+      {
+        "id": "asia_suez",
+        "name": "Asia via Suez",
+        "segments": [
+          {
+            "id": "area-south-china-sea",
+            "short": "S China Sea",
+            "level": "none"
+          },
+          {
+            "id": "malacca",
+            "short": "Malacca",
+            "level": "none"
+          },
+          {
+            "id": "sri_lanka",
+            "short": "Sri Lanka",
+            "level": "none"
+          },
+          {
+            "id": "arabian_sea",
+            "short": "Arabian Sea",
+            "level": "none"
+          },
+          {
+            "id": "bab_el_mandeb",
+            "short": "Aden",
+            "level": "none"
+          },
+          {
+            "id": "area-red-sea",
+            "short": "Red Sea",
+            "level": "none"
+          },
+          {
+            "id": "suez",
+            "short": "Suez",
+            "level": "none"
+          },
+          {
+            "id": "area-mediterranean",
+            "short": "Med",
+            "level": "none"
+          },
+          {
+            "id": "gibraltar",
+            "short": "Gibraltar",
+            "level": "none"
+          },
+          {
+            "id": "area-off-portugal",
+            "short": "Portugal",
+            "level": "watch"
+          },
+          {
+            "id": "biscay",
+            "short": "Biscay",
+            "level": "none"
+          },
+          {
+            "id": "dover_strait",
+            "short": "Dover",
+            "level": "none"
+          }
+        ],
+        "level": "watch",
+        "severity": "Rough",
+        "delay": "up to 1 day"
+      },
+      {
+        "id": "us_east",
+        "name": "US East Coast and Canada",
+        "segments": [
+          {
+            "id": "area-north-west-atlantic",
+            "short": "NW Atlantic",
+            "level": "extreme"
+          },
+          {
+            "id": "mid_north_atlantic",
+            "short": "Mid-Atlantic",
+            "level": "extreme"
+          },
+          {
+            "id": "western_approaches",
+            "short": "W Approaches",
+            "level": "likely"
+          },
+          {
+            "id": "dover_strait",
+            "short": "Dover",
+            "level": "none"
+          }
+        ],
+        "level": "extreme",
+        "severity": "Extreme",
+        "delay": "2 days or more"
+      },
+      {
+        "id": "caribbean",
+        "name": "Caribbean and Panama",
+        "segments": [
+          {
+            "id": "panama",
+            "short": "Panama",
+            "level": "none"
+          },
+          {
+            "id": "area-caribbean",
+            "short": "Caribbean",
+            "level": "none"
+          },
+          {
+            "id": "area-azores",
+            "short": "Azores",
+            "level": "watch"
+          },
+          {
+            "id": "western_approaches",
+            "short": "W Approaches",
+            "level": "likely"
+          },
+          {
+            "id": "dover_strait",
+            "short": "Dover",
+            "level": "none"
+          }
+        ],
+        "level": "likely",
+        "severity": "Severe",
+        "delay": "1\u20132 days"
+      },
+      {
+        "id": "med",
+        "name": "Mediterranean",
+        "segments": [
+          {
+            "id": "area-mediterranean",
+            "short": "Med",
+            "level": "none"
+          },
+          {
+            "id": "gibraltar",
+            "short": "Gibraltar",
+            "level": "none"
+          },
+          {
+            "id": "area-off-portugal",
+            "short": "Portugal",
+            "level": "watch"
+          },
+          {
+            "id": "biscay",
+            "short": "Biscay",
+            "level": "none"
+          },
+          {
+            "id": "dover_strait",
+            "short": "Dover",
+            "level": "none"
+          }
+        ],
+        "level": "watch",
+        "severity": "Rough",
+        "delay": "up to 1 day"
+      },
+      {
+        "id": "west_africa",
+        "name": "West Africa",
+        "segments": [
+          {
+            "id": "area-gulf-of-guinea",
+            "short": "G of Guinea",
+            "level": "none"
+          },
+          {
+            "id": "area-off-west-africa",
+            "short": "W Africa",
+            "level": "none"
+          },
+          {
+            "id": "area-off-portugal",
+            "short": "Portugal",
+            "level": "watch"
+          },
+          {
+            "id": "biscay",
+            "short": "Biscay",
+            "level": "none"
+          },
+          {
+            "id": "western_approaches",
+            "short": "W Approaches",
+            "level": "likely"
+          },
+          {
+            "id": "dover_strait",
+            "short": "Dover",
+            "level": "none"
+          }
+        ],
+        "level": "likely",
+        "severity": "Severe",
+        "delay": "1\u20132 days"
+      },
+      {
+        "id": "north_sea",
+        "name": "North Sea feeders",
+        "segments": [
+          {
+            "id": "area-north-sea",
+            "short": "North Sea",
+            "level": "none"
+          },
+          {
+            "id": "german_bight",
+            "short": "German Bight",
+            "level": "none"
+          },
+          {
+            "id": "dover_strait",
+            "short": "Dover",
+            "level": "none"
+          }
+        ],
+        "level": "none",
+        "severity": "Calm",
+        "delay": "no weather delay"
       }
     ],
     "storms": [

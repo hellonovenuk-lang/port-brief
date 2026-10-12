@@ -10,14 +10,15 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from port_brief.config import playbook as pb
 from port_brief.config.locations import BY_ID, LANE_THRESHOLDS, LOCATIONS, PORT_THRESHOLDS
 from port_brief.editorial.schema import CAUSE_TEXT, day_label
+from port_brief.editorial.tags import TAG_COLOUR, tag_for
 from port_brief.render import charts, worldmap
 
 TEMPLATES = Path(__file__).parent / "templates"
-HEALTH_NAMES = {"marine_weather": "weather", "cyclones": "tropical storms", "sinay_congestion": "congestion",
+HEALTH_NAMES = {"marine_weather": "weather", "storm_field": "sea-state grid", "cyclones": "tropical storms", "sinay_congestion": "congestion",
                 "schedule_reliability": "schedule reliability", "advisories": "notices"}
 HEALTH_WORDS = {"ok": "complete", "partial": "partly available", "failed": "unavailable",
                 "skipped": "not connected", "stale": "last published figures"}
-UNCURATED_PER_PUBLISHER = 3
+UNCURATED_PER_PUBLISHER = 2
 REGION_ORDER = {"uk": 0, "north_europe": 1, "global": 2}
 
 
@@ -75,7 +76,45 @@ def context(snap: dict, editorial: dict, meta: dict) -> dict:
     keyed = {tuple(m) for a in j.get("storm_areas", []) for m in a.get("members", [])}
     below_rough = pb.SEVERITY_SEA_M["watch"] - 0.1
     field = [p if (p[0], p[1]) in keyed else [p[0], p[1], min(p[2], below_rough), p[3]] for p in field]
+    # Part 1: one visual row per port.
+    port_rows = []
+    for p in j.get("ports_status", []):
+        c = p.get("congestion") or {}
+        occ, gap = c.get("occupancy_pct"), c.get("occupancy_gap_vs_mean_pct")
+        tip, tip_avg = c.get("time_in_port_median_h"), c.get("time_in_port_trailing_avg_h")
+        days = (j["locations"].get(p["id"]) or {}).get("days", [])
+        port_rows.append({
+            **p,
+            "occ": occ, "normal": (occ - gap) if occ is not None and gap is not None else None, "gap": gap,
+            "gauge_colour": (pb.STATUS_COLOUR["congested"] if gap is not None and gap >= pb.CONGESTED_GAP_PP
+                             else pb.STATUS_COLOUR["watch"] if gap is not None and gap >= pb.BUSY_GAP_PP else "#5b6b7d"),
+            "tip": tip, "tip_trend": (None if tip is None or not tip_avg else "up" if tip > tip_avg * 1.05 else "down" if tip < tip_avg * 0.95 else "flat"),
+            "days": days[:7],
+            "note": editorial["port_notes"].get(p["id"]) or p.get("short_action") or p["actions"][0],
+        })
+
+    # Part 2: route strips, numbered to match the map key.
+    number_of = {i["id"]: i["n"] for i in key}
+    routes = []
+    for r in j.get("routes", []):
+        routes.append({**r, "segments": [{**seg, "n": number_of.get(seg["id"]) if seg["level"] != "none" else None}
+                                         for seg in r["segments"]]})
+
+    # Part 3: tagged notices, ports and shipping lines side by side.
+    def tagged(groups):
+        out = []
+        for g in groups:
+            for i in g["items"]:
+                key_, label = tag_for(i["title"])
+                out.append({**i, "publisher": g["name"], "tag": key_, "tag_label": label})
+        return out
+
     return {
+        "port_rows": port_rows,
+        "routes": routes,
+        "notices_ports": tagged([g for g in adv_groups if g["kind"] == "port"])[:8],
+        "notices_lines": tagged([g for g in adv_groups if g["kind"] == "carrier"])[:9],
+        "tag_colours": TAG_COLOUR,
         "ed": editorial,
         "meta": meta,
         "issue_long": f"{issue.strftime('%A')} {issue.day} {issue.strftime('%B %Y')}",
@@ -109,7 +148,6 @@ def context(snap: dict, editorial: dict, meta: dict) -> dict:
         "xe": xe,
         "dv": dv,
         "dumbbell_svg": charts.carrier_dumbbell(si, xe),
-        "trend_svg": charts.global_trend(si),
         "adv_groups": adv_groups,
         "health": snap["health"],
         "attributions": snap["attributions"],

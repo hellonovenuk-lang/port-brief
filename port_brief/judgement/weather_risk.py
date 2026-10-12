@@ -13,7 +13,7 @@ from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from port_brief import paths
-from port_brief.judgement import port_status, storm_areas
+from port_brief.judgement import port_status, routes, storm_areas
 from port_brief.config.locations import AGULHAS, BY_ID, LOCATIONS, RELEVANCE, thresholds_for
 
 LEVELS = {"none": 0, "watch": 1, "likely": 2, "extreme": 3}  # extreme is used for lanes only
@@ -350,8 +350,10 @@ def judge(snapshot: dict) -> dict:
         "ports_status": port_status.ports_status(snapshot, assessments, congestion),
         "inbound": port_status.inbound(assessments),
         "storm_areas": storm_areas.storm_areas(((snapshot["sources"].get("storm_field") or {}).get("data") or {}).get("points") or []),
+        "routes": [],
         "storms": storms,
         "forecast_issued": snapshot["generated_at"],
     }
+    judgement["routes"] = routes.route_strips(judgement["storm_areas"], judgement["inbound"])
     snapshot["judgement"] = judgement
     return judgement

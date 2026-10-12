@@ -3,41 +3,34 @@ Issue 12, Sunday 11 October 2026
 
 Felixstowe congested as wind threatens London Gateway on Wednesday
 
-Disruption likely: London Gateway and Hamburg. Congested: Felixstowe and Bremerhaven. Watch: Liverpool and Rotterdam. Rough seas in the Bay of Biscay may delay Asia, Mediterranean and West Africa services into the UK by 1–2 days. Reliability: Sea-Intelligence 49.9%, Xeneta 29%.
+1  PORT HEALTH CHECK
+- Felixstowe [Congested]: Berths 13 points over normal: add 2–3 days to inland plans for the next 2 weeks
+- Southampton [Running normally]: No delays expected: book release and delivery now
+- London Gateway [Disruption likely]: Cranes likely stopped Wed 11:00–20:00: warn your haulier, allow 24–48 hours
+- Liverpool [Watch]: Gusty Thu morning: avoid tight Thursday cut-offs
+- Rotterdam [Watch]: Busier than usual: avoid tight feeder connections
+- Antwerp [Running normally]: No delays expected: book release and delivery now
+- Bremerhaven [Congested]: Ships staying 36% longer: add 2–3 days for the next 2 weeks
+- Hamburg [Disruption likely]: Strike reported for Monday: check terminal notices, allow 24–48 hours
 
-THE PORTS THIS WEEK
+2  WEATHER ON THE WAY IN
+- Asia via the Cape: 1–2 days
+- Asia via Suez: 1–2 days
+- US East Coast and Canada: 1–2 days
+- Caribbean and Panama: 1–2 days
+- Mediterranean: 1–2 days
+- West Africa: 1–2 days
+- North Sea feeders: Up to 1 day
 
-Felixstowe: Congested
-Berths are 13 points busier than normal. Add 2–3 days to inland plans for containers arriving in the next 2 weeks, pre-book haulage and check your free time.
+3  NEWS AND NOTICES
+- [Other] Smart berths: What West African ports can learn from Rotterdam
+- [Surcharge] Maersk raises U.S. surcharge to USD 215: what it means for Maersk stock
+- [Surcharge] Maersk raises U.S. inland fuel surcharge to USD 215: stock pre-market at EUR 3,335.50
+- [Service change] Agility bags EUR 500 mn financing + Damietta welcomes another MSC service
+- [Service change] MSC launches weekly feeder service to Lekki Port via Lomé
+- [Disruption] Hapag-Lloyd suspends bookings to three Philippine ports as container crisis deepens
 
-Southampton: Running normally
-Running as expected with no predicted delays. Speak to your carrier about release and delivery now.
-
-London Gateway: Disruption likely
-Crane stoppages likely on Wednesday from 11:00 to 20:00, with gusts to 22 m/s. Tell your haulier to expect longer waits and allow 24–48 hours on collections.
-
-Liverpool: Watch
-Cranes may pause on Thursday morning. Allow 12–24 hours and avoid tight Thursday cut-offs.
-
-Rotterdam: Watch
-Berths are 7 points busier than usual. If you tranship here, watch berthing times and avoid tight feeder connections.
-
-Antwerp: Running normally
-Running as expected with no predicted delays. Speak to your carrier about release and delivery now.
-
-Bremerhaven: Congested
-Ships are spending 36% longer in port than usual. Add 2–3 days to inland plans for containers arriving in the next 2 weeks and pre-book haulage.
-
-Hamburg: Disruption likely
-A 24-hour strike is reported for Monday. Check your terminal's latest notice before booking collections and allow 24–48 hours.
-
-ON THE WAY IN
-Two storms matter for European arrivals. Biscay turns severe on Wednesday and Thursday, so services from Asia, the Mediterranean and West Africa into the UK are likely to run 1–2 days late. Ships rounding the Cape on Friday may lose up to 1 day. Don't book haulage against the published ETA.
-
-SCHEDULE RELIABILITY
-Sea-Intelligence: 49.9% of ships on time in Aug 2026. Xeneta: 29% in Aug 2026.
-
-Read the full brief (PDF): {{PDF_URL}}
+Open the full brief (PDF): {{PDF_URL}}
 
 Headlines link to the original publishers; some discovered via Google News. Port congestion data: Sinay (sinay.ai). Schedule reliability: Sea-Intelligence Global Liner Performance report; Xeneta Schedule Reliability Scorecard. Tropical cyclone data: GDACS (Global Disaster Alert and Coordination System), European Commission JRC / UN OCHA. Weather data by Open-Meteo.com (CC BY 4.0). 
 Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}

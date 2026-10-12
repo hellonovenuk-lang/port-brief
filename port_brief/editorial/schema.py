@@ -13,8 +13,10 @@ from datetime import date
 from port_brief.config import playbook as pb
 from port_brief.config.locations import LANE_THRESHOLDS, PORT_THRESHOLDS
 
-LIMITS = {"headline": 90, "standfirst": 340, "watchlist_note": 220, "section": 1100, "port_note": 260, "inbound_note": 600}
-SECTIONS = ("ports", "lanes", "reliability", "advisories")
+# Short by design: the issue is read at a glance, so every field has a tight limit.
+LIMITS = {"headline": 80, "summary_line": 110, "port_note": 90, "inbound_note": 160,
+          "advisories": 300, "reliability": 200}
+SUMMARY_PARTS = ("ports", "weather", "news")
 ALWAYS_ALLOWED = set(range(0, 14))  # counts, "three to five days", "top 13", "D5"
 
 NUMBER_RE = re.compile(r"(?<![A-Za-z\d.])-?\d+(?:\.\d+)?")
@@ -99,29 +101,24 @@ def style_issues(text: str) -> list[str]:
 
 def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
     errors = []
-    editorial.setdefault("watchlist_notes", {})
-    for key in ("headline", "standfirst", "sections", "author", "port_notes", "inbound_note"):
+    for key in ("headline", "summary", "port_notes", "inbound_note", "sections", "author"):
         if key not in editorial:
             errors.append(f"missing field: {key}")
     if errors:
         return errors
 
-    def check_len(label, text, limit):
-        if not isinstance(text, str) or not text.strip():
+    def check_len(label, text, limit, allow_empty=False):
+        if not isinstance(text, str) or (not allow_empty and not text.strip()):
             errors.append(f"{label}: empty")
         elif len(text) > limit:
             errors.append(f"{label}: {len(text)} chars (max {limit})")
 
     check_len("headline", editorial["headline"], LIMITS["headline"])
-    check_len("standfirst", editorial["standfirst"], LIMITS["standfirst"])
-    for s in SECTIONS:
-        check_len(f"sections.{s}", editorial["sections"].get(s, ""), LIMITS["section"])
-
-    watch_ids = {w["id"] for w in snapshot.get("judgement", {}).get("watchlist", [])}
-    for loc_id, note in editorial["watchlist_notes"].items():
-        if loc_id not in watch_ids:
-            errors.append(f"watchlist_notes.{loc_id}: not on the watchlist")
-        check_len(f"watchlist_notes.{loc_id}", note, LIMITS["watchlist_note"])
+    for part in SUMMARY_PARTS:
+        check_len(f"summary.{part}", editorial["summary"].get(part, ""), LIMITS["summary_line"])
+    check_len("inbound_note", editorial["inbound_note"], LIMITS["inbound_note"])
+    check_len("sections.advisories", editorial["sections"].get("advisories", ""), LIMITS["advisories"], allow_empty=True)
+    check_len("sections.reliability", editorial["sections"].get("reliability", ""), LIMITS["reliability"], allow_empty=True)
 
     port_ids = [p["id"] for p in snapshot.get("judgement", {}).get("ports_status", [])]
     for pid in port_ids:
@@ -129,8 +126,6 @@ def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
     for pid in editorial["port_notes"]:
         if pid not in port_ids:
             errors.append(f"port_notes.{pid}: not a tracked port")
-    if not isinstance(editorial["inbound_note"], str) or len(editorial["inbound_note"]) > LIMITS["inbound_note"]:
-        errors.append(f"inbound_note: must be text of at most {LIMITS['inbound_note']} chars")
 
     picks = editorial.get("advisory_picks")
     if picks is not None:
@@ -140,16 +135,16 @@ def validate(editorial: dict, snapshot: dict, issue_date: str) -> list[str]:
                 errors.append(f"advisory_picks: unknown url {url[:80]}")
 
     allowed = allowed_numbers(snapshot, issue_date)
-    texts = {"headline": editorial["headline"], "standfirst": editorial["standfirst"],
+    texts = {"headline": editorial["headline"],
+             **{f"summary.{k}": v for k, v in editorial["summary"].items()},
              **{f"sections.{k}": v for k, v in editorial["sections"].items()},
-             **{f"watchlist_notes.{k}": v for k, v in editorial["watchlist_notes"].items()},
              **{f"port_notes.{k}": v for k, v in editorial["port_notes"].items()},
              "inbound_note": editorial["inbound_note"]}
     for label, text in texts.items():
         bad = unsupported_numbers(text or "", allowed)
         if bad:
             errors.append(f"{label}: numbers not found in the data: {', '.join(bad)}")
-        for issue in style_issues(text):
+        for issue in style_issues(text or ""):
             errors.append(f"{label}: {issue}")
     return errors
 
@@ -193,108 +188,61 @@ def _clip(text: str, limit: int) -> str:
 
 
 def fallback(snapshot: dict, issue_date: str) -> dict:
+    """Short, data-only wording straight from the playbook, so every issue is complete."""
     j = snapshot.get("judgement", {})
-    wl = j.get("watchlist", [])
-    rel = snapshot["sources"].get("schedule_reliability", {}).get("data", {})
-    si, xe, dv = rel.get("sea_intelligence"), rel.get("xeneta"), rel.get("divergence")
-
     statuses = j.get("ports_status", [])
-    flagged = [p for p in statuses if p["status"] != "normal"]
     by_status = {k: [p["name"] for p in statuses if p["status"] == k] for k in pb.STATUS_ORDER}
-    weather_ports = [p for p in flagged if p["windows"]]
+    routes = j.get("routes", [])
+    rough_routes = [r for r in routes if r["level"] != "none"]
+    worst_route = max(rough_routes, key=lambda r: ["watch", "likely", "extreme"].index(r["level"]), default=None)
+
+    # Summary: one line per part.
+    flagged = [(k, by_status[k]) for k in ("disruption", "congested", "watch") if by_status[k]]
+    if flagged:
+        ports_line = "; ".join(f"{pb.STATUS_LABEL[k]}: {_join(names)}" for k, names in flagged)
+    else:
+        ports_line = "All eight ports running normally" if not any(p["data_gaps"] for p in statuses) else "No weather disruption at any of the eight ports"
+    if worst_route:
+        weather_line = f"{worst_route['name']}: {worst_route['severity'].lower()} seas, {worst_route['delay']}"
+        if len(rough_routes) > 1:
+            weather_line += f"; {len(rough_routes) - 1} more route{'s' if len(rough_routes) > 2 else ''} affected"
+    else:
+        weather_line = "No weather delays on the routes into the UK"
+    adv = snapshot["sources"].get("advisories", {}).get("data", {}).get("publishers", {})
+    n_items = sum(len(p["items"]) for p in adv.values())
+    news_line = f"{n_items} notices from ports and shipping lines" if n_items else "No new notices from ports or shipping lines"
+
     if by_status["disruption"]:
         headline = f"Disruption likely at {_join(by_status['disruption'])}"
     elif by_status["congested"]:
-        headline = f"{_join(by_status['congested'])} running busier than normal"
-    elif weather_ports:
-        first = min(weather_ports, key=lambda p: p["windows"][0]["start"])
-        headline = (f"Wind may pause crane work at {len(weather_ports)} of {len(statuses)} ports this week"
-                    if len(weather_ports) > 1 else f"Wind may pause crane work at {first['name']} this week")
-    elif statuses and any(p["data_gaps"] for p in statuses):
-        headline = "No weather disruption forecast at UK and North European ports this week"
-    elif statuses:
-        headline = "All UK and North European ports running normally this week"
+        headline = f"{_join(by_status['congested'])} busier than normal"
+    elif worst_route and worst_route["level"] in ("likely", "extreme"):
+        headline = f"{worst_route['severity']} seas slow {worst_route['name']} arrivals"
+    elif by_status["watch"]:
+        headline = f"Gusty spells at {len(by_status['watch'])} of {len(statuses)} ports this week"
     else:
-        headline = "Port Brief"
-    headline = headline[: LIMITS["headline"]]
+        headline = "A quiet week at UK and North European ports"
 
-    stand = []
-    if flagged:
-        for status in ("disruption", "congested", "watch"):
-            if by_status[status]:
-                stand.append(f"{pb.STATUS_LABEL[status]}: {_join(by_status[status])}.")
-    elif statuses:
-        stand.append("No weather disruption is forecast at the UK and North European ports we track.")
-    inbound = j.get("inbound", [])
-    if inbound:
-        stand.append(f"Rough seas in the {inbound[0]['name']} may delay {inbound[0]['trades']} by {inbound[0]['delay']}.")
+    port_notes = {p["id"]: _clip(p.get("short_action") or p["actions"][0], LIMITS["port_note"]) for p in statuses}
+    inbound_note = (f"Worst this week: {worst_route['name']}, {worst_route['delay']}. Confirm revised ETAs before booking haulage."
+                    if worst_route else "No weather on the routes into the UK is expected to delay arrivals.")
+
+    rel = snapshot["sources"].get("schedule_reliability", {}).get("data", {})
+    si, xe = rel.get("sea_intelligence"), rel.get("xeneta")
+    rel_txt = ""
     if si and si.get("global_pct") is not None:
-        stand.append(f"Reliability: Sea-Intelligence {si['global_pct']}%"
-                     + (f", Xeneta {xe['global_pct']}%." if xe and xe.get("global_pct") is not None else "."))
-    standfirst = " ".join(stand)
-    if len(standfirst) > LIMITS["standfirst"]:
-        standfirst = " ".join(stand[:-1])[: LIMITS["standfirst"]]
-
-    port_notes = {}
-    for p in statuses:
-        # Weather windows already sit in the action and the Detail column, so lead with the action.
-        lead = "" if p["windows"] or not p["reasons"] else f"{p['reasons'][0][0].upper()}{p['reasons'][0][1:]}. "
-        note = lead + " ".join(p["actions"])
-        port_notes[p["id"]] = _clip(note if len(note) <= LIMITS["port_note"] else p["actions"][0], LIMITS["port_note"])
-
-    inbound_note = (" ".join(f"{i['name']}: {i['action']}" for i in inbound[:2]) if inbound
-                    else "No weather on the main routes into the UK and North Europe is expected to delay arrivals this week.")
-    inbound_note = _clip(inbound_note, LIMITS["inbound_note"])
-
-    notes = {}
-    for w in wl:
-        reasons = "; ".join(w["reasons"][:2])
-        notes[w["id"]] = (f"{w['level'].capitalize()} risk of {_causes(w)} {day_label(w['peak_day'])}"
-                          f" ({reasons}). Trend: {w['trend']}.")[: LIMITS["watchlist_note"]]
-
-    if flagged:
-        port_txt = " ".join(f"{p['name']}: {p['status_label'].lower()}." for p in flagged)
-        port_txt += f" {len(statuses) - len(flagged)} of {len(statuses)} ports are running normally."
-    else:
-        port_txt = "All the ports we track are running normally, with no crane or pilotage limits forecast."
-    if any(p["data_gaps"] for p in statuses):
-        port_txt += " Congestion data was unavailable for this issue, so statuses reflect weather and port news only."
-
-    lanes = [a for a in j.get("locations", {}).values() if a["kind"] == "lane"]
-    flagged_lanes = [a for a in lanes if a["outlook_3_5d"] != "none" or a["near_level"] != "none"]
-    lane_txt = ("Lanes with flagged days: " + "; ".join(
-        f"{a['name']} ({day_label(a['peak_day'])})" for a in flagged_lanes) + "."
-                ) if flagged_lanes else "No heavy-weather thresholds are forecast on the lanes we track."
-    storms_near = [s for s in j.get("storms", []) if s.get("nearby")]
-    if storms_near:
-        lane_txt += " Tropical cyclones near tracked locations: " + ", ".join(s["name"] for s in storms_near) + "."
-
-    if si and si.get("global_pct") is not None:
-        rel_txt = f"Sea-Intelligence puts global schedule reliability at {si['global_pct']}% for {_period(si['period'])}"
-        if si.get("mom_pp") is not None:
-            rel_txt += f", {abs(si['mom_pp'])} points {'down' if si['mom_pp'] < 0 else 'up'} on the month before"
-        rel_txt += "."
+        rel_txt = f"On time in {_period(si['period'])}: Sea-Intelligence {si['global_pct']}%"
         if xe and xe.get("global_pct") is not None:
-            rel_txt += f" Xeneta measures {xe['global_pct']}% for {_period(xe['period'])}."
-        if dv and dv.get("comparable"):
-            rel_txt += (f" The two benchmarks sit {abs(dv['global_gap_pp'])} points apart because they define on time differently."
-                        " Use them as two views of the same trend.")
-    else:
-        rel_txt = "Schedule reliability figures were unavailable for this issue."
-
-    adv_count = sum(len(p["items"]) for p in snapshot["sources"].get("advisories", {}).get("data", {}).get("publishers", {}).values())
-    adv_txt = ("Operational notices from the past week from the ports and carriers we follow. "
-               "Items marked NEW did not appear in a previous issue."
-               if adv_count else "No operational notices from the ports and carriers we follow this week.")
+            rel_txt += f", Xeneta {xe['global_pct']}% (stricter measure)"
+        rel_txt += "."
 
     return {
         "issue_date": issue_date,
         "author": "template",
-        "headline": headline,
-        "standfirst": standfirst,
-        "watchlist_notes": notes,
+        "headline": _clip(headline, LIMITS["headline"]),
+        "summary": {"ports": _clip(ports_line, LIMITS["summary_line"]), "weather": _clip(weather_line, LIMITS["summary_line"]),
+                    "news": _clip(news_line, LIMITS["summary_line"])},
         "port_notes": port_notes,
-        "inbound_note": inbound_note,
-        "sections": {"ports": port_txt[: LIMITS["section"]], "lanes": lane_txt[: LIMITS["section"]],
-                     "reliability": rel_txt[: LIMITS["section"]], "advisories": adv_txt},
+        "inbound_note": _clip(inbound_note, LIMITS["inbound_note"]),
+        "sections": {"advisories": "", "reliability": _clip(rel_txt, LIMITS["reliability"])},
     }

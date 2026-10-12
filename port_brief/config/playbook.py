@@ -32,6 +32,9 @@ BUFFER = {
 # Inbound lane delay estimates by weather level.
 INBOUND_DELAY = {"watch": "up to 1 day", "likely": "1–2 days", "extreme": "2 days or more"}
 
+# Route strips with no rough sea area on them.
+NO_ROUTE_DELAY = "no weather delay"
+
 # Rough areas away from the main lanes: only ships routed through them are affected.
 OFF_ROUTE_DELAY = "only if routed through it"
 
@@ -68,6 +71,18 @@ ACTIONS = {
     "watch_busy": "Berths are busier than usual. Watch vessel berthing times and avoid tight cut-offs.",
     "normal": "No predicted delays. Speak to your carrier about release and delivery now to keep it that way.",
     "normal_no_congestion": "No weather disruption forecast. Speak to your carrier about release and delivery now.",
+}
+
+# One-line actions for the port rows (90 characters or fewer once filled in).
+SHORT_ACTIONS = {
+    "disruption_weather": "Cranes likely stopped {window}: warn your haulier, allow " + BUFFER["disruption_hours"],
+    "disruption_news": "Reported disruption: check terminal notices, allow " + BUFFER["disruption_hours"],
+    "congested": "Add " + BUFFER["congested_days"] + " to inland plans for " + BUFFER["congested_horizon"],
+    "watch_weather": "Gusty {window}: allow " + BUFFER["watch_hours"],
+    "watch_news": "Reported delays: check terminal notices before booking",
+    "watch_busy": "Busier than usual: avoid tight cut-offs",
+    "normal": "No delays expected: book release and delivery now",
+    "normal_no_congestion": "No weather delays forecast: book release and delivery now",
 }
 
 NO_CONGESTION_DATA = "Congestion data unavailable this issue; status based on weather and port news only."

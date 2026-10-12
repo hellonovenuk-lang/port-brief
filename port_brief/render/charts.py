@@ -63,7 +63,7 @@ def carrier_dumbbell(si: dict | None, xe: dict | None) -> str | None:
         return None
     xe_by = {norm_carrier(c["carrier"]): c["pct"] for c in (xe or {}).get("carriers", [])}
     rows = si["carriers"]
-    fig, ax = plt.subplots(figsize=(4.6, 0.26 * len(rows) + 0.7))
+    fig, ax = plt.subplots(figsize=(3.6, 0.17 * len(rows) + 0.55))
     _style(ax)
     ys = list(range(len(rows)))[::-1]
     for y, c in zip(ys, rows):
@@ -72,7 +72,7 @@ def carrier_dumbbell(si: dict | None, xe: dict | None) -> str | None:
             ax.plot([x2, c["pct"]], [y, y], color=AXIS, linewidth=2, solid_capstyle="round", zorder=1)
             ax.scatter([x2], [y], s=34, color=XE, edgecolor=SURFACE, linewidth=1.5, zorder=3)
         ax.scatter([c["pct"]], [y], s=34, color=SI, edgecolor=SURFACE, linewidth=1.5, zorder=3)
-    ax.set_yticks(ys, [c["carrier"] for c in rows], color=INK2)
+    ax.set_yticks(ys, [c["carrier"] for c in rows], color=INK2, fontsize=7)
     ax.set_xlim(0, 100)
     ax.set_xticks([0, 25, 50, 75, 100], ["0%", "25%", "50%", "75%", "100%"])
     ax.set_ylim(-0.7, len(rows) - 0.3)

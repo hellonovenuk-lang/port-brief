@@ -46,7 +46,7 @@ def facts_markdown(snap: dict, issue_date: str) -> str:
         lines.append(f"- `{p['id']}` {p['name']} [{p['region']}]: **{p['status_label']}**. Reasons: {'; '.join(p['reasons']) or 'none'}. "
                      f"Weather windows (UK time): {', '.join(w['label'] + ' (' + w['level'] + ', ' + '/'.join(w['causes']) + ')' for w in p['windows']) or 'none'}. "
                      f"Congestion: {cong}.")
-        lines.append(f"  - playbook action: {' '.join(p['actions'])}")
+        lines.append(f"  - short action (template for port_notes, max 90 chars): {p.get('short_action')}")
     lines += ["", "## On the way in (lanes; for inbound_note)", ""]
     for i in j.get("inbound", []):
         lines.append(f"- {i['name']} ({i['level']}), {schema.day_label(i['from_day'])} to {schema.day_label(i['to_day'])}: "
@@ -60,6 +60,10 @@ def facts_markdown(snap: dict, issue_date: str) -> str:
                      f"{schema.day_label(a['from_day'])} to {schema.day_label(a['to_day'])}; affects {a['trades']}; delay {a['delay']}.")
     if not j.get("storm_areas"):
         lines.append("- none")
+    lines += ["", "## Routes into the UK (strip segments origin to Channel; level per sea area)", ""]
+    for r in j.get("routes", []):
+        flagged = ", ".join(f"{seg['short']} {seg['level']}" for seg in r["segments"] if seg["level"] != "none") or "all calm"
+        lines.append(f"- {r['name']}: {r['severity']}, delay {r['delay']}; {flagged}")
     lines += ["", "## Playbook buffers you may quote", "",
               f"- {pb.BUFFER}", f"- inbound delays: {pb.INBOUND_DELAY}", "",
               "## Watchlist (ranked)", ""]

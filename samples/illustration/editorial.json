@@ -2,32 +2,24 @@
   "issue_date": "2026-10-11",
   "author": "illustration",
   "headline": "Felixstowe congested as wind threatens London Gateway on Wednesday",
-  "standfirst": "Disruption likely: London Gateway and Hamburg. Congested: Felixstowe and Bremerhaven. Watch: Liverpool and Rotterdam. Rough seas in the Bay of Biscay may delay Asia, Mediterranean and West Africa services into the UK by 1–2 days. Reliability: Sea-Intelligence 49.9%, Xeneta 29%.",
-  "watchlist_notes": {
-    "liverpool": "Likely risk of crane stoppages Tue 13 Oct (gusts 22.4 m/s, wind 15.9 m/s). Trend: improving.",
-    "mid_north_atlantic": "Likely risk of heavy weather Thu 15 Oct (sea 4.62 m, wind 8.2 m/s). Trend: improving.",
-    "felixstowe": "Watch risk of crane stoppages Mon 12 Oct (gusts 15.2 m/s, wind 11.3 m/s). Trend: improving.",
-    "southampton": "Watch risk of crane stoppages Mon 12 Oct (gusts 16.0 m/s, wind 11.8 m/s). Trend: improving.",
-    "rotterdam": "Watch risk of crane stoppages Sat 17 Oct (gusts 18.0 m/s, wind 8.4 m/s). Trend: stable.",
-    "antwerp": "Watch risk of crane stoppages Fri 16 Oct (gusts 19.3 m/s, wind 13.8 m/s). Trend: stable.",
-    "bremerhaven": "Watch risk of crane stoppages Sat 17 Oct (gusts 17.8 m/s, wind 13.3 m/s). Trend: stable.",
-    "hamburg": "Watch risk of crane stoppages Sat 17 Oct (gusts 17.8 m/s, wind 13.2 m/s). Trend: stable."
+  "summary": {
+    "ports": "Felixstowe and Bremerhaven congested; London Gateway wind Wed; Hamburg strike Mon",
+    "weather": "Severe seas in Biscay: Asia and West Africa services 1–2 days late",
+    "news": "Strike reported at Hamburg for Monday"
   },
   "port_notes": {
-    "felixstowe": "Berths are 13 points busier than normal. Add 2–3 days to inland plans for containers arriving in the next 2 weeks, pre-book haulage and check your free time.",
-    "southampton": "Running as expected with no predicted delays. Speak to your carrier about release and delivery now.",
-    "london_gateway": "Crane stoppages likely on Wednesday from 11:00 to 20:00, with gusts to 22 m/s. Tell your haulier to expect longer waits and allow 24–48 hours on collections.",
-    "liverpool": "Cranes may pause on Thursday morning. Allow 12–24 hours and avoid tight Thursday cut-offs.",
-    "rotterdam": "Berths are 7 points busier than usual. If you tranship here, watch berthing times and avoid tight feeder connections.",
-    "antwerp": "Running as expected with no predicted delays. Speak to your carrier about release and delivery now.",
-    "bremerhaven": "Ships are spending 36% longer in port than usual. Add 2–3 days to inland plans for containers arriving in the next 2 weeks and pre-book haulage.",
-    "hamburg": "A 24-hour strike is reported for Monday. Check your terminal's latest notice before booking collections and allow 24–48 hours."
+    "felixstowe": "Berths 13 points over normal: add 2–3 days to inland plans for the next 2 weeks",
+    "southampton": "No delays expected: book release and delivery now",
+    "london_gateway": "Cranes likely stopped Wed 11:00–20:00: warn your haulier, allow 24–48 hours",
+    "liverpool": "Gusty Thu morning: avoid tight Thursday cut-offs",
+    "rotterdam": "Busier than usual: avoid tight feeder connections",
+    "antwerp": "No delays expected: book release and delivery now",
+    "bremerhaven": "Ships staying 36% longer: add 2–3 days for the next 2 weeks",
+    "hamburg": "Strike reported for Monday: check terminal notices, allow 24–48 hours"
   },
-  "inbound_note": "Two storms matter for European arrivals. Biscay turns severe on Wednesday and Thursday, so services from Asia, the Mediterranean and West Africa into the UK are likely to run 1–2 days late. Ships rounding the Cape on Friday may lose up to 1 day. Don't book haulage against the published ETA.",
+  "inbound_note": "Confirm revised ETAs for anything routed past Biscay this week before you book haulage.",
   "sections": {
-    "ports": "Felixstowe: congested. London Gateway: disruption likely. Liverpool: watch. Rotterdam: watch. Bremerhaven: congested. Hamburg: disruption likely. 2 of 8 ports are running normally.",
-    "lanes": "Lanes with flagged days: Mid-North Atlantic (Thu 15 Oct).",
-    "reliability": "Sea-Intelligence puts global schedule reliability at 49.9% for August 2026, 5.9 points down on the month before. Xeneta measures 29% for August 2026. The two benchmarks sit 20.9 points apart because they define on time differently. Use them as two views of the same trend.",
-    "advisories": "Operational notices from the past week from the ports and carriers we follow. Items marked NEW did not appear in a previous issue."
+    "advisories": "",
+    "reliability": "On time in August 2026: Sea-Intelligence 49.9%, Xeneta 29% (stricter measure)."
   }
 }

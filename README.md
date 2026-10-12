@@ -62,22 +62,21 @@ squares beside the status word.
 The layout avoids the common tells of machine-made design: dark dashboards, stat tiles, cards with
 coloured edges, pill badges, uppercase eyebrow labels, gradients and glyph icons.
 
-- **Page 1** leads with the ports table: status, what to do, and when.
-- **Page 2** has the weather maps. They carry no words apart from small numbers:
-  - **World map** of the routes into Europe: the Atlantic, Mediterranean, Cape, Indian Ocean and Asia. The empty Pacific is cropped out.
-  - **Storm field**: rough seas are shaded where they are actually forecast, from a grid of about 1,200 sea points (Open-Meteo marine, 8 requests per run). The six-day peak sea height sets the severity:
+Each issue runs in three parts, built to be read at a glance:
 
-    | Severity | Peak seas | Colour | Pattern | Expected delay |
-    |---|---|---|---|---|
-    | Rough | 4 m+ | amber | plain | up to 1 day |
-    | Severe | 6 m+ | orange | dotted | 1–2 days |
-    | Extreme | 8 m+ | red | hatched | 2 days or more |
+1. **Port health check** (page 1). The headline, a three-line summary and the North European ports map coloured by status, then one row per port:
+   - the status;
+   - a **congestion gauge**: berth occupancy against the port's normal level, from Sinay; it shows "awaiting data" until `SINAY_API_KEY` is set;
+   - median time in port with a trend arrow;
+   - **seven day squares** for crane weather;
+   - one short action.
+2. **Weather on the way in** (page 2).
+   - **Storm map**: the six-day peak sea state shaded where Rough, Severe or Extreme, numbered.
+   - **Route strips**: one row per trade route into the UK (Asia via the Cape, Asia via Suez, US East Coast, Caribbean, Mediterranean, West Africa, North Sea feeders). Each is a chain of sea areas coloured by severity, with the expected delay at the end. Routes are defined in `config/routes.py`.
+   - A compact numbered key.
+3. **News and notices** (page 3). Ports and shipping lines in two columns. Each notice is tagged Disruption, Surcharge, Service change or Other (`editorial/tags.py`). A compact line-reliability chart and sources sit below.
 
-    The patterns keep the steps distinct when printed in black and white.
-  - **Named areas**: each rough area is assigned to its nearest named sea area (the tracked lanes plus a small gazetteer in `judgement/storm_areas.py`). It gets a number on the map and a row in the key table (name, routes affected, severity, days, peak seas, expected delay).
-  - **Off-route areas** say "only if routed through it" rather than a delay.
-  - **North European ports map**: the 8 ports coloured by status, with the same shading and numbers.
-- **Calm areas are not shaded or named.** A quiet week shows a clear map and says so.
+Calm areas are not shaded or named. A quiet week shows a clear map and all-grey route strips.
 
 The writing is checked as well as the numbers. `validate` rejects em dashes, "it's not X, it's Y",
 rhetorical questions and similar machine-writing tics (`STYLE_RULES` in `editorial/schema.py`).

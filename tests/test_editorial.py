@@ -22,6 +22,8 @@ SNAP = {
              "windows": [], "congestion": None, "headlines": [], "data_gaps": ["Congestion data unavailable"]},
         ],
         "inbound": [],
+        "routes": [{"id": "asia_cape", "name": "Asia via the Cape", "segments": [], "level": "likely",
+                    "severity": "Severe", "delay": "1–2 days"}],
         "forecast_drift": [],
         "congestion": {},
         "storms": [],
@@ -45,14 +47,13 @@ def good_editorial():
         "issue_date": "2026-10-01",
         "author": "claude",
         "headline": "Biscay turns rough from Sunday",
-        "standfirst": "Seas reach 6.4 m in Biscay on 4 October. Reliability: 49.9% vs 29%, a 20.9 pp gap.",
-        "watchlist_notes": {"biscay": "Seas 6.4 m with winds 21.2 m/s; allow a day on Iberia rotations."},
-        "sections": {"ports": "Quiet at UK gateways.", "lanes": "Biscay deteriorates into the weekend.",
-                     "reliability": "Sea-Intelligence fell 5.9 pp to 49.9%.", "advisories": "Maersk adds a USD 500 PSS."},
+        "summary": {"ports": "Felixstowe congested, 12 points above normal", "weather": "Biscay seas 6.4 m on Sun 4 Oct",
+                    "news": "Maersk adds a USD 500 PSS"},
+        "sections": {"reliability": "Sea-Intelligence fell 5.9 pp to 49.9%.", "advisories": "Maersk adds a USD 500 PSS."},
         "advisory_picks": ["https://example.com/a"],
-        "port_notes": {"felixstowe": "Congested: berths 12 pp busier than normal. Add 2–3 days for boxes landing in the next 2 weeks and tell your haulier.",
+        "port_notes": {"felixstowe": "Add 2–3 days to inland plans for the next 2 weeks",
                        "hamburg": "No weather disruption forecast. Speak to your carrier about release now."},
-        "inbound_note": "No lane delays expected.",
+        "inbound_note": "Biscay seas reach 6.4 m on Sunday.",
     }
 
 
@@ -73,12 +74,12 @@ def test_rounded_figures_are_accepted():
     assert schema.validate(ed, SNAP, "2026-10-01") == []
 
 
-def test_unknown_watchlist_id_and_url_are_rejected():
+def test_unknown_port_id_and_url_are_rejected():
     ed = good_editorial()
-    ed["watchlist_notes"]["felixstowe"] = "Calm."
+    ed["port_notes"]["felixstowe_typo"] = "Calm."
     ed["advisory_picks"] = ["https://example.com/invented"]
     errors = " ".join(schema.validate(ed, SNAP, "2026-10-01"))
-    assert "felixstowe" in errors and "unknown url" in errors
+    assert "felixstowe_typo" in errors and "unknown url" in errors
 
 
 def test_length_limits():
@@ -110,4 +111,10 @@ def test_invented_buffer_is_rejected():
 def test_fallback_has_a_note_per_port():
     fb = schema.fallback(SNAP, "2026-10-01")
     assert set(fb["port_notes"]) == {"felixstowe", "hamburg"}
-    assert "2–3 days" in fb["port_notes"]["felixstowe"]
+    assert len(fb["port_notes"]["felixstowe"]) <= 90
+
+
+def test_port_notes_must_be_one_short_line():
+    ed = good_editorial()
+    ed["port_notes"]["felixstowe"] = "Add 2–3 days to inland plans for the next 2 weeks, " * 3
+    assert any("port_notes.felixstowe" in e and "max 90" in e for e in schema.validate(ed, SNAP, "2026-10-01"))

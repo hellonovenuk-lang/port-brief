@@ -1,24 +1,26 @@
 {
   "issue_date": "2026-10-12",
   "author": "claude",
-  "headline": "Gales likely to stop cranes at Liverpool on Tuesday as Atlantic storms build",
-  "standfirst": "Liverpool faces its worst day on Tuesday, with gusts to 22 m/s from 10:00 to 22:00. Severe to extreme seas across the North Atlantic will hold up ships from North America by 2 days or more, and the Western Approaches turn severe on Wednesday.",
-  "port_notes": {
-    "felixstowe": "A short gusty spell on Monday evening from 20:00 to 21:00, then settled. Allow 12–24 hours on anything due off the quay tonight and push releases through for the rest of the week.",
-    "southampton": "Brief gusts near crane limits on Monday and Tuesday mornings. Avoid tight cut-offs on those mornings and allow 12–24 hours.",
-    "london_gateway": "No crane or pilotage limits forecast all week. A good week to clear releases: speak to your carrier about release and delivery now.",
-    "liverpool": "Cranes are likely to stop on Tuesday from 10:00 to 22:00, with gusts to 22 m/s. Tell your haulier today, move Tuesday collections to Wednesday and allow 24–48 hours.",
-    "rotterdam": "Short spells near crane limits on Tuesday afternoon and again on Saturday. If you tranship here, allow 12–24 hours on weekend feeder connections.",
-    "antwerp": "Gusts near crane limits on Tuesday afternoon, then from Friday evening through Saturday. Allow 12–24 hours on Friday and weekend moves.",
-    "bremerhaven": "Windy from Tuesday night into Wednesday morning, and again on Saturday. Allow 12–24 hours on Wednesday vessel calls and avoid tight cut-offs.",
-    "hamburg": "Gusty on Tuesday and from Tuesday evening to Wednesday 10:00, then again on Saturday. Allow 12–24 hours and keep Wednesday morning plans flexible."
+  "headline": "Liverpool cranes likely stopped on Tuesday as Atlantic storms slow arrivals",
+  "summary": {
+    "ports": "Liverpool likely stops cranes Tue 10:00–22:00; gusty spells at six other ports; London Gateway clear",
+    "weather": "US East Coast and Canada services 2 days or more late; Asia via the Cape 1–2 days",
+    "news": "Hapag-Lloyd suspends bookings to three Philippine ports; MSC restores Karachi to Europe"
   },
-  "inbound_note": "Extreme seas across the North Atlantic, peaking at 11.8 m, mean ships from North America are likely to arrive 2 days or more late. Severe seas in the Western Approaches on Wednesday slow Cape-routed Asia arrivals into the Channel by 1–2 days, so confirm revised ETAs with your carrier before booking haulage.",
+  "port_notes": {
+    "felixstowe": "Gusty Mon 20:00–21:00 only: release and deliver as planned",
+    "southampton": "Gusty Mon and Tue mornings: avoid tight morning cut-offs",
+    "london_gateway": "Clear all week: book release and delivery now",
+    "liverpool": "Cranes likely stopped Tue 10:00–22:00: move collections to Wed, allow 24–48 hours",
+    "rotterdam": "Gusty Tue 16:00–18:00: allow 12–24 hours on feeder connections",
+    "antwerp": "Gusty Tue afternoon and from Fri evening: allow 12–24 hours",
+    "bremerhaven": "Gusty Tue night to Wed 10:00: allow 12–24 hours on Wed calls",
+    "hamburg": "Gusty Tue 12:00–15:00 and Tue night: keep Wed morning flexible"
+  },
+  "inbound_note": "Confirm revised ETAs for anything coming from North America or round the Cape before you book haulage.",
   "sections": {
-    "ports": "Liverpool takes the worst of Tuesday's gale. Elsewhere the spells near crane limits are short, and London Gateway stays clear all week.",
-    "lanes": "Storms dominate the North Atlantic all week.",
-    "reliability": "Sea-Intelligence puts August global schedule reliability at 49.9%, down 5.9 points on July and 15.2 points on a year earlier. Late ships arrived 6.81 days behind schedule on average. Xeneta measures 29% for the same month. The 20.9-point gap comes from method: Sea-Intelligence counts an arrival as on time within one day of schedule, Xeneta only on the scheduled day. Both rank Maersk and Hapag-Lloyd first and second. With this week's Atlantic storms on top, plan on transatlantic arrivals missing their scheduled day.",
-    "advisories": "Hapag-Lloyd has suspended bookings to three Philippine ports as congestion there worsens. MSC has restored a direct service from Karachi to seven European ports. Maersk has raised its US inland haulage fuel surcharge to USD 215 per container, and Hapag-Lloyd has announced a North America GRI. Malaysia is enforcing new cargo manifest rules, which CMA CGM warns could delay cargo there."
+    "advisories": "Hapag-Lloyd has stopped taking bookings to three Philippine ports, and MSC has restored a direct Karachi service to seven European ports. Surcharges keep rising on US inland haulage and West Africa.",
+    "reliability": "In August, Sea-Intelligence counted 49.9% of ships on time and Xeneta 29%. Plan on about half of arrivals missing their scheduled day."
   },
   "advisory_picks": [
     "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPbFhXQTFobklKT2hOd2xHY1pNOHBLMUNFUGdvcTUyNENWN1cwUEVaeTQwNVR3T3phRWM3blNOZThxa1U5V3V1WHc3c0UyaFE5T1V4VXRWSm1WQWNLaWl2TW5ReVFyOWQwblVoV0swN05vZkthbnkwc2tKTXlsaG9NWmV1QktjTGo2Y3VwWnlaNzNRSE1VRmU4c2RqNnVzVVF2WlRCT2NRODZCZw?oc=5",
@@ -26,6 +28,7 @@
     "https://news.google.com/rss/articles/CBMizAFBVV95cUxPdGd4RnpYYXFMT2U3U3dOLXNESkV2bnFIR1lqd1VBUTB5ellPaTFXa1FMRm9NWjJfLUFnZTZZWGxqa1REa0dlVy1JbE9WY3RJeVRIbDR5Vk9STFRwZ2k3b05ReXNjQ3pvR3BhOS0wWTVaZEt4OGNtSUpzZlNFaDloSnZXUG5VSFpRQjZlUVVoRXpmZ1pKYXp3T0JnQ1ZTaWpIalZvVUo1NmF2Mmd3cWRPRldmZTZHR1RoM2lFVTFXYjVvQm05RGEteUk4R0w?oc=5",
     "https://news.google.com/rss/articles/CBMidkFVX3lxTE1xNkpxU3Z5eFYwdkhDQmtJUkJuRXpJMkVySUJSc2R0dDJFbjRoY0hTVldfeGJkeVc0eXNIRkttWkVHUUJYVFI0MTVPX3hCZkxHVUxaQU5tYkt1dEQ0QWZuRUYyN2tPMG5Pdk8zYWhwMjkyUHR3WXc?oc=5",
     "https://news.google.com/rss/articles/CBMipAFBVV95cUxNZWVoZXZULU9uaWpwRE5CR2N1WW90Z3FSNWRvRjlHTk4yRC1PTE1mNmkzV2l1V0ZRMXdlempMWUtKYUdRYUR2STU3RjVldjQzTkVkaklfbFBrWVd3U2Z4Wm40Smw0dnB2MUJBOFo3MnV3ZUtydlZMU0lJUGNsR1lycVcwMmpJeFB6ZTZVS1ZIVVJjWUN2M2VCWkh6VzVBOS1uQlFYLQ?oc=5",
-    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPT01RQXY0NFZIenZrQy1kR0Mtckxyc2dsNTFKNjdzU0o3cEFtRUZrNVNKMFRBaW5SUWRiM3JGX1ZfNWM1aWc0N2JwUkI2c29UM3A3YlYwM1hCYmRkMFUwTnB2QUFJUjhzWWluQzAzZTNKSFhBaHB1UEQ1NklVdVJqckx4cndXTG9IUlRmMURZWWotT0JWcG5vaDBn?oc=5"
+    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPT01RQXY0NFZIenZrQy1kR0Mtckxyc2dsNTFKNjdzU0o3cEFtRUZrNVNKMFRBaW5SUWRiM3JGX1ZfNWM1aWc0N2JwUkI2c29UM3A3YlYwM1hCYmRkMFUwTnB2QUFJUjhzWWluQzAzZTNKSFhBaHB1UEQ1NklVdVJqckx4cndXTG9IUlRmMURZWWotT0JWcG5vaDBn?oc=5",
+    "https://news.google.com/rss/articles/CBMilgFBVV95cUxQQnlZMHFOSlhxTFFiMDhBWXRWYTZHSHdyYUJTNUVYZG5lZ2dRamJmSnd0TGM2N2NRWFoySnk2eDJlRi1vYndyWlNDYWRSczYwdklqSGYtT3F3dHROdUFDaThkXzA3Ul9uLTRhazlHdXltSEk5TXYwZEVyUUtXenhleDhJMEdVUVFnYm1IVUlsTVBGWjFGU2c?oc=5"
   ]
 }

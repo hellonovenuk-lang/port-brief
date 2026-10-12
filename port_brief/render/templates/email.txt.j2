@@ -3,22 +3,17 @@ PORT BRIEF
 
 {{ ed.headline }}
 
-{{ ed.standfirst }}
-
-THE PORTS THIS WEEK
-{% for p in port_board %}
-{{ p.name }}: {{ p.status_label }}
-{{ ed.port_notes.get(p.id) or p.actions|join(' ') }}
-{% endfor %}{% if congestion_missing %}
-Congestion figures were not available for this issue, so statuses reflect weather forecasts and port news only.
+1  PORT HEALTH CHECK
+{% for p in port_rows %}- {{ p.name }} [{{ p.status_label }}]: {{ p.note }}
+{% endfor %}{% if congestion_missing %}(Congestion data is not yet connected; statuses reflect weather and port news only.)
 {% endif %}
-ON THE WAY IN
-{{ ed.inbound_note }}
-
-SCHEDULE RELIABILITY
-{% if si and si.global_pct is not none %}Sea-Intelligence: {{ si.global_pct }}% of ships on time in {{ si.period|period }}.{% endif %}{% if xe and xe.global_pct is not none %} Xeneta: {{ xe.global_pct }}% in {{ xe.period|period }}.{% endif %}
-
-Read the full brief (PDF): {{ '{{PDF_URL}}' }}
+2  WEATHER ON THE WAY IN
+{% for r in routes %}- {{ r.name }}: {{ r.delay|sentence }}
+{% endfor %}
+3  NEWS AND NOTICES
+{% for i in (notices_ports + notices_lines)[:6] %}- [{{ i.tag_label }}] {{ i.title }}
+{% endfor %}
+Open the full brief (PDF): {{ '{{PDF_URL}}' }}
 
 {% for a in attributions %}{{ a.rstrip(".") }}. {% endfor %}
 Unsubscribe: {{ '{{{RESEND_UNSUBSCRIBE_URL}}}' }}

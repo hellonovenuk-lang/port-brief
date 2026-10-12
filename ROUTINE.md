@@ -55,28 +55,30 @@ Read `drafts/$ISSUE/facts.md` in full, then overwrite `drafts/$ISSUE/editorial.j
 {
   "issue_date": "ISSUE",
   "author": "claude",
-  "headline": "≤ 90 chars: the most important port action this week",
-  "standfirst": "≤ 340 chars: the two or three things a UK importer must do this week",
-  "port_notes": { "<port id>": "≤ 260 chars, one for EVERY port in facts.md" },
-  "inbound_note": "at most 2 sentences: the worst sea areas from facts.md by name and severity word (Rough, Severe, Extreme), which arrivals run late and by how much",
-  "sections": {
-    "ports": "≤ 1100 chars", "lanes": "≤ 1100 chars",
-    "reliability": "≤ 1100 chars", "advisories": "≤ 1100 chars"
+  "headline": "≤ 80 chars: the single most important thing this week",
+  "summary": {
+    "ports": "≤ 110 chars: part 1 in one line, e.g. 'Liverpool cranes likely stopped Tue; Felixstowe busier than normal'",
+    "weather": "≤ 110 chars: part 2 in one line, the worst route and its delay",
+    "news": "≤ 110 chars: part 3 in one line, the notice that matters most"
   },
-  "advisory_picks": ["6–10 URLs copied exactly from facts.md, the most operationally useful"]
+  "port_notes": { "<port id>": "≤ 90 chars, ONE action per port, for EVERY port in facts.md" },
+  "inbound_note": "≤ 160 chars, one sentence: what importers should do about the worst route",
+  "sections": {
+    "advisories": "≤ 300 chars or empty: why the top notices matter to a UK importer",
+    "reliability": "≤ 200 chars: both global figures with their periods, plainly"
+  },
+  "advisory_picks": ["6–12 URLs copied exactly from facts.md: balance ports and shipping lines"]
 }
 ```
 
+The issue is built to be read at a glance: maps, gauges, day squares and route strips carry the detail,
+so the words should be few and direct.
+
 The readers are small importer teams, so every port gets a status and an action:
-- **Port notes are the heart of the issue.** Start from the playbook action in facts.md and make it
-  specific to that port and this week. Keep the status exactly as given, and keep the playbook buffers
-  (2–3 days, 24–48 hours and so on). Don't invent new ones.
-- Use this shape: *what's happening, then what to do*. Write in the second person with concrete verbs:
-  "tell your haulier", "speak to your carrier about release now", "add 2–3 days to inland plans for boxes landing in the next 2 weeks".
-- **Disruption likely**: name the window exactly as given (UK time) and the cause (wind or swell), then give the haulier and collection advice.
-- **Congested**: say how far above normal it is, then the buffer and pre-booking advice.
-- **Running normally**: say so plainly and encourage acting now (release, delivery, booking slots).
-- If congestion data is unavailable, the PDF shows one notice above the board, so don't repeat it in every note. Never imply congestion is normal ("no weather disruption forecast", not "no delays").
+- **Port notes are one action each**, at most 90 characters. Start from the short action in facts.md and
+  make it specific to that port, keeping the status and the playbook buffers.
+  Examples: "Cranes likely stopped Tue 10:00–22:00: move collections to Wed" or "Add 2–3 days to inland plans for the next 2 weeks".
+- If congestion data is unavailable, the PDF says so once. Never imply congestion is normal.
 
 House style:
 - Write like a trade-paper reporter: plain declarative sentences of varied length. The headline states the
@@ -131,7 +133,7 @@ Write the body in this order:
 
 1. The page-1 preview: `![Page 1](https://github.com/<owner>/<repo>/blob/issue/$ISSUE/drafts/$ISSUE/preview.png?raw=true)`,
    plus a link to the PDF file in the branch.
-2. Headline and standfirst.
+2. Headline and the three summary lines.
 3. The watchlist as a table: level, place, day, cause.
 4. **Needs your check**: model-read figures, failed or stale sources, validation fallbacks, anything odd.
 5. Data health: one line per source.

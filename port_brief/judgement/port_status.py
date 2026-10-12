@@ -58,7 +58,7 @@ def congestion_signal(c: dict | None) -> tuple[str | None, str | None]:
 
 
 def assess_port(port: dict, assessment: dict | None, congestion: dict | None, headlines: list[dict]) -> dict:
-    status, reasons, actions, gaps = "normal", [], [], []
+    status, reasons, actions, gaps, short = "normal", [], [], [], None
     windows = (assessment or {}).get("windows", [])
 
     likely = [w for w in windows if w["level"] == "likely"]
@@ -69,12 +69,14 @@ def assess_port(port: dict, assessment: dict | None, congestion: dict | None, he
         reasons.append(f"{' and '.join('crane' if c == 'crane' else 'pilotage' for c in w['causes'])} limits exceeded "
                        f"{w['label']}" + (f", gusts to {w['peak_gust']:.0f} m/s" if w.get("peak_gust") else ""))
         actions.append(pb.ACTIONS["disruption_weather"].format(window=w["label"]))
+        short = short or pb.SHORT_ACTIONS["disruption_weather"].format(window=w["short"] if "short" in w else w["label"])
     elif watch:
         w = watch[0]
         status = "watch"
         reasons.append(f"near {' and '.join('crane' if c == 'crane' else 'pilotage' for c in w['causes'])} limits "
                        f"{w['label']}" + (f", gusts to {w['peak_gust']:.0f} m/s" if w.get("peak_gust") else ""))
         actions.append(pb.ACTIONS["watch_weather"].format(window=w["label"]))
+        short = short or pb.SHORT_ACTIONS["watch_weather"].format(window=w["short"] if "short" in w else w["label"])
 
     c_status, c_reason = congestion_signal(congestion)
     if c_status is None:
@@ -84,8 +86,11 @@ def assess_port(port: dict, assessment: dict | None, congestion: dict | None, he
             reasons.append(c_reason)
         if c_status == "congested":
             actions.append(pb.ACTIONS["congested"])
+            if status != "disruption":
+                short = pb.SHORT_ACTIONS["congested"]
         elif c_status == "watch" and not windows:
             actions.append(pb.ACTIONS["watch_busy"])
+            short = short or pb.SHORT_ACTIONS["watch_busy"]
         if _rank(c_status) > _rank(status):
             status = c_status
 
@@ -94,14 +99,17 @@ def assess_port(port: dict, assessment: dict | None, congestion: dict | None, he
             reasons.append(f"reported: {h['title']}")
             actions.append(pb.ACTIONS["disruption_news"].format(headline=h["title"]))
             status = "disruption"
+            short = pb.SHORT_ACTIONS["disruption_news"]
             break
         if h["signal"] == "congestion" and _rank(status) < _rank("watch"):
             reasons.append(f"reported: {h['title']}")
             actions.append(pb.ACTIONS["watch_news"].format(headline=h["title"]))
             status = "watch"
+            short = short or pb.SHORT_ACTIONS["watch_news"]
 
     if status == "normal":
         actions = [pb.ACTIONS["normal"] if c_status else pb.ACTIONS["normal_no_congestion"]]
+        short = pb.SHORT_ACTIONS["normal"] if c_status else pb.SHORT_ACTIONS["normal_no_congestion"]
 
     return {
         "id": port["id"],
@@ -111,6 +119,7 @@ def assess_port(port: dict, assessment: dict | None, congestion: dict | None, he
         "status_label": pb.STATUS_LABEL[status],
         "reasons": reasons,
         "actions": actions,
+        "short_action": short,
         "windows": windows,
         "congestion": congestion,
         "headlines": headlines[:2],

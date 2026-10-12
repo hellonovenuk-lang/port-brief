@@ -77,3 +77,45 @@ def test_style_lint_catches_machine_tics(text):
 
 def test_style_lint_allows_plain_advice():
     assert schema.style_issues("Felixstowe is congested. Add 2–3 days to inland plans and tell your haulier.") == []
+
+
+def test_route_delay_comes_from_worst_segment():
+    from port_brief.judgement import routes
+
+    areas = [{"id": "agulhas", "level": "likely"}, {"id": "biscay", "level": "watch"}]
+    strips = {r["id"]: r for r in routes.route_strips(areas, [])}
+    assert strips["asia_cape"]["delay"] == "1–2 days"
+    assert strips["asia_cape"]["severity"] == "Severe"
+    assert strips["north_sea"]["delay"] == "no weather delay"
+    assert [s["level"] for s in strips["asia_cape"]["segments"]].count("none") == len(strips["asia_cape"]["segments"]) - 2
+
+
+def test_route_segments_all_exist_as_sea_areas():
+    from port_brief.config.routes import ROUTES
+    from port_brief.judgement.storm_areas import zones
+
+    ids = {z["id"] for z in zones()}
+    assert all(seg in ids for r in ROUTES for seg in r["segments"])
+
+
+@pytest.mark.parametrize("title,tag", [
+    ("Hapag-Lloyd suspends bookings to three Philippine ports", "disruption"),
+    ("Maersk raises fuel surcharge to 20% in UK and Ireland", "surcharge"),
+    ("MSC restores direct Karachi service to seven European ports", "service"),
+    ("Smart berths: what West African ports can learn", "other"),
+])
+def test_notice_tags(title, tag):
+    from port_brief.editorial.tags import tag_for
+
+    assert tag_for(title)[0] == tag
+
+
+def test_gauge_awaits_data_without_sinay():
+    from port_brief.render.issue import context
+
+    snap = __import__("json").loads((__import__("pathlib").Path(__file__).parent.parent / "samples/2026-10-12/snapshot.json").read_text())
+    snap["judgement"]["routes"] = snap["judgement"].get("routes", [])
+    ed = schema.fallback(snap, "2026-10-12")
+    ctx = context(snap, ed, {"issue_date": "2026-10-12"})
+    assert all(row["occ"] is None for row in ctx["port_rows"])
+    assert ctx["congestion_missing"] is True

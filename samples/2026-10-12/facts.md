@@ -5,21 +5,21 @@ Forecast issued 2026-10-12T09:33:17Z. Levels: none < watch < likely.
 ## Port status (one note required per port; keep the status, make the action specific)
 
 - `felixstowe` Felixstowe [uk]: **Watch**. Reasons: near crane limits Mon 12 Oct 20:00–21:00, gusts to 15 m/s. Weather windows (UK time): Mon 12 Oct 20:00–21:00 (watch, crane). Congestion: congestion data unavailable.
-  - playbook action: Intermittent stoppages possible Mon 12 Oct 20:00–21:00. Allow 12–24 hours and avoid tight cut-offs.
+  - short action (template for port_notes, max 90 chars): Gusty Mon 20:00–21:00: allow 12–24 hours
 - `southampton` Southampton [uk]: **Watch**. Reasons: near crane limits Mon 12 Oct 10:00–11:00, gusts to 16 m/s. Weather windows (UK time): Mon 12 Oct 10:00–11:00 (watch, crane), Tue 13 Oct 09:00–11:00 (watch, crane). Congestion: congestion data unavailable.
-  - playbook action: Intermittent stoppages possible Mon 12 Oct 10:00–11:00. Allow 12–24 hours and avoid tight cut-offs.
+  - short action (template for port_notes, max 90 chars): Gusty Mon 10:00–11:00: allow 12–24 hours
 - `london_gateway` London Gateway [uk]: **Running normally**. Reasons: none. Weather windows (UK time): none. Congestion: congestion data unavailable.
-  - playbook action: No weather disruption forecast. Speak to your carrier about release and delivery now.
+  - short action (template for port_notes, max 90 chars): No weather delays forecast: book release and delivery now
 - `liverpool` Liverpool [uk]: **Disruption likely**. Reasons: crane limits exceeded Tue 13 Oct 10:00–22:00, gusts to 22 m/s. Weather windows (UK time): Tue 13 Oct 07:00–08:00 (watch, crane), Tue 13 Oct 10:00–22:00 (likely, crane). Congestion: congestion data unavailable.
-  - playbook action: Operations likely suspended Tue 13 Oct 10:00–22:00. Tell your haulier to expect longer waits and re-booked slots, and allow 24–48 hours on collections and vessel arrivals around that window.
+  - short action (template for port_notes, max 90 chars): Cranes likely stopped Tue 10:00–22:00: warn your haulier, allow 24–48 hours
 - `rotterdam` Rotterdam [north_europe]: **Watch**. Reasons: near crane limits Tue 13 Oct 16:00–18:00, gusts to 15 m/s. Weather windows (UK time): Tue 13 Oct 16:00–18:00 (watch, crane), Fri 16 Oct 21:00 – Sat 17 Oct 00:00 (watch, crane), Sat 17 Oct 12:00–21:00 (watch, crane). Congestion: congestion data unavailable.
-  - playbook action: Intermittent stoppages possible Tue 13 Oct 16:00–18:00. Allow 12–24 hours and avoid tight cut-offs.
+  - short action (template for port_notes, max 90 chars): Gusty Tue 16:00–18:00: allow 12–24 hours
 - `antwerp` Antwerp [north_europe]: **Watch**. Reasons: near crane limits Tue 13 Oct 15:00–18:00, gusts to 18 m/s. Weather windows (UK time): Tue 13 Oct 15:00–18:00 (watch, crane), Fri 16 Oct 18:00 – Sun 18 Oct 00:00 (watch, crane), Mon 19 Oct 00:00–01:00 (watch, crane). Congestion: congestion data unavailable.
-  - playbook action: Intermittent stoppages possible Tue 13 Oct 15:00–18:00. Allow 12–24 hours and avoid tight cut-offs.
+  - short action (template for port_notes, max 90 chars): Gusty Tue 15:00–18:00: allow 12–24 hours
 - `bremerhaven` Bremerhaven [north_europe]: **Watch**. Reasons: near crane limits Tue 13 Oct 21:00 – Wed 14 Oct 10:00, gusts to 18 m/s. Weather windows (UK time): Tue 13 Oct 21:00 – Wed 14 Oct 10:00 (watch, crane), Sat 17 Oct 01:00–08:00 (watch, crane), Sat 17 Oct 10:00–13:00 (watch, crane), Sun 18 Oct 14:00–18:00 (watch, crane). Congestion: congestion data unavailable.
-  - playbook action: Intermittent stoppages possible Tue 13 Oct 21:00 – Wed 14 Oct 10:00. Allow 12–24 hours and avoid tight cut-offs.
+  - short action (template for port_notes, max 90 chars): Gusty Tue 21:00–Wed 10:00: allow 12–24 hours
 - `hamburg` Hamburg [north_europe]: **Watch**. Reasons: near crane limits Tue 13 Oct 12:00–15:00, gusts to 15 m/s. Weather windows (UK time): Tue 13 Oct 12:00–15:00 (watch, crane), Tue 13 Oct 19:00 – Wed 14 Oct 10:00 (watch, crane), Sat 17 Oct 01:00–15:00 (watch, crane), Sun 18 Oct 14:00–18:00 (watch, crane). Congestion: congestion data unavailable.
-  - playbook action: Intermittent stoppages possible Tue 13 Oct 12:00–15:00. Allow 12–24 hours and avoid tight cut-offs.
+  - short action (template for port_notes, max 90 chars): Gusty Tue 12:00–15:00: allow 12–24 hours
 
 ## On the way in (lanes; for inbound_note)
 
@@ -32,10 +32,21 @@ Forecast issued 2026-10-12T09:33:17Z. Levels: none < watch < likely.
 - (3) North of Scotland: Extreme, peak seas 10.7 m on Wed 14 Oct, Wed 14 Oct to Sun 18 Oct; affects northabout routings and Scandinavian services; delay only if routed through it.
 - (4) Western Approaches: Severe, peak seas 7.1 m on Wed 14 Oct, Wed 14 Oct to Thu 15 Oct; affects transatlantic and Cape-routed Asia arrivals into the Channel; delay 1–2 days.
 - (5) Cape of Good Hope / Agulhas: Severe, peak seas 6.7 m on Wed 14 Oct, Wed 14 Oct to Sat 17 Oct; affects Asia–North Europe services routed via the Cape; delay 1–2 days.
-- (6) Off Portugal: Rough, peak seas 5.0 m on Sun 18 Oct, Sat 17 Oct to Sun 18 Oct; affects Asia, Mediterranean and West Africa services into the UK; delay up to 1 day.
-- (7) Azores: Rough, peak seas 4.7 m on Wed 14 Oct, Wed 14 Oct to Wed 14 Oct; affects transatlantic and Caribbean services; delay up to 1 day.
-- (8) South Atlantic: Rough, peak seas 5.1 m on Wed 14 Oct, Mon 12 Oct to Fri 16 Oct; affects South America East Coast and Cape-routed services; delay only if routed through it.
-- (9) Southern Indian Ocean: Rough, peak seas 4.9 m on Fri 16 Oct, Fri 16 Oct to Sat 17 Oct; affects Australia and Cape-routed services; delay only if routed through it.
+- (6) Off Namibia: Rough, peak seas 5.2 m on Wed 14 Oct, Wed 14 Oct to Thu 15 Oct; affects Asia–North Europe services routed via the Cape; delay up to 1 day.
+- (7) Off Portugal: Rough, peak seas 5.0 m on Sun 18 Oct, Sat 17 Oct to Sun 18 Oct; affects Asia, Mediterranean and West Africa services into the UK; delay up to 1 day.
+- (8) Azores: Rough, peak seas 4.7 m on Wed 14 Oct, Wed 14 Oct to Wed 14 Oct; affects transatlantic and Caribbean services; delay up to 1 day.
+- (9) South Atlantic: Rough, peak seas 5.0 m on Thu 15 Oct, Mon 12 Oct to Fri 16 Oct; affects South America East Coast and Cape-routed services; delay only if routed through it.
+- (10) Southern Indian Ocean: Rough, peak seas 4.9 m on Fri 16 Oct, Fri 16 Oct to Sat 17 Oct; affects Australia and Cape-routed services; delay only if routed through it.
+
+## Routes into the UK (strip segments origin to Channel; level per sea area)
+
+- Asia via the Cape: Severe, delay 1–2 days; Cape likely, Namibia watch, Portugal watch, W Approaches likely
+- Asia via Suez: Rough, delay up to 1 day; Portugal watch
+- US East Coast and Canada: Extreme, delay 2 days or more; NW Atlantic extreme, Mid-Atlantic extreme, W Approaches likely
+- Caribbean and Panama: Severe, delay 1–2 days; Azores watch, W Approaches likely
+- Mediterranean: Rough, delay up to 1 day; Portugal watch
+- West Africa: Severe, delay 1–2 days; Portugal watch, W Approaches likely
+- North Sea feeders: Calm, delay no weather delay; all calm
 
 ## Playbook buffers you may quote
 

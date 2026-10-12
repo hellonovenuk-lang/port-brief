@@ -204,7 +204,7 @@ def world_map(items: list[dict], field: list[list]) -> str:
 
 
 def north_europe_map(ports_status: list[dict], items: list[dict], field: list[list]) -> str:
-    fig, ax = plt.subplots(figsize=(3.4, 2.9))
+    fig, ax = plt.subplots(figsize=(3.6, 2.7))
     _base(ax, NORTH_EUROPE_EXTENT, "50m")
     _storm_field(ax, field, NORTH_EUROPE_EXTENT)
     x0, x1, y0, y1 = NORTH_EUROPE_EXTENT
